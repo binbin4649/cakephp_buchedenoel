@@ -64,14 +64,16 @@ if(!empty($TransportDateil)):
 	echo $form->create('TransportDateil', array('name'=>'qty'));
 	$total_quantity = 0;
 	$total_price = 0;
-	echo '<table><tr><th>JAN</th><th>子品番</th><th>倉庫</th><th>在庫数</th><th>移動数</th><th></th></tr>';
+	echo '<table><tr><th></th><th>JAN</th><th>子品番</th><th>倉庫</th><th>在庫数</th><th>移動数</th><th></th></tr>';
 	//foreach($TransportDateil as $key=>$dateil){
+	$i = 1;
 	while(!empty($TransportDateil)){
 		$dateil = array_pop($TransportDateil);
 		$key = $dateil['subitem_id'];
 		//pr($dateil);
 		//exit;
 		echo '<tr>';
+		echo '<td>'.$i.'</td>';
 		echo '<td>'.$dateil['subitem_jan'].'</td>';
 		echo '<td>'.$dateil['subitem_name'].'</td>';
 		echo '<td>'.$sectionDepots[$dateil['out_depot']].':'.$dateil['out_depot'].'</td>';
@@ -91,10 +93,11 @@ if(!empty($TransportDateil)):
 		echo '</tr>';
 		$total_quantity = $total_quantity + $dateil['quantity'];
 		$total_price = $total_price + ($dateil['item_price'] * $dateil['quantity']);
+		$i++;
 	}
-	echo '<tr><td colspan="3"></td><td>合計</td><td>'.$total_quantity.'</td><td>'.number_format($total_price).'</td></tr>';
+	echo '<tr><td colspan="4"></td><td>合計</td><td>'.$total_quantity.'</td><td>'.number_format($total_price).'</td></tr>';
 
-	echo '<tr><td colspan="4"></td><td>'.$form->submit('Edit', array('div'=>false)).'</td><td></td></tr>';
+	echo '<tr><td colspan="5"></td><td>'.$form->submit('Edit', array('div'=>false)).'</td><td></td></tr>';
 
 	echo '</table>';
 	echo $form->end();
