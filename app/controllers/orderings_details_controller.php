@@ -155,12 +155,14 @@ class OrderingsDetailsController extends AppController {
 				$this->Session->delete("OrderingsDetail");
 				$session_read = array();
 			}
-			if($ac == 'spesial' or $ac == 'basic' or $ac == 'custom'){
+			if($ac == 'spesial' or $ac == 'basic' or $ac == 'custom' or $ac == 'repair' or $ac == 'other'){
 				$Ordering = array();
 				$OrderingsDetail = array();
 				foreach($session_read as $key=>$value){
 					$Ordering = array();
 					$OrderingsDetail = array();
+					if($ac == 'other') $orderings_type = 99;
+					if($ac == 'repair') $orderings_type = 4;
 					if($ac == 'spesial') $orderings_type = 3;
 					if($ac == 'basic') $orderings_type = 2;
 					if($ac == 'custom') $orderings_type = 1;
@@ -250,7 +252,7 @@ class OrderingsDetailsController extends AppController {
 				$Autoitems[] = $values['Item']['name'];
 			}
 		}else{
-			$Autoitems[] = 'しらんがな';
+			$Autoitems[] = '違います';
 		}
 		$this->set("Autoitems",$Autoitems);
 	}

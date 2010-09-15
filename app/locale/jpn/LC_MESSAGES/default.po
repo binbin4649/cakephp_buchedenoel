@@ -2363,3 +2363,16 @@ msgstr "お渡し入力"
 msgid "Shipping Input"
 msgstr "出荷入力"
 
+msgid "Repair Ordering"
+msgstr "修理発注"
+
+msgid "The Repair Ordering. Are you sure?"
+msgstr "修理を発注します。よろしいですか？"
+
+
+msgid "Other Ordering"
+msgstr "その他発注"
+
+msgid "The Other Ordering. Are you sure?"
+msgstr "その他の発注します。よろしいですか？"
+

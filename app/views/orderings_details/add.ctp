@@ -129,7 +129,11 @@
 			echo '<p>'.$html->link(__('Be Ordering', true), array('action'=>'add/spesial/'), null, sprintf(__('The Spesial Ordering. Are you sure?', true), $detailTotal['quantity'])).'</p>';
 		}else{
 			echo '<p>'.$html->link(__('Basic Ordering', true), array('action'=>'add/basic/'), null, sprintf(__('The Basic Ordering. Are you sure?', true), $detailTotal['quantity'])).'　/　';
-			echo $html->link(__('Custom Ordering', true), array('action'=>'add/custom/'), null, sprintf(__('The Custom Ordering. Are you sure?', true), $detailTotal['quantity'])).'</p>';
+			echo $html->link(__('Custom Ordering', true), array('action'=>'add/custom/'), null, sprintf(__('The Custom Ordering. Are you sure?', true), $detailTotal['quantity'])).'　/　';
+			
+			echo $html->link(__('Repair Ordering', true), array('action'=>'add/repair/'), null, sprintf(__('The Repair Ordering. Are you sure?', true), $detailTotal['quantity'])).'　/　';
+			echo $html->link(__('Other Ordering', true), array('action'=>'add/other/'), null, sprintf(__('The Other Ordering. Are you sure?', true), $detailTotal['quantity'])).'</p>';
+			
 		}
 //pr($details);
 	}
