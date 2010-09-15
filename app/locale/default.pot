@@ -1,0 +1,4547 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  Revision: 7945 \app\config\090730bootstrap.php
+#  Revision: 7945 \app\config\bootstrap.php
+#  Revision: 7945 \app\views\scaffolds\index.ctp
+#  Revision: 7945 \app\views\layouts\CopyOfdefault.ctp
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2009-07-31 22:32+0900\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: \config\090730bootstrap.php:351
+#: \config\bootstrap.php:351
+msgid "Normal"
+msgstr ""
+
+#: \config\090730bootstrap.php:352
+#: \config\bootstrap.php:352
+msgid "Top Expression"
+msgstr ""
+
+#: \config\bootstrap.php:47
+msgid "Hokkaido"
+msgstr ""
+
+#: \config\bootstrap.php:48
+msgid "Aomori"
+msgstr ""
+
+#: \config\bootstrap.php:49
+msgid "Iwate"
+msgstr ""
+
+#: \config\bootstrap.php:50
+msgid "Miyagi"
+msgstr ""
+
+#: \config\bootstrap.php:51
+msgid "Akita"
+msgstr ""
+
+#: \config\bootstrap.php:52
+msgid "Yamagata"
+msgstr ""
+
+#: \config\bootstrap.php:53
+msgid "Fukushima"
+msgstr ""
+
+#: \config\bootstrap.php:54
+msgid "Ibaragi"
+msgstr ""
+
+#: \config\bootstrap.php:55
+msgid "Tochigi"
+msgstr ""
+
+#: \config\bootstrap.php:56
+msgid "Gunma"
+msgstr ""
+
+#: \config\bootstrap.php:57
+msgid "Saitama"
+msgstr ""
+
+#: \config\bootstrap.php:58
+msgid "Chiba"
+msgstr ""
+
+#: \config\bootstrap.php:59
+msgid "Tokyo"
+msgstr ""
+
+#: \config\bootstrap.php:60
+msgid "Kanagawa"
+msgstr ""
+
+#: \config\bootstrap.php:61
+msgid "Niigata"
+msgstr ""
+
+#: \config\bootstrap.php:62
+msgid "Toyama"
+msgstr ""
+
+#: \config\bootstrap.php:63
+msgid "Ishikawa"
+msgstr ""
+
+#: \config\bootstrap.php:64
+msgid "Fukui"
+msgstr ""
+
+#: \config\bootstrap.php:65
+msgid "Yamanashi"
+msgstr ""
+
+#: \config\bootstrap.php:66
+msgid "Nagano"
+msgstr ""
+
+#: \config\bootstrap.php:67
+msgid "Gifu"
+msgstr ""
+
+#: \config\bootstrap.php:68
+msgid "Shizuoka"
+msgstr ""
+
+#: \config\bootstrap.php:69
+msgid "Aichi"
+msgstr ""
+
+#: \config\bootstrap.php:70
+msgid "Mie"
+msgstr ""
+
+#: \config\bootstrap.php:71
+msgid "Shiga"
+msgstr ""
+
+#: \config\bootstrap.php:72
+msgid "Kyoto"
+msgstr ""
+
+#: \config\bootstrap.php:73
+msgid "Osaka"
+msgstr ""
+
+#: \config\bootstrap.php:74
+msgid "Nara"
+msgstr ""
+
+#: \config\bootstrap.php:75
+msgid "Wakayama"
+msgstr ""
+
+#: \config\bootstrap.php:76
+msgid "Tottori"
+msgstr ""
+
+#: \config\bootstrap.php:77
+msgid "Shimane"
+msgstr ""
+
+#: \config\bootstrap.php:78
+msgid "Okayama"
+msgstr ""
+
+#: \config\bootstrap.php:79
+msgid "Hiroshima"
+msgstr ""
+
+#: \config\bootstrap.php:80
+msgid "Yamaguchi"
+msgstr ""
+
+#: \config\bootstrap.php:81
+msgid "Tokushima"
+msgstr ""
+
+#: \config\bootstrap.php:82
+msgid "Kagawa"
+msgstr ""
+
+#: \config\bootstrap.php:83
+msgid "Ehime"
+msgstr ""
+
+#: \config\bootstrap.php:84
+msgid "Kochi"
+msgstr ""
+
+#: \config\bootstrap.php:85
+msgid "Fukuoka"
+msgstr ""
+
+#: \config\bootstrap.php:86
+msgid "Saga"
+msgstr ""
+
+#: \config\bootstrap.php:87
+msgid "Nagasaki"
+msgstr ""
+
+#: \config\bootstrap.php:88
+msgid "Kumamoto"
+msgstr ""
+
+#: \config\bootstrap.php:89
+msgid "Oita"
+msgstr ""
+
+#: \config\bootstrap.php:90
+msgid "Miyazaki"
+msgstr ""
+
+#: \config\bootstrap.php:91
+msgid "Kagoshima"
+msgstr ""
+
+#: \config\bootstrap.php:92
+msgid "Okinawa"
+msgstr ""
+
+#: \config\bootstrap.php:93;151;279;289;297;331;345
+msgid "Other"
+msgstr ""
+
+#: \config\bootstrap.php:115
+msgid "Enrollment"
+msgstr ""
+
+#: \config\bootstrap.php:116
+msgid "Leave"
+msgstr ""
+
+#: \config\bootstrap.php:117
+msgid "Retirement"
+msgstr ""
+
+#: \config\bootstrap.php:130
+msgid "Sales(Shops)"
+msgstr ""
+
+#: \config\bootstrap.php:131
+msgid "Sales(Not Shops)"
+msgstr ""
+
+#: \config\bootstrap.php:132
+msgid "Non-business sector"
+msgstr ""
+
+#: \config\bootstrap.php:138
+msgid "Inventory Management"
+msgstr ""
+
+#: \config\bootstrap.php:139
+msgid "Not Inventory Management"
+msgstr ""
+
+#: \config\bootstrap.php:145
+msgid "mm(Vertical*Width*Thickness)"
+msgstr ""
+
+#: \config\bootstrap.php:146
+msgid "mm(Vertical*Width)"
+msgstr ""
+
+#: \config\bootstrap.php:147
+msgid "mm(Width*Thickness)"
+msgstr ""
+
+#: \config\bootstrap.php:148
+msgid "mm(Diameter*Thickness)"
+msgstr ""
+
+#: \config\bootstrap.php:149
+msgid "mm(Diameter*Width)"
+msgstr ""
+
+#: \config\bootstrap.php:150
+msgid "mm(Diameter*Width*Thickness)"
+msgstr ""
+
+#: \config\bootstrap.php:157
+msgid "Can Order"
+msgstr ""
+
+#: \config\bootstrap.php:158
+msgid "Not Order"
+msgstr ""
+
+#: \config\bootstrap.php:164
+msgid "Can Custom Order"
+msgstr ""
+
+#: \config\bootstrap.php:165
+msgid "Not Custom Order"
+msgstr ""
+
+#: \config\bootstrap.php:171;178
+msgid "Can Resize"
+msgstr ""
+
+#: \config\bootstrap.php:172;179
+msgid "Not Resize"
+msgstr ""
+
+#: \config\bootstrap.php:185
+msgid "Rate Apply"
+msgstr ""
+
+#: \config\bootstrap.php:186
+msgid "Not Rate Apply"
+msgstr ""
+
+#: \config\bootstrap.php:192
+msgid "Product Cost"
+msgstr ""
+
+#: \config\bootstrap.php:193
+msgid "Expenses"
+msgstr ""
+
+#: \config\bootstrap.php:248
+msgid "Articles supplied"
+msgstr ""
+
+#: \config\bootstrap.php:249
+#: \views\parts\admin_index.ctp:2
+#: \views\parts\index.ctp:2
+msgid "Parts"
+msgstr ""
+
+#: \config\bootstrap.php:255
+msgid "By Bill"
+msgstr ""
+
+#: \config\bootstrap.php:256
+msgid "By Breakdown"
+msgstr ""
+
+#: \config\bootstrap.php:257
+msgid "By Production"
+msgstr ""
+
+#: \config\bootstrap.php:258
+msgid "By Monthly Bill"
+msgstr ""
+
+#: \config\bootstrap.php:264
+msgid "Dropfration"
+msgstr ""
+
+#: \config\bootstrap.php:265
+msgid "Revaluation"
+msgstr ""
+
+#: \config\bootstrap.php:266
+msgid "Round Off"
+msgstr ""
+
+#: \config\bootstrap.php:272
+msgid "End Of Every Month"
+msgstr ""
+
+#: \config\bootstrap.php:273
+msgid "Every 5th"
+msgstr ""
+
+#: \config\bootstrap.php:274
+msgid "Every 10th"
+msgstr ""
+
+#: \config\bootstrap.php:275
+msgid "Every 15th"
+msgstr ""
+
+#: \config\bootstrap.php:276
+msgid "Every 20th"
+msgstr ""
+
+#: \config\bootstrap.php:277
+msgid "Every 25th"
+msgstr ""
+
+#: \config\bootstrap.php:278;288
+msgid "Any Time"
+msgstr ""
+
+#: \config\bootstrap.php:285
+msgid "End Of Month"
+msgstr ""
+
+#: \config\bootstrap.php:286
+msgid "End Of Next Month"
+msgstr ""
+
+#: \config\bootstrap.php:287
+msgid "End Of Next Next Month"
+msgstr ""
+
+#: \config\bootstrap.php:295
+msgid "Cash"
+msgstr ""
+
+#: \config\bootstrap.php:296
+msgid "Cheque"
+msgstr ""
+
+#: \config\bootstrap.php:303
+msgid "Continuation"
+msgstr ""
+
+#: \config\bootstrap.php:304
+msgid "Pause"
+msgstr ""
+
+#: \config\bootstrap.php:305
+msgid "Stop"
+msgstr ""
+
+#: \config\bootstrap.php:321
+msgid "Ring"
+msgstr ""
+
+#: \config\bootstrap.php:322
+msgid "Necklace"
+msgstr ""
+
+#: \config\bootstrap.php:323
+msgid "Necklace Chain"
+msgstr ""
+
+#: \config\bootstrap.php:324
+msgid "Pendant Top"
+msgstr ""
+
+#: \config\bootstrap.php:325
+msgid "bracelet"
+msgstr ""
+
+#: \config\bootstrap.php:326
+msgid "earring"
+msgstr ""
+
+#: \config\bootstrap.php:327
+msgid "Anklet"
+msgstr ""
+
+#: \config\bootstrap.php:328
+msgid "Clock"
+msgstr ""
+
+#: \config\bootstrap.php:329
+msgid "Strap"
+msgstr ""
+
+#: \config\bootstrap.php:330
+msgid "lighter"
+msgstr ""
+
+#: \config\bootstrap.php:337
+msgid "Sales"
+msgstr ""
+
+#: \config\bootstrap.php:338
+msgid "Product"
+msgstr ""
+
+#: \config\bootstrap.php:339
+msgid "Management"
+msgstr ""
+
+#: \config\bootstrap.php:340
+msgid "Marketing"
+msgstr ""
+
+#: \config\bootstrap.php:341
+msgid "Design"
+msgstr ""
+
+#: \config\bootstrap.php:342
+msgid "System"
+msgstr ""
+
+#: \config\bootstrap.php:343
+msgid "Shops"
+msgstr ""
+
+#: \config\bootstrap.php:344
+msgid "Customer Center"
+msgstr ""
+
+#: \controllers\brands_controller.php:15;38;53;68;85;100
+msgid "Invalid Brand"
+msgstr ""
+
+#: \controllers\brands_controller.php:77
+msgid "Brand saved."
+msgstr ""
+
+#: \controllers\brands_controller.php:89
+msgid "The Brand has been saved."
+msgstr ""
+
+#: \controllers\brands_controller.php:103
+msgid "Brand deleted"
+msgstr ""
+
+#: \controllers\days_coordinations_controller.php:14;31;46;61;78;93
+msgid "Invalid DaysCoordination"
+msgstr ""
+
+#: \controllers\days_coordinations_controller.php:23;70
+msgid "DaysCoordination saved."
+msgstr ""
+
+#: \controllers\days_coordinations_controller.php:35;82
+msgid "The DaysCoordination has been saved."
+msgstr ""
+
+#: \controllers\days_coordinations_controller.php:49;96
+msgid "DaysCoordination deleted"
+msgstr ""
+
+#: \controllers\employments_controller.php:19;39;54;69;86;101
+msgid "Invalid Employment"
+msgstr ""
+
+#: \controllers\employments_controller.php:57;104
+msgid "Employment deleted"
+msgstr ""
+
+#: \controllers\employments_controller.php:78
+msgid "Employment saved."
+msgstr ""
+
+#: \controllers\employments_controller.php:90
+msgid "The Employment has been saved."
+msgstr ""
+
+#: \controllers\factories_controller.php:15;61;85;100;117;132
+msgid "Invalid Factory"
+msgstr ""
+
+#: \controllers\factories_controller.php:109
+msgid "Factory saved."
+msgstr ""
+
+#: \controllers\factories_controller.php:121
+msgid "The Factory has been saved."
+msgstr ""
+
+#: \controllers\factories_controller.php:135
+msgid "Factory deleted"
+msgstr ""
+
+#: \controllers\item_images_controller.php:16;49;67;88;107;124
+msgid "Invalid ItemImage"
+msgstr ""
+
+#: \controllers\item_images_controller.php:97
+msgid "ItemImage saved."
+msgstr ""
+
+#: \controllers\item_images_controller.php:111
+msgid "The ItemImage has been saved."
+msgstr ""
+
+#: \controllers\item_images_controller.php:127
+msgid "ItemImage deleted"
+msgstr ""
+
+#: \controllers\items_controller.php:139;224;319;336;361;384
+msgid "Invalid Item"
+msgstr ""
+
+#: \controllers\items_controller.php:345
+msgid "Item saved."
+msgstr ""
+
+#: \controllers\items_controller.php:365
+msgid "The Item has been saved."
+msgstr ""
+
+#: \controllers\items_controller.php:387
+msgid "Item deleted"
+msgstr ""
+
+#: \controllers\materials_controller.php:14;36;51;66;83;98
+msgid "Invalid Material"
+msgstr ""
+
+#: \controllers\materials_controller.php:75
+msgid "Material saved."
+msgstr ""
+
+#: \controllers\materials_controller.php:87
+msgid "The Material has been saved."
+msgstr ""
+
+#: \controllers\materials_controller.php:101
+msgid "Material deleted"
+msgstr ""
+
+#: \controllers\memo_categories_controller.php:21;83
+msgid "Invalid MemoCategory."
+msgstr ""
+
+#: \controllers\memo_categories_controller.php:34;51;93;108
+msgid "The MemoCategory has been saved"
+msgstr ""
+
+#: \controllers\memo_categories_controller.php:37;54;96;111
+msgid "The MemoCategory could not be saved. Please, try again."
+msgstr ""
+
+#: \controllers\memo_categories_controller.php:46;103
+msgid "Invalid MemoCategory"
+msgstr ""
+
+#: \controllers\memo_categories_controller.php:66;121
+msgid "Invalid id for MemoCategory"
+msgstr ""
+
+#: \controllers\memo_categories_controller.php:70;125
+msgid "MemoCategory deleted"
+msgstr ""
+
+#: \controllers\memo_datas_controller.php:107;247
+msgid "Invalid MemoData."
+msgstr ""
+
+#: \controllers\memo_datas_controller.php:155;185;214;260;275
+msgid "The MemoData could not be saved. Please, try again."
+msgstr ""
+
+#: \controllers\memo_datas_controller.php:201;267
+msgid "Invalid MemoData"
+msgstr ""
+
+#: \controllers\memo_datas_controller.php:230;285
+msgid "Invalid id for MemoData"
+msgstr ""
+
+#: \controllers\memo_datas_controller.php:234;289
+msgid "MemoData deleted"
+msgstr ""
+
+#: \controllers\memo_datas_controller.php:257;272
+msgid "The MemoData has been saved"
+msgstr ""
+
+#: \controllers\parts_controller.php:15;91;130;145;164;181
+msgid "Invalid Part"
+msgstr ""
+
+#: \controllers\parts_controller.php:133;184
+msgid "Part deleted"
+msgstr ""
+
+#: \controllers\parts_controller.php:154
+msgid "Part saved."
+msgstr ""
+
+#: \controllers\parts_controller.php:168
+msgid "The Part has been saved."
+msgstr ""
+
+#: \controllers\posts_controller.php:19;40;55;70;87;102
+msgid "Invalid Post"
+msgstr ""
+
+#: \controllers\posts_controller.php:58;105
+msgid "Post deleted"
+msgstr ""
+
+#: \controllers\posts_controller.php:79
+msgid "Post saved."
+msgstr ""
+
+#: \controllers\posts_controller.php:91
+msgid "The Post has been saved."
+msgstr ""
+
+#: \controllers\processes_controller.php:14;36;51;66;83;98
+msgid "Invalid Process"
+msgstr ""
+
+#: \controllers\processes_controller.php:75
+msgid "Process saved."
+msgstr ""
+
+#: \controllers\processes_controller.php:87
+msgid "The Process has been saved."
+msgstr ""
+
+#: \controllers\processes_controller.php:101
+msgid "Process deleted"
+msgstr ""
+
+#: \controllers\sales_state_codes_controller.php:15;46;65;80;97;112
+msgid "Invalid SalesStateCode"
+msgstr ""
+
+#: \controllers\sales_state_codes_controller.php:89
+msgid "SalesStateCode saved."
+msgstr ""
+
+#: \controllers\sales_state_codes_controller.php:101
+msgid "The SalesStateCode has been saved."
+msgstr ""
+
+#: \controllers\sales_state_codes_controller.php:115
+msgid "SalesStateCode deleted"
+msgstr ""
+
+#: \controllers\sections_controller.php:20;45;66;81;98;113
+msgid "Invalid Section"
+msgstr ""
+
+#: \controllers\sections_controller.php:69;116
+msgid "Section deleted"
+msgstr ""
+
+#: \controllers\sections_controller.php:90
+msgid "Section saved."
+msgstr ""
+
+#: \controllers\sections_controller.php:102
+msgid "The Section has been saved."
+msgstr ""
+
+#: \controllers\stones_controller.php:14;36;51;66;83;98
+msgid "Invalid Stone"
+msgstr ""
+
+#: \controllers\stones_controller.php:75
+msgid "Stone saved."
+msgstr ""
+
+#: \controllers\stones_controller.php:87
+msgid "The Stone has been saved."
+msgstr ""
+
+#: \controllers\stones_controller.php:101
+msgid "Stone deleted"
+msgstr ""
+
+#: \controllers\subitems_controller.php:15;60;83;98;119;138
+msgid "Invalid Subitem"
+msgstr ""
+
+#: \controllers\subitems_controller.php:86;141
+msgid "Subitem deleted"
+msgstr ""
+
+#: \controllers\subitems_controller.php:107
+msgid "Subitem saved."
+msgstr ""
+
+#: \controllers\subitems_controller.php:123
+msgid "The Subitem has been saved."
+msgstr ""
+
+#: \controllers\tags_controller.php:14;37;52;67;84;99
+msgid "Invalid Tag"
+msgstr ""
+
+#: \controllers\tags_controller.php:76
+msgid "Tag saved."
+msgstr ""
+
+#: \controllers\tags_controller.php:88
+msgid "The Tag has been saved."
+msgstr ""
+
+#: \controllers\tags_controller.php:102
+msgid "Tag deleted"
+msgstr ""
+
+#: \controllers\tags_items_controller.php:14;31;46;61;78;93
+msgid "Invalid TagsItem"
+msgstr ""
+
+#: \controllers\tags_items_controller.php:23;70
+msgid "TagsItem saved."
+msgstr ""
+
+#: \controllers\tags_items_controller.php:35;82
+msgid "The TagsItem has been saved."
+msgstr ""
+
+#: \controllers\tags_items_controller.php:49;96
+msgid "TagsItem deleted"
+msgstr ""
+
+#: \controllers\time_cards_controller.php:14;33;50;65;84;101
+msgid "Invalid TimeCard"
+msgstr ""
+
+#: \controllers\time_cards_controller.php:23;74
+msgid "TimeCard saved."
+msgstr ""
+
+#: \controllers\time_cards_controller.php:37;88
+msgid "The TimeCard has been saved."
+msgstr ""
+
+#: \controllers\time_cards_controller.php:53;104
+msgid "TimeCard deleted"
+msgstr ""
+
+#: \controllers\users_controller.php:44;78;103;118;139;158
+msgid "Invalid User"
+msgstr ""
+
+#: \controllers\users_controller.php:85
+msgid "The Users could not be saved. Please, try again."
+msgstr ""
+
+#: \controllers\users_controller.php:106;161
+msgid "User deleted"
+msgstr ""
+
+#: \controllers\users_controller.php:127
+msgid "User saved."
+msgstr ""
+
+#: \controllers\users_controller.php:143
+msgid "The User has been saved."
+msgstr ""
+
+#: \views\brands\add.ctp:2
+#: \views\brands\admin_add.ctp:18
+#: \views\brands\admin_edit.ctp:20
+#: \views\brands\admin_view.ctp:55
+#: \views\brands\edit.ctp:2;25
+#: \views\brands\view.ctp:2;46
+#: \views\items\admin_add.ctp:51
+#: \views\items\admin_edit.ctp:53
+#: \views\items\admin_index.ctp:193
+#: \views\items\admin_view.ctp:204
+#: \views\pages\masters.ctp:18
+msgid "List Brands"
+msgstr ""
+
+#: \views\brands\add.ctp:5
+#: \views\brands\admin_add.ctp:4
+msgid "Add Brand"
+msgstr ""
+
+#: \views\brands\add.ctp:8
+#: \views\brands\edit.ctp:9
+#: \views\brands\view.ctp:10
+msgid "Brand Name"
+msgstr ""
+
+#: \views\brands\add.ctp:13
+#: \views\brands\admin_view.ctp:14
+#: \views\brands\edit.ctp:14
+#: \views\brands\view.ctp:15
+msgid "Temporary Costrate"
+msgstr ""
+
+#: \views\brands\add.ctp:18
+#: \views\employments\add.ctp:28
+#: \views\factories\add.ctp:131
+#: \views\items\add.ctp:213
+#: \views\materials\add.ctp:25
+#: \views\memo_categories\add.ctp:16
+#: \views\parts\add.ctp:30
+#: \views\posts\add.ctp:31
+#: \views\processes\add.ctp:24
+#: \views\sales_state_codes\add.ctp:32
+#: \views\sections\add.ctp:69
+#: \views\stones\add.ctp:18
+#: \views\subitems\add.ctp:77
+#: \views\tags\add.ctp:12
+#: \views\users\add.ctp:120
+msgid "Register"
+msgstr ""
+
+#: \views\brands\admin_add.ctp:19
+#: \views\brands\admin_edit.ctp:21
+#: \views\brands\admin_index.ctp:75
+#: \views\brands\admin_view.ctp:57
+#: \views\factories\admin_add.ctp:40
+#: \views\factories\admin_edit.ctp:42
+#: \views\factories\admin_index.ctp:159
+#: \views\factories\admin_view.ctp:162
+#: \views\item_images\admin_add.ctp:16
+#: \views\item_images\admin_edit.ctp:18
+#: \views\item_images\admin_index.ctp:59
+#: \views\item_images\admin_view.ctp:37
+#: \views\item_images\index.ctp:59
+#: \views\item_images\view.ctp:37
+#: \views\items\add.ctp:2;217
+#: \views\items\admin_add.ctp:48
+#: \views\items\admin_edit.ctp:50
+#: \views\items\admin_view.ctp:200
+#: \views\materials\admin_add.ctp:20
+#: \views\materials\admin_edit.ctp:22
+#: \views\materials\admin_index.ctp:79
+#: \views\materials\admin_view.ctp:62
+#: \views\processes\admin_add.ctp:20
+#: \views\processes\admin_edit.ctp:22
+#: \views\processes\admin_index.ctp:79
+#: \views\processes\admin_view.ctp:62
+#: \views\sales_state_codes\admin_add.ctp:21
+#: \views\sales_state_codes\admin_edit.ctp:23
+#: \views\sales_state_codes\admin_index.ctp:83
+#: \views\sales_state_codes\admin_view.ctp:67
+#: \views\stones\admin_add.ctp:19
+#: \views\stones\admin_edit.ctp:21
+#: \views\stones\admin_index.ctp:75
+#: \views\stones\admin_view.ctp:57
+#: \views\subitems\admin_add.ctp:32
+#: \views\subitems\admin_edit.ctp:34
+#: \views\subitems\admin_index.ctp:127
+#: \views\subitems\admin_view.ctp:122
+#: \views\subitems\index.ctp:127
+msgid "List Items"
+msgstr ""
+
+#: \views\brands\admin_add.ctp:20
+#: \views\brands\admin_edit.ctp:22
+#: \views\brands\admin_index.ctp:76
+#: \views\brands\admin_view.ctp:58;165
+#: \views\factories\admin_add.ctp:41
+#: \views\factories\admin_edit.ctp:43
+#: \views\factories\admin_index.ctp:160
+#: \views\factories\admin_view.ctp:163;270
+#: \views\item_images\admin_add.ctp:17
+#: \views\item_images\admin_edit.ctp:19
+#: \views\item_images\admin_index.ctp:60
+#: \views\item_images\admin_view.ctp:38
+#: \views\item_images\index.ctp:60
+#: \views\item_images\view.ctp:38
+#: \views\items\admin_index.ctp:190
+#: \views\items\admin_view.ctp:201
+#: \views\materials\admin_add.ctp:21
+#: \views\materials\admin_edit.ctp:23
+#: \views\materials\admin_index.ctp:80
+#: \views\materials\admin_view.ctp:63;170
+#: \views\processes\admin_add.ctp:21
+#: \views\processes\admin_edit.ctp:23
+#: \views\processes\admin_index.ctp:80
+#: \views\processes\admin_view.ctp:63;170
+#: \views\sales_state_codes\admin_add.ctp:22
+#: \views\sales_state_codes\admin_edit.ctp:24
+#: \views\sales_state_codes\admin_index.ctp:84
+#: \views\sales_state_codes\admin_view.ctp:68;175
+#: \views\stones\admin_add.ctp:20
+#: \views\stones\admin_edit.ctp:22
+#: \views\stones\admin_index.ctp:76
+#: \views\stones\admin_view.ctp:58;165
+#: \views\subitems\admin_add.ctp:33
+#: \views\subitems\admin_edit.ctp:35
+#: \views\subitems\admin_index.ctp:128
+#: \views\subitems\admin_view.ctp:123
+#: \views\subitems\index.ctp:128
+msgid "New Item"
+msgstr ""
+
+#: \views\brands\admin_edit.ctp:4
+#: \views\brands\admin_view.ctp:53
+#: \views\brands\edit.ctp:5
+#: \views\brands\view.ctp:44
+msgid "Edit Brand"
+msgstr ""
+
+#: \views\brands\admin_edit.ctp:19
+#: \views\brands\admin_index.ctp:61
+#: \views\brands\admin_view.ctp:156
+#: \views\brands\edit.ctp:24
+#: \views\days_coordinations\admin_edit.ctp:23
+#: \views\days_coordinations\admin_index.ctp:77
+#: \views\days_coordinations\edit.ctp:23
+#: \views\days_coordinations\index.ctp:77
+#: \views\employments\admin_edit.ctp:22
+#: \views\employments\admin_index.ctp:73
+#: \views\employments\admin_view.ctp:157
+#: \views\employments\edit.ctp:33
+#: \views\factories\admin_edit.ctp:40
+#: \views\factories\admin_index.ctp:145
+#: \views\factories\admin_view.ctp:261
+#: \views\factories\edit.ctp:135
+#: \views\item_images\admin_edit.ctp:16
+#: \views\item_images\admin_index.ctp:45
+#: \views\item_images\edit.ctp:24
+#: \views\item_images\index.ctp:45
+#: \views\items\admin_edit.ctp:49
+#: \views\items\admin_index.ctp:177
+#: \views\items\admin_view.ctp:285;327;375
+#: \views\items\edit.ctp:223
+#: \views\materials\admin_edit.ctp:20
+#: \views\materials\admin_index.ctp:65
+#: \views\materials\admin_view.ctp:161
+#: \views\materials\edit.ctp:30
+#: \views\memo_categories\admin_edit.ctp:19
+#: \views\memo_categories\admin_index.ctp:61
+#: \views\memo_categories\edit.ctp:21
+#: \views\memo_datas\admin_edit.ctp:25
+#: \views\memo_datas\admin_index.ctp:85
+#: \views\memo_datas\edit.ctp:54
+#: \views\parts\admin_edit.ctp:17
+#: \views\parts\admin_index.ctp:53
+#: \views\parts\edit.ctp:37
+#: \views\parts\index.ctp:53
+#: \views\posts\admin_edit.ctp:23
+#: \views\posts\admin_index.ctp:77
+#: \views\posts\admin_view.ctp:162
+#: \views\posts\edit.ctp:36
+#: \views\processes\admin_edit.ctp:20
+#: \views\processes\admin_index.ctp:65
+#: \views\processes\admin_view.ctp:161
+#: \views\processes\edit.ctp:30
+#: \views\sales_state_codes\admin_edit.ctp:21
+#: \views\sales_state_codes\admin_index.ctp:69
+#: \views\sales_state_codes\admin_view.ctp:166
+#: \views\sales_state_codes\edit.ctp:38
+#: \views\scaffolds\index.ctp:71
+#: \views\sections\admin_edit.ctp:35
+#: \views\sections\admin_index.ctp:125
+#: \views\sections\admin_view.ctp:222
+#: \views\sections\edit.ctp:72
+#: \views\stones\admin_edit.ctp:19
+#: \views\stones\admin_index.ctp:61
+#: \views\stones\admin_view.ctp:156
+#: \views\stones\edit.ctp:24
+#: \views\subitems\admin_edit.ctp:32
+#: \views\subitems\admin_index.ctp:113
+#: \views\subitems\admin_view.ctp:165
+#: \views\subitems\edit.ctp:83
+#: \views\subitems\index.ctp:113
+#: \views\tags\admin_edit.ctp:18
+#: \views\tags\admin_index.ctp:57
+#: \views\tags\edit.ctp:18
+#: \views\tags_items\admin_edit.ctp:16
+#: \views\tags_items\admin_index.ctp:45
+#: \views\tags_items\edit.ctp:16
+#: \views\tags_items\index.ctp:45
+#: \views\time_cards\admin_edit.ctp:22
+#: \views\time_cards\admin_index.ctp:73
+#: \views\time_cards\edit.ctp:22
+#: \views\time_cards\index.ctp:73
+#: \views\users\CopyOfview.ctp:197
+#: \views\users\admin_edit.ctp:41
+#: \views\users\admin_index.ctp:149
+#: \views\users\admin_view.ctp:220
+#: \views\users\edit.ctp:84
+#: \views\users\view.ctp:216
+msgid "Delete"
+msgstr ""
+
+#: \views\brands\admin_edit.ctp:19
+#: \views\brands\admin_index.ctp:61
+#: \views\brands\admin_view.ctp:54;156
+#: \views\brands\edit.ctp:24
+#: \views\brands\view.ctp:45
+#: \views\days_coordinations\admin_edit.ctp:23
+#: \views\days_coordinations\admin_index.ctp:77
+#: \views\days_coordinations\admin_view.ctp:74
+#: \views\days_coordinations\edit.ctp:23
+#: \views\days_coordinations\index.ctp:77
+#: \views\days_coordinations\view.ctp:74
+#: \views\employments\admin_edit.ctp:22
+#: \views\employments\admin_index.ctp:73
+#: \views\employments\admin_view.ctp:69;157
+#: \views\employments\edit.ctp:33
+#: \views\employments\view.ctp:60
+#: \views\factories\admin_edit.ctp:40
+#: \views\factories\admin_index.ctp:145
+#: \views\factories\admin_view.ctp:159;261
+#: \views\factories\edit.ctp:135
+#: \views\factories\view.ctp:150
+#: \views\item_images\admin_edit.ctp:16
+#: \views\item_images\admin_index.ctp:45
+#: \views\item_images\admin_view.ctp:34
+#: \views\item_images\edit.ctp:24
+#: \views\item_images\index.ctp:45
+#: \views\item_images\view.ctp:34
+#: \views\items\admin_edit.ctp:49
+#: \views\items\admin_index.ctp:177
+#: \views\items\admin_view.ctp:199;285;327;375
+#: \views\items\edit.ctp:223
+#: \views\items\view.ctp:270
+#: \views\materials\admin_edit.ctp:20
+#: \views\materials\admin_index.ctp:65
+#: \views\materials\admin_view.ctp:59;161
+#: \views\materials\edit.ctp:30
+#: \views\materials\view.ctp:50
+#: \views\memo_categories\admin_edit.ctp:19
+#: \views\memo_categories\admin_index.ctp:61
+#: \views\memo_categories\admin_view.ctp:54
+#: \views\memo_categories\edit.ctp:21
+#: \views\memo_categories\view.ctp:45
+#: \views\memo_datas\admin_edit.ctp:25
+#: \views\memo_datas\admin_index.ctp:85
+#: \views\memo_datas\admin_view.ctp:84
+#: \views\memo_datas\edit.ctp:54
+#: \views\memo_datas\view.ctp:72
+#: \views\parts\admin_edit.ctp:17
+#: \views\parts\admin_index.ctp:53
+#: \views\parts\admin_view.ctp:44
+#: \views\parts\edit.ctp:37
+#: \views\parts\index.ctp:53
+#: \views\parts\view.ctp:44
+#: \views\posts\admin_edit.ctp:23
+#: \views\posts\admin_index.ctp:77
+#: \views\posts\admin_view.ctp:74;162
+#: \views\posts\edit.ctp:36
+#: \views\posts\view.ctp:65
+#: \views\processes\admin_edit.ctp:20
+#: \views\processes\admin_index.ctp:65
+#: \views\processes\admin_view.ctp:59;161
+#: \views\processes\edit.ctp:30
+#: \views\processes\view.ctp:50
+#: \views\sales_state_codes\admin_edit.ctp:21
+#: \views\sales_state_codes\admin_index.ctp:69
+#: \views\sales_state_codes\admin_view.ctp:64;166
+#: \views\sales_state_codes\edit.ctp:38
+#: \views\sales_state_codes\view.ctp:55
+#: \views\sections\admin_edit.ctp:35
+#: \views\sections\admin_index.ctp:125
+#: \views\sections\admin_view.ctp:134;222
+#: \views\sections\edit.ctp:72
+#: \views\sections\view.ctp:157
+#: \views\stones\admin_edit.ctp:19
+#: \views\stones\admin_index.ctp:61
+#: \views\stones\admin_view.ctp:54;156
+#: \views\stones\edit.ctp:24
+#: \views\stones\view.ctp:45
+#: \views\subitems\admin_edit.ctp:32
+#: \views\subitems\admin_index.ctp:113
+#: \views\subitems\admin_view.ctp:119;165
+#: \views\subitems\edit.ctp:83
+#: \views\subitems\index.ctp:113
+#: \views\subitems\view.ctp:113
+#: \views\tags\admin_edit.ctp:18
+#: \views\tags\admin_index.ctp:57
+#: \views\tags\admin_view.ctp:49
+#: \views\tags\edit.ctp:18
+#: \views\tags\view.ctp:40
+#: \views\tags_items\admin_edit.ctp:16
+#: \views\tags_items\admin_index.ctp:45
+#: \views\tags_items\admin_view.ctp:34
+#: \views\tags_items\edit.ctp:16
+#: \views\tags_items\index.ctp:45
+#: \views\tags_items\view.ctp:34
+#: \views\time_cards\admin_edit.ctp:22
+#: \views\time_cards\admin_index.ctp:73
+#: \views\time_cards\admin_view.ctp:69
+#: \views\time_cards\edit.ctp:22
+#: \views\time_cards\index.ctp:73
+#: \views\time_cards\view.ctp:69
+#: \views\users\CopyOfview.ctp:150;197
+#: \views\users\admin_edit.ctp:41
+#: \views\users\admin_index.ctp:149
+#: \views\users\admin_view.ctp:164;220
+#: \views\users\edit.ctp:84
+#: \views\users\view.ctp:169;216
+msgid "Are you sure you want to delete # %s?"
+msgstr ""
+
+#: \views\brands\admin_index.ctp:2
+#: \views\brands\index.ctp:2
+msgid "Brands"
+msgstr ""
+
+#: \views\brands\admin_index.ctp:6
+#: \views\brands\index.ctp:6
+#: \views\days_coordinations\admin_index.ctp:6
+#: \views\days_coordinations\index.ctp:6
+#: \views\employments\admin_index.ctp:6
+#: \views\employments\index.ctp:6
+#: \views\factories\admin_index.ctp:6
+#: \views\factories\index.ctp:6
+#: \views\item_images\admin_index.ctp:6
+#: \views\item_images\index.ctp:6
+#: \views\items\admin_index.ctp:6
+#: \views\items\index.ctp:176
+#: \views\materials\admin_index.ctp:6
+#: \views\materials\index.ctp:6
+#: \views\memo_categories\admin_index.ctp:6
+#: \views\memo_categories\index.ctp:6
+#: \views\memo_datas\admin_index.ctp:6
+#: \views\memo_datas\category_index.ctp:8
+#: \views\memo_datas\section_index.ctp:7
+#: \views\parts\admin_index.ctp:6
+#: \views\parts\index.ctp:6
+#: \views\posts\admin_index.ctp:6
+#: \views\posts\index.ctp:6
+#: \views\processes\admin_index.ctp:6
+#: \views\processes\index.ctp:6
+#: \views\sales_state_codes\admin_index.ctp:6
+#: \views\sales_state_codes\index.ctp:6
+#: \views\sections\admin_index.ctp:6
+#: \views\sections\index.ctp:6
+#: \views\stones\admin_index.ctp:6
+#: \views\stones\index.ctp:6
+#: \views\subitems\admin_index.ctp:6
+#: \views\subitems\index.ctp:6
+#: \views\tags\admin_index.ctp:6
+#: \views\tags\index.ctp:6
+#: \views\tags_items\admin_index.ctp:6
+#: \views\tags_items\index.ctp:6
+#: \views\time_cards\admin_index.ctp:6
+#: \views\time_cards\index.ctp:6
+#: \views\users\admin_index.ctp:6
+#: \views\users\index.ctp:12
+msgid "Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%"
+msgstr ""
+
+#: \views\brands\admin_index.ctp:20
+#: \views\brands\admin_view.ctp:104
+#: \views\days_coordinations\admin_index.ctp:24
+#: \views\days_coordinations\index.ctp:24
+#: \views\employments\admin_index.ctp:23
+#: \views\employments\admin_view.ctp:112
+#: \views\factories\admin_index.ctp:41
+#: \views\factories\admin_view.ctp:209
+#: \views\item_images\admin_index.ctp:16
+#: \views\item_images\index.ctp:16
+#: \views\items\admin_index.ctp:49
+#: \views\items\admin_view.ctp:249;308;353
+#: \views\materials\admin_index.ctp:21
+#: \views\materials\admin_view.ctp:109
+#: \views\memo_categories\admin_index.ctp:20
+#: \views\memo_datas\admin_index.ctp:26
+#: \views\parts\admin_index.ctp:18
+#: \views\parts\index.ctp:18
+#: \views\posts\admin_index.ctp:24
+#: \views\posts\admin_view.ctp:117
+#: \views\processes\admin_index.ctp:21
+#: \views\processes\admin_view.ctp:109
+#: \views\sales_state_codes\admin_index.ctp:22
+#: \views\sales_state_codes\admin_view.ctp:114
+#: \views\scaffolds\index.ctp:41
+#: \views\sections\admin_index.ctp:36
+#: \views\sections\admin_view.ctp:177
+#: \views\stones\admin_index.ctp:20
+#: \views\stones\admin_view.ctp:104
+#: \views\subitems\admin_index.ctp:33
+#: \views\subitems\admin_view.ctp:144
+#: \views\subitems\index.ctp:33
+#: \views\tags\admin_index.ctp:19
+#: \views\tags_items\admin_index.ctp:16
+#: \views\tags_items\index.ctp:16
+#: \views\time_cards\admin_index.ctp:23
+#: \views\time_cards\index.ctp:23
+#: \views\users\CopyOfview.ctp:171
+#: \views\users\admin_index.ctp:42
+#: \views\users\admin_view.ctp:194
+#: \views\users\view.ctp:190
+msgid "Actions"
+msgstr ""
+
+#: \views\brands\admin_index.ctp:59
+#: \views\brands\admin_view.ctp:154
+#: \views\days_coordinations\admin_index.ctp:75
+#: \views\days_coordinations\index.ctp:75
+#: \views\employments\admin_index.ctp:71
+#: \views\employments\admin_view.ctp:155
+#: \views\factories\admin_index.ctp:143
+#: \views\factories\admin_view.ctp:259
+#: \views\item_images\admin_index.ctp:43
+#: \views\item_images\index.ctp:43
+#: \views\items\admin_index.ctp:175
+#: \views\items\admin_view.ctp:283;325;373
+#: \views\materials\admin_index.ctp:63
+#: \views\materials\admin_view.ctp:159
+#: \views\memo_categories\admin_index.ctp:59
+#: \views\memo_datas\admin_index.ctp:83
+#: \views\parts\admin_index.ctp:51
+#: \views\parts\index.ctp:51
+#: \views\posts\admin_index.ctp:75
+#: \views\posts\admin_view.ctp:160
+#: \views\processes\admin_index.ctp:63
+#: \views\processes\admin_view.ctp:159
+#: \views\sales_state_codes\admin_index.ctp:67
+#: \views\sales_state_codes\admin_view.ctp:164
+#: \views\scaffolds\index.ctp:69
+#: \views\sections\admin_index.ctp:123
+#: \views\sections\admin_view.ctp:220
+#: \views\stones\admin_index.ctp:59
+#: \views\stones\admin_view.ctp:154
+#: \views\subitems\admin_index.ctp:111
+#: \views\subitems\admin_view.ctp:163
+#: \views\subitems\index.ctp:111
+#: \views\tags\admin_index.ctp:55
+#: \views\tags_items\admin_index.ctp:43
+#: \views\tags_items\index.ctp:43
+#: \views\time_cards\admin_index.ctp:71
+#: \views\time_cards\index.ctp:71
+#: \views\users\CopyOfview.ctp:195
+#: \views\users\admin_index.ctp:147
+#: \views\users\admin_view.ctp:218
+#: \views\users\view.ctp:214
+msgid "View"
+msgstr ""
+
+#: \views\brands\admin_index.ctp:60
+#: \views\brands\admin_view.ctp:155
+#: \views\brands\edit.ctp:19
+#: \views\days_coordinations\admin_index.ctp:76
+#: \views\days_coordinations\index.ctp:76
+#: \views\employments\admin_index.ctp:72
+#: \views\employments\admin_view.ctp:156
+#: \views\employments\edit.ctp:28
+#: \views\factories\admin_index.ctp:144
+#: \views\factories\admin_view.ctp:260
+#: \views\factories\edit.ctp:130
+#: \views\factories\index.ctp:14
+#: \views\item_images\admin_index.ctp:44
+#: \views\item_images\edit.ctp:20
+#: \views\item_images\index.ctp:44
+#: \views\items\admin_index.ctp:176
+#: \views\items\admin_view.ctp:284;326;374
+#: \views\items\edit.ctp:216
+#: \views\items\view.ctp:283;299
+#: \views\materials\admin_index.ctp:64
+#: \views\materials\admin_view.ctp:160
+#: \views\materials\edit.ctp:25
+#: \views\materials\index.ctp:14
+#: \views\memo_categories\admin_index.ctp:60
+#: \views\memo_categories\edit.ctp:16
+#: \views\memo_datas\admin_index.ctp:84
+#: \views\memo_datas\edit.ctp:49
+#: \views\parts\admin_index.ctp:52
+#: \views\parts\edit.ctp:33
+#: \views\parts\index.ctp:52
+#: \views\posts\admin_index.ctp:76
+#: \views\posts\admin_view.ctp:161
+#: \views\posts\edit.ctp:31
+#: \views\processes\admin_index.ctp:64
+#: \views\processes\admin_view.ctp:160
+#: \views\processes\edit.ctp:25
+#: \views\processes\index.ctp:14;35
+#: \views\sales_state_codes\admin_index.ctp:68
+#: \views\sales_state_codes\admin_view.ctp:165
+#: \views\sales_state_codes\edit.ctp:33
+#: \views\sales_state_codes\index.ctp:15;39
+#: \views\scaffolds\index.ctp:70
+#: \views\sections\admin_index.ctp:124
+#: \views\sections\admin_view.ctp:221
+#: \views\sections\edit.ctp:67
+#: \views\stones\admin_index.ctp:60
+#: \views\stones\admin_view.ctp:155
+#: \views\stones\edit.ctp:19
+#: \views\stones\index.ctp:14;35
+#: \views\subitems\admin_index.ctp:112
+#: \views\subitems\admin_view.ctp:164
+#: \views\subitems\edit.ctp:76
+#: \views\subitems\index.ctp:112
+#: \views\subitems\view.ctp:126;145
+#: \views\tags\admin_index.ctp:56
+#: \views\tags\edit.ctp:13
+#: \views\tags\index.ctp:14;35
+#: \views\tags_items\admin_index.ctp:44
+#: \views\tags_items\index.ctp:44
+#: \views\time_cards\admin_index.ctp:72
+#: \views\time_cards\index.ctp:72
+#: \views\users\CopyOfview.ctp:196
+#: \views\users\admin_index.ctp:148
+#: \views\users\admin_view.ctp:219
+#: \views\users\edit.ctp:79
+#: \views\users\view.ctp:215
+msgid "Edit"
+msgstr ""
+
+#: \views\brands\admin_index.ctp:68
+#: \views\days_coordinations\admin_index.ctp:84
+#: \views\days_coordinations\index.ctp:84
+#: \views\employments\admin_index.ctp:80
+#: \views\factories\admin_index.ctp:152
+#: \views\item_images\admin_index.ctp:52
+#: \views\item_images\index.ctp:52
+#: \views\items\admin_index.ctp:184
+#: \views\items\index.ctp:224
+#: \views\materials\admin_index.ctp:72
+#: \views\memo_categories\admin_index.ctp:68
+#: \views\memo_datas\admin_index.ctp:92
+#: \views\parts\admin_index.ctp:60
+#: \views\parts\index.ctp:60
+#: \views\posts\admin_index.ctp:84
+#: \views\processes\admin_index.ctp:72
+#: \views\sales_state_codes\admin_index.ctp:76
+#: \views\scaffolds\index.ctp:81
+#: \views\sections\admin_index.ctp:132
+#: \views\sections\index.ctp:57
+#: \views\stones\admin_index.ctp:68
+#: \views\subitems\admin_index.ctp:120
+#: \views\subitems\index.ctp:120
+#: \views\tags\admin_index.ctp:64
+#: \views\tags_items\admin_index.ctp:52
+#: \views\tags_items\index.ctp:52
+#: \views\time_cards\admin_index.ctp:80
+#: \views\time_cards\index.ctp:80
+#: \views\users\admin_index.ctp:156
+msgid "previous"
+msgstr ""
+
+#: \views\brands\admin_index.ctp:70
+#: \views\days_coordinations\admin_index.ctp:86
+#: \views\days_coordinations\index.ctp:86
+#: \views\employments\admin_index.ctp:82
+#: \views\factories\admin_index.ctp:154
+#: \views\item_images\admin_index.ctp:54
+#: \views\item_images\index.ctp:54
+#: \views\items\admin_index.ctp:186
+#: \views\items\index.ctp:226
+#: \views\materials\admin_index.ctp:74
+#: \views\memo_categories\admin_index.ctp:70
+#: \views\memo_datas\admin_index.ctp:94
+#: \views\parts\admin_index.ctp:62
+#: \views\parts\index.ctp:62
+#: \views\posts\admin_index.ctp:86
+#: \views\processes\admin_index.ctp:74
+#: \views\sales_state_codes\admin_index.ctp:78
+#: \views\scaffolds\index.ctp:83
+#: \views\sections\admin_index.ctp:134
+#: \views\sections\index.ctp:59
+#: \views\stones\admin_index.ctp:70
+#: \views\subitems\admin_index.ctp:122
+#: \views\subitems\index.ctp:122
+#: \views\tags\admin_index.ctp:66
+#: \views\tags_items\admin_index.ctp:54
+#: \views\tags_items\index.ctp:54
+#: \views\time_cards\admin_index.ctp:82
+#: \views\time_cards\index.ctp:82
+#: \views\users\admin_index.ctp:158
+msgid "next"
+msgstr ""
+
+#: \views\brands\admin_index.ctp:74
+#: \views\brands\admin_view.ctp:56
+#: \views\brands\index.ctp:49
+#: \views\items\admin_add.ctp:52
+#: \views\items\admin_edit.ctp:54
+#: \views\items\admin_index.ctp:194
+#: \views\items\admin_view.ctp:205
+#: \views\pages\masters.ctp:19
+msgid "New Brand"
+msgstr ""
+
+#: \views\brands\admin_view.ctp:2
+#: \views\brands\view.ctp:3
+#: \views\items\add.ctp:22
+#: \views\items\admin_view.ctp:14
+#: \views\items\edit.ctp:31
+#: \views\items\index.ctp:28;183
+#: \views\items\view.ctp:60
+msgid "Brand"
+msgstr ""
+
+#: \views\brands\admin_view.ctp:4;66
+#: \views\days_coordinations\admin_view.ctp:4
+#: \views\days_coordinations\view.ctp:4
+#: \views\employments\admin_view.ctp:4;81
+#: \views\factories\admin_view.ctp:4;171
+#: \views\item_images\admin_view.ctp:4
+#: \views\item_images\view.ctp:4
+#: \views\items\admin_view.ctp:4;227;303;345
+#: \views\materials\admin_view.ctp:4;71
+#: \views\memo_categories\admin_view.ctp:4
+#: \views\memo_datas\admin_view.ctp:4
+#: \views\parts\admin_view.ctp:4
+#: \views\parts\view.ctp:4
+#: \views\posts\admin_view.ctp:4;86
+#: \views\processes\admin_view.ctp:4;71
+#: \views\sales_state_codes\admin_view.ctp:4;76
+#: \views\sections\admin_view.ctp:4;146
+#: \views\stones\admin_view.ctp:4;66
+#: \views\subitems\admin_view.ctp:4;137
+#: \views\subitems\view.ctp:121
+#: \views\tags\admin_view.ctp:4
+#: \views\tags_items\admin_view.ctp:4
+#: \views\tags_items\view.ctp:4
+#: \views\time_cards\admin_view.ctp:4
+#: \views\time_cards\view.ctp:4
+#: \views\users\CopyOfview.ctp:159
+#: \views\users\admin_view.ctp:4;182
+#: \views\users\view.ctp:178
+msgid "Id"
+msgstr ""
+
+#: \views\brands\admin_view.ctp:9;67
+#: \views\days_coordinations\admin_view.ctp:9
+#: \views\days_coordinations\view.ctp:9
+#: \views\employments\admin_view.ctp:9;82
+#: \views\factories\admin_view.ctp:9;172
+#: \views\item_images\admin_view.ctp:9
+#: \views\item_images\view.ctp:9
+#: \views\items\admin_view.ctp:9;228;304;346
+#: \views\items\view.ctp:279
+#: \views\materials\admin_view.ctp:9;72
+#: \views\memo_categories\admin_view.ctp:9
+#: \views\memo_datas\admin_view.ctp:9
+#: \views\posts\admin_view.ctp:9;87
+#: \views\processes\admin_view.ctp:9;72
+#: \views\sales_state_codes\admin_view.ctp:9;77
+#: \views\sections\admin_view.ctp:9;147
+#: \views\stones\admin_view.ctp:9;67
+#: \views\subitems\admin_view.ctp:9
+#: \views\tags\admin_view.ctp:9
+#: \views\users\CopyOfview.ctp:10
+#: \views\users\add.ctp:8
+#: \views\users\admin_view.ctp:9
+msgid "Name"
+msgstr ""
+
+#: \views\brands\admin_view.ctp:19;98
+#: \views\brands\view.ctp:20
+#: \views\days_coordinations\admin_view.ctp:39
+#: \views\days_coordinations\view.ctp:39
+#: \views\employments\admin_view.ctp:44;108
+#: \views\employments\view.ctp:45
+#: \views\factories\admin_view.ctp:124;203
+#: \views\factories\view.ctp:125
+#: \views\item_images\admin_view.ctp:19
+#: \views\item_images\view.ctp:19
+#: \views\items\admin_view.ctp:164;243;306;347
+#: \views\items\view.ctp:247
+#: \views\materials\admin_view.ctp:24;103
+#: \views\materials\view.ctp:25
+#: \views\memo_categories\admin_view.ctp:29
+#: \views\memo_categories\view.ctp:30
+#: \views\memo_datas\admin_view.ctp:59
+#: \views\memo_datas\view.ctp:53
+#: \views\parts\admin_view.ctp:29
+#: \views\parts\view.ctp:29
+#: \views\posts\admin_view.ctp:49;113
+#: \views\posts\view.ctp:50
+#: \views\processes\admin_view.ctp:24;103
+#: \views\processes\view.ctp:25
+#: \views\sales_state_codes\admin_view.ctp:29;108
+#: \views\sales_state_codes\view.ctp:30
+#: \views\sections\admin_view.ctp:109;173
+#: \views\sections\view.ctp:142
+#: \views\stones\admin_view.ctp:19;98
+#: \views\stones\view.ctp:20
+#: \views\subitems\admin_view.ctp:84;142
+#: \views\subitems\view.ctp:88
+#: \views\tags\admin_view.ctp:14
+#: \views\tags\view.ctp:15
+#: \views\tags_items\admin_view.ctp:19
+#: \views\tags_items\view.ctp:19
+#: \views\time_cards\admin_view.ctp:44
+#: \views\time_cards\view.ctp:44
+#: \views\users\CopyOfview.ctp:135;167
+#: \views\users\admin_view.ctp:139;190
+#: \views\users\view.ctp:154;186
+msgid "Created"
+msgstr ""
+
+#: \views\brands\admin_view.ctp:24;99
+#: \views\brands\view.ctp:25
+#: \views\days_coordinations\admin_view.ctp:44
+#: \views\days_coordinations\view.ctp:44
+#: \views\employments\admin_view.ctp:34;103
+#: \views\employments\view.ctp:35
+#: \views\factories\admin_view.ctp:129;204
+#: \views\factories\view.ctp:130
+#: \views\item_images\admin_view.ctp:24
+#: \views\item_images\view.ctp:24
+#: \views\items\admin_view.ctp:169;244;307;348
+#: \views\items\view.ctp:252
+#: \views\materials\admin_view.ctp:29;104
+#: \views\materials\view.ctp:30
+#: \views\memo_categories\admin_view.ctp:19
+#: \views\memo_categories\view.ctp:20
+#: \views\memo_datas\admin_view.ctp:49
+#: \views\memo_datas\view.ctp:43
+#: \views\posts\admin_view.ctp:39;108
+#: \views\posts\view.ctp:40
+#: \views\processes\admin_view.ctp:29;104
+#: \views\processes\view.ctp:30
+#: \views\sales_state_codes\admin_view.ctp:34;109
+#: \views\sales_state_codes\view.ctp:35
+#: \views\sections\admin_view.ctp:94;168
+#: \views\sections\view.ctp:125
+#: \views\stones\admin_view.ctp:24;99
+#: \views\stones\view.ctp:25
+#: \views\subitems\admin_view.ctp:89
+#: \views\subitems\view.ctp:93
+#: \views\tags\admin_view.ctp:19
+#: \views\tags\view.ctp:20
+#: \views\tags_items\admin_view.ctp:24
+#: \views\tags_items\view.ctp:24
+#: \views\time_cards\admin_view.ctp:34
+#: \views\time_cards\view.ctp:34
+#: \views\users\CopyOfview.ctp:110;165
+#: \views\users\admin_view.ctp:114;188
+#: \views\users\view.ctp:125;184
+msgid "Created User"
+msgstr ""
+
+#: \views\brands\admin_view.ctp:29;100
+#: \views\brands\view.ctp:30
+#: \views\days_coordinations\admin_view.ctp:49
+#: \views\days_coordinations\view.ctp:49
+#: \views\employments\admin_view.ctp:49;109
+#: \views\employments\index.ctp:13
+#: \views\employments\view.ctp:50
+#: \views\factories\admin_view.ctp:134;205
+#: \views\factories\index.ctp:13
+#: \views\factories\view.ctp:135
+#: \views\items\admin_view.ctp:174;245;349
+#: \views\items\index.ctp:187
+#: \views\items\view.ctp:257;282
+#: \views\materials\admin_view.ctp:34;105
+#: \views\materials\view.ctp:35
+#: \views\memo_categories\admin_view.ctp:34
+#: \views\memo_categories\index.ctp:14
+#: \views\memo_categories\view.ctp:35
+#: \views\memo_datas\admin_view.ctp:64
+#: \views\memo_datas\view.ctp:58
+#: \views\parts\admin_view.ctp:34
+#: \views\parts\view.ctp:34
+#: \views\posts\admin_view.ctp:54;114
+#: \views\posts\index.ctp:14
+#: \views\posts\view.ctp:55
+#: \views\processes\admin_view.ctp:34;105
+#: \views\processes\view.ctp:35
+#: \views\sales_state_codes\admin_view.ctp:39;110
+#: \views\sales_state_codes\view.ctp:40
+#: \views\sections\admin_view.ctp:114;174
+#: \views\sections\view.ctp:147;172
+#: \views\stones\admin_view.ctp:29;100
+#: \views\stones\view.ctp:30
+#: \views\subitems\admin_view.ctp:94;143
+#: \views\subitems\view.ctp:98;125
+#: \views\tags\admin_view.ctp:24
+#: \views\tags\view.ctp:25
+#: \views\time_cards\admin_view.ctp:49
+#: \views\time_cards\view.ctp:49
+#: \views\users\CopyOfview.ctp:140;168
+#: \views\users\admin_view.ctp:144;191
+#: \views\users\index.ctp:23
+#: \views\users\view.ctp:159;187
+msgid "Updated"
+msgstr ""
+
+#: \views\brands\admin_view.ctp:34;101
+#: \views\brands\view.ctp:35
+#: \views\days_coordinations\admin_view.ctp:54
+#: \views\days_coordinations\view.ctp:54
+#: \views\employments\admin_view.ctp:39;104
+#: \views\employments\view.ctp:40
+#: \views\factories\admin_view.ctp:139;206
+#: \views\factories\view.ctp:140
+#: \views\items\admin_view.ctp:179;246;350
+#: \views\items\view.ctp:262
+#: \views\materials\admin_view.ctp:39;106
+#: \views\materials\view.ctp:40
+#: \views\memo_categories\admin_view.ctp:24
+#: \views\memo_categories\view.ctp:25
+#: \views\memo_datas\admin_view.ctp:54
+#: \views\memo_datas\view.ctp:48
+#: \views\posts\admin_view.ctp:44;109
+#: \views\posts\view.ctp:45
+#: \views\processes\admin_view.ctp:39;106
+#: \views\processes\view.ctp:40
+#: \views\sales_state_codes\admin_view.ctp:44;111
+#: \views\sales_state_codes\view.ctp:45
+#: \views\sections\admin_view.ctp:99;169
+#: \views\sections\view.ctp:132
+#: \views\stones\admin_view.ctp:34;101
+#: \views\stones\view.ctp:35
+#: \views\subitems\admin_view.ctp:99
+#: \views\subitems\view.ctp:103
+#: \views\tags\admin_view.ctp:29
+#: \views\tags\view.ctp:30
+#: \views\time_cards\admin_view.ctp:39
+#: \views\time_cards\view.ctp:39
+#: \views\users\CopyOfview.ctp:115;166
+#: \views\users\admin_view.ctp:119;189
+#: \views\users\view.ctp:130;185
+msgid "Updated User"
+msgstr ""
+
+#: \views\brands\admin_view.ctp:39;102
+#: \views\days_coordinations\admin_view.ctp:59
+#: \views\days_coordinations\view.ctp:59
+#: \views\employments\admin_view.ctp:54;110
+#: \views\factories\admin_view.ctp:144;207
+#: \views\items\admin_view.ctp:184;247;351
+#: \views\materials\admin_view.ctp:44;107
+#: \views\memo_categories\admin_view.ctp:39
+#: \views\memo_datas\admin_view.ctp:69
+#: \views\posts\admin_view.ctp:59;115
+#: \views\processes\admin_view.ctp:44;107
+#: \views\sales_state_codes\admin_view.ctp:49;112
+#: \views\sections\admin_view.ctp:119;175
+#: \views\stones\admin_view.ctp:39;102
+#: \views\subitems\admin_view.ctp:104
+#: \views\tags\admin_view.ctp:34
+#: \views\time_cards\admin_view.ctp:54
+#: \views\time_cards\view.ctp:54
+#: \views\users\CopyOfview.ctp:169
+#: \views\users\admin_view.ctp:149;192
+#: \views\users\view.ctp:188
+msgid "Deleted"
+msgstr ""
+
+#: \views\brands\admin_view.ctp:44;103
+#: \views\days_coordinations\admin_view.ctp:64
+#: \views\days_coordinations\view.ctp:64
+#: \views\employments\admin_view.ctp:59;111
+#: \views\factories\admin_view.ctp:149;208
+#: \views\items\admin_view.ctp:189;248;352
+#: \views\materials\admin_view.ctp:49;108
+#: \views\memo_categories\admin_view.ctp:44
+#: \views\memo_datas\admin_view.ctp:74
+#: \views\posts\admin_view.ctp:64;116
+#: \views\processes\admin_view.ctp:49;108
+#: \views\sales_state_codes\admin_view.ctp:54;113
+#: \views\sections\admin_view.ctp:124;176
+#: \views\stones\admin_view.ctp:44;103
+#: \views\subitems\admin_view.ctp:109
+#: \views\tags\admin_view.ctp:39
+#: \views\time_cards\admin_view.ctp:59
+#: \views\time_cards\view.ctp:59
+#: \views\users\CopyOfview.ctp:170
+#: \views\users\admin_view.ctp:154;193
+#: \views\users\view.ctp:189
+msgid "Deleted Date"
+msgstr ""
+
+#: \views\brands\admin_view.ctp:54
+#: \views\brands\view.ctp:45
+msgid "Delete Brand"
+msgstr ""
+
+#: \views\brands\admin_view.ctp:62
+#: \views\factories\admin_view.ctp:167
+#: \views\materials\admin_view.ctp:67
+#: \views\processes\admin_view.ctp:67
+#: \views\sales_state_codes\admin_view.ctp:72
+#: \views\stones\admin_view.ctp:62
+msgid "Related Items"
+msgstr ""
+
+#: \views\brands\admin_view.ctp:68
+#: \views\factories\admin_view.ctp:173
+#: \views\materials\admin_view.ctp:73
+#: \views\processes\admin_view.ctp:73
+#: \views\sales_state_codes\admin_view.ctp:78
+#: \views\stones\admin_view.ctp:68
+msgid "Brand Id"
+msgstr ""
+
+#: \views\brands\admin_view.ctp:69
+#: \views\factories\admin_view.ctp:174
+#: \views\materials\admin_view.ctp:74
+#: \views\processes\admin_view.ctp:74
+#: \views\sales_state_codes\admin_view.ctp:79
+#: \views\stones\admin_view.ctp:69
+msgid "Factory Id"
+msgstr ""
+
+#: \views\brands\admin_view.ctp:70
+#: \views\factories\admin_view.ctp:175
+#: \views\items\add.ctp:17
+#: \views\items\admin_view.ctp:24
+#: \views\items\edit.ctp:26
+#: \views\items\index.ctp:185
+#: \views\items\view.ctp:55
+#: \views\materials\admin_view.ctp:75
+#: \views\processes\admin_view.ctp:75
+#: \views\sales_state_codes\admin_view.ctp:80
+#: \views\stones\admin_view.ctp:70
+msgid "Price"
+msgstr ""
+
+#: \views\brands\admin_view.ctp:71
+#: \views\factories\admin_view.ctp:176
+#: \views\items\add.ctp:119
+#: \views\items\admin_view.ctp:29
+#: \views\items\edit.ctp:130
+#: \views\items\index.ctp:71
+#: \views\items\view.ctp:172
+#: \views\materials\admin_view.ctp:76
+#: \views\processes\admin_view.ctp:76
+#: \views\sales_state_codes\admin_view.ctp:81
+#: \views\stones\admin_view.ctp:71
+msgid "Stock Code"
+msgstr ""
+
+#: \views\brands\admin_view.ctp:72
+#: \views\factories\admin_view.ctp:177
+#: \views\materials\admin_view.ctp:77
+#: \views\processes\admin_view.ctp:77
+#: \views\sales_state_codes\admin_view.ctp:82
+#: \views\stones\admin_view.ctp:72
+msgid "Sales State Code Id"
+msgstr ""
+
+#: \views\brands\admin_view.ctp:73
+#: \views\factories\admin_view.ctp:178
+#: \views\items\admin_view.ctp:240
+#: \views\materials\admin_view.ctp:78
+#: \views\processes\admin_view.ctp:78
+#: \views\sales_state_codes\admin_view.ctp:83
+#: \views\stones\admin_view.ctp:73
+msgid "Process Id"
+msgstr ""
+
+#: \views\brands\admin_view.ctp:74
+#: \views\factories\admin_view.ctp:179
+#: \views\items\admin_view.ctp:241
+#: \views\materials\admin_view.ctp:79
+#: \views\processes\admin_view.ctp:79
+#: \views\sales_state_codes\admin_view.ctp:84
+#: \views\stones\admin_view.ctp:74
+msgid "Material Id"
+msgstr ""
+
+#: \views\brands\admin_view.ctp:75
+#: \views\factories\admin_view.ctp:180
+#: \views\materials\admin_view.ctp:80
+#: \views\processes\admin_view.ctp:80
+#: \views\sales_state_codes\admin_view.ctp:85
+#: \views\stones\admin_view.ctp:75
+msgid "Stone Id"
+msgstr ""
+
+#: \views\brands\admin_view.ctp:76
+#: \views\factories\admin_view.ctp:181
+#: \views\items\add.ctp:68
+#: \views\items\admin_view.ctp:54
+#: \views\items\edit.ctp:77
+#: \views\items\view.ctp:118
+#: \views\materials\admin_view.ctp:81
+#: \views\processes\admin_view.ctp:81
+#: \views\sales_state_codes\admin_view.ctp:86
+#: \views\stones\admin_view.ctp:76
+msgid "Stone Other"
+msgstr ""
+
+#: \views\brands\admin_view.ctp:77
+#: \views\factories\admin_view.ctp:182
+#: \views\items\add.ctp:72
+#: \views\items\admin_view.ctp:59
+#: \views\items\edit.ctp:81
+#: \views\items\view.ctp:123
+#: \views\materials\admin_view.ctp:82
+#: \views\processes\admin_view.ctp:82
+#: \views\sales_state_codes\admin_view.ctp:87
+#: \views\stones\admin_view.ctp:77
+msgid "Stone Spec"
+msgstr ""
+
+#: \views\brands\admin_view.ctp:78
+#: \views\factories\admin_view.ctp:183
+#: \views\items\add.ctp:76
+#: \views\items\admin_view.ctp:64
+#: \views\items\edit.ctp:85
+#: \views\items\view.ctp:128
+#: \views\materials\admin_view.ctp:83
+#: \views\processes\admin_view.ctp:83
+#: \views\sales_state_codes\admin_view.ctp:88
+#: \views\stones\admin_view.ctp:78
+msgid "Message Stamp"
+msgstr ""
+
+#: \views\brands\admin_view.ctp:79
+#: \views\factories\admin_view.ctp:184
+#: \views\items\add.ctp:80
+#: \views\items\admin_view.ctp:69
+#: \views\items\edit.ctp:89
+#: \views\items\view.ctp:133
+#: \views\materials\admin_view.ctp:84
+#: \views\processes\admin_view.ctp:84
+#: \views\sales_state_codes\admin_view.ctp:89
+#: \views\stones\admin_view.ctp:79
+msgid "Message Stamp Ja"
+msgstr ""
+
+#: \views\brands\admin_view.ctp:80
+#: \views\factories\admin_view.ctp:185
+#: \views\items\admin_view.ctp:74
+#: \views\materials\admin_view.ctp:85
+#: \views\processes\admin_view.ctp:85
+#: \views\sales_state_codes\admin_view.ctp:90
+#: \views\stones\admin_view.ctp:80
+msgid "Release Day"
+msgstr ""
+
+#: \views\brands\admin_view.ctp:81
+#: \views\factories\admin_view.ctp:186
+#: \views\items\admin_view.ctp:79
+#: \views\materials\admin_view.ctp:86
+#: \views\processes\admin_view.ctp:86
+#: \views\sales_state_codes\admin_view.ctp:91
+#: \views\stones\admin_view.ctp:81
+msgid "Order End Day"
+msgstr ""
+
+#: \views\brands\admin_view.ctp:82
+#: \views\factories\admin_view.ctp:187
+#: \views\items\add.ctp:98
+#: \views\items\admin_view.ctp:84
+#: \views\items\edit.ctp:109
+#: \views\items\view.ctp:148
+#: \views\materials\admin_view.ctp:87
+#: \views\processes\admin_view.ctp:87
+#: \views\sales_state_codes\admin_view.ctp:92
+#: \views\stones\admin_view.ctp:82
+msgid "Demension"
+msgstr ""
+
+#: \views\brands\admin_view.ctp:83
+#: \views\factories\admin_view.ctp:188
+#: \views\items\add.ctp:102
+#: \views\items\admin_view.ctp:89
+#: \views\items\edit.ctp:113
+#: \views\items\view.ctp:153
+#: \views\materials\admin_view.ctp:88
+#: \views\processes\admin_view.ctp:88
+#: \views\sales_state_codes\admin_view.ctp:93
+#: \views\stones\admin_view.ctp:83
+msgid "Weight"
+msgstr ""
+
+#: \views\brands\admin_view.ctp:84
+#: \views\factories\admin_view.ctp:189
+#: \views\items\admin_view.ctp:94
+#: \views\items\view.ctp:160
+#: \views\materials\admin_view.ctp:89
+#: \views\processes\admin_view.ctp:89
+#: \views\sales_state_codes\admin_view.ctp:94
+#: \views\stones\admin_view.ctp:84
+msgid "Part Id"
+msgstr ""
+
+#: \views\brands\admin_view.ctp:85
+#: \views\factories\admin_view.ctp:190
+#: \views\items\add.ctp:112
+#: \views\items\admin_view.ctp:99
+#: \views\items\edit.ctp:123
+#: \views\items\view.ctp:167
+#: \views\materials\admin_view.ctp:90
+#: \views\processes\admin_view.ctp:90
+#: \views\sales_state_codes\admin_view.ctp:95
+#: \views\stones\admin_view.ctp:85
+msgid "Unit"
+msgstr ""
+
+#: \views\brands\admin_view.ctp:86
+#: \views\factories\admin_view.ctp:191
+#: \views\items\add.ctp:126
+#: \views\items\admin_view.ctp:104
+#: \views\items\edit.ctp:137
+#: \views\items\index.ctp:78
+#: \views\items\view.ctp:177
+#: \views\materials\admin_view.ctp:91
+#: \views\processes\admin_view.ctp:91
+#: \views\sales_state_codes\add.ctp:28
+#: \views\sales_state_codes\admin_view.ctp:24;96
+#: \views\sales_state_codes\edit.ctp:29
+#: \views\sales_state_codes\view.ctp:25
+#: \views\stones\admin_view.ctp:86
+msgid "Order Approve"
+msgstr ""
+
+#: \views\brands\admin_view.ctp:87
+#: \views\factories\admin_view.ctp:192
+#: \views\items\admin_view.ctp:109
+#: \views\materials\admin_view.ctp:92
+#: \views\processes\admin_view.ctp:92
+#: \views\sales_state_codes\admin_view.ctp:19;97
+#: \views\sales_state_codes\view.ctp:20
+#: \views\stones\admin_view.ctp:87
+msgid "Cutom Order Approve"
+msgstr ""
+
+#: \views\brands\admin_view.ctp:88
+#: \views\factories\add.ctp:65
+#: \views\factories\admin_view.ctp:74;193
+#: \views\factories\edit.ctp:66
+#: \views\factories\view.ctp:75
+#: \views\items\add.ctp:137
+#: \views\items\admin_view.ctp:114
+#: \views\items\edit.ctp:148
+#: \views\items\view.ctp:187
+#: \views\materials\admin_view.ctp:93
+#: \views\processes\admin_view.ctp:93
+#: \views\sales_state_codes\admin_view.ctp:98
+#: \views\stones\admin_view.ctp:88
+msgid "Custom Order Days"
+msgstr ""
+
+#: \views\brands\admin_view.ctp:89
+#: \views\factories\add.ctp:69
+#: \views\factories\admin_view.ctp:79;194
+#: \views\factories\edit.ctp:70
+#: \views\factories\view.ctp:80
+#: \views\items\add.ctp:142
+#: \views\items\admin_view.ctp:119
+#: \views\items\edit.ctp:153
+#: \views\items\view.ctp:192
+#: \views\materials\admin_view.ctp:94
+#: \views\processes\admin_view.ctp:94
+#: \views\sales_state_codes\admin_view.ctp:99
+#: \views\stones\admin_view.ctp:89
+msgid "Repair Days"
+msgstr ""
+
+#: \views\brands\admin_view.ctp:90
+#: \views\factories\admin_view.ctp:195
+#: \views\items\add.ctp:150
+#: \views\items\admin_view.ctp:124
+#: \views\items\edit.ctp:161
+#: \views\items\index.ctp:92
+#: \views\items\view.ctp:197
+#: \views\materials\admin_view.ctp:95
+#: \views\processes\admin_view.ctp:95
+#: \views\sales_state_codes\admin_view.ctp:100
+#: \views\stones\admin_view.ctp:90
+msgid "Trans Approve"
+msgstr ""
+
+#: \views\brands\admin_view.ctp:91
+#: \views\factories\admin_view.ctp:196
+#: \views\items\admin_view.ctp:129
+#: \views\items\view.ctp:202
+#: \views\materials\admin_view.ctp:96
+#: \views\processes\admin_view.ctp:96
+#: \views\sales_state_codes\admin_view.ctp:101
+#: \views\stones\admin_view.ctp:91
+msgid "In Chain"
+msgstr ""
+
+#: \views\brands\admin_view.ctp:92
+#: \views\factories\admin_view.ctp:197
+#: \views\items\admin_view.ctp:134
+#: \views\materials\admin_view.ctp:97
+#: \views\processes\admin_view.ctp:97
+#: \views\sales_state_codes\admin_view.ctp:102
+#: \views\stones\admin_view.ctp:92
+msgid "Atelier Trans Approve"
+msgstr ""
+
+#: \views\brands\admin_view.ctp:93
+#: \views\factories\admin_view.ctp:198
+#: \views\items\add.ctp:165
+#: \views\items\admin_view.ctp:139;232
+#: \views\items\edit.ctp:176
+#: \views\items\view.ctp:212
+#: \views\materials\admin_view.ctp:98
+#: \views\processes\admin_view.ctp:98
+#: \views\sales_state_codes\admin_view.ctp:103
+#: \views\stones\admin_view.ctp:93
+#: \views\subitems\add.ctp:23
+#: \views\subitems\admin_view.ctp:29
+#: \views\subitems\edit.ctp:22
+#: \views\subitems\view.ctp:30
+msgid "Labor Cost"
+msgstr ""
+
+#: \views\brands\admin_view.ctp:94
+#: \views\factories\admin_view.ctp:199
+#: \views\items\admin_view.ctp:144;233
+#: \views\items\view.ctp:217
+#: \views\materials\admin_view.ctp:99
+#: \views\processes\admin_view.ctp:99
+#: \views\sales_state_codes\admin_view.ctp:104
+#: \views\stones\admin_view.ctp:94
+#: \views\subitems\add.ctp:27
+#: \views\subitems\admin_view.ctp:34
+#: \views\subitems\edit.ctp:26
+#: \views\subitems\view.ctp:35
+msgid "Supply Full Cost"
+msgstr ""
+
+#: \views\brands\admin_view.ctp:95
+#: \views\factories\admin_view.ctp:200
+#: \views\items\add.ctp:173
+#: \views\items\admin_view.ctp:149;234
+#: \views\items\edit.ctp:184
+#: \views\items\view.ctp:222
+#: \views\materials\admin_view.ctp:100
+#: \views\processes\admin_view.ctp:100
+#: \views\sales_state_codes\admin_view.ctp:105
+#: \views\stones\admin_view.ctp:95
+#: \views\subitems\add.ctp:31
+#: \views\subitems\admin_view.ctp:39
+#: \views\subitems\edit.ctp:30
+#: \views\subitems\view.ctp:40
+msgid "Cost"
+msgstr ""
+
+#: \views\brands\admin_view.ctp:96
+#: \views\factories\admin_view.ctp:201
+#: \views\items\add.ctp:180
+#: \views\items\admin_view.ctp:154
+#: \views\items\edit.ctp:191
+#: \views\items\index.ctp:106
+#: \views\items\view.ctp:227
+#: \views\materials\admin_view.ctp:101
+#: \views\processes\admin_view.ctp:101
+#: \views\sales_state_codes\admin_view.ctp:106
+#: \views\stones\admin_view.ctp:96
+msgid "Percent Code"
+msgstr ""
+
+#: \views\brands\admin_view.ctp:97
+#: \views\factories\admin_view.ctp:202
+#: \views\items\add.ctp:187
+#: \views\items\admin_view.ctp:159
+#: \views\items\edit.ctp:198
+#: \views\items\index.ctp:113
+#: \views\items\view.ctp:232
+#: \views\materials\admin_view.ctp:102
+#: \views\processes\admin_view.ctp:102
+#: \views\sales_state_codes\admin_view.ctp:107
+#: \views\stones\admin_view.ctp:97
+msgid "Sales Sum Code"
+msgstr ""
+
+#: \views\brands\view.ctp:5
+#: \views\employments\view.ctp:5
+#: \views\factories\view.ctp:5
+#: \views\items\view.ctp:33
+#: \views\materials\view.ctp:5
+#: \views\memo_categories\view.ctp:5
+#: \views\memo_datas\view.ctp:23
+#: \views\posts\view.ctp:5
+#: \views\processes\view.ctp:5
+#: \views\sales_state_codes\view.ctp:5
+#: \views\sections\view.ctp:5
+#: \views\stones\view.ctp:5
+#: \views\subitems\view.ctp:5
+#: \views\tags\view.ctp:5
+#: \views\users\view.ctp:5
+msgid "System No."
+msgstr ""
+
+#: \views\days_coordinations\add.ctp:4
+#: \views\days_coordinations\admin_add.ctp:4
+msgid "Add DaysCoordination"
+msgstr ""
+
+#: \views\days_coordinations\add.ctp:22
+#: \views\days_coordinations\admin_add.ctp:22
+#: \views\days_coordinations\admin_edit.ctp:24
+#: \views\days_coordinations\admin_view.ctp:75
+#: \views\days_coordinations\edit.ctp:24
+#: \views\days_coordinations\view.ctp:75
+msgid "List DaysCoordinations"
+msgstr ""
+
+#: \views\days_coordinations\admin_edit.ctp:4
+#: \views\days_coordinations\admin_view.ctp:73
+#: \views\days_coordinations\edit.ctp:4
+#: \views\days_coordinations\view.ctp:73
+msgid "Edit DaysCoordination"
+msgstr ""
+
+#: \views\days_coordinations\admin_index.ctp:2
+#: \views\days_coordinations\index.ctp:2
+msgid "DaysCoordinations"
+msgstr ""
+
+#: \views\days_coordinations\admin_index.ctp:90
+#: \views\days_coordinations\admin_view.ctp:76
+#: \views\days_coordinations\index.ctp:90
+#: \views\days_coordinations\view.ctp:76
+msgid "New DaysCoordination"
+msgstr ""
+
+#: \views\days_coordinations\admin_view.ctp:2
+#: \views\days_coordinations\view.ctp:2
+msgid "DaysCoordination"
+msgstr ""
+
+#: \views\days_coordinations\admin_view.ctp:14
+#: \views\days_coordinations\view.ctp:14
+msgid "Apply Approve"
+msgstr ""
+
+#: \views\days_coordinations\admin_view.ctp:19
+#: \views\days_coordinations\view.ctp:19
+msgid "Coordination Approve"
+msgstr ""
+
+#: \views\days_coordinations\admin_view.ctp:24
+#: \views\days_coordinations\view.ctp:24
+msgid "Start Datetime"
+msgstr ""
+
+#: \views\days_coordinations\admin_view.ctp:29
+#: \views\days_coordinations\view.ctp:29
+msgid "End Datetime"
+msgstr ""
+
+#: \views\days_coordinations\admin_view.ctp:34
+#: \views\days_coordinations\view.ctp:34
+msgid "Apply Day"
+msgstr ""
+
+#: \views\days_coordinations\admin_view.ctp:74
+#: \views\days_coordinations\view.ctp:74
+msgid "Delete DaysCoordination"
+msgstr ""
+
+#: \views\elements\left_menu.ctp:9
+#: \views\item_images\admin_view.ctp:14
+#: \views\item_images\view.ctp:14
+#: \views\items\admin_view.ctp:2
+#: \views\items\view.ctp:31
+#: \views\subitems\admin_view.ctp:14
+msgid "Item"
+msgstr ""
+
+#: \views\elements\left_menu.ctp:10
+msgid "Item Saech"
+msgstr ""
+
+#: \views\elements\left_menu.ctp:11
+#: \views\time_cards\admin_view.ctp:14
+#: \views\time_cards\view.ctp:14
+#: \views\users\CopyOfview.ctp:3
+#: \views\users\admin_view.ctp:2
+#: \views\users\view.ctp:3
+msgid "User"
+msgstr ""
+
+#: \views\elements\left_menu.ctp:12
+msgid "User Saech"
+msgstr ""
+
+#: \views\elements\left_menu.ctp:13
+msgid "Master"
+msgstr ""
+
+#: \views\elements\left_menu.ctp:14
+msgid "Item Master"
+msgstr ""
+
+#: \views\elements\left_menu.ctp:15
+msgid "User Master"
+msgstr ""
+
+#: \views\elements\left_menu.ctp:16
+msgid "Start Up"
+msgstr ""
+
+#: \views\elements\left_menu.ctp:17
+msgid "ItemCSV Insert"
+msgstr ""
+
+#: \views\employments\add.ctp:2;33
+#: \views\employments\admin_add.ctp:21
+#: \views\employments\admin_edit.ctp:23
+#: \views\employments\admin_view.ctp:70
+#: \views\employments\edit.ctp:2;34
+#: \views\employments\view.ctp:2;61
+#: \views\pages\users_masters.ctp:19
+#: \views\users\admin_add.ctp:45
+#: \views\users\admin_edit.ctp:47
+#: \views\users\admin_index.ctp:167
+#: \views\users\admin_view.ctp:171
+msgid "List Employments"
+msgstr ""
+
+#: \views\employments\add.ctp:5
+#: \views\employments\admin_add.ctp:4
+msgid "Add Employment"
+msgstr ""
+
+#: \views\employments\add.ctp:8
+#: \views\employments\edit.ctp:9
+#: \views\employments\index.ctp:12
+#: \views\employments\view.ctp:10
+msgid "Employment Name"
+msgstr ""
+
+#: \views\employments\add.ctp:12
+#: \views\employments\edit.ctp:13
+#: \views\employments\view.ctp:15
+#: \views\posts\add.ctp:12
+#: \views\posts\edit.ctp:13
+#: \views\posts\view.ctp:15
+#: \views\sections\add.ctp:12
+#: \views\sections\edit.ctp:13
+#: \views\sections\view.ctp:15;168
+#: \views\users\CopyOfview.ctp:20
+#: \views\users\add.ctp:12
+#: \views\users\edit.ctp:10
+#: \views\users\view.ctp:20
+msgid "English"
+msgstr ""
+
+#: \views\employments\add.ctp:16
+#: \views\employments\edit.ctp:17
+#: \views\employments\view.ctp:20
+#: \views\posts\add.ctp:16
+#: \views\posts\edit.ctp:17
+#: \views\posts\view.ctp:20
+#: \views\users\CopyOfview.ctp:25
+#: \views\users\view.ctp:25
+msgid "Kyuuyo Bugyo"
+msgstr ""
+
+#: \views\employments\add.ctp:21
+#: \views\employments\edit.ctp:21
+#: \views\employments\view.ctp:25
+#: \views\posts\add.ctp:21
+#: \views\posts\edit.ctp:21
+#: \views\posts\index.ctp:13
+#: \views\posts\view.ctp:25
+#: \views\users\CopyOfview.ctp:90
+#: \views\users\add.ctp:94
+#: \views\users\edit.ctp:58
+#: \views\users\view.ctp:105
+msgid "Order of Priority"
+msgstr ""
+
+#: \views\employments\add.ctp:25
+#: \views\employments\admin_view.ctp:29;107
+#: \views\employments\edit.ctp:25
+#: \views\employments\view.ctp:30
+#: \views\posts\add.ctp:25
+#: \views\posts\admin_view.ctp:29;112
+#: \views\posts\edit.ctp:25
+#: \views\posts\view.ctp:30
+#: \views\sections\add.ctp:67
+#: \views\sections\admin_view.ctp:104;172
+#: \views\sections\edit.ctp:65
+#: \views\sections\view.ctp:137
+#: \views\time_cards\admin_view.ctp:29
+#: \views\time_cards\view.ctp:29
+#: \views\users\CopyOfview.ctp:130;164
+#: \views\users\add.ctp:117
+#: \views\users\admin_view.ctp:134;187
+#: \views\users\edit.ctp:76
+#: \views\users\view.ctp:149;183
+msgid "Remarks"
+msgstr ""
+
+#: \views\employments\admin_add.ctp:22
+#: \views\employments\admin_edit.ctp:24
+#: \views\employments\admin_index.ctp:87
+#: \views\employments\admin_view.ctp:72
+#: \views\posts\admin_add.ctp:23
+#: \views\posts\admin_edit.ctp:25
+#: \views\posts\admin_index.ctp:91
+#: \views\posts\admin_view.ctp:77
+#: \views\sections\admin_add.ctp:35
+#: \views\sections\admin_edit.ctp:37
+#: \views\sections\admin_index.ctp:139
+#: \views\sections\admin_view.ctp:137
+#: \views\time_cards\add.ctp:22
+#: \views\time_cards\admin_add.ctp:22
+#: \views\time_cards\admin_edit.ctp:24
+#: \views\time_cards\admin_index.ctp:87
+#: \views\time_cards\admin_view.ctp:72
+#: \views\time_cards\edit.ctp:24
+#: \views\time_cards\index.ctp:87
+#: \views\time_cards\view.ctp:72
+#: \views\users\CopyOfview.ctp:2;151
+#: \views\users\add.ctp:2;125
+#: \views\users\admin_add.ctp:40
+#: \views\users\admin_edit.ctp:42
+#: \views\users\admin_view.ctp:165
+#: \views\users\edit.ctp:2;85
+#: \views\users\view.ctp:2;170
+msgid "List Users"
+msgstr ""
+
+#: \views\employments\admin_add.ctp:23
+#: \views\employments\admin_edit.ctp:25
+#: \views\employments\admin_index.ctp:88
+#: \views\employments\admin_view.ctp:73;166
+#: \views\pages\users_masters.ctp:14
+#: \views\posts\admin_add.ctp:24
+#: \views\posts\admin_edit.ctp:26
+#: \views\posts\admin_index.ctp:92
+#: \views\posts\admin_view.ctp:78;171
+#: \views\sections\admin_add.ctp:36
+#: \views\sections\admin_edit.ctp:38
+#: \views\sections\admin_index.ctp:140
+#: \views\sections\admin_view.ctp:138;231
+#: \views\time_cards\add.ctp:23
+#: \views\time_cards\admin_add.ctp:23
+#: \views\time_cards\admin_edit.ctp:25
+#: \views\time_cards\admin_index.ctp:88
+#: \views\time_cards\admin_view.ctp:73
+#: \views\time_cards\edit.ctp:25
+#: \views\time_cards\index.ctp:88
+#: \views\time_cards\view.ctp:73
+#: \views\users\admin_index.ctp:162
+#: \views\users\admin_view.ctp:166
+msgid "New User"
+msgstr ""
+
+#: \views\employments\admin_edit.ctp:4
+#: \views\employments\admin_view.ctp:68
+#: \views\employments\edit.ctp:5
+#: \views\employments\view.ctp:59
+msgid "Edit Employment"
+msgstr ""
+
+#: \views\employments\admin_index.ctp:2
+#: \views\employments\index.ctp:2
+msgid "Employments"
+msgstr ""
+
+#: \views\employments\admin_index.ctp:86
+#: \views\employments\admin_view.ctp:71
+#: \views\employments\index.ctp:48
+#: \views\pages\users_masters.ctp:20
+#: \views\users\admin_add.ctp:46
+#: \views\users\admin_edit.ctp:48
+#: \views\users\admin_index.ctp:168
+#: \views\users\admin_view.ctp:172
+msgid "New Employment"
+msgstr ""
+
+#: \views\employments\admin_view.ctp:2
+#: \views\employments\view.ctp:3
+#: \views\sections\view.ctp:170
+#: \views\users\CopyOfview.ctp:40
+#: \views\users\add.ctp:26
+#: \views\users\admin_view.ctp:29
+#: \views\users\edit.ctp:14
+#: \views\users\index.ctp:21
+#: \views\users\view.ctp:40
+msgid "Employment"
+msgstr ""
+
+#: \views\employments\admin_view.ctp:14;83
+#: \views\posts\admin_view.ctp:14;88
+#: \views\sections\admin_view.ctp:19;148
+#: \views\users\admin_view.ctp:14
+msgid "Kyuuyo Bugyo Code"
+msgstr ""
+
+#: \views\employments\admin_view.ctp:19;88
+#: \views\posts\admin_view.ctp:19;93
+#: \views\sections\admin_view.ctp:29;153
+#: \views\users\admin_view.ctp:39
+msgid "Name English"
+msgstr ""
+
+#: \views\employments\admin_view.ctp:24;99
+#: \views\posts\admin_view.ctp:24;104
+#: \views\sections\admin_view.ctp:164
+#: \views\users\admin_view.ctp:94
+msgid "List Order"
+msgstr ""
+
+#: \views\employments\admin_view.ctp:69
+#: \views\employments\view.ctp:60
+msgid "Delete Employment"
+msgstr ""
+
+#: \views\employments\admin_view.ctp:77
+#: \views\posts\admin_view.ctp:82
+#: \views\sections\admin_view.ctp:142
+#: \views\sections\view.ctp:162
+msgid "Related Users"
+msgstr ""
+
+#: \views\employments\admin_view.ctp:84
+#: \views\posts\admin_view.ctp:89
+#: \views\sections\admin_view.ctp:149
+msgid "Section Id"
+msgstr ""
+
+#: \views\employments\admin_view.ctp:85
+#: \views\posts\admin_view.ctp:90
+#: \views\sections\admin_view.ctp:150
+msgid "Post Id"
+msgstr ""
+
+#: \views\employments\admin_view.ctp:86
+#: \views\posts\admin_view.ctp:91
+#: \views\sections\admin_view.ctp:151
+msgid "Employment Id"
+msgstr ""
+
+#: \views\employments\admin_view.ctp:87
+#: \views\factories\add.ctp:12
+#: \views\factories\admin_view.ctp:14
+#: \views\factories\edit.ctp:13
+#: \views\factories\view.ctp:15
+#: \views\items\admin_view.ctp:231
+#: \views\items\view.ctp:281
+#: \views\posts\admin_view.ctp:92
+#: \views\sections\admin_view.ctp:152
+#: \views\subitems\add.ctp:21
+#: \views\subitems\admin_view.ctp:24
+#: \views\subitems\edit.ctp:20
+#: \views\subitems\view.ctp:25
+#: \views\users\admin_view.ctp:34
+msgid "Name Kana"
+msgstr ""
+
+#: \views\employments\admin_view.ctp:89
+#: \views\posts\admin_view.ctp:94
+#: \views\sections\admin_view.ctp:154
+#: \views\users\CopyOfview.ctp:45
+#: \views\users\admin_view.ctp:44
+#: \views\users\edit.ctp:16
+#: \views\users\view.ctp:45
+msgid "Sex"
+msgstr ""
+
+#: \views\employments\admin_view.ctp:90
+#: \views\factories\add.ctp:24
+#: \views\factories\admin_view.ctp:29
+#: \views\factories\edit.ctp:25
+#: \views\factories\view.ctp:30
+#: \views\posts\admin_view.ctp:95
+#: \views\sections\add.ctp:44
+#: \views\sections\admin_view.ctp:54;155
+#: \views\sections\edit.ctp:42
+#: \views\sections\view.ctp:85
+#: \views\users\CopyOfview.ctp:50
+#: \views\users\add.ctp:36
+#: \views\users\admin_view.ctp:49
+#: \views\users\edit.ctp:18
+msgid "Post Code"
+msgstr ""
+
+#: \views\employments\admin_view.ctp:91
+#: \views\factories\add.ctp:31
+#: \views\factories\admin_view.ctp:34
+#: \views\factories\edit.ctp:32
+#: \views\factories\view.ctp:35
+#: \views\posts\admin_view.ctp:96
+#: \views\sections\add.ctp:49
+#: \views\sections\admin_view.ctp:59;156
+#: \views\sections\edit.ctp:47
+#: \views\sections\view.ctp:90
+#: \views\users\admin_view.ctp:54
+msgid "District"
+msgstr ""
+
+#: \views\employments\admin_view.ctp:92
+#: \views\factories\admin_view.ctp:39
+#: \views\factories\view.ctp:40
+#: \views\posts\admin_view.ctp:97
+#: \views\sections\admin_view.ctp:64;157
+#: \views\users\admin_view.ctp:59
+msgid "Adress One"
+msgstr ""
+
+#: \views\employments\admin_view.ctp:93
+#: \views\factories\admin_view.ctp:44
+#: \views\factories\view.ctp:45
+#: \views\posts\admin_view.ctp:98
+#: \views\sections\admin_view.ctp:69;158
+#: \views\users\admin_view.ctp:64
+msgid "Adress Two"
+msgstr ""
+
+#: \views\employments\admin_view.ctp:94
+#: \views\factories\add.ctp:45
+#: \views\factories\admin_view.ctp:49
+#: \views\factories\edit.ctp:46
+#: \views\factories\view.ctp:50
+#: \views\posts\admin_view.ctp:99
+#: \views\sections\add.ctp:60
+#: \views\sections\admin_view.ctp:74;159
+#: \views\sections\edit.ctp:58
+#: \views\sections\view.ctp:105
+#: \views\users\CopyOfview.ctp:65
+#: \views\users\add.ctp:46
+#: \views\users\admin_view.ctp:69
+#: \views\users\edit.ctp:21
+#: \views\users\view.ctp:50
+msgid "Tel"
+msgstr ""
+
+#: \views\employments\admin_view.ctp:95
+#: \views\factories\add.ctp:57
+#: \views\factories\admin_view.ctp:64
+#: \views\factories\edit.ctp:58
+#: \views\factories\view.ctp:65
+#: \views\posts\admin_view.ctp:100
+#: \views\sections\add.ctp:63
+#: \views\sections\admin_view.ctp:84;160
+#: \views\sections\edit.ctp:61
+#: \views\sections\view.ctp:115
+#: \views\users\CopyOfview.ctp:70
+#: \views\users\add.ctp:50
+#: \views\users\admin_view.ctp:74
+#: \views\users\edit.ctp:23
+#: \views\users\view.ctp:55
+msgid "Mail"
+msgstr ""
+
+#: \views\employments\admin_view.ctp:96
+#: \views\posts\admin_view.ctp:101
+#: \views\sections\admin_view.ctp:161
+#: \views\users\CopyOfview.ctp:75
+#: \views\users\admin_view.ctp:79
+#: \views\users\view.ctp:90
+msgid "Birth Day"
+msgstr ""
+
+#: \views\employments\admin_view.ctp:97
+#: \views\posts\admin_view.ctp:102
+#: \views\sections\admin_view.ctp:162
+#: \views\users\CopyOfview.ctp:80
+#: \views\users\add.ctp:83
+#: \views\users\admin_view.ctp:84
+#: \views\users\edit.ctp:51
+#: \views\users\view.ctp:95
+msgid "Blood Type"
+msgstr ""
+
+#: \views\employments\admin_view.ctp:98
+#: \views\posts\admin_view.ctp:103
+#: \views\sections\admin_view.ctp:163
+#: \views\users\admin_view.ctp:89
+msgid "Duty Code"
+msgstr ""
+
+#: \views\employments\admin_view.ctp:100
+#: \views\posts\admin_view.ctp:105
+#: \views\sections\admin_view.ctp:165
+#: \views\users\admin_view.ctp:99
+msgid "Join Day"
+msgstr ""
+
+#: \views\employments\admin_view.ctp:101
+#: \views\posts\admin_view.ctp:106
+#: \views\sections\admin_view.ctp:166
+#: \views\users\CopyOfview.ctp:100
+#: \views\users\admin_view.ctp:104
+#: \views\users\view.ctp:115
+msgid "Exit Day"
+msgstr ""
+
+#: \views\employments\admin_view.ctp:102
+#: \views\posts\add.ctp:28
+#: \views\posts\admin_view.ctp:34;107
+#: \views\posts\edit.ctp:28
+#: \views\posts\view.ctp:35
+#: \views\sections\admin_view.ctp:167
+#: \views\users\CopyOfview.ctp:105
+#: \views\users\add.ctp:111
+#: \views\users\admin_view.ctp:109
+#: \views\users\edit.ctp:67
+#: \views\users\view.ctp:120
+msgid "Access Authority"
+msgstr ""
+
+#: \views\employments\admin_view.ctp:105
+#: \views\posts\admin_view.ctp:110
+#: \views\sections\admin_view.ctp:170
+#: \views\users\admin_view.ctp:124
+msgid "Username"
+msgstr ""
+
+#: \views\employments\admin_view.ctp:106
+#: \views\posts\admin_view.ctp:111
+#: \views\sections\admin_view.ctp:171
+#: \views\users\CopyOfview.ctp:125
+#: \views\users\add.ctp:115
+#: \views\users\admin_view.ctp:129
+#: \views\users\edit.ctp:72
+#: \views\users\login.ctp:6
+#: \views\users\view.ctp:142
+msgid "Password"
+msgstr ""
+
+#: \views\employments\index.ctp:11
+#: \views\factories\index.ctp:11
+#: \views\memo_categories\index.ctp:11
+#: \views\memo_datas\category_index.ctp:13
+#: \views\memo_datas\index.ctp:9
+#: \views\memo_datas\section_index.ctp:12
+#: \views\memo_datas\view.ctp:84
+#: \views\posts\index.ctp:11
+#: \views\processes\index.ctp:11
+#: \views\sales_state_codes\index.ctp:11
+#: \views\sections\index.ctp:11
+#: \views\stones\index.ctp:11
+#: \views\tags\index.ctp:11
+#: \views\top\index.ctp:5
+#: \views\users\index.ctp:17
+msgid "*"
+msgstr ""
+
+#: \views\factories\add.ctp:2
+#: \views\factories\admin_add.ctp:39
+#: \views\factories\admin_edit.ctp:41
+#: \views\factories\admin_view.ctp:160
+#: \views\factories\edit.ctp:2;136
+#: \views\factories\view.ctp:2
+#: \views\items\admin_add.ctp:49
+#: \views\items\admin_edit.ctp:51
+#: \views\items\admin_index.ctp:191
+#: \views\items\admin_view.ctp:202
+#: \views\pages\masters.ctp:16
+msgid "List Factories"
+msgstr ""
+
+#: \views\factories\add.ctp:5
+#: \views\factories\admin_add.ctp:4
+msgid "Add Factory"
+msgstr ""
+
+#: \views\factories\add.ctp:8
+#: \views\factories\edit.ctp:9
+#: \views\factories\index.ctp:12
+#: \views\factories\view.ctp:10
+msgid "Factory Name"
+msgstr ""
+
+#: \views\factories\add.ctp:16
+#: \views\factories\admin_view.ctp:19
+#: \views\factories\edit.ctp:17
+#: \views\factories\view.ctp:20
+msgid "Charge Person"
+msgstr ""
+
+#: \views\factories\add.ctp:20
+#: \views\factories\admin_view.ctp:24
+#: \views\factories\edit.ctp:21
+#: \views\factories\view.ctp:25
+msgid "Charge Section"
+msgstr ""
+
+#: \views\factories\add.ctp:32;77;84;91;98;105;112
+#: \views\factories\edit.ctp:33;78;85;92;99;106;113
+#: \views\items\add.ctp:23;30;37;49;53;57;61;65;113;120;127;134;151;162;181;188
+#: \views\items\edit.ctp:32;39;46;58;62;66;70;74;124;131;138;145;162;173;192;199
+#: \views\items\index.ctp:29;36;43;49;53;57;61;65;72;79;86;93;100;107;114
+#: \views\memo_categories\add.ctp:13
+#: \views\memo_categories\edit.ctp:13
+#: \views\memo_datas\add.ctp:22;29
+#: \views\memo_datas\edit.ctp:22;29
+#: \views\memo_datas\reply_add.ctp:42
+#: \views\parts\add.ctp:23
+#: \views\parts\edit.ctp:26
+#: \views\sales_state_codes\add.ctp:22;29
+#: \views\sales_state_codes\edit.ctp:23;30
+#: \views\sections\add.ctp:28;35;42;50
+#: \views\sections\edit.ctp:26;33;40;48
+#: \views\subitems\add.ctp:36;40;56;63;70
+#: \views\subitems\edit.ctp:35;39;55;62;69
+#: \views\users\add.ctp:19;23;27;34;84;91;112
+#: \views\users\edit.ctp:52;68
+msgid "(Please Select)"
+msgstr ""
+
+#: \views\factories\add.ctp:35
+#: \views\factories\edit.ctp:36
+#: \views\sections\view.ctp:95
+#: \views\users\CopyOfview.ctp:55
+msgid "Adress 1"
+msgstr ""
+
+#: \views\factories\add.ctp:40
+#: \views\factories\edit.ctp:41
+#: \views\sections\view.ctp:100
+#: \views\users\CopyOfview.ctp:60
+msgid "Adress 2"
+msgstr ""
+
+#: \views\factories\add.ctp:49
+#: \views\factories\admin_view.ctp:54
+#: \views\factories\edit.ctp:50
+#: \views\factories\view.ctp:55
+msgid "Extension Tel"
+msgstr ""
+
+#: \views\factories\add.ctp:53
+#: \views\factories\admin_view.ctp:59
+#: \views\factories\edit.ctp:54
+#: \views\factories\view.ctp:60
+#: \views\sections\add.ctp:61
+#: \views\sections\admin_view.ctp:79
+#: \views\sections\edit.ctp:59
+#: \views\sections\view.ctp:110
+msgid "Fax"
+msgstr ""
+
+#: \views\factories\add.ctp:61
+#: \views\factories\admin_view.ctp:69
+#: \views\factories\edit.ctp:62
+#: \views\factories\view.ctp:70
+msgid "Delivery Days"
+msgstr ""
+
+#: \views\factories\add.ctp:76
+#: \views\factories\admin_view.ctp:84
+#: \views\factories\edit.ctp:77
+#: \views\factories\view.ctp:85
+#: \views\sections\add.ctp:34
+#: \views\sections\admin_view.ctp:39
+#: \views\sections\edit.ctp:32
+#: \views\sections\view.ctp:70
+msgid "Tax Method"
+msgstr ""
+
+#: \views\factories\add.ctp:83
+#: \views\factories\admin_view.ctp:89
+#: \views\factories\edit.ctp:84
+#: \views\factories\view.ctp:90
+#: \views\sections\add.ctp:41
+#: \views\sections\admin_view.ctp:44
+#: \views\sections\edit.ctp:39
+#: \views\sections\view.ctp:75
+msgid "Tax Fraction"
+msgstr ""
+
+#: \views\factories\add.ctp:90
+#: \views\factories\admin_view.ctp:94
+#: \views\factories\edit.ctp:91
+#: \views\factories\view.ctp:95
+msgid "Total Day"
+msgstr ""
+
+#: \views\factories\add.ctp:97
+#: \views\factories\admin_view.ctp:99
+#: \views\factories\edit.ctp:98
+#: \views\factories\view.ctp:100
+msgid "Payment Day"
+msgstr ""
+
+#: \views\factories\add.ctp:104
+#: \views\factories\admin_view.ctp:104
+#: \views\factories\edit.ctp:105
+#: \views\factories\view.ctp:105
+msgid "Payment Code"
+msgstr ""
+
+#: \views\factories\add.ctp:111
+#: \views\factories\admin_view.ctp:109
+#: \views\factories\edit.ctp:112
+#: \views\factories\view.ctp:110
+msgid "Trading Flag"
+msgstr ""
+
+#: \views\factories\add.ctp:117
+#: \views\factories\admin_view.ctp:114
+#: \views\factories\edit.ctp:118
+#: \views\factories\view.ctp:115
+msgid "Trading Start"
+msgstr ""
+
+#: \views\factories\add.ctp:125
+#: \views\factories\admin_view.ctp:119
+#: \views\factories\edit.ctp:125
+#: \views\factories\view.ctp:120
+msgid "Trading End"
+msgstr ""
+
+#: \views\factories\admin_edit.ctp:4
+#: \views\factories\admin_view.ctp:158
+#: \views\factories\edit.ctp:5
+#: \views\factories\view.ctp:149
+msgid "Edit Factory"
+msgstr ""
+
+#: \views\factories\admin_index.ctp:2
+#: \views\factories\index.ctp:2
+msgid "Factories"
+msgstr ""
+
+#: \views\factories\admin_index.ctp:158
+#: \views\factories\admin_view.ctp:161
+#: \views\factories\index.ctp:48
+#: \views\items\admin_add.ctp:50
+#: \views\items\admin_edit.ctp:52
+#: \views\items\admin_index.ctp:192
+#: \views\items\admin_view.ctp:203
+#: \views\pages\masters.ctp:17
+msgid "New Factory"
+msgstr ""
+
+#: \views\factories\admin_view.ctp:2
+#: \views\factories\view.ctp:3
+#: \views\items\add.ctp:48
+#: \views\items\admin_view.ctp:19
+#: \views\items\edit.ctp:57
+#: \views\items\index.ctp:48;184
+#: \views\items\view.ctp:93
+msgid "Factory"
+msgstr ""
+
+#: \views\factories\admin_view.ctp:159
+#: \views\factories\view.ctp:150
+msgid "Delete Factory"
+msgstr ""
+
+#: \views\item_images\add.ctp:2
+#: \views\item_images\admin_add.ctp:4
+msgid "Add ItemImage"
+msgstr ""
+
+#: \views\item_images\add.ctp:9
+#: \views\item_images\edit.ctp:12
+msgid "Image Comment"
+msgstr ""
+
+#: \views\item_images\add.ctp:15
+msgid "Add"
+msgstr ""
+
+#: \views\item_images\admin_add.ctp:15
+#: \views\item_images\admin_edit.ctp:17
+#: \views\item_images\admin_view.ctp:35
+#: \views\item_images\view.ctp:35
+msgid "List ItemImages"
+msgstr ""
+
+#: \views\item_images\admin_edit.ctp:4
+#: \views\item_images\admin_view.ctp:33
+#: \views\item_images\edit.ctp:4
+#: \views\item_images\view.ctp:33
+msgid "Edit ItemImage"
+msgstr ""
+
+#: \views\item_images\admin_index.ctp:2
+#: \views\item_images\index.ctp:2
+msgid "ItemImages"
+msgstr ""
+
+#: \views\item_images\admin_index.ctp:58
+#: \views\item_images\admin_view.ctp:36
+#: \views\item_images\index.ctp:58
+#: \views\item_images\view.ctp:36
+msgid "New ItemImage"
+msgstr ""
+
+#: \views\item_images\admin_view.ctp:2
+#: \views\item_images\view.ctp:2
+msgid "ItemImage"
+msgstr ""
+
+#: \views\item_images\admin_view.ctp:34
+#: \views\item_images\view.ctp:34
+msgid "Delete ItemImage"
+msgstr ""
+
+#: \views\items\add.ctp:5
+#: \views\items\admin_add.ctp:4
+msgid "Add Item"
+msgstr ""
+
+#: \views\items\add.ctp:9
+#: \views\items\edit.ctp:13
+#: \views\items\index.ctp:182
+#: \views\items\view.ctp:38
+#: \views\parts\add.ctp:11
+#: \views\parts\edit.ctp:13
+#: \views\subitems\view.ctp:122
+msgid "Item Name"
+msgstr ""
+
+#: \views\items\add.ctp:13
+#: \views\items\edit.ctp:17
+#: \views\items\view.ctp:43
+msgid "Item Title"
+msgstr ""
+
+#: \views\items\add.ctp:19
+#: \views\items\edit.ctp:28
+msgid "(out tax)"
+msgstr ""
+
+#: \views\items\add.ctp:29
+#: \views\items\edit.ctp:38
+#: \views\items\index.ctp:35
+#: \views\items\view.ctp:65
+msgid "Item Property"
+msgstr ""
+
+#: \views\items\add.ctp:36
+#: \views\items\edit.ctp:45
+#: \views\items\index.ctp:42
+#: \views\items\view.ctp:72
+msgid "Item Type"
+msgstr ""
+
+#: \views\items\add.ctp:40
+#: \views\items\edit.ctp:49
+#: \views\items\view.ctp:79
+msgid "Size Basic"
+msgstr ""
+
+#: \views\items\add.ctp:44
+#: \views\items\edit.ctp:53
+#: \views\items\view.ctp:86
+msgid "Size Order"
+msgstr ""
+
+#: \views\items\add.ctp:52
+#: \views\items\edit.ctp:61
+#: \views\items\index.ctp:52
+#: \views\items\view.ctp:98
+msgid "Sales State"
+msgstr ""
+
+#: \views\items\add.ctp:56
+#: \views\items\admin_view.ctp:39
+#: \views\items\edit.ctp:65
+#: \views\items\index.ctp:56
+#: \views\items\view.ctp:103
+#: \views\processes\admin_view.ctp:2
+#: \views\processes\view.ctp:3
+#: \views\subitems\add.ctp:35
+#: \views\subitems\admin_view.ctp:69
+#: \views\subitems\edit.ctp:34
+#: \views\subitems\view.ctp:46
+msgid "Process"
+msgstr ""
+
+#: \views\items\add.ctp:60
+#: \views\items\admin_view.ctp:44
+#: \views\items\edit.ctp:69
+#: \views\items\index.ctp:60
+#: \views\items\view.ctp:108
+#: \views\materials\admin_view.ctp:2
+#: \views\materials\view.ctp:3
+#: \views\subitems\add.ctp:39
+#: \views\subitems\admin_view.ctp:74
+#: \views\subitems\edit.ctp:38
+#: \views\subitems\view.ctp:51
+msgid "Material"
+msgstr ""
+
+#: \views\items\add.ctp:64
+#: \views\items\admin_view.ctp:49
+#: \views\items\edit.ctp:73
+#: \views\items\index.ctp:64
+#: \views\items\view.ctp:113
+#: \views\stones\admin_view.ctp:2
+#: \views\stones\view.ctp:3
+msgid "Stone"
+msgstr ""
+
+#: \views\items\add.ctp:85
+#: \views\items\edit.ctp:95
+#: \views\items\index.ctp:119
+#: \views\items\view.ctp:138
+msgid "Release"
+msgstr ""
+
+#: \views\items\add.ctp:92
+#: \views\items\edit.ctp:103
+#: \views\items\index.ctp:135
+#: \views\items\view.ctp:143
+msgid "Order End"
+msgstr ""
+
+#: \views\items\add.ctp:133
+#: \views\items\edit.ctp:144
+#: \views\items\index.ctp:85
+msgid "Custom Order App"
+msgstr ""
+
+#: \views\items\add.ctp:154
+#: \views\items\edit.ctp:165
+msgid "in Chain"
+msgstr ""
+
+#: \views\items\add.ctp:161
+#: \views\items\edit.ctp:172
+#: \views\items\index.ctp:99
+#: \views\items\view.ctp:207
+msgid "Atelier Trans App"
+msgstr ""
+
+#: \views\items\add.ctp:169
+#: \views\items\edit.ctp:180
+msgid "Supply Fullcost"
+msgstr ""
+
+#: \views\items\add.ctp:192
+#: \views\items\edit.ctp:203
+#: \views\items\view.ctp:237
+#: \views\materials\add.ctp:20
+#: \views\materials\admin_view.ctp:19
+#: \views\materials\edit.ctp:20
+#: \views\materials\view.ctp:20
+#: \views\processes\add.ctp:19
+#: \views\processes\admin_view.ctp:19
+#: \views\processes\edit.ctp:20
+#: \views\processes\view.ctp:20
+#: \views\stones\add.ctp:13
+#: \views\stones\admin_view.ctp:14
+#: \views\stones\edit.ctp:14
+#: \views\stones\view.ctp:15
+msgid "Notes"
+msgstr ""
+
+#: \views\items\add.ctp:198
+#: \views\items\edit.ctp:209
+#: \views\items\view.ctp:242
+msgid "Secret Notes"
+msgstr ""
+
+#: \views\items\admin_add.ctp:53
+#: \views\items\admin_edit.ctp:55
+#: \views\items\admin_index.ctp:195
+#: \views\items\admin_view.ctp:206
+#: \views\pages\masters.ctp:20
+msgid "List Sales State Codes"
+msgstr ""
+
+#: \views\items\admin_add.ctp:54
+#: \views\items\admin_edit.ctp:56
+#: \views\items\admin_index.ctp:196
+#: \views\items\admin_view.ctp:207
+#: \views\pages\masters.ctp:21
+msgid "New Sales State Code"
+msgstr ""
+
+#: \views\items\admin_add.ctp:55
+#: \views\items\admin_edit.ctp:57
+#: \views\items\admin_index.ctp:197
+#: \views\items\admin_view.ctp:208
+#: \views\pages\masters.ctp:22
+#: \views\processes\add.ctp:2;29
+#: \views\processes\admin_add.ctp:19
+#: \views\processes\admin_edit.ctp:21
+#: \views\processes\admin_view.ctp:60
+#: \views\processes\edit.ctp:2;31
+#: \views\processes\view.ctp:2;51
+#: \views\subitems\admin_add.ctp:34
+#: \views\subitems\admin_edit.ctp:36
+#: \views\subitems\admin_index.ctp:129
+#: \views\subitems\admin_view.ctp:124
+#: \views\subitems\index.ctp:129
+msgid "List Processes"
+msgstr ""
+
+#: \views\items\admin_add.ctp:56
+#: \views\items\admin_edit.ctp:58
+#: \views\items\admin_index.ctp:198
+#: \views\items\admin_view.ctp:209
+#: \views\pages\masters.ctp:23
+#: \views\processes\admin_index.ctp:78
+#: \views\processes\admin_view.ctp:61
+#: \views\processes\index.ctp:48
+#: \views\subitems\admin_add.ctp:35
+#: \views\subitems\admin_edit.ctp:37
+#: \views\subitems\admin_index.ctp:130
+#: \views\subitems\admin_view.ctp:125
+#: \views\subitems\index.ctp:130
+msgid "New Process"
+msgstr ""
+
+#: \views\items\admin_add.ctp:57
+#: \views\items\admin_edit.ctp:59
+#: \views\items\admin_index.ctp:199
+#: \views\items\admin_view.ctp:210
+#: \views\materials\add.ctp:2;30
+#: \views\materials\admin_add.ctp:19
+#: \views\materials\admin_edit.ctp:21
+#: \views\materials\admin_view.ctp:60
+#: \views\materials\edit.ctp:2;31
+#: \views\materials\view.ctp:2;51
+#: \views\pages\masters.ctp:24
+#: \views\subitems\admin_add.ctp:36
+#: \views\subitems\admin_edit.ctp:38
+#: \views\subitems\admin_index.ctp:131
+#: \views\subitems\admin_view.ctp:126
+#: \views\subitems\index.ctp:131
+msgid "List Materials"
+msgstr ""
+
+#: \views\items\admin_add.ctp:58
+#: \views\items\admin_edit.ctp:60
+#: \views\items\admin_index.ctp:200
+#: \views\items\admin_view.ctp:211
+#: \views\materials\admin_index.ctp:78
+#: \views\materials\admin_view.ctp:61
+#: \views\materials\index.ctp:48
+#: \views\pages\masters.ctp:25
+#: \views\subitems\admin_add.ctp:37
+#: \views\subitems\admin_edit.ctp:39
+#: \views\subitems\admin_index.ctp:132
+#: \views\subitems\admin_view.ctp:127
+#: \views\subitems\index.ctp:132
+msgid "New Material"
+msgstr ""
+
+#: \views\items\admin_add.ctp:59
+#: \views\items\admin_edit.ctp:61
+#: \views\items\admin_index.ctp:201
+#: \views\items\admin_view.ctp:212
+#: \views\pages\masters.ctp:26
+#: \views\stones\add.ctp:2;23
+#: \views\stones\admin_add.ctp:18
+#: \views\stones\admin_edit.ctp:20
+#: \views\stones\admin_view.ctp:55
+#: \views\stones\edit.ctp:2;25
+#: \views\stones\view.ctp:2;46
+msgid "List Stones"
+msgstr ""
+
+#: \views\items\admin_add.ctp:60
+#: \views\items\admin_edit.ctp:62
+#: \views\items\admin_index.ctp:202
+#: \views\items\admin_view.ctp:213
+#: \views\pages\masters.ctp:27
+#: \views\stones\admin_index.ctp:74
+#: \views\stones\admin_view.ctp:56
+#: \views\stones\index.ctp:48
+msgid "New Stone"
+msgstr ""
+
+#: \views\items\admin_add.ctp:61
+#: \views\items\admin_edit.ctp:63
+#: \views\items\admin_index.ctp:203
+#: \views\items\admin_view.ctp:214
+#: \views\pages\masters.ctp:28
+#: \views\parts\admin_add.ctp:17
+#: \views\parts\admin_edit.ctp:19
+#: \views\parts\admin_index.ctp:67
+#: \views\parts\admin_view.ctp:47
+#: \views\parts\index.ctp:67
+#: \views\subitems\admin_add.ctp:31
+#: \views\subitems\admin_edit.ctp:33
+#: \views\subitems\admin_view.ctp:120
+msgid "List Subitems"
+msgstr ""
+
+#: \views\items\admin_add.ctp:62
+#: \views\items\admin_edit.ctp:64
+#: \views\items\admin_index.ctp:204
+#: \views\items\admin_view.ctp:215;294
+#: \views\items\view.ctp:308
+#: \views\pages\masters.ctp:29
+#: \views\parts\admin_add.ctp:18
+#: \views\parts\admin_edit.ctp:20
+#: \views\parts\admin_index.ctp:68
+#: \views\parts\admin_view.ctp:48
+#: \views\parts\index.ctp:68
+#: \views\subitems\admin_index.ctp:126
+#: \views\subitems\admin_view.ctp:121
+#: \views\subitems\index.ctp:126
+msgid "New Subitem"
+msgstr ""
+
+#: \views\items\admin_add.ctp:63
+#: \views\items\admin_edit.ctp:65
+#: \views\items\admin_index.ctp:205
+#: \views\items\admin_view.ctp:216
+#: \views\pages\masters.ctp:30
+msgid "List Item Images"
+msgstr ""
+
+#: \views\items\admin_add.ctp:64
+#: \views\items\admin_edit.ctp:66
+#: \views\items\admin_index.ctp:206
+#: \views\items\admin_view.ctp:217;336
+#: \views\pages\masters.ctp:31
+msgid "New Item Image"
+msgstr ""
+
+#: \views\items\admin_add.ctp:65
+#: \views\items\admin_edit.ctp:67
+#: \views\items\admin_index.ctp:207
+#: \views\items\admin_view.ctp:218
+#: \views\pages\masters.ctp:32
+#: \views\tags\add.ctp:2;17
+#: \views\tags\admin_add.ctp:17
+#: \views\tags\admin_edit.ctp:19
+#: \views\tags\admin_view.ctp:50
+#: \views\tags\edit.ctp:2;19
+#: \views\tags\view.ctp:2;41
+msgid "List Tags"
+msgstr ""
+
+#: \views\items\admin_add.ctp:66
+#: \views\items\admin_edit.ctp:68
+#: \views\items\admin_index.ctp:208
+#: \views\items\admin_view.ctp:219;384
+#: \views\pages\masters.ctp:33
+#: \views\tags\admin_index.ctp:70
+#: \views\tags\admin_view.ctp:51
+#: \views\tags\index.ctp:48
+msgid "New Tag"
+msgstr ""
+
+#: \views\items\admin_edit.ctp:4
+#: \views\items\admin_view.ctp:198
+#: \views\items\edit.ctp:9
+#: \views\items\view.ctp:269
+msgid "Edit Item"
+msgstr ""
+
+#: \views\items\admin_index.ctp:2
+#: \views\items\index.ctp:10
+msgid "Items"
+msgstr ""
+
+#: \views\items\admin_view.ctp:34
+msgid "Sales State Code"
+msgstr ""
+
+#: \views\items\admin_view.ctp:199
+#: \views\items\view.ctp:270
+msgid "Delete Item"
+msgstr ""
+
+#: \views\items\admin_view.ctp:223
+#: \views\items\view.ctp:275
+msgid "Related Subitems"
+msgstr ""
+
+#: \views\items\admin_view.ctp:229;305
+#: \views\parts\admin_view.ctp:9
+#: \views\subitems\admin_view.ctp:138
+#: \views\tags_items\admin_view.ctp:9
+#: \views\tags_items\view.ctp:9
+msgid "Item Id"
+msgstr ""
+
+#: \views\items\admin_view.ctp:230
+#: \views\items\view.ctp:280
+#: \views\subitems\admin_view.ctp:19
+#: \views\subitems\view.ctp:15
+msgid "Jan"
+msgstr ""
+
+#: \views\items\admin_view.ctp:235
+#: \views\subitems\add.ctp:48
+#: \views\subitems\admin_view.ctp:44
+#: \views\subitems\edit.ctp:47
+#: \views\subitems\view.ctp:62
+msgid "Carat"
+msgstr ""
+
+#: \views\items\admin_view.ctp:236
+#: \views\subitems\add.ctp:55
+#: \views\subitems\admin_view.ctp:49
+#: \views\subitems\edit.ctp:54
+#: \views\subitems\view.ctp:67
+msgid "Color"
+msgstr ""
+
+#: \views\items\admin_view.ctp:237
+#: \views\subitems\add.ctp:62
+#: \views\subitems\admin_view.ctp:54
+#: \views\subitems\edit.ctp:61
+#: \views\subitems\view.ctp:72
+msgid "Clarity"
+msgstr ""
+
+#: \views\items\admin_view.ctp:238
+#: \views\subitems\add.ctp:69
+#: \views\subitems\admin_view.ctp:59
+#: \views\subitems\edit.ctp:68
+#: \views\subitems\view.ctp:77
+msgid "Cut"
+msgstr ""
+
+#: \views\items\admin_view.ctp:239
+#: \views\subitems\add.ctp:73
+#: \views\subitems\admin_view.ctp:64
+#: \views\subitems\edit.ctp:72
+#: \views\subitems\view.ctp:82
+msgid "Grade Report"
+msgstr ""
+
+#: \views\items\admin_view.ctp:242
+#: \views\subitems\admin_view.ctp:79
+#: \views\subitems\view.ctp:56
+msgid "Selldata Id"
+msgstr ""
+
+#: \views\items\admin_view.ctp:299
+msgid "Related Item Images"
+msgstr ""
+
+#: \views\items\admin_view.ctp:341
+#: \views\items\view.ctp:20
+msgid "Related Tags"
+msgstr ""
+
+#: \views\items\csv_add.ctp:4
+msgid "CSV Add Item"
+msgstr ""
+
+#: \views\items\edit.ctp:6;224
+msgid "Return Item View"
+msgstr ""
+
+#: \views\items\edit.ctp:98;106
+#: \views\items\index.ctp:122;130;138;146
+msgid "(Select)"
+msgstr ""
+
+#: \views\items\index.ctp:186
+#: \views\sections\add.ctp:27
+#: \views\sections\admin_view.ctp:34
+#: \views\sections\edit.ctp:25
+#: \views\sections\view.ctp:65
+msgid "Sales Code"
+msgstr ""
+
+#: \views\items\view.ctp:19
+msgid "Add Image"
+msgstr ""
+
+#: \views\items\view.ctp:48
+msgid "Pair"
+msgstr ""
+
+#: \views\items\view.ctp:182
+msgid "Cutom Order App"
+msgstr ""
+
+#: \views\layouts\CopyOfdefault.ctp:30
+msgid "Administration of all [Buche de Noel] : "
+msgstr ""
+
+#: \views\layouts\CopyOfdefault.ctp:46
+msgid "Logon:%s"
+msgstr ""
+
+#: \views\layouts\default.ctp:31
+msgid "　Logon:　%s"
+msgstr ""
+
+#: \views\layouts\default.ctp:33
+msgid "Logout"
+msgstr ""
+
+#: \views\materials\add.ctp:5
+#: \views\materials\admin_add.ctp:4
+msgid "Add Material"
+msgstr ""
+
+#: \views\materials\add.ctp:9
+#: \views\materials\edit.ctp:9
+#: \views\materials\view.ctp:10
+msgid "Material Name"
+msgstr ""
+
+#: \views\materials\add.ctp:14
+#: \views\materials\admin_view.ctp:14
+#: \views\materials\edit.ctp:14
+#: \views\materials\view.ctp:15
+#: \views\processes\add.ctp:13
+#: \views\processes\admin_view.ctp:14
+#: \views\processes\edit.ctp:14
+#: \views\processes\view.ctp:15
+msgid "Cleaning Plan"
+msgstr ""
+
+#: \views\materials\admin_edit.ctp:4
+#: \views\materials\admin_view.ctp:58
+#: \views\materials\edit.ctp:5
+#: \views\materials\view.ctp:49
+msgid "Edit Material"
+msgstr ""
+
+#: \views\materials\admin_index.ctp:2
+#: \views\materials\index.ctp:2
+msgid "Materials"
+msgstr ""
+
+#: \views\materials\admin_view.ctp:59
+#: \views\materials\view.ctp:50
+msgid "Delete Material"
+msgstr ""
+
+#: \views\memo_categories\add.ctp:2;21
+#: \views\memo_categories\admin_add.ctp:18
+#: \views\memo_categories\admin_edit.ctp:20
+#: \views\memo_categories\admin_view.ctp:55
+#: \views\memo_categories\edit.ctp:22
+#: \views\memo_categories\view.ctp:2;46
+msgid "List MemoCategories"
+msgstr ""
+
+#: \views\memo_categories\add.ctp:5
+#: \views\memo_categories\admin_add.ctp:4
+#: \views\memo_categories\edit.ctp:4
+msgid "Add MemoCategory"
+msgstr ""
+
+#: \views\memo_categories\add.ctp:7
+#: \views\memo_categories\edit.ctp:7
+#: \views\memo_categories\index.ctp:12
+#: \views\memo_categories\view.ctp:10
+msgid "Memo Category Name"
+msgstr ""
+
+#: \views\memo_categories\add.ctp:12
+#: \views\memo_categories\edit.ctp:12
+#: \views\memo_categories\index.ctp:13
+#: \views\memo_categories\view.ctp:15
+msgid "Memo Sections"
+msgstr ""
+
+#: \views\memo_categories\admin_edit.ctp:4
+#: \views\memo_categories\admin_view.ctp:53
+#: \views\memo_categories\view.ctp:44
+msgid "Edit MemoCategory"
+msgstr ""
+
+#: \views\memo_categories\admin_index.ctp:2
+#: \views\memo_categories\index.ctp:2
+msgid "MemoCategories"
+msgstr ""
+
+#: \views\memo_categories\admin_index.ctp:74
+#: \views\memo_categories\admin_view.ctp:56
+#: \views\memo_categories\index.ctp:48
+msgid "New MemoCategory"
+msgstr ""
+
+#: \views\memo_categories\admin_view.ctp:2
+#: \views\memo_categories\view.ctp:3
+msgid "MemoCategory"
+msgstr ""
+
+#: \views\memo_categories\admin_view.ctp:14
+msgid "Memo Sections Id"
+msgstr ""
+
+#: \views\memo_categories\admin_view.ctp:54
+#: \views\memo_categories\view.ctp:45
+msgid "Delete MemoCategory"
+msgstr ""
+
+#: \views\memo_datas\add.ctp:2
+#: \views\memo_datas\category_index.ctp:2
+#: \views\memo_datas\reply_add.ctp:4
+msgid "<< List Board Index"
+msgstr ""
+
+#: \views\memo_datas\add.ctp:8
+msgid "Board:New Posts:"
+msgstr ""
+
+#: \views\memo_datas\add.ctp:14
+#: \views\memo_datas\admin_add.ctp:4
+#: \views\memo_datas\edit.ctp:13
+msgid "Add MemoData"
+msgstr ""
+
+#: \views\memo_datas\add.ctp:17
+#: \views\memo_datas\category_index.ctp:14
+#: \views\memo_datas\edit.ctp:17
+#: \views\memo_datas\index.ctp:10
+#: \views\memo_datas\reply_add.ctp:25
+#: \views\memo_datas\section_index.ctp:13
+#: \views\memo_datas\view.ctp:85
+#: \views\top\index.ctp:6
+msgid "Title"
+msgstr ""
+
+#: \views\memo_datas\add.ctp:21
+#: \views\memo_datas\category_index.ctp:15
+#: \views\memo_datas\edit.ctp:21
+#: \views\memo_datas\index.ctp:11
+#: \views\memo_datas\section_index.ctp:14
+#: \views\memo_datas\view.ctp:28;86
+#: \views\top\index.ctp:7
+msgid "Category"
+msgstr ""
+
+#: \views\memo_datas\add.ctp:28
+#: \views\memo_datas\admin_view.ctp:19
+#: \views\memo_datas\edit.ctp:28
+#: \views\memo_datas\reply_add.ctp:41
+#: \views\memo_datas\view.ctp:33
+msgid "Top Flag"
+msgstr ""
+
+#: \views\memo_datas\add.ctp:34
+#: \views\memo_datas\admin_view.ctp:34
+#: \views\memo_datas\edit.ctp:34
+#: \views\memo_datas\reply_add.ctp:46
+msgid "Contents"
+msgstr ""
+
+#: \views\memo_datas\add.ctp:41
+msgid "New Posts"
+msgstr ""
+
+#: \views\memo_datas\admin_add.ctp:24
+#: \views\memo_datas\admin_edit.ctp:26
+#: \views\memo_datas\admin_view.ctp:85
+msgid "List MemoDatas"
+msgstr ""
+
+#: \views\memo_datas\admin_edit.ctp:4
+#: \views\memo_datas\admin_view.ctp:83
+#: \views\memo_datas\view.ctp:70
+msgid "Edit MemoData"
+msgstr ""
+
+#: \views\memo_datas\admin_index.ctp:2
+msgid "MemoDatas"
+msgstr ""
+
+#: \views\memo_datas\admin_index.ctp:98
+#: \views\memo_datas\admin_view.ctp:86
+#: \views\memo_datas\category_index.ctp:59
+#: \views\memo_datas\index.ctp:50
+#: \views\memo_datas\section_index.ctp:58
+msgid "New MemoData"
+msgstr ""
+
+#: \views\memo_datas\admin_view.ctp:2
+msgid "MemoData"
+msgstr ""
+
+#: \views\memo_datas\admin_view.ctp:14
+msgid "Memo Category Id"
+msgstr ""
+
+#: \views\memo_datas\admin_view.ctp:24
+msgid "Dev Status"
+msgstr ""
+
+#: \views\memo_datas\admin_view.ctp:29
+msgid "Q Status"
+msgstr ""
+
+#: \views\memo_datas\admin_view.ctp:39
+#: \views\memo_datas\reply_add.ctp:52
+#: \views\memo_datas\view.ctp:81
+msgid "Reply"
+msgstr ""
+
+#: \views\memo_datas\admin_view.ctp:44
+#: \views\memo_datas\view.ctp:38
+msgid "File"
+msgstr ""
+
+#: \views\memo_datas\admin_view.ctp:84
+#: \views\memo_datas\view.ctp:72
+msgid "Delete MemoData"
+msgstr ""
+
+#: \views\memo_datas\category_index.ctp:16
+#: \views\memo_datas\index.ctp:12
+#: \views\memo_datas\section_index.ctp:15
+msgid "top_flag"
+msgstr ""
+
+#: \views\memo_datas\category_index.ctp:17
+#: \views\memo_datas\index.ctp:13
+#: \views\memo_datas\section_index.ctp:16
+#: \views\memo_datas\view.ctp:87
+#: \views\top\index.ctp:8
+msgid "created_user"
+msgstr ""
+
+#: \views\memo_datas\category_index.ctp:18
+#: \views\memo_datas\index.ctp:14
+#: \views\memo_datas\section_index.ctp:17
+#: \views\memo_datas\view.ctp:88
+#: \views\top\index.ctp:9
+msgid "updated"
+msgstr ""
+
+#: \views\memo_datas\edit.ctp:2
+#: \views\memo_datas\view.ctp:2
+msgid "<<< List Board Index"
+msgstr ""
+
+#: \views\memo_datas\edit.ctp:7
+msgid "Board:Edit:"
+msgstr ""
+
+#: \views\memo_datas\reply_add.ctp:8
+msgid "Board:Reply:"
+msgstr ""
+
+#: \views\memo_datas\reply_add.ctp:22
+#: \views\memo_datas\view.ctp:76
+msgid "Reply MemoData"
+msgstr ""
+
+#: \views\memo_datas\section_index.ctp:2
+msgid "< List Board Index"
+msgstr ""
+
+#: \views\memo_datas\view.ctp:8
+msgid "From MemoData"
+msgstr ""
+
+#: \views\pages\CopyOfhome.ctp:12
+msgid "Your tmp directory is writable."
+msgstr ""
+
+#: \views\pages\CopyOfhome.ctp:16
+msgid "Your tmp directory is NOT writable."
+msgstr ""
+
+#: \views\pages\CopyOfhome.ctp:26
+msgid "The %s is being used for caching. To change the config edit APP/config/core.php "
+msgstr ""
+
+#: \views\pages\CopyOfhome.ctp:30
+msgid "Your cache is NOT working. Please check the settings in APP/config/core.php"
+msgstr ""
+
+#: \views\pages\CopyOfhome.ctp:40
+msgid "Your database configuration file is present."
+msgstr ""
+
+#: \views\pages\CopyOfhome.ctp:45
+msgid "Your database configuration file is NOT present."
+msgstr ""
+
+#: \views\pages\CopyOfhome.ctp:47
+msgid "Rename config/database.php.default to config/database.php"
+msgstr ""
+
+#: \views\pages\CopyOfhome.ctp:62
+msgid "Cake is able to connect to the database."
+msgstr ""
+
+#: \views\pages\CopyOfhome.ctp:66
+msgid "Cake is NOT able to connect to the database."
+msgstr ""
+
+#: \views\pages\CopyOfhome.ctp:72
+msgid "Editing this Page"
+msgstr ""
+
+#: \views\pages\CopyOfhome.ctp:75
+msgid "To change the content of this page, edit: %s\n\t\tTo change its layout, edit: %s\n\t\tYou can also add some CSS styles for your pages at: %s"
+msgstr ""
+
+#: \views\pages\users_masters.ctp:15
+#: \views\sections\add.ctp:2;74
+#: \views\sections\admin_add.ctp:34
+#: \views\sections\admin_edit.ctp:36
+#: \views\sections\admin_view.ctp:135
+#: \views\sections\edit.ctp:2;73
+#: \views\sections\view.ctp:2;158
+#: \views\users\admin_add.ctp:41
+#: \views\users\admin_edit.ctp:43
+#: \views\users\admin_index.ctp:163
+#: \views\users\admin_view.ctp:167
+msgid "List Sections"
+msgstr ""
+
+#: \views\pages\users_masters.ctp:16
+#: \views\sections\admin_index.ctp:138
+#: \views\sections\admin_view.ctp:136
+#: \views\sections\index.ctp:63
+#: \views\users\admin_add.ctp:42
+#: \views\users\admin_edit.ctp:44
+#: \views\users\admin_index.ctp:164
+#: \views\users\admin_view.ctp:168
+msgid "New Section"
+msgstr ""
+
+#: \views\pages\users_masters.ctp:17
+#: \views\posts\add.ctp:2;36
+#: \views\posts\admin_add.ctp:22
+#: \views\posts\admin_edit.ctp:24
+#: \views\posts\admin_view.ctp:75
+#: \views\posts\edit.ctp:2;37
+#: \views\posts\view.ctp:2;66
+#: \views\users\admin_add.ctp:43
+#: \views\users\admin_edit.ctp:45
+#: \views\users\admin_index.ctp:165
+#: \views\users\admin_view.ctp:169
+msgid "List Posts"
+msgstr ""
+
+#: \views\pages\users_masters.ctp:18
+#: \views\posts\admin_index.ctp:90
+#: \views\posts\admin_view.ctp:76
+#: \views\posts\index.ctp:52
+#: \views\users\admin_add.ctp:44
+#: \views\users\admin_edit.ctp:46
+#: \views\users\admin_index.ctp:166
+#: \views\users\admin_view.ctp:170
+msgid "New Post"
+msgstr ""
+
+#: \views\pages\users_masters.ctp:21
+#: \views\users\admin_add.ctp:47
+#: \views\users\admin_edit.ctp:49
+#: \views\users\admin_index.ctp:169
+#: \views\users\admin_view.ctp:173
+msgid "List Time Cards"
+msgstr ""
+
+#: \views\pages\users_masters.ctp:22
+#: \views\users\CopyOfview.ctp:206
+#: \views\users\admin_add.ctp:48
+#: \views\users\admin_edit.ctp:50
+#: \views\users\admin_index.ctp:170
+#: \views\users\admin_view.ctp:174;229
+#: \views\users\view.ctp:225
+msgid "New Time Card"
+msgstr ""
+
+#: \views\parts\add.ctp:8
+#: \views\parts\admin_add.ctp:4
+msgid "Add Part"
+msgstr ""
+
+#: \views\parts\add.ctp:9
+#: \views\parts\edit.ctp:9
+#: \views\subitems\add.ctp:5
+#: \views\subitems\edit.ctp:5
+#: \views\subitems\view.ctp:3
+msgid "Parent Item:"
+msgstr ""
+
+#: \views\parts\add.ctp:10
+#: \views\parts\edit.ctp:10
+msgid "Child Item:"
+msgstr ""
+
+#: \views\parts\add.ctp:15
+#: \views\parts\admin_view.ctp:19
+#: \views\parts\edit.ctp:18
+#: \views\parts\view.ctp:19
+#: \views\subitems\admin_view.ctp:140
+#: \views\subitems\view.ctp:123
+msgid "Quantity"
+msgstr ""
+
+#: \views\parts\add.ctp:22
+#: \views\parts\admin_view.ctp:24
+#: \views\parts\edit.ctp:25
+#: \views\parts\view.ctp:24
+#: \views\subitems\admin_view.ctp:141
+#: \views\subitems\view.ctp:124
+msgid "Supply Code"
+msgstr ""
+
+#: \views\parts\admin_add.ctp:16
+#: \views\parts\admin_edit.ctp:18
+#: \views\parts\admin_view.ctp:45
+#: \views\subitems\admin_add.ctp:38
+#: \views\subitems\admin_edit.ctp:40
+#: \views\subitems\admin_index.ctp:133
+#: \views\subitems\admin_view.ctp:128
+#: \views\subitems\index.ctp:133
+msgid "List Parts"
+msgstr ""
+
+#: \views\parts\admin_edit.ctp:4
+#: \views\parts\admin_view.ctp:43
+#: \views\parts\edit.ctp:8
+#: \views\parts\view.ctp:43
+msgid "Edit Part"
+msgstr ""
+
+#: \views\parts\admin_index.ctp:66
+#: \views\parts\admin_view.ctp:46
+#: \views\parts\index.ctp:66
+#: \views\subitems\admin_add.ctp:39
+#: \views\subitems\admin_edit.ctp:41
+#: \views\subitems\admin_index.ctp:134
+#: \views\subitems\admin_view.ctp:129;174
+#: \views\subitems\index.ctp:134
+#: \views\subitems\view.ctp:154
+msgid "New Part"
+msgstr ""
+
+#: \views\parts\admin_view.ctp:2
+#: \views\parts\view.ctp:2
+msgid "Part"
+msgstr ""
+
+#: \views\parts\admin_view.ctp:14
+#: \views\parts\view.ctp:14
+#: \views\subitems\admin_view.ctp:2
+#: \views\subitems\view.ctp:2
+msgid "Subitem"
+msgstr ""
+
+#: \views\parts\admin_view.ctp:44
+#: \views\parts\view.ctp:44
+msgid "Delete Part"
+msgstr ""
+
+#: \views\parts\view.ctp:9
+msgid "Parts Name"
+msgstr ""
+
+#: \views\posts\add.ctp:5
+#: \views\posts\admin_add.ctp:4
+msgid "Add Post"
+msgstr ""
+
+#: \views\posts\add.ctp:8
+#: \views\posts\edit.ctp:9
+#: \views\posts\index.ctp:12
+#: \views\posts\view.ctp:10
+msgid "Post Name"
+msgstr ""
+
+#: \views\posts\admin_edit.ctp:4
+#: \views\posts\admin_view.ctp:73
+#: \views\posts\edit.ctp:5
+#: \views\posts\view.ctp:64
+msgid "Edit Post"
+msgstr ""
+
+#: \views\posts\admin_index.ctp:2
+#: \views\posts\index.ctp:2
+msgid "Posts"
+msgstr ""
+
+#: \views\posts\admin_view.ctp:2
+#: \views\posts\view.ctp:3
+#: \views\sections\view.ctp:169
+#: \views\users\CopyOfview.ctp:35
+#: \views\users\add.ctp:22
+#: \views\users\admin_view.ctp:24
+#: \views\users\edit.ctp:13
+#: \views\users\index.ctp:20
+#: \views\users\view.ctp:35
+msgid "Post"
+msgstr ""
+
+#: \views\posts\admin_view.ctp:74
+#: \views\posts\view.ctp:65
+msgid "Delete Post"
+msgstr ""
+
+#: \views\processes\add.ctp:5
+#: \views\processes\admin_add.ctp:4
+msgid "Add Process"
+msgstr ""
+
+#: \views\processes\add.ctp:8
+#: \views\processes\edit.ctp:9
+#: \views\processes\index.ctp:12
+#: \views\processes\view.ctp:10
+msgid "Process Name"
+msgstr ""
+
+#: \views\processes\admin_edit.ctp:4
+#: \views\processes\admin_view.ctp:58
+#: \views\processes\edit.ctp:5
+#: \views\processes\view.ctp:49
+msgid "Edit Process"
+msgstr ""
+
+#: \views\processes\admin_index.ctp:2
+#: \views\processes\index.ctp:2
+msgid "Processes"
+msgstr ""
+
+#: \views\processes\admin_view.ctp:59
+#: \views\processes\view.ctp:50
+msgid "Delete Process"
+msgstr ""
+
+#: \views\sales_state_codes\add.ctp:2
+#: \views\sales_state_codes\admin_add.ctp:20
+#: \views\sales_state_codes\admin_edit.ctp:22
+#: \views\sales_state_codes\admin_view.ctp:65
+#: \views\sales_state_codes\edit.ctp:2;39
+#: \views\sales_state_codes\view.ctp:2;56
+msgid "List SalesStateCodes"
+msgstr ""
+
+#: \views\sales_state_codes\add.ctp:5
+#: \views\sales_state_codes\admin_add.ctp:4
+msgid "Add SalesStateCode"
+msgstr ""
+
+#: \views\sales_state_codes\add.ctp:8
+#: \views\sales_state_codes\edit.ctp:9
+msgid "Sales Code Name"
+msgstr ""
+
+#: \views\sales_state_codes\add.ctp:13
+#: \views\sales_state_codes\admin_view.ctp:14
+#: \views\sales_state_codes\edit.ctp:14
+#: \views\sales_state_codes\view.ctp:15
+msgid "Explain"
+msgstr ""
+
+#: \views\sales_state_codes\add.ctp:21
+#: \views\sales_state_codes\edit.ctp:22
+msgid "Custom Order Approve"
+msgstr ""
+
+#: \views\sales_state_codes\admin_edit.ctp:4
+#: \views\sales_state_codes\admin_view.ctp:63
+#: \views\sales_state_codes\edit.ctp:5
+#: \views\sales_state_codes\view.ctp:54
+msgid "Edit SalesStateCode"
+msgstr ""
+
+#: \views\sales_state_codes\admin_index.ctp:2
+#: \views\sales_state_codes\index.ctp:2
+msgid "SalesStateCodes"
+msgstr ""
+
+#: \views\sales_state_codes\admin_index.ctp:82
+#: \views\sales_state_codes\admin_view.ctp:66
+#: \views\sales_state_codes\index.ctp:52
+msgid "New SalesStateCode"
+msgstr ""
+
+#: \views\sales_state_codes\admin_view.ctp:2
+#: \views\sales_state_codes\view.ctp:3
+msgid "SalesStateCode"
+msgstr ""
+
+#: \views\sales_state_codes\admin_view.ctp:64
+#: \views\sales_state_codes\view.ctp:55
+msgid "Delete SalesStateCode"
+msgstr ""
+
+#: \views\sales_state_codes\index.ctp:12
+#: \views\sales_state_codes\view.ctp:10
+msgid "Sales State Name"
+msgstr ""
+
+#: \views\sales_state_codes\index.ctp:13
+msgid "Cutom Order"
+msgstr ""
+
+#: \views\scaffolds\index.ctp:71
+msgid "Are you sure you want to delete"
+msgstr ""
+
+#: \views\scaffolds\index.ctp:93
+msgid "List %s"
+msgstr ""
+
+#: \views\scaffolds\index.ctp:94
+msgid "New %s"
+msgstr ""
+
+#: \views\sections\add.ctp:5
+#: \views\sections\admin_add.ctp:4
+msgid "Add Section"
+msgstr ""
+
+#: \views\sections\add.ctp:8
+#: \views\sections\edit.ctp:9
+#: \views\sections\index.ctp:12
+#: \views\sections\view.ctp:10
+msgid "Section Name"
+msgstr ""
+
+#: \views\sections\add.ctp:15
+#: \views\sections\view.ctp:21;48
+msgid "Kyuuyo Bugyo 1"
+msgstr ""
+
+#: \views\sections\add.ctp:16
+#: \views\sections\view.ctp:26;53
+msgid "Kyuuyo Bugyo 2"
+msgstr ""
+
+#: \views\sections\add.ctp:17
+#: \views\sections\view.ctp:31
+msgid "Kyuuyo Bugyo 3"
+msgstr ""
+
+#: \views\sections\add.ctp:18
+#: \views\sections\view.ctp:36
+msgid "Kyuuyo Bugyo 4"
+msgstr ""
+
+#: \views\sections\add.ctp:19
+#: \views\sections\view.ctp:41
+msgid "Kyuuyo Bugyo 5"
+msgstr ""
+
+#: \views\sections\add.ctp:22
+#: \views\sections\edit.ctp:20
+msgid "Kanjou Bugyo"
+msgstr ""
+
+#: \views\sections\add.ctp:53
+#: \views\sections\edit.ctp:51
+#: \views\users\add.ctp:38
+#: \views\users\edit.ctp:19
+msgid "Adress1"
+msgstr ""
+
+#: \views\sections\add.ctp:57
+#: \views\sections\edit.ctp:55
+#: \views\users\add.ctp:42
+#: \views\users\edit.ctp:20
+msgid "Adress2"
+msgstr ""
+
+#: \views\sections\add.ctp:66
+#: \views\sections\edit.ctp:64
+#: \views\sections\index.ctp:15
+#: \views\sections\view.ctp:120
+msgid "IP"
+msgstr ""
+
+#: \views\sections\admin_edit.ctp:4
+#: \views\sections\admin_view.ctp:133
+#: \views\sections\edit.ctp:5
+#: \views\sections\view.ctp:156
+msgid "Edit Section"
+msgstr ""
+
+#: \views\sections\admin_index.ctp:2
+#: \views\sections\index.ctp:2
+msgid "Sections"
+msgstr ""
+
+#: \views\sections\admin_view.ctp:2
+#: \views\sections\view.ctp:3
+#: \views\users\CopyOfview.ctp:30
+#: \views\users\add.ctp:18
+#: \views\users\admin_view.ctp:19
+#: \views\users\edit.ctp:12
+#: \views\users\index.ctp:19
+#: \views\users\view.ctp:30
+msgid "Section"
+msgstr ""
+
+#: \views\sections\admin_view.ctp:14
+msgid "Kyuuyo Bugyo Highrank Code"
+msgstr ""
+
+#: \views\sections\admin_view.ctp:24
+msgid "Kanjo Bugyo Code"
+msgstr ""
+
+#: \views\sections\admin_view.ctp:49
+#: \views\sections\view.ctp:80
+msgid "Auto Share Priority"
+msgstr ""
+
+#: \views\sections\admin_view.ctp:89
+#: \views\time_cards\admin_view.ctp:24
+#: \views\time_cards\view.ctp:24
+#: \views\users\CopyOfview.ctp:163
+#: \views\users\admin_view.ctp:186
+#: \views\users\view.ctp:182
+msgid "Ip Number"
+msgstr ""
+
+#: \views\sections\admin_view.ctp:134
+#: \views\sections\view.ctp:157
+msgid "Delete Section"
+msgstr ""
+
+#: \views\sections\edit.ctp:16
+msgid "kyuuyo bugyo1"
+msgstr ""
+
+#: \views\sections\edit.ctp:17
+msgid "kyuuyo bugyo2"
+msgstr ""
+
+#: \views\sections\edit.ctp:18
+msgid "kyuuyo bugyo3"
+msgstr ""
+
+#: \views\sections\edit.ctp:19
+msgid "kyuuyo bugyo4"
+msgstr ""
+
+#: \views\sections\index.ctp:13
+msgid "kuwake"
+msgstr ""
+
+#: \views\sections\index.ctp:14
+msgid "Section Code"
+msgstr ""
+
+#: \views\sections\view.ctp:60
+msgid "Kanjo Bugyo"
+msgstr ""
+
+#: \views\sections\view.ctp:166
+#: \views\users\CopyOfview.ctp:5
+msgid "System Number"
+msgstr ""
+
+#: \views\sections\view.ctp:167
+#: \views\users\index.ctp:18
+msgid "Users Name"
+msgstr ""
+
+#: \views\sections\view.ctp:171
+#: \views\users\CopyOfview.ctp:120
+#: \views\users\add.ctp:114
+#: \views\users\edit.ctp:71
+#: \views\users\index.ctp:22
+#: \views\users\login.ctp:5
+#: \views\users\view.ctp:137
+msgid "Login ID"
+msgstr ""
+
+#: \views\stones\add.ctp:5
+#: \views\stones\admin_add.ctp:4
+msgid "Add Stone"
+msgstr ""
+
+#: \views\stones\add.ctp:8
+#: \views\stones\edit.ctp:9
+#: \views\stones\index.ctp:12
+#: \views\stones\view.ctp:10
+msgid "Stone Name"
+msgstr ""
+
+#: \views\stones\admin_edit.ctp:4
+#: \views\stones\admin_view.ctp:53
+#: \views\stones\edit.ctp:5
+#: \views\stones\view.ctp:44
+msgid "Edit Stone"
+msgstr ""
+
+#: \views\stones\admin_index.ctp:2
+#: \views\stones\index.ctp:2
+msgid "Stones"
+msgstr ""
+
+#: \views\stones\admin_view.ctp:54
+#: \views\stones\view.ctp:45
+msgid "Delete Stone"
+msgstr ""
+
+#: \views\subitems\add.ctp:4
+#: \views\subitems\admin_add.ctp:4
+msgid "Add Subitem"
+msgstr ""
+
+#: \views\subitems\add.ctp:9
+#: \views\subitems\edit.ctp:9
+#: \views\subitems\view.ctp:10
+msgid "Subitem Name"
+msgstr ""
+
+#: \views\subitems\add.ctp:14
+#: \views\subitems\edit.ctp:13
+msgid "JAN Code"
+msgstr ""
+
+#: \views\subitems\add.ctp:18
+#: \views\subitems\edit.ctp:17
+#: \views\subitems\view.ctp:20
+msgid "Size"
+msgstr ""
+
+#: \views\subitems\add.ctp:42
+#: \views\subitems\edit.ctp:41
+msgid "Seller Data"
+msgstr ""
+
+#: \views\subitems\admin_edit.ctp:4
+#: \views\subitems\admin_view.ctp:118
+#: \views\subitems\edit.ctp:4
+#: \views\subitems\view.ctp:112
+msgid "Edit Subitem"
+msgstr ""
+
+#: \views\subitems\admin_index.ctp:2
+#: \views\subitems\index.ctp:2
+msgid "Subitems"
+msgstr ""
+
+#: \views\subitems\admin_view.ctp:119
+#: \views\subitems\view.ctp:113
+msgid "Delete Subitem"
+msgstr ""
+
+#: \views\subitems\admin_view.ctp:133
+#: \views\subitems\view.ctp:117
+msgid "Related Parts"
+msgstr ""
+
+#: \views\subitems\admin_view.ctp:139
+msgid "Subitem Id"
+msgstr ""
+
+#: \views\tags\add.ctp:5
+#: \views\tags\admin_add.ctp:4
+msgid "Add Tag"
+msgstr ""
+
+#: \views\tags\add.ctp:8
+#: \views\tags\edit.ctp:9
+#: \views\tags\index.ctp:12
+#: \views\tags\view.ctp:10
+msgid "Tag Name"
+msgstr ""
+
+#: \views\tags\admin_edit.ctp:4
+#: \views\tags\admin_view.ctp:48
+#: \views\tags\edit.ctp:5
+#: \views\tags\view.ctp:39
+msgid "Edit Tag"
+msgstr ""
+
+#: \views\tags\admin_index.ctp:2
+#: \views\tags\index.ctp:2
+msgid "Tags"
+msgstr ""
+
+#: \views\tags\admin_view.ctp:2
+#: \views\tags\view.ctp:3
+msgid "Tag"
+msgstr ""
+
+#: \views\tags\admin_view.ctp:49
+#: \views\tags\view.ctp:40
+msgid "Delete Tag"
+msgstr ""
+
+#: \views\tags_items\add.ctp:4
+#: \views\tags_items\admin_add.ctp:4
+msgid "Add TagsItem"
+msgstr ""
+
+#: \views\tags_items\add.ctp:15
+#: \views\tags_items\admin_add.ctp:15
+#: \views\tags_items\admin_edit.ctp:17
+#: \views\tags_items\admin_view.ctp:35
+#: \views\tags_items\edit.ctp:17
+#: \views\tags_items\view.ctp:35
+msgid "List TagsItems"
+msgstr ""
+
+#: \views\tags_items\admin_edit.ctp:4
+#: \views\tags_items\admin_view.ctp:33
+#: \views\tags_items\edit.ctp:4
+#: \views\tags_items\view.ctp:33
+msgid "Edit TagsItem"
+msgstr ""
+
+#: \views\tags_items\admin_index.ctp:2
+#: \views\tags_items\index.ctp:2
+msgid "TagsItems"
+msgstr ""
+
+#: \views\tags_items\admin_index.ctp:58
+#: \views\tags_items\admin_view.ctp:36
+#: \views\tags_items\index.ctp:58
+#: \views\tags_items\view.ctp:36
+msgid "New TagsItem"
+msgstr ""
+
+#: \views\tags_items\admin_view.ctp:2
+#: \views\tags_items\view.ctp:2
+msgid "TagsItem"
+msgstr ""
+
+#: \views\tags_items\admin_view.ctp:14
+#: \views\tags_items\view.ctp:14
+msgid "Tag Id"
+msgstr ""
+
+#: \views\tags_items\admin_view.ctp:34
+#: \views\tags_items\view.ctp:34
+msgid "Delete TagsItem"
+msgstr ""
+
+#: \views\time_cards\add.ctp:4
+#: \views\time_cards\admin_add.ctp:4
+msgid "Add TimeCard"
+msgstr ""
+
+#: \views\time_cards\add.ctp:21
+#: \views\time_cards\admin_add.ctp:21
+#: \views\time_cards\admin_edit.ctp:23
+#: \views\time_cards\admin_view.ctp:70
+#: \views\time_cards\edit.ctp:23
+#: \views\time_cards\view.ctp:70
+msgid "List TimeCards"
+msgstr ""
+
+#: \views\time_cards\admin_edit.ctp:4
+#: \views\time_cards\admin_view.ctp:68
+#: \views\time_cards\edit.ctp:4
+#: \views\time_cards\view.ctp:68
+msgid "Edit TimeCard"
+msgstr ""
+
+#: \views\time_cards\admin_index.ctp:2
+#: \views\time_cards\index.ctp:2
+msgid "TimeCards"
+msgstr ""
+
+#: \views\time_cards\admin_index.ctp:86
+#: \views\time_cards\admin_view.ctp:71
+#: \views\time_cards\index.ctp:86
+#: \views\time_cards\view.ctp:71
+msgid "New TimeCard"
+msgstr ""
+
+#: \views\time_cards\admin_view.ctp:2
+#: \views\time_cards\view.ctp:2
+msgid "TimeCard"
+msgstr ""
+
+#: \views\time_cards\admin_view.ctp:9
+#: \views\time_cards\view.ctp:9
+#: \views\users\CopyOfview.ctp:160
+#: \views\users\admin_view.ctp:183
+#: \views\users\view.ctp:179
+msgid "Chopping"
+msgstr ""
+
+#: \views\time_cards\admin_view.ctp:19
+#: \views\time_cards\view.ctp:19
+#: \views\users\CopyOfview.ctp:162
+#: \views\users\admin_view.ctp:185
+#: \views\users\view.ctp:181
+msgid "Chop Date"
+msgstr ""
+
+#: \views\time_cards\admin_view.ctp:69
+#: \views\time_cards\view.ctp:69
+msgid "Delete TimeCard"
+msgstr ""
+
+#: \views\top\index.ctp:2
+msgid "Board"
+msgstr ""
+
+#: \views\top\index.ctp:40
+msgid "List Board Index"
+msgstr ""
+
+#: \views\users\CopyOfview.ctp:15
+#: \views\users\add.ctp:11
+#: \views\users\edit.ctp:9
+#: \views\users\view.ctp:15
+msgid "Kana"
+msgstr ""
+
+#: \views\users\CopyOfview.ctp:85
+#: \views\users\add.ctp:90
+#: \views\users\edit.ctp:55
+#: \views\users\view.ctp:100
+msgid "Work Situation"
+msgstr ""
+
+#: \views\users\CopyOfview.ctp:95
+#: \views\users\view.ctp:110
+msgid "Joined Day"
+msgstr ""
+
+#: \views\users\CopyOfview.ctp:149
+#: \views\users\admin_edit.ctp:4
+#: \views\users\admin_view.ctp:163
+#: \views\users\edit.ctp:5
+#: \views\users\view.ctp:168
+msgid "Edit User"
+msgstr ""
+
+#: \views\users\CopyOfview.ctp:150
+#: \views\users\admin_view.ctp:164
+#: \views\users\view.ctp:169
+msgid "Delete User"
+msgstr ""
+
+#: \views\users\CopyOfview.ctp:155
+#: \views\users\admin_view.ctp:178
+#: \views\users\view.ctp:174
+msgid "Related Time Cards"
+msgstr ""
+
+#: \views\users\CopyOfview.ctp:161
+#: \views\users\admin_view.ctp:184
+#: \views\users\view.ctp:180
+msgid "User Id"
+msgstr ""
+
+#: \views\users\add.ctp:5
+#: \views\users\admin_add.ctp:4
+msgid "Add User"
+msgstr ""
+
+#: \views\users\add.ctp:14
+msgid "Kyuyo Bugyo"
+msgstr ""
+
+#: \views\users\add.ctp:33
+msgid "sex"
+msgstr ""
+
+#: \views\users\add.ctp:55
+#: \views\users\edit.ctp:27
+#: \views\users\view.ctp:62
+msgid "Mobile Phone"
+msgstr ""
+
+#: \views\users\add.ctp:59
+#: \views\users\edit.ctp:31
+#: \views\users\view.ctp:67
+msgid "Mobile Mail"
+msgstr ""
+
+#: \views\users\add.ctp:63
+#: \views\users\edit.ctp:35
+#: \views\users\view.ctp:72
+msgid "Business Phone"
+msgstr ""
+
+#: \views\users\add.ctp:67
+#: \views\users\edit.ctp:39
+#: \views\users\view.ctp:77
+msgid "Business Phone Mail"
+msgstr ""
+
+#: \views\users\add.ctp:71
+#: \views\users\edit.ctp:43
+#: \views\users\view.ctp:82
+msgid "Pension Number"
+msgstr ""
+
+#: \views\users\add.ctp:76
+#: \views\users\edit.ctp:46
+msgid "Birth day"
+msgstr ""
+
+#: \views\users\add.ctp:99
+#: \views\users\edit.ctp:61
+msgid "Joined day"
+msgstr ""
+
+#: \views\users\add.ctp:103
+#: \views\users\edit.ctp:62
+msgid "Exit day"
+msgstr ""
+
+#: \views\users\admin_index.ctp:2
+#: \views\users\index.ctp:2
+msgid "Users"
+msgstr ""
+
+#: \views\users\csv_update.ctp:5
+msgid "CSV Update User"
+msgstr ""
+
+#: \views\users\edit.ctp:8
+#: \views\users\view.ctp:10
+msgid "User Name"
+msgstr ""
+
+#: \views\users\edit.ctp:11
+msgid "Staff Number"
+msgstr ""
+

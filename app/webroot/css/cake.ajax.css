@@ -1,0 +1,32 @@
+div#AutoItemName_autoComplete {
+	position: absolute;
+	width:250px;
+	background-color:#ffffff;
+	border: 1px solid #888;
+	margin:0px;
+	padding:0px;
+}
+div#AutoItemName_ul {
+	list-style-type:none;
+	margin:0px;
+	padding:0px;
+}
+div#AutoItemName_autoComplete ul li.selected {
+	background-color: #fbb;
+}
+div#AutoItemName_autoComplete li {
+	list-style-type: none;
+	display: block;
+	margin:0px;
+	padding:0px;
+	height:16px;
+	cursor:pointer;
+}
+
+div#AutoItemName_autoComplete ul {
+	list-style-type: none;
+	display: block;
+	margin:0px;
+	padding:0px;
+	cursor:pointer;
+}

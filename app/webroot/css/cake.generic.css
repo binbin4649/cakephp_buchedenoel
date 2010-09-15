@@ -1,0 +1,620 @@
+/* reset */
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td { 
+	margin:0;
+	padding:0;
+}
+table {
+	border-collapse:collapse;
+	border-spacing:0;
+}
+fieldset,img { 
+	border:0;
+}
+address,caption,cite,code,dfn,em,strong,th,var {
+	font-style:normal;
+	font-weight:normal;
+}
+ol,ul {
+	list-style:none;
+}
+caption,th {
+	text-align:left;
+}
+h1,h2,h3,h4,h5,h6 {
+	font-size:100%;
+	font-weight:normal;
+}
+q:before,q:after {
+	content:'';
+}
+abbr,acronym { border:0;
+}
+
+/* --- */
+
+*{
+	margin:0;
+	padding:0;
+}
+
+body{
+	/*background:transparent url(/img/background.png) repeat scroll 50%;*/
+	color:#000000;
+	font-family:Verdana,arial,sans-serif,"ƒqƒ‰ƒMƒmŠpƒS Pro W3","‚l‚r ƒSƒVƒbƒN","Osaka";
+	font-size:12px;
+	margin:0 1em;
+	padding:0;
+	text-align:left;
+	width:100%;
+}
+
+/* General Style Info */
+a{
+	color:#003d4c;
+	text-decoration:underline;
+}
+a:hover{
+	color:#007a99;
+	text-decoration:none;
+}
+
+a img{
+	border:none;
+}
+
+h1{
+	color:#808080;
+	font-size:12px;
+	padding:3px 5px;
+	border-color:#E4E4E4;
+	border-width:1px 7px 1px 7px;
+	border-style:solid;
+	padding:0.5em;
+	margin:10px;
+}
+
+h2, h3, h4{
+	font-weight:normal;
+}
+
+h2{
+	color:#c6c65b;
+	padding-top: 1em;
+	margin:0.3em 0;
+	font-size: 180%;
+}
+
+h3{
+	color:#c6c65b;
+	padding-top:2em;
+	font-size: 140%;
+}
+
+h4{
+	color:#c6c65b;
+	padding-top:0.5em;
+	font-weight:normal;
+}
+
+em {
+	font-size: 12px;
+}
+
+ul, li {
+	margin: 0 12px;
+}
+
+/* Layout */
+
+#container{
+	background-color:#FFFFFF;
+	padding:0;
+	font-size:12px;
+	text-align:left;
+	width:800px;
+	border-left:#E4E4E4 solid 6px;
+	border-right:#E4E4E4 solid 6px;
+	border-bottom:#E4E4E4 solid 6px;
+}
+
+#header{
+	margin:0 0 2px 10px;
+}
+
+#content{
+	width:700px;
+}
+#footer{
+	clear:both;
+	font-size:10px;
+	text-align:center;
+	color:#666666;
+	margin:15px 0;
+	padding:0;
+}
+
+/* tables */
+
+table {
+	width: 100%;
+	border-top: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	color:#333;
+	background-color: #fff;
+	clear:both;
+	padding: 0;
+	margin: 0 0 2em 0;
+	white-space: normal;
+}
+th {
+	background-color: #e2e2e2;
+	border-top: 1px solid #fff;
+	border-left: 1px solid #fff;
+	border-right: 1px solid #003d4c;
+	border-bottom: 1px solid #003d4c;
+	text-align: center;
+	padding:1px 4px;
+}
+table tr td {
+	border-right: 1px solid #ddd;
+	padding:4px 4px;
+	vertical-align:top;
+	text-align: center;
+}
+table tr.altRow td {
+	background: #f4f4f4;
+}
+table td.actions {
+	white-space: nowrap;
+}
+#cakeSqlLog td {
+	text-align: left;
+	padding: 4px 8px;
+	background: #fff;
+	border-bottom: 2px solid #ccc;
+}
+
+/* scaffold show */
+
+div.related {
+	clear:both;
+	display:block;
+}
+dl {
+	line-height:2em;
+	margin:0em 1em;
+	float:left;
+	width: 400px;
+}
+dt {
+	font-weight: bold;
+	vertical-align:top;
+	border-bottom: 1px solid #ccc;
+}
+dd {
+	margin-left:11em;
+	margin-top:-2em;
+	vertical-align:top;
+	border-left: 1px solid #ccc;
+	padding-left:1em;
+}
+
+/* notices and errors */
+
+#flashMessage, .error, .error_message {
+	color:#900;
+	font-size: 16px;
+	background-color: #fff;
+	margin: 8px 0px;
+	font-weight: bold;
+}
+.error_message {
+	clear: both;
+}
+.error em {
+	font-size: 18px;
+	color: #003d4c;
+}
+.notice {
+	color: #656565;
+	font-size: 14px;
+	background-color: #f4f4f4;
+	padding: 0.5em;
+	margin: 1em 0;
+	display:block;
+}
+.tip {
+	color: #656565;
+	background-color: #ddd;
+}
+
+/* original */
+
+div .checkbox {
+	width: 100%;
+}
+
+div .checkbox input{
+	display: inline;
+	float: left;
+	width: 30px;
+	
+}
+
+div .checkbox label{
+	display: block;
+	float: right;
+	width: 160px;
+	text-align: left;
+
+}
+
+.tagtag {
+	margin:1em 0em 0em 1em;
+	width: 450px;
+}
+
+.tagtag td{
+	text-align: left;
+}
+
+/* forms */
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+form {
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+  min-width: 560px;
+  max-width: 620px;
+  width: 590px;
+}
+
+form fieldset {
+  clear: both;
+  font-size: 100%;
+  border-color: #000000;
+  border-width: 1px 0 0 0;
+  border-style: solid none none none;
+  padding: 10px;
+  margin: 0 0 0 0;
+}
+
+form fieldset legend {
+  font-size: 150%;
+  font-weight: normal;
+  color: #000000;
+  margin: 0 0 0 0;
+  padding: 0 5px;
+}
+
+label {
+  font-size: 100%;
+}
+
+label u {
+  font-style: normal;
+  text-decoration: underline;
+}
+
+input, select, textarea {
+  font-family: Tahoma, Arial, sans-serif;
+  font-size: 100%;
+  color: #000000;
+}
+
+textarea {
+  overflow: auto;
+}
+
+form div {
+  clear: left;
+  display: block;
+  width: 400px;
+  zoom: 1;
+  margin: 5px 0 0 0;
+  padding: 1px 3px;
+}
+
+form fieldset div.notes {
+  float: right;
+  width: 158px;
+  height: auto;
+  margin: 0 0 10px 10px;
+  padding: 5px;
+  border: 1px solid #666666;
+  background-color: #ffffe1;
+  color: #666666;
+  font-size: 88%;
+}
+
+form fieldset div.notes h4 {
+  background-image: url(/images/icon_info.gif);
+  background-repeat: no-repeat;
+  background-position: top left;
+  padding: 3px 0 3px 27px;
+  border-width: 0 0 1px 0;
+  border-style: solid;
+  border-color: #666666;
+  color: #666666;
+  font-size: 110%;
+}
+
+form fieldset div.notes p {
+  margin: 0em 0em 1.2em 0em;
+  color: #666666;
+}
+
+form fieldset div.notes p.last {
+  margin: 0em;
+}
+
+form div fieldset {
+  clear: none;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #666666;
+  margin: 0 0 0 144px;
+  padding: 0 5px 5px 5px;
+  width: 197px;
+}
+
+form div fieldset legend {
+  font-size: 100%;
+  padding: 0 3px 0 9px;
+}
+
+form div.required fieldset legend {
+  font-weight: bold;
+}
+
+form div label {
+  display: block;
+  float: left;
+  width: 130px;
+  padding: 3px 5px;
+  margin: 0 0 5px 0;
+  text-align: right;
+}
+
+form div.optional label, label.optional {
+  font-weight: normal;
+}
+
+form div.required label, label.required {
+  font-weight: bold;
+}
+
+form div label.labelCheckbox, form div label.labelRadio {
+  float: none;
+  display: block;
+  width: 200px;
+  zoom: 1;
+  padding: 0;
+  margin: 0 0 5px 142px;
+  text-align: left;
+}
+
+form div fieldset label.labelCheckbox, form div fieldset label.labelRadio {
+  margin: 0 0 5px 0;
+  width: 170px;
+}
+
+form div img {
+  border: 1px solid #000000;
+}
+
+p.error {
+  background-color: #ff0000;
+  background-image: url(/images/icon_error.gif);
+  background-repeat: no-repeat;
+  background-position: 3px 3px;
+  color: #ffffff;
+  padding: 3px 3px 5px 27px;
+  border: 1px solid #000000;
+  margin: auto 100px;
+}
+
+form div.error {
+  background-color: #ffffe1;
+  background-image: url(/images/required_bg.gif);
+  background-repeat: no-repeat;
+  background-position: top left;
+  color: #666666;
+  border: 1px solid #ff0000;
+}
+
+form div.error p.error {
+  background-image: url(/images/icon_error.gif);
+  background-position: top left;
+  background-color: transparent;
+  border-style: none;
+  font-size: 88%;
+  font-weight: bold;
+  margin: 0 0 0 118px;
+  width: 200px;
+  color: #ff0000;
+}
+
+form div select {
+  
+  padding: 1px 3px;
+  margin: 0 0 0 0;
+}
+form div textarea {
+  width: 200px;
+  padding: 1px 3px;
+  margin: 0 0 0 0;
+}
+
+form div input.inputText, form div input.inputPassword {
+  width: 200px;
+  padding: 1px 3px;
+  margin: 0 0 0 0;
+}
+
+form div input.inputFile {
+  width: 211px;
+}
+
+form div select.selectOne, form div select.selectMultiple {
+
+  padding: 1px 3px;
+}
+
+form div input.inputCheckbox, form div input.inputRadio, input.inputCheckbox, input.inputRadio {
+  display: inline;
+  height: auto;
+  width: auto;
+  background-color: transparent;
+  border-width: 0;
+  padding: 0;
+  margin: 0 0 0 140px;
+}
+
+form div.submit {
+  width: 214px;
+  padding: 0 0 0 146px;
+}
+
+form div.submit div {
+  display: inline;
+  float: left;
+  text-align: left;
+  width: auto;
+  padding: 0;
+  margin: 0;
+}
+
+form div input.inputSubmit, form div input.inputButton, input.inputSubmit, input.inputButton {
+  padding: 0 10px;
+  margin: 0;
+}
+
+form div.submit div input.inputSubmit, form div.submit div input.inputButton {
+  float: right;
+  margin: 0 0 0 5px;
+}
+
+form div small {
+  display: block;
+  margin: 0 0 5px 142px;
+  padding: 1px 3px;
+  font-size: 88%;
+  zoom: 1;
+}
+
+/* form.import.css */
+
+label img {
+  behavior: url(/behaviors/label_img.htc);
+}
+
+form fieldset legend {
+  line-height: 150%;
+}
+
+form input, form select, form textarea {
+  background-color: #ffffff;
+}
+
+form textarea.expanding {
+  overflow: auto;
+  overflow-x: auto;
+  overflow-y: visible;
+}
+
+div.optional label:before {
+  content: '';
+}
+
+div.required label:before {
+  content: '';
+}
+  
+form div label.labelCheckbox, form div label.labelRadio, label.labelCheckbox, label.labelRadio {
+  display: block;
+  width: 190px;
+  zoom: 1;
+  padding: 4px 0 0 18px;
+  text-indent: -18px;
+  line-height: 120%;
+}
+
+form div label.labelCheckbox input.inputCheckbox, form div label.labelRadio input.inputRadio, label.labelCheckbox input.inputCheckbox, label.labelRadio input.inputRadio {
+  margin: 0;
+}
+
+form div fieldset input.inputText, form div fieldset input.inputPassword, form div fieldset input.inputFile, form div fieldset textarea.inputTextarea {
+  width: 160px;
+  margin: 0 0 0 18px;
+  margin: expression(setCntr(), '0px 0 0 -124px');
+}
+
+form div label.compact {
+  display: inline;
+  width: auto;
+  padding: 4px 10px 0 0;
+  text-indent: 0;
+  margin: 0 0 0 0;
+}
+
+form div.wide label {
+  float: none;
+  display: block;
+}
+
+form div label.wide {
+  width: 348px;
+}
+
+form div.wide input.inputText, form div.wide input.inputPassword, form div.wide input.inputFile, form div.wide select, form div.wide textarea {
+  width: 344px;
+  margin: 0;
+}
+
+form div.notes p, form div small {
+  line-height: 125%;
+}
+
+form div.wide small {
+  margin: 0 0 5px 0;
+}
+
+
+/* action links */
+ul.actions {
+	float: left;
+	margin-left:20px;
+	width: 200px;
+}
+ul.actions li {
+	margin-top: 4px;
+}
+pre {
+	padding: 1em;
+}
+
+/* Paging */
+div.paging {
+	background:#fff;
+	color: #ccc;
+	margin-bottom: 2em;
+}
+div.paging div.disabled {
+	color: #ddd;
+	display: inline;
+}
+div.paging span {
+}
+div.paging span.current {
+	color: #000;
+}
+div.paging span a {
+}
+

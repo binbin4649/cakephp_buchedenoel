@@ -1,0 +1,2365 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  Revision: 7945 \app\config\090730bootstrap.php
+#  Revision: 7945 \app\config\bootstrap.php
+#  Revision: 7945 \app\views\scaffolds\index.ctp
+#  Revision: 7945 \app\views\layouts\CopyOfdefault.ctp
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2009-07-31 22:32+0900\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+msgid "Stocks"
+msgstr "在庫一覧"
+
+msgid "Normal"
+msgstr "通常"
+
+msgid "Top Expression"
+msgstr "トップ表示"
+
+msgid "Hokkaido"
+msgstr "北海道"
+
+msgid "Aomori"
+msgstr "青森県"
+
+msgid "Iwate"
+msgstr "岩手県"
+
+msgid "Miyagi"
+msgstr "宮城県"
+
+msgid "Akita"
+msgstr "秋田県"
+
+msgid "Yamagata"
+msgstr "山形県"
+
+msgid "Fukushima"
+msgstr "福島県"
+
+msgid "Ibaragi"
+msgstr "茨木県"
+
+msgid "Tochigi"
+msgstr "栃木県"
+
+msgid "Gunma"
+msgstr "群馬県"
+
+msgid "Saitama"
+msgstr "埼玉県"
+
+msgid "Chiba"
+msgstr "千葉県"
+
+msgid "Tokyo"
+msgstr "東京都"
+
+msgid "Kanagawa"
+msgstr "神奈川県"
+
+msgid "Niigata"
+msgstr "新潟県"
+
+msgid "Toyama"
+msgstr "富山県"
+
+msgid "Ishikawa"
+msgstr "石川県"
+
+msgid "Fukui"
+msgstr "福井県"
+
+msgid "Yamanashi"
+msgstr "山梨県"
+
+msgid "Nagano"
+msgstr "長野県"
+
+msgid "Gifu"
+msgstr "岐阜県"
+
+msgid "Shizuoka"
+msgstr "静岡県"
+
+msgid "Aichi"
+msgstr "愛知県"
+
+msgid "Mie"
+msgstr "三重県"
+
+msgid "Shiga"
+msgstr "滋賀県"
+
+msgid "Kyoto"
+msgstr "京都府"
+
+msgid "Osaka"
+msgstr "大阪府"
+
+msgid "Hyogo"
+msgstr "兵庫県"
+
+msgid "Nara"
+msgstr "奈良県"
+
+msgid "Wakayama"
+msgstr "和歌山県"
+
+msgid "Tottori"
+msgstr "鳥取県"
+
+msgid "Shimane"
+msgstr "島根県"
+
+msgid "Okayama"
+msgstr "岡山県"
+
+msgid "Hiroshima"
+msgstr "広島県"
+
+msgid "Yamaguchi"
+msgstr "山梨県"
+
+msgid "Tokushima"
+msgstr "徳島県"
+
+msgid "Kagawa"
+msgstr "香川県"
+
+msgid "Ehime"
+msgstr "愛媛県"
+
+msgid "Kochi"
+msgstr "高知県"
+
+msgid "Fukuoka"
+msgstr "福岡県"
+
+msgid "Saga"
+msgstr "佐賀県"
+
+msgid "Nagasaki"
+msgstr "長崎県"
+
+msgid "Kumamoto"
+msgstr "熊本県"
+
+msgid "Oita"
+msgstr "大分県"
+
+msgid "Miyazaki"
+msgstr "宮崎県"
+
+msgid "Kagoshima"
+msgstr "鹿児島県"
+
+msgid "Okinawa"
+msgstr "沖縄県"
+
+msgid "Other"
+msgstr "その他"
+
+msgid "Enrollment"
+msgstr "在籍"
+
+msgid "Leave"
+msgstr "休職"
+
+msgid "Retirement"
+msgstr "退職"
+
+msgid "Sales(Shops)"
+msgstr "営業部門（店舗）"
+
+msgid "Sales(Not Shops)"
+msgstr "営業部門（店舗以外）"
+
+msgid "Non-business sector"
+msgstr "非営業部門"
+
+msgid "Inventory Management"
+msgstr "在庫管理する"
+
+msgid "Not Inventory Management"
+msgstr "在庫管理しない"
+
+msgid "mm(Vertical*Width*Thickness)"
+msgstr "mm(縦x横x厚さ)"
+
+msgid "mm(Vertical*Width)"
+msgstr "mm(縦x横)"
+
+msgid "mm(Width*Thickness)"
+msgstr "mm(幅x厚さ)"
+
+msgid "mm(Diameter*Thickness)"
+msgstr "mm(直径x厚さ)"
+
+msgid "mm(Diameter*Width)"
+msgstr "mm(直径x幅)"
+
+msgid "mm(Diameter*Width*Thickness)"
+msgstr "mm(直径x幅x厚さ)"
+
+msgid "Can Order"
+msgstr "卸受注可"
+
+msgid "Not Order"
+msgstr "卸受注不可"
+
+msgid "Can Custom Order"
+msgstr "客注可"
+
+msgid "Can Custom Order(Even)"
+msgstr "客注可(偶数可)"
+
+msgid "Can Custom Order(Odd)"
+msgstr "客注可(奇数のみ)"
+
+msgid "Not Custom Order"
+msgstr "客注不可"
+
+msgid "Can Resize"
+msgstr "サイズ直し可"
+
+msgid "Not Resize"
+msgstr "サイズ直し不可"
+
+msgid "Rate Apply"
+msgstr "掛率適用"
+
+msgid "Not Rate Apply"
+msgstr "掛率適用なし"
+
+msgid "Product Cost"
+msgstr "製品原価"
+
+msgid "Expenses"
+msgstr "経費"
+
+msgid "Articles supplied"
+msgstr "支給品"
+
+msgid "Parts"
+msgstr "構成部品"
+
+msgid "By Bill"
+msgstr "伝票単位"
+
+msgid "By Breakdown"
+msgstr "明細単位"
+
+msgid "By Production"
+msgstr "単品単位"
+
+msgid "By Monthly Bill"
+msgstr "請求単位"
+
+msgid "Dropfration"
+msgstr "切り捨て"
+
+msgid "Revaluation"
+msgstr "切り上げ"
+
+msgid "Round Off"
+msgstr "四捨五入"
+
+msgid "End Of Every Month"
+msgstr "毎月末"
+
+msgid "Every 5th"
+msgstr "毎月5日"
+
+msgid "Every 10th"
+msgstr "毎月10日"
+
+msgid "Every 15th"
+msgstr "毎月15日"
+
+msgid "Every 20th"
+msgstr "毎月20日"
+
+msgid "Every 25th"
+msgstr "毎月25日"
+
+msgid "Any Time"
+msgstr "随時"
+
+msgid "End Of Month"
+msgstr "当月末"
+
+msgid "End Of Next Month"
+msgstr "翌月末"
+
+msgid "End Of Next Next Month"
+msgstr "翌々月末"
+
+msgid "Next 5th"
+msgstr "翌月5日"
+
+msgid "Next 10th"
+msgstr "翌月10日"
+
+msgid "Next 15th"
+msgstr "翌月15日"
+
+msgid "Next 20th"
+msgstr "翌月20日"
+
+msgid "Next 25th"
+msgstr "翌月25日"
+
+msgid "Next Next 5th"
+msgstr "翌々月5日"
+
+msgid "Next Next 10th"
+msgstr "翌々月10日"
+
+msgid "Next Next 15th"
+msgstr "翌々月15日"
+
+msgid "Next Next 20th"
+msgstr "翌々月20日"
+
+msgid "Next Next 25th"
+msgstr "翌々月25日"
+
+msgid "Cash"
+msgstr "現金"
+
+msgid "Cheque"
+msgstr "手形"
+
+msgid "Continuation"
+msgstr "継続中"
+
+msgid "Pause"
+msgstr "一時休止"
+
+msgid "Stop"
+msgstr "停止"
+
+msgid "Ring"
+msgstr "リング"
+
+msgid "Necklace"
+msgstr "ネックレス"
+
+msgid "Necklace Chain"
+msgstr "ネックレスチェーン"
+
+msgid "Pendant Top"
+msgstr "ペンダントトップ"
+
+msgid "bracelet"
+msgstr "ブレスレット・バングル"
+
+msgid "earring"
+msgstr "ピアス"
+
+msgid "Anklet"
+msgstr "アンクレット"
+
+msgid "Clock"
+msgstr "ウオッチ"
+
+msgid "Strap"
+msgstr "ストラップ"
+
+msgid "lighter"
+msgstr "ライター"
+
+msgid "Marriage"
+msgstr "マリッジ"
+
+msgid "Engage"
+msgstr "エンゲージ"
+
+msgid "Charm"
+msgstr "チャーム"
+
+msgid "Salers"
+msgstr "営業部"
+
+msgid "Sales"
+msgstr "売上"
+
+msgid "Product"
+msgstr "商品部"
+
+msgid "Management"
+msgstr "管理部"
+
+msgid "Marketing"
+msgstr "マーケティング室"
+
+msgid "Design"
+msgstr "デザイン室"
+
+msgid "System"
+msgstr "システム室"
+
+msgid "Shops"
+msgstr "直営店"
+
+msgid "Customer Center"
+msgstr "カスタマーセンター"
+
+msgid "List Brands"
+msgstr "ブランド一覧"
+
+msgid "Add Brand"
+msgstr "ブランド追加"
+
+msgid "Brand Name"
+msgstr "ブランド名"
+
+msgid "Temporary Costrate"
+msgstr "仮原価率"
+
+msgid "Register"
+msgstr "登録"
+
+msgid "List Items"
+msgstr "商品一覧"
+
+msgid "New Item"
+msgstr "商品新規登録"
+
+msgid "Edit Brand"
+msgstr "ブランド編集"
+
+msgid "Delete"
+msgstr "削除"
+
+msgid "Are you sure you want to delete # %s?"
+msgstr "削除します。よろしいですか？"
+
+msgid "Brands"
+msgstr "ブランド"
+
+msgid "Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%"
+msgstr "Page: %page% / %pages% , total: %count% "
+
+msgid "Edit"
+msgstr "編集"
+
+msgid "New Brand"
+msgstr "ブランド新規登録"
+
+msgid "Brand"
+msgstr "ブランド"
+
+msgid "Created"
+msgstr "作成日時"
+
+msgid "Created User"
+msgstr "作成者"
+
+msgid "Updated"
+msgstr "更新日時"
+
+msgid "Updated User"
+msgstr "更新者"
+
+msgid "Delete Brand"
+msgstr "ブランド削除"
+
+msgid "Price"
+msgstr "価格"
+
+msgid "Stock Code"
+msgstr "在庫管理区分"
+
+msgid "Sales State Code Id"
+msgstr "販売状況"
+
+msgid "Process Id"
+msgstr "加工"
+
+msgid "Material Id"
+msgstr "素材"
+
+msgid "Stone Id"
+msgstr "石"
+
+msgid "Stone Other"
+msgstr "石（特記事項）"
+
+msgid "Stone Spec"
+msgstr "石　仕様"
+
+msgid "Message Stamp"
+msgstr "メッセージ刻印"
+
+msgid "Message Stamp Ja"
+msgstr "メッセージ刻印　和訳"
+
+msgid "Release Day"
+msgstr "市場投入時期"
+
+msgid "Order End Day"
+msgstr "市場引揚時期"
+
+msgid "Demension"
+msgstr "商品寸法"
+
+msgid "Weight"
+msgstr "重さ"
+
+msgid "Part Id"
+msgstr "パーツ"
+
+msgid "Unit"
+msgstr "寸法単位"
+
+msgid "Order Approve"
+msgstr "卸受注可否"
+
+msgid "Cutom Order Approve"
+msgstr "客注可否"
+
+msgid "Custom Order Days"
+msgstr "客注日数"
+
+msgid "Repair Days"
+msgstr "修理日数"
+
+msgid "Trans Approve"
+msgstr "サイズ直し可否"
+
+msgid "In Chain"
+msgstr "チェーン品番"
+
+msgid "Atelier Trans Approve"
+msgstr "アトリエサイズ直し可否"
+
+msgid "Labor Cost"
+msgstr "工賃"
+
+msgid "Supply Full Cost"
+msgstr "支給品金額合計"
+
+msgid "Cost"
+msgstr "原価"
+
+msgid "Percent Code"
+msgstr "掛率適用区分"
+
+msgid "Sales Sum Code"
+msgstr "売上計上区分"
+
+msgid "Item"
+msgstr "商品"
+
+msgid "Item Saech"
+msgstr "商品検索"
+
+msgid "User"
+msgstr "従業員"
+
+msgid "User Saech"
+msgstr "従業員検索"
+
+msgid "Master"
+msgstr "マスタ"
+
+msgid "Item Master"
+msgstr "商品マスタ"
+
+msgid "User Master"
+msgstr "従業員マスタ"
+
+msgid "List Employments"
+msgstr "雇用体系一覧"
+
+msgid "Add Employment"
+msgstr "雇用体系追加"
+
+msgid "Employment Name"
+msgstr "雇用体系名"
+
+msgid "English"
+msgstr "英語"
+
+msgid "Kyuuyo Bugyo"
+msgstr "給与奉行コード"
+
+msgid "Order of Priority"
+msgstr "並び順優先順位"
+
+msgid "Remarks"
+msgstr "備考"
+
+msgid "List Users"
+msgstr "従業員一覧"
+
+msgid "User View"
+msgstr "従業員詳細"
+
+msgid "Section View"
+msgstr "部門詳細"
+
+msgid "New User"
+msgstr "従業員追加"
+
+msgid "Edit Employment"
+msgstr "雇用体系編集"
+
+msgid "Employments"
+msgstr "雇用体系"
+
+msgid "New Employment"
+msgstr "雇用体系追加"
+
+msgid "Employment"
+msgstr "雇用体系"
+
+msgid "Kyuuyo Bugyo Code"
+msgstr "給与奉行コード"
+
+msgid "Name English"
+msgstr "英語名"
+
+msgid "Delete Employment"
+msgstr "雇用体系削除"
+
+msgid "Related Users"
+msgstr "関連従業員"
+
+msgid "Name Kana"
+msgstr "カナ"
+
+msgid "Sex"
+msgstr "性別"
+
+msgid "Post Code"
+msgstr "郵便番号"
+
+msgid "District"
+msgstr "都道府県"
+
+msgid "Adress One"
+msgstr "住所1"
+
+msgid "Adress Two"
+msgstr "住所２"
+
+msgid "Tel"
+msgstr "電話番号"
+
+msgid "Mail"
+msgstr "メールアドレス"
+
+msgid "Birth Day"
+msgstr "誕生日"
+
+msgid "Blood Type"
+msgstr "血液型"
+
+msgid "Duty Code"
+msgstr "在籍区分"
+
+msgid "Join Day"
+msgstr "入社年月日"
+
+msgid "Exit Day"
+msgstr "退職年月日"
+
+msgid "Access Authority"
+msgstr "システムアクセス権限"
+
+msgid "Username"
+msgstr "ユーザーID"
+
+msgid "Password"
+msgstr "パスワード"
+
+msgid "List Factories"
+msgstr "工場・仕入先一覧"
+
+msgid "Add Factory"
+msgstr "工場・仕入先追加"
+
+msgid "Factory Name"
+msgstr "工場・仕入先名"
+
+msgid "Charge Person"
+msgstr "担当者"
+
+msgid "Charge Section"
+msgstr "担当部署"
+
+msgid "Adress 1"
+msgstr "住所１"
+
+msgid "Adress 2"
+msgstr "住所２"
+
+msgid "Extension Tel"
+msgstr "内線番号"
+
+msgid "Delivery Days"
+msgstr "納品日数"
+
+msgid "Tax Method"
+msgstr "消費税計算方法"
+
+msgid "Tax Fraction"
+msgstr "消費税端数処理"
+
+msgid "Total Day"
+msgstr "締日"
+
+msgid "Payment Day"
+msgstr "支払日"
+
+msgid "Payment Code"
+msgstr "支払区分"
+
+msgid "Trading Flag"
+msgstr "取引継続区分"
+
+msgid "Trading Start"
+msgstr "取引開始時期"
+
+msgid "Trading End"
+msgstr "取引終了時期"
+
+msgid "Edit Factory"
+msgstr "工場・仕入先編集"
+
+msgid "Factories"
+msgstr "工場・仕入先"
+
+msgid "New Factory"
+msgstr "工場・仕入先新規登録"
+
+msgid "Factory"
+msgstr "工場・仕入先"
+
+msgid "Delete Factory"
+msgstr "工場・仕入先削除"
+
+msgid "Add ItemImage"
+msgstr "商品画像追加"
+
+msgid "Image Comment"
+msgstr "画像コメント"
+
+msgid "Add"
+msgstr "追加"
+
+msgid "Edit ItemImage"
+msgstr "商品画像編集"
+
+msgid "ItemImages"
+msgstr "商品画像"
+
+msgid "New ItemImage"
+msgstr "商品画像登録"
+
+msgid "ItemImage"
+msgstr "商品画像"
+
+msgid "Delete ItemImage"
+msgstr "商品画像削除"
+
+msgid "Add Item"
+msgstr "商品新規登録"
+
+msgid "Item Name"
+msgstr "品番"
+
+msgid "Item Title"
+msgstr "タイトル"
+
+msgid "(out tax)"
+msgstr "税抜き"
+
+msgid "Item Property"
+msgstr "商品属性"
+
+msgid "Item Type"
+msgstr "商品タイプ"
+
+msgid "Size Basic"
+msgstr "基本サイズ"
+
+msgid "Size Order"
+msgstr "客注サイズ"
+
+msgid "Sales State"
+msgstr "販売状況"
+
+msgid "Process"
+msgstr "加工"
+
+msgid "Material"
+msgstr "素材"
+
+msgid "Stone"
+msgstr "石"
+
+msgid "Release"
+msgstr "市場投入時期"
+
+msgid "Order End"
+msgstr "市場引揚時期"
+
+msgid "Custom Order App"
+msgstr "客注可否"
+
+msgid "in Chain"
+msgstr "チェーン品番"
+
+msgid "Atelier Trans App"
+msgstr "アトリエサイズ直し可否"
+
+msgid "Supply Fullcost"
+msgstr "支給品金額合計"
+
+msgid "Notes"
+msgstr "ノート"
+
+msgid "Secret Notes"
+msgstr "非公開ノート"
+
+msgid "List Sales State Codes"
+msgstr "販売状況一覧"
+
+msgid "New Sales State Code"
+msgstr "販売状況新規登録"
+
+msgid "List Processes"
+msgstr "加工一覧"
+
+msgid "New Process"
+msgstr "加工新規登録"
+
+msgid "List Materials"
+msgstr "素材一覧"
+
+msgid "New Material"
+msgstr "素材新規登録"
+
+msgid "List Stones"
+msgstr "石一覧"
+
+msgid "New Stone"
+msgstr "石新規登録"
+
+msgid "List Subitems"
+msgstr "子品番一覧"
+
+msgid "New Subitem"
+msgstr "子品番新規登録"
+
+msgid "List Tags"
+msgstr "商品分類一覧"
+
+msgid "New Tag"
+msgstr "商品分類新規登録"
+
+msgid "Edit Item"
+msgstr "商品編集"
+
+msgid "Items"
+msgstr "商品"
+
+msgid "Sales State Code"
+msgstr "販売状況"
+
+msgid "Delete Item"
+msgstr "商品削除"
+
+msgid "Related Subitems"
+msgstr "関連子品番"
+
+msgid "Jan"
+msgstr "Janコード"
+
+msgid "Grade Report"
+msgstr "鑑定書番号"
+
+msgid "Selldata Id"
+msgstr "受注番号"
+
+msgid "Related Item Images"
+msgstr "関連商品画像"
+
+msgid "Related Tags"
+msgstr "関連商品分類"
+
+msgid "Return Item View"
+msgstr "戻る"
+
+msgid "Sales Code"
+msgstr "部門区分"
+
+msgid "Add Image"
+msgstr "画像追加"
+
+msgid "Pair"
+msgstr "ペア品番"
+
+msgid "Cutom Order App"
+msgstr "客注可否"
+
+msgid "Logon:%s"
+msgstr "ログイン中:　%s"
+
+msgid "　Logon:　%s"
+msgstr "ログイン中:　%s"
+
+msgid "Logout"
+msgstr "ログアウト"
+
+msgid "Add Material"
+msgstr "素材追加"
+
+msgid "Material Name"
+msgstr "素材名"
+
+msgid "Cleaning Plan"
+msgstr "クリーニング方法"
+
+msgid "Edit Material"
+msgstr "素材編集"
+
+msgid "Materials"
+msgstr "素材"
+
+msgid "Delete Material"
+msgstr "素材削除"
+
+msgid "List MemoCategories"
+msgstr "掲示板カテゴリ一覧"
+
+msgid "Add MemoCategory"
+msgstr "掲示板カテゴリ追加"
+
+msgid "Memo Category Name"
+msgstr "掲示板カテゴリ名"
+
+msgid "Memo Sections"
+msgstr "部門"
+
+msgid "Edit MemoCategory"
+msgstr "掲示板カテゴリ編集"
+
+msgid "MemoCategories"
+msgstr "掲示板"
+
+msgid "New MemoCategory"
+msgstr "掲示板新規登録"
+
+msgid "MemoCategory"
+msgstr "掲示板カテゴリ"
+
+msgid "Delete MemoCategory"
+msgstr "掲示板カテゴリ削除"
+
+msgid "<< List Board Index"
+msgstr "<< 掲示板トップ"
+
+msgid "Board:New Posts:"
+msgstr "掲示板：新規登録"
+
+msgid "Add MemoData"
+msgstr "新規登録"
+
+msgid "Title"
+msgstr "タイトル"
+
+msgid "Category"
+msgstr "カテゴリ"
+
+msgid "Top Flag"
+msgstr "トップ表示"
+
+msgid "Contents"
+msgstr "内容"
+
+msgid "New Posts"
+msgstr "新規登録"
+
+msgid "List MemoDatas"
+msgstr "掲示板トップ"
+
+msgid "Edit MemoData"
+msgstr "編集"
+
+msgid "New MemoData"
+msgstr "新規登録"
+
+msgid "Reply"
+msgstr "返信"
+
+msgid "Delete MemoData"
+msgstr "削除"
+
+msgid "top_flag"
+msgstr "トップ表示"
+
+msgid "created_user"
+msgstr "作成者"
+
+msgid "updated"
+msgstr "更新日時"
+
+msgid "<<< List Board Index"
+msgstr "<<< 掲示板トップ"
+
+msgid "Board:Edit:"
+msgstr "掲示板：編集"
+
+msgid "Board:Reply:"
+msgstr "掲示板：返信"
+
+msgid "Reply MemoData"
+msgstr "返信"
+
+msgid "< List Board Index"
+msgstr "< 掲示板トップ"
+
+msgid "From MemoData"
+msgstr "返信元"
+
+msgid "List Sections"
+msgstr "部門一覧"
+
+msgid "New Section"
+msgstr "部門新規登録"
+
+msgid "List Posts"
+msgstr "役職一覧"
+
+msgid "New Post"
+msgstr "役職新規登録"
+
+msgid "Add Part"
+msgstr "パーツ追加"
+
+msgid "Parent Item:"
+msgstr "親品番："
+
+msgid "Child Item:"
+msgstr "子品番："
+
+msgid "Quantity"
+msgstr "数量"
+
+msgid "Supply Code"
+msgstr "支給区分"
+
+msgid "List Parts"
+msgstr "パーツ一覧"
+
+msgid "Edit Part"
+msgstr "パーツ編集"
+
+msgid "New Part"
+msgstr "パーツ新規登録"
+
+msgid "Part"
+msgstr "パーツ"
+
+msgid "Subitem"
+msgstr "子品番"
+
+msgid "Delete Part"
+msgstr "パーツ削除"
+
+msgid "Parts Name"
+msgstr "パーツ品番"
+
+msgid "Add Post"
+msgstr "役職追加"
+
+msgid "Post Name"
+msgstr "役職名"
+
+msgid "Edit Post"
+msgstr "役職編集"
+
+msgid "Posts"
+msgstr "役職"
+
+msgid "Delete Post"
+msgstr "役職削除"
+
+msgid "Add Process"
+msgstr "加工追加"
+
+msgid "Process Name"
+msgstr "加工名"
+
+msgid "Edit Process"
+msgstr "加工編集"
+
+msgid "Processes"
+msgstr "加工"
+
+msgid "Delete Process"
+msgstr "加工削除"
+
+msgid "List SalesStateCodes"
+msgstr "販売状況一覧"
+
+msgid "Add SalesStateCode"
+msgstr "販売状況追加"
+
+msgid "Sales Code Name"
+msgstr "販売状況名"
+
+msgid "Explain"
+msgstr "説明"
+
+msgid "Custom Order Approve"
+msgstr "客注可否"
+
+msgid "Edit SalesStateCode"
+msgstr "販売状況編集"
+
+msgid "SalesStateCodes"
+msgstr "販売状況"
+
+msgid "New SalesStateCode"
+msgstr "販売状況新規登録"
+
+msgid "SalesStateCode"
+msgstr "販売状況"
+
+msgid "Delete SalesStateCode"
+msgstr "販売状況削除"
+
+msgid "Sales State Name"
+msgstr "販売状況名"
+
+msgid "Cutom Order"
+msgstr "客注"
+
+msgid "Add Section"
+msgstr "部門追加"
+
+msgid "Section Name"
+msgstr "部門名"
+
+msgid "Kyuuyo Bugyo 1"
+msgstr "給与奉行コード1"
+
+msgid "Kyuuyo Bugyo 2"
+msgstr "給与奉行コード2"
+
+msgid "Kyuuyo Bugyo 3"
+msgstr "給与奉行コード3"
+
+msgid "Kyuuyo Bugyo 4"
+msgstr "給与奉行コード4"
+
+msgid "Kyuuyo Bugyo 5"
+msgstr "給与奉行コード5"
+
+msgid "Kanjou Bugyo"
+msgstr "勘定奉行コード"
+
+msgid "Adress1"
+msgstr "住所1"
+
+msgid "Adress2"
+msgstr "住所2"
+
+msgid "Edit Section"
+msgstr "部門編集"
+
+msgid "Sections"
+msgstr "部門"
+
+msgid "Section"
+msgstr "部門"
+
+msgid "Kanjo Bugyo Code"
+msgstr "勘定奉行コード"
+
+msgid "Auto Share Priority"
+msgstr "振分優先順位"
+
+msgid "Delete Section"
+msgstr "部門削除"
+
+msgid "kyuuyo bugyo1"
+msgstr "給与奉行コード1"
+
+msgid "kyuuyo bugyo2"
+msgstr "給与奉行コード2"
+
+msgid "kyuuyo bugyo3"
+msgstr "給与奉行コード3"
+
+msgid "kyuuyo bugyo4"
+msgstr "給与奉行コード4"
+
+msgid "kuwake"
+msgstr "区分"
+
+msgid "Section Code"
+msgstr "部門"
+
+msgid "Kanjo Bugyo"
+msgstr "勘定奉行コード"
+
+msgid "System Number"
+msgstr "System No."
+
+msgid "Users Name"
+msgstr "ユーザーID"
+
+msgid "Login ID"
+msgstr "ユーザーID"
+
+msgid "Add Stone"
+msgstr "石追加"
+
+msgid "Stone Name"
+msgstr "石名"
+
+msgid "Edit Stone"
+msgstr "石編集"
+
+msgid "Stones"
+msgstr "石"
+
+msgid "Delete Stone"
+msgstr "石削除"
+
+msgid "Add Subitem"
+msgstr "子品番追加"
+
+msgid "Subitem Name"
+msgstr "子品番"
+
+msgid "Size"
+msgstr "サイズ"
+
+msgid "Seller Data"
+msgstr "受注番号"
+
+msgid "Edit Subitem"
+msgstr "子品番編集"
+
+msgid "Subitems"
+msgstr "子品番"
+
+msgid "Delete Subitem"
+msgstr "子品番削除"
+
+msgid "Related Parts"
+msgstr "関連パーツ"
+
+msgid "Subitem Id"
+msgstr "子品番"
+
+msgid "Add Tag"
+msgstr "商品分類追加"
+
+msgid "Tag Name"
+msgstr "商品分類名"
+
+msgid "Edit Tag"
+msgstr "商品分類編集"
+
+msgid "Tags"
+msgstr "商品分類"
+
+msgid "Tag"
+msgstr "商品分類"
+
+msgid "Delete Tag"
+msgstr "商品分類削除"
+
+msgid "Add TagsItem"
+msgstr "商品分類追加"
+
+msgid "Tag Id"
+msgstr "商品分類"
+
+msgid "Board"
+msgstr "掲示板"
+
+msgid "List Board Index"
+msgstr "掲示板一覧"
+
+msgid "Kana"
+msgstr "カナ"
+
+msgid "Work Situation"
+msgstr "在籍区分"
+
+msgid "Joined Day"
+msgstr "入社年月日"
+
+msgid "Edit User"
+msgstr "従業員編集"
+
+msgid "Delete User"
+msgstr "従業員削除"
+
+msgid "User Id"
+msgstr "従業員"
+
+msgid "Add User"
+msgstr "従業員追加"
+
+msgid "Kyuyo Bugyo"
+msgstr "給与奉行コード"
+
+msgid "sex"
+msgstr "性別"
+
+msgid "Mobile Phone"
+msgstr "携帯番号"
+
+msgid "Mobile Mail"
+msgstr "携帯メール"
+
+msgid "Business Phone"
+msgstr "会社携帯"
+
+msgid "Business Phone Mail"
+msgstr "会社携帯メール"
+
+msgid "Pension Number"
+msgstr "基礎年金番号"
+
+msgid "Birth day"
+msgstr "誕生日"
+
+msgid "Joined day"
+msgstr "入社年月日"
+
+msgid "Exit day"
+msgstr "退職年月日"
+
+msgid "Users"
+msgstr "従業員"
+
+msgid "User Name"
+msgstr "氏名"
+
+msgid "Staff Number"
+msgstr "社員番号"
+
+##########################################################:
+
+msgid "Add Billing"
+msgstr "請求先新規登録"
+
+msgid "Contact Section"
+msgstr "担当部署"
+
+msgid "Contact Post"
+msgstr "担当者役職"
+
+msgid "Contact Name"
+msgstr "担当者名"
+
+msgid "Invoice Type"
+msgstr "請求区分"
+
+msgid "Billing Name"
+msgstr "請求先名"
+
+msgid "Billing"
+msgstr "請求先"
+
+msgid "Billings"
+msgstr "請求先"
+
+msgid "New Billing"
+msgstr "請求先新規登録"
+
+msgid "List Billings"
+msgstr "請求先一覧"
+
+msgid "Edit Billing"
+msgstr "請求先編集"
+
+msgid "Add Company"
+msgstr "取引先新規追加"
+
+msgid "Company Name"
+msgstr "取引先名"
+
+msgid "Contact User"
+msgstr "営業担当者"
+
+msgid "Home Page"
+msgstr "ホームページ"
+
+msgid "Trade Type"
+msgstr "取引状態"
+
+msgid "Basic Rate"
+msgstr "基本掛率"
+
+msgid "Rate Fraction"
+msgstr "掛率端数処理"
+
+msgid "Start Day"
+msgstr "開始日"
+
+msgid "Last Visit Day"
+msgstr "最終訪問日"
+
+msgid "Agreement"
+msgstr "契約書番号"
+
+msgid "Stations"
+msgstr "最寄駅"
+
+msgid "More"
+msgstr "施設"
+
+msgid "Store Info"
+msgstr "店舗情報"
+
+msgid "Companies"
+msgstr "取引先"
+
+msgid "Company"
+msgstr "取引先"
+
+msgid "Edit Company"
+msgstr "取引先編集"
+
+msgid "Company Master"
+msgstr "取引先マスタ"
+
+msgid "List Destinations"
+msgstr "出荷先一覧"
+
+msgid "Add Destination"
+msgstr "出荷先新規登録"
+
+msgid "Destination Name"
+msgstr "出荷先名"
+
+msgid "Shipping Flag"
+msgstr "送料発生"
+
+msgid "Shipping Condition"
+msgstr "送料発生条件"
+
+msgid "Shipping Cost"
+msgstr "送料"
+
+msgid "New Destination"
+msgstr "出荷先新規登録"
+
+msgid "Destinations"
+msgstr "出荷先"
+
+msgid "Destination"
+msgstr "出荷先"
+
+msgid "Edit Destination"
+msgstr "出荷先編集"
+
+msgid "New Company"
+msgstr "取引先新規追加"
+
+msgid "List Companies"
+msgstr "取引先一覧"
+
+msgid "Rate"
+msgstr "掛率"
+
+msgid "New BrandRate"
+msgstr "ブランド別掛率新規登録"
+
+msgid "BrandRates"
+msgstr "ブランド別掛率"
+
+msgid "List BrandRates"
+msgstr "ブランド別掛率一覧"
+
+msgid "Add BrandRate"
+msgstr "ブランド別掛率追加"
+
+msgid "Cancel Flag"
+msgstr "適用"
+
+msgid "New Brand Rate"
+msgstr "ブランド別掛率追加"
+
+msgid "Brand Rates"
+msgstr "ブランド別掛率"
+
+msgid "Add Grouping"
+msgstr "取引先分類追加"
+
+msgid "Grouping Name"
+msgstr "分類名"
+
+msgid "List Groupings"
+msgstr "取引先分類一覧"
+
+msgid "Groupings"
+msgstr "取引先分類"
+
+msgid "New Grouping"
+msgstr "取引先分類新規登録"
+
+msgid "Edit Grouping"
+msgstr "取引先分類編集"
+
+msgid "List Depots"
+msgstr "倉庫一覧"
+
+msgid "Add Depot"
+msgstr "倉庫追加"
+
+msgid "Depot Name"
+msgstr "倉庫名"
+
+msgid "Depots"
+msgstr "倉庫"
+
+msgid "New Depot"
+msgstr "倉庫追加"
+
+msgid "Status"
+msgstr "状態"
+
+msgid "Stocking"
+msgstr "在庫"
+
+msgid "Ordering Input"
+msgstr "発注入力"
+
+msgid "Ordering List"
+msgstr "発注一覧"
+
+msgid "Ordering No."
+msgstr "発注番号"
+
+msgid "Ordering Date"
+msgstr "発注日"
+
+msgid "Total"
+msgstr "合計金額"
+
+msgid "Total Tax"
+msgstr "消費税合計"
+
+msgid "Adjustment"
+msgstr "調整金額"
+
+msgid "Shipping,Adjustment"
+msgstr "送料,調整金額"
+
+msgid "List Orderings"
+msgstr "発注一覧"
+
+msgid "Edit Ordering"
+msgstr "発注修正"
+
+msgid "Ordering"
+msgstr "発注"
+
+msgid "Ordering Detail"
+msgstr "発注明細"
+
+msgid "Ordering Qty"
+msgstr "発注数量"
+
+msgid "Stock Qty"
+msgstr "仕入数量"
+
+msgid "sf Date"
+msgstr "納期"
+
+msgid "Order No."
+msgstr "受注番号"
+
+msgid "Depot"
+msgstr "倉庫"
+
+msgid "Ordering Decision"
+msgstr "発注確定処理"
+
+msgid "Dateil Total"
+msgstr "明細合計"
+
+msgid "Ordering Print"
+msgstr "発注書印刷"
+
+msgid "Ordering FAX"
+msgstr "発注FAX送信済み"
+
+msgid "Ordering Alterration"
+msgstr "状態を戻す（※注）"
+
+msgid "Ordering Cancell"
+msgstr "発注取消（※注）"
+
+msgid "Add Buying"
+msgstr "一括仕入れ"
+
+msgid "Invoices No"
+msgstr "納品書番号"
+
+msgid "Shipping"
+msgstr "送料"
+
+msgid "Purchases Date"
+msgstr "仕入日"
+
+msgid "Add Buying Confirm"
+msgstr "仕入確認"
+
+msgid "Purchase No."
+msgstr "仕入番号"
+
+msgid "Purchase Date"
+msgstr "仕入日"
+
+msgid "Purchase Total"
+msgstr "総合計"
+
+msgid "Detail Total"
+msgstr "商品合計"
+
+msgid "Bill No."
+msgstr "請求書"
+
+msgid "Pay Date"
+msgstr "実行日"
+
+msgid "Pay Way Type"
+msgstr "支払方法"
+
+msgid "Transport No."
+msgstr "移動番号"
+
+msgid "Out Section"
+msgstr "出庫部門・店舗"
+
+msgid "Out Depot"
+msgstr "出庫倉庫"
+
+msgid "In Section"
+msgstr "入庫部門・店舗"
+
+msgid "In Depot"
+msgstr "入庫倉庫"
+
+msgid "Delivary Date"
+msgstr "出庫予定日"
+
+msgid "Arrival Date"
+msgstr "着荷希望日"
+
+msgid "Moving spot"
+msgstr "在庫移動"
+
+msgid "Moving List"
+msgstr "移動一覧"
+
+msgid "Purchase List"
+msgstr "仕入一覧"
+
+msgid "Pay List"
+msgstr "支払一覧"
+
+msgid "Warehousing"
+msgstr "入庫処理"
+
+msgid "Cancell"
+msgstr "取消"
+
+msgid "Stock Log"
+msgstr "在庫履歴"
+
+msgid "Board List"
+msgstr "掲示板一覧"
+
+msgid "Stock Revision"
+msgstr "在庫修正"
+
+msgid "Print"
+msgstr "印刷"
+
+msgid "Stock Change"
+msgstr "在庫修正区分"
+
+msgid "Reason Type"
+msgstr "原因区分"
+
+msgid "Reason"
+msgstr "原因詳細"
+
+msgid "Revision List"
+msgstr "修正履歴"
+
+msgid "Add PricetagDetail"
+msgstr "タグ発注入力"
+
+msgid "Total Quantity"
+msgstr "合計数量"
+
+msgid "PriceTag Add"
+msgstr "タグ発注入力"
+
+msgid "Tag Order List"
+msgstr "タグ発注一覧"
+
+msgid "PriceTag Order"
+msgstr "タグ発注詳細"
+
+msgid "Pricetag Detail"
+msgstr "タグ発注明細"
+
+msgid "Be Ordering"
+msgstr "発注する"
+
+msgid "Output CSV Data"
+msgstr "CSV出力"
+
+msgid "Complete"
+msgstr "完了"
+
+msgid "Cancel"
+msgstr "取消"
+
+msgid "Major Size"
+msgstr "基本サイズ"
+
+msgid "Specified Date"
+msgstr "希望納期"
+
+msgid "Order Bid"
+msgstr "発注単価"
+
+msgid "Temporary Bid"
+msgstr "発注仮単価"
+
+msgid "Ordering no."
+msgstr "発注番号"
+
+msgid "About Resort House"
+msgstr "福利厚生施設全般について"
+
+msgid "Order Input"
+msgstr "受注入力（品番）"
+
+msgid "Order List"
+msgstr "受注一覧"
+
+msgid "Confirm Order"
+msgstr "受注入力確認"
+
+msgid "Return"
+msgstr "戻る"
+
+msgid "Order Type"
+msgstr "受注タイプ"
+
+msgid "Order Date"
+msgstr "受注日"
+
+msgid "Partners No."
+msgstr "客先注文番号"
+
+msgid "Events No."
+msgstr "イベントNo."
+
+msgid "Span No."
+msgstr "スパンNo."
+
+msgid "Customers Name"
+msgstr "お客様名"
+
+msgid "Contact1"
+msgstr "販売担当者1"
+
+msgid "Contact2"
+msgstr "販売担当者2"
+
+msgid "Contact3"
+msgstr "販売担当者3"
+
+msgid "Contact4"
+msgstr "販売担当者4"
+
+msgid "Contact1、2"
+msgstr "販売担当者1、2"
+
+msgid "Contact3、4"
+msgstr "販売担当者3、4"
+
+msgid "Pairing1"
+msgstr "取置番号1"
+
+msgid "Pairing2"
+msgstr "取置番号2"
+
+msgid "Pairing3"
+msgstr "取置番号3"
+
+msgid "Pairing4"
+msgstr "取置番号4"
+
+msgid "Pairing"
+msgstr "取置番号"
+
+msgid "Stock Reserve"
+msgstr "取置（簡易移動）"
+
+msgid "Orders Print"
+msgstr "注文請書印刷"
+
+msgid "Sell Input"
+msgstr "売上入力"
+
+msgid "Sale Date"
+msgstr "売上日"
+
+msgid "Sale Type"
+msgstr "売上タイプ"
+
+msgid "Close Date"
+msgstr "締め日"
+
+msgid "Item Total"
+msgstr "商品合計"
+
+msgid "Tax"
+msgstr "消費税"
+
+msgid "Sales Price Total"
+msgstr "上代合計"
+
+msgid "Edit Order"
+msgstr "受注編集"
+
+msgid "Invoice Date"
+msgstr "請求日"
+
+msgid "Balance Forward"
+msgstr "繰越残高"
+
+msgid "Month Total"
+msgstr "今月請求額"
+
+msgid "Collect Bill"
+msgstr "回収予定日"
+
+msgid "Previous Invoice"
+msgstr "前回請求額"
+
+msgid "Previous Deposit"
+msgstr "前回入金額"
+
+msgid "Sales Total"
+msgstr "税抜売上額"
+
+msgid "Credit Methods"
+msgstr "支払方法"
+
+msgid "Bank Acut"
+msgstr "振込口座"
+
+msgid "Deposit Amount"
+msgstr "入金金額"
+
+msgid "Transfer Fee"
+msgstr "振込手数料"
+
+msgid "Offset Amount"
+msgstr "相殺金額"
+
+msgid "Reconcile Amount"
+msgstr "消込金額"
+
+msgid "Credit Date"
+msgstr "入金日"
+
+msgid "Credit Date"
+msgstr "入金日"
+
+msgid "Bank Name"
+msgstr "口座名称"
+
+msgid "Account Number"
+msgstr "口座番号"
+
+msgid "Account Type"
+msgstr "口座種別"
+
+msgid "Bank Code"
+msgstr "銀行コード"
+
+msgid "Branch Code"
+msgstr "支店コード"
+
+msgid "register an order. Are you all right?"
+msgstr "受注を登録します。よろしいですか？"
+
+msgid "Input Sales Confirm"
+msgstr "売上入力確認"
+
+msgid "input sales. Are you all right?"
+msgstr "売上を入力します。よろしいですか？"
+
+msgid "Sales Print"
+msgstr "納品書、物品受領書出力"
+
+msgid "Invoice Print"
+msgstr "請求書出力"
+
+msgid "close the sales that I close it, and was over a day. Are you all right?"
+msgstr "締め日を過ぎた売上を締めます。よろしいですか？"
+
+msgid "Reservation is in a state and outputs a list of picking for the order. Are you all right?"
+msgstr "保留状態で受注分のピッキングリストを出力します。よろしいですか？"
+
+msgid "Reservation is in a state and outputs a list of picking for the custom order. Are you all right?"
+msgstr "保留状態で客注分のピッキングリストを出力します。よろしいですか？"
+
+msgid "Pick List Old"
+msgstr "出力済みのピッキングリスト"
+
+msgid "CustomOrder PickList OutPut"
+msgstr "客注（店舗）ピッキングリスト出力"
+
+msgid "Order PickList OutPut"
+msgstr "受注（WS）ピッキングリスト出力"
+
+msgid "input sales."
+msgstr "売上を入力しました。"
+
+msgid "Sales List"
+msgstr "売上一覧"
+
+msgid "Invoice List"
+msgstr "請求一覧"
+
+msgid "Credit List"
+msgstr "入金一覧"
+
+msgid "Store Sales"
+msgstr "売上（店舗）"
+
+msgid "Input Sale(JAN)"
+msgstr "売上入力（JAN）"
+
+msgid "register an sale. Are you all right?"
+msgstr "売上を登録します。よろしいですか？"
+
+msgid "Confirm Sale"
+msgstr "売上確認"
+
+msgid "Store Sale List"
+msgstr "売上一覧（店舗）"
+
+msgid "register an order. Are you all right?"
+msgstr "受注を登録します。よろしいですか？"
+
+msgid "Input CustomOrder"
+msgstr "客注入力"
+
+msgid "CustomOrder List"
+msgstr "客注一覧"
+
+msgid "Single Management"
+msgstr "単品管理"
+
+msgid "Depot No."
+msgstr "倉庫番号"
+
+
+msgid "Old Depot No."
+msgstr "旧倉庫番号"
+
+
+msgid "Marking"
+msgstr "刻印"
+
+msgid "Minority Size"
+msgstr "基本サイズ外"
+
+msgid "CustomOrder Print"
+msgstr "客注伝票印刷"
+
+msgid "Amount Type"
+msgstr "集計タイプ"
+
+msgid "Amount Start"
+msgstr "集計期間開始日"
+
+msgid "Amount End"
+msgstr "集計期間終了日"
+
+msgid "Full Amount"
+msgstr "総売上合計"
+
+msgid "Item Amount"
+msgstr "商品売上合計"
+
+msgid "Tax Amount"
+msgstr "消費税合計"
+
+msgid "Cost Amount"
+msgstr "商品原価合計"
+
+msgid "Sales Qty"
+msgstr "売上数量"
+
+msgid "Purchase Qty"
+msgstr "仕入数量"
+
+msgid "Expense Amount"
+msgstr "経費合計"
+
+msgid "Purchase Amount"
+msgstr "仕入金額合計"
+
+msgid "Stock Price Amount"
+msgstr "在庫上代合計"
+
+msgid "Stock Cost Amount"
+msgstr "在庫原価合計"
+
+msgid "Rank"
+msgstr "順位"
+
+msgid "Mark"
+msgstr "目標"
+
+msgid "Plan"
+msgstr "予算"
+
+msgid "Section List"
+msgstr "部門一覧"
+
+msgid "Board Search"
+msgstr "掲示板検索"
+
+msgid "Section Code"
+msgstr "部門コード"
+
+msgid "Section Opne"
+msgstr "営業開始日"
+
+msgid "Section Close"
+msgstr "営業終了日"
+
+msgid "Estimate Status"
+msgstr "要見積状態"
+
+msgid "Reception Date"
+msgstr "受付日"
+
+msgid "Store Arrival Date"
+msgstr "店着希望日"
+
+msgid "Factory Delivery Date"
+msgstr "工場納期"
+
+msgid "Shipping Date"
+msgstr "出荷日"
+
+msgid "Control Number"
+msgstr "管理番号"
+
+msgid "Customer Name"
+msgstr "お客様名"
+
+msgid "Customer Tel"
+msgstr "お客様連絡先"
+
+msgid "Repair Content"
+msgstr "修理内容"
+
+msgid "Reapir Cost"
+msgstr "修理下代"
+
+msgid "Repair Price"
+msgstr "修理上代"
+
+msgid "Edit Repair"
+msgstr "修理編集"
+
+msgid "List Repairs"
+msgstr "修理一覧"
+
+msgid "Repair View"
+msgstr "修理詳細"
+
+msgid "New Repair"
+msgstr "修理新規登録"
+
+msgid "Request Repair List"
+msgstr "修理依頼一覧"
+
+msgid "Request Repair OutPut"
+msgstr "修理依頼出力"
+
+msgid "Reservation is in a state and outputs a list of request for the repair. Are you all right?"
+msgstr "修理依頼書を出力します。よろしいですか？"
+
+msgid "Head Check Repair"
+msgstr "本社確認"
+
+msgid "Arrival Factory"
+msgstr "工場上がり"
+
+msgid "Arrival Store"
+msgstr "店舗着"
+
+msgid "Ships Head"
+msgstr "本社出荷"
+
+msgid "Check and change the office. Are you all right?"
+msgstr "状態を「本社確認」に変更します。よろしいですか？"
+
+msgid "Arrival from the factory. Are you all right?"
+msgstr "状態を「工場上がり」に変更します。よろしいですか？"
+
+msgid "Ships Head. Are you all right?"
+msgstr "状態を「本社出荷」に変更します。よろしいですか？"
+
+msgid "Arrival Stores. Are you all right?"
+msgstr "状態を「店舗着」に変更します。よろしいですか？"
+
+msgid "Complete. Are you all right?"
+msgstr "状態を「完了」に変更します。よろしいですか？"
+
+msgid "Purchase price"
+msgstr "仕入原価"
+
+msgid "Average cost"
+msgstr "総平均原価"
+
+msgid "Order to confirm the status updates. Are you sure?"
+msgstr "発注ステータスを確定に更新します。よろしいですか？"
+
+msgid "Print. Are you sure?"
+msgstr "印刷します。よろしいですか？"
+
+msgid "FAX sent to update the status. Are you sure?"
+msgstr "ステータスをFAX送信済みに更新します。よろしいですか？"
+
+msgid "Buying process"
+msgstr "仕入処理"
+
+msgid "Returns the status. Are you sure?"
+msgstr "ステータスを戻します。よろしいですか？"
+
+msgid "The order. Are you sure?"
+msgstr "発注します。よろしいですか？"
+
+msgid "List Purchases"
+msgstr "仕入一覧"
+
+msgid "Pay Qty"
+msgstr "支払済数量"
+
+msgid "Gram"
+msgstr "重量"
+
+msgid "Buying Confirm"
+msgstr "仕入確定"
+
+msgid "Confirm purchase. Are you sure?"
+msgstr "仕入確定します。よろしいですか？"
+
+msgid "Tightening process manually"
+msgstr "手動締め処理"
+
+msgid "Tighten by hand. Are you sure?"
+msgstr "手動で締めます。よろしいですか？"
+
+msgid "Tighten the document in question. Are you sure?"
+msgstr "該当する伝票を締めます。よろしいですか？"
+
+msgid "Tags to the items of the order. Are you sure?"
+msgstr "商品部へタグを発注します。よろしいですか？"
+
+msgid "CSV tag is output. Are you sure?"
+msgstr "タグCSVを出力します。よろしいですか？"
+
+msgid "Edit Purchase"
+msgstr "仕入編集"
+
+msgid "Doing Pay"
+msgstr "締め処理"
+
+msgid "Purchase View"
+msgstr "仕入詳細"
+
+msgid "Payment List"
+msgstr "支払一覧"
+
+msgid "Sagawa store bulk e secret CSV output. Are you sure?"
+msgstr "店舗の佐川e飛伝CSVを一括出力します。よろしいですか？"
+
+msgid "Edit Pay"
+msgstr "支払編集"
+
+msgid "Pay View"
+msgstr "支払詳細"
+
+msgid "Purchase Data"
+msgstr "仕入データ"
+
+msgid "Transport View"
+msgstr "移動詳細"
+
+msgid "Input Reserve"
+msgstr "取置入力"
+
+msgid "Layaway Type"
+msgstr "取置状態"
+
+msgid "Layaway User"
+msgstr "取置担当者"
+
+msgid "List Transports"
+msgstr "移動一覧"
+
+msgid "List StockRevision"
+msgstr "修正履歴一覧"
+
+msgid "StockRevision View"
+msgstr "修正履歴詳細"
+
+msgid "Add StockRevision"
+msgstr "在庫修正入力"
+
+msgid "StockRevision Confirm"
+msgstr "在庫修正確認"
+
+msgid "Office Staff Only"
+msgstr "本社専用"
+
+msgid "Add TransportDateil"
+msgstr "在庫移動入力"
+
+msgid "Receipt processing"
+msgstr "入庫処理"
+
+msgid "Return Sales"
+msgstr "赤伝入力"
+
+msgid "Return Sales Date"
+msgstr "赤伝日付"
+
+msgid "Return sales. Are you all right?"
+msgstr "赤伝を登録します。よろしいですか？"
+
+msgid "Prev Money"
+msgstr "前受金"
+
+msgid "Total(in tax)"
+msgstr "合計金額（内税）"
+
+msgid "Transport Edit"
+msgstr "移動編集"
+
+msgid "Customers order cancel"
+msgstr "客注取消"
+
+msgid "Sales Cancel it. Are you all right?"
+msgstr "売り上げを取消します。よろしいですか？"
+
+msgid "Sale Data"
+msgstr "売上データ"
+
+msgid "Customers Order Data"
+msgstr "客注データ"
+
+msgid "Today Shipping List OutPut"
+msgstr "本日分出荷リストCSV出力"
+
+msgid "Shipping List CSV output. Are you all right?"
+msgstr "本日分出荷リストCSVを出力します。よろしいですか？"
+
+msgid "Special Order"
+msgstr "特別注文"
+
+msgid "Spacial Order Confirm"
+msgstr "特別注文確認"
+
+msgid "Input Special Order. Are you all right?"
+msgstr "特別注文を入力します。よろしいですか？"
+
+msgid "The MemoData could not be saved. Please, try again."
+msgstr "ERROR：カテゴリが選択されていないかもしれません。確認して下さい。"
+
+msgid "Stone Cost"
+msgstr "石代"
+
+msgid "Grade Cost"
+msgstr "鑑定書代"
+
+msgid "Metal Gram"
+msgstr "地金重さ"
+
+msgid "Metal Cost"
+msgstr "地金代"
+
+msgid "Confirm Credit"
+msgstr "入金確認"
+
+msgid "Custom Ordering"
+msgstr "客注発注"
+
+msgid "Basic Ordering"
+msgstr "プロパー発注"
+
+msgid "The Custom Ordering. Are you sure?"
+msgstr "客注を発注します。よろしいですか？"
+
+msgid "The Basic Ordering. Are you sure?"
+msgstr "プロパー発注します。よろしいですか？"
+
+msgid "The Spesial Ordering. Are you sure?"
+msgstr "単品管理商品を発注します。よろしいですか？"
+
+msgid "Ordering Type"
+msgstr "発注タイプ"
+
+msgid "Delete Order"
+msgstr "受注取消"
+
+msgid "Sales Cancel"
+msgstr "売上取消"
+
+msgid "Edit Sales"
+msgstr "売上編集"
+
+msgid "Sale No."
+msgstr "売上番号(id)"
+
+msgid "Pass Input"
+msgstr "お渡し入力"
+
+msgid "Shipping Input"
+msgstr "出荷入力"
+
