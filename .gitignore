@@ -2,3 +2,5 @@
 /app/webroot/files
 /app/webroot/img
 /app/config/database.php
+.htaccess
+.htpasswd
