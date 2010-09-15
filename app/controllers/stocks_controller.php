@@ -104,14 +104,25 @@ class StocksController extends AppController {
 	}
 	
 	//親品番検索
-	function item_index($item_id = null){
+	function item_index($item_id = null, $ac = null){
 		if($item_id == null){
 			$this->redirect(array('controller'=>'items', 'action'=>'index'));
 		}else{
 			$item['name'] = $this->Item->itemName($item_id);
 			$item['id'] = $item_id;
 			$this->set('item', $item);
-			$item_stocks = $this->Stock->ItemStocks($item_id);
+			if($ac == 'not_defa'){
+				$item_stocks = $this->Stock->ItemStocks($item_id);
+				$this->set('depo', 'not_defa');
+			}
+			if($ac == 'all'){
+				$item_stocks = $this->Stock->ItemStocksAll($item_id);
+				$this->set('depo', 'all');
+			}
+			if($ac == null){
+				$item_stocks = $this->Stock->ItemStocksDefault($item_id);
+				$this->set('depo', 'defa');
+			}
 			$this->set('item_stocks', $item_stocks);
 			$this->set('major_size', get_major_size());
 		}

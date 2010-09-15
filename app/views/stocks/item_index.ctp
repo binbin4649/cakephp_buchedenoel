@@ -1,5 +1,24 @@
 <h2>親品番在庫</h2>
-<?php echo $html->link($item['name'], array('controller'=>'items', 'action'=>'view/'.$item['id'])); ?>
+<p>
+<?php 
+	echo $html->link($item['name'], array('controller'=>'items', 'action'=>'view/'.$item['id'])).'　/　';
+	if($depo != 'defa'){
+		echo $html->link('通常倉庫', array('controller'=>'stocks', 'action'=>'item_index/'.$item['id'])).'　/　';
+	}else{
+		echo '通常倉庫　/　';
+	}
+	if($depo != 'not_defa'){
+		echo $html->link('通常以外', array('controller'=>'stocks', 'action'=>'item_index/'.$item['id'].'/not_defa')).'　/　';
+	}else{
+		echo '通常以外　/　';
+	}
+	if($depo != 'all'){
+		echo $html->link('全倉庫', array('controller'=>'stocks', 'action'=>'item_index/'.$item['id'].'/all'));
+	}else{
+		echo '全倉庫　/　';
+	}
+?>
+</p>
 <table cellpadding="0" cellspacing="0">
 <tr>
 	<th>部門</th>

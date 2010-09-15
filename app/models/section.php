@@ -85,7 +85,7 @@ class Section extends AppModel {
 	function cleaningList(){
 		if ($this->Behaviors->attached('Cache')) {
 			$args = func_get_args();
-			if($this->cacheEnabled()) return $this->cacheMethod(CACHE_TODAY, __FUNCTION__, $args);//
+			if($this->cacheEnabled()) return $this->cacheMethod(CACHE_TODAY_RANKING, __FUNCTION__, $args);//
 		}
 		App::import('Component', 'Cleaning');
    		$CleaningComponent = new CleaningComponent();
@@ -103,6 +103,27 @@ class Section extends AppModel {
 		return $out;
 	}
 	
+	// default_depot のリスト
+	function defaultList(){
+		if ($this->Behaviors->attached('Cache')) {
+			$args = func_get_args();
+			if($this->cacheEnabled()) return $this->cacheMethod(CACHE_TODAY_RANKING, __FUNCTION__, $args);//
+		}
+		$ins = $this->cleaningList();
+		$out = array();
+		foreach($ins as $id=>$name){
+			$params = array(
+				'conditions'=>array('Section.id'=>$id),
+				'recursive'=>-1,
+				'fields'=>'Section.default_depot'
+			);
+			$section = $this->find('first', $params);
+			$out[$id]['default_depot'] = $section['Section']['default_depot'];
+			$out[$id]['name'] = $name;
+		}
+		return $out;
+	}
+	
 	//集計対象の部門一覧を返す
 	function amountSectionList(){
 		//とりあえず、直営店だけ、ついでに部門コード順
@@ -116,7 +137,7 @@ class Section extends AppModel {
 		$sections = $this->find('list', $params);
 		foreach($sections as $id=>$name){
 			$name = $CleaningComponent->sectionName($name);
-			$sections[$id] = mb_substr($name, 0, 8);
+			$sections[$id] = mb_substr($name, 0, 12);
 		}
 		return $sections;
 	}
