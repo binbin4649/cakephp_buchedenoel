@@ -34,24 +34,6 @@ class Item extends AppModel {
 		),
 	);
 	
-	/*
-	function find() {
-		if ($this->Behaviors->attached('Cache')) {
-			$args = func_get_args();
-			if($this->cacheEnabled()) return $this->cacheMethod(CACHE_TODAY, __FUNCTION__, $args);
-		}
-		$parent = get_parent_class($this);
-		return call_user_func_array(array($parent, __FUNCTION__), $args);
-	}
-	*/
-
-	/*なぜかエラーになる
-	function beforeSave(){
-		$this->data['Item']['price'] = mb_convert_kana($this->data['Item']['price'], 'a', 'UTF-8');
-		$this->data['Item']['price'] = ereg_replace("[^0-9]", "", $this->data['price']['weight']);
-		return true;
-	}
-	*/
 
 	function itemDumpingCheck($data){
 		//nullはtrue
