@@ -70,5 +70,4 @@ class AppModel extends Model {
   }
 
 
-}
-?>
+}?>
