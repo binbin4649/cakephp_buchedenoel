@@ -1,3 +1,9 @@
+<?php
+if(!empty($csv)){
+	echo '<br>在庫CSV：<a href="'.$csv['url'].'" target="_blank">'.$csv['name'].'</a>';
+	echo '<br>CSVが出力されました。右クリック「リンク先を保存」を選択して保存してください。<br>';
+}
+?>
 <h2>親品番在庫</h2>
 <p>
 <?php 
@@ -13,10 +19,11 @@
 		echo '通常以外　/　';
 	}
 	if($depo != 'all'){
-		echo $html->link('全倉庫', array('controller'=>'stocks', 'action'=>'item_index/'.$item['id'].'/all'));
+		echo $html->link('全倉庫', array('controller'=>'stocks', 'action'=>'item_index/'.$item['id'].'/all')).'　/　';
 	}else{
 		echo '全倉庫　/　';
 	}
+	echo $html->link('CSV', array('controller'=>'stocks', 'action'=>'item_index/'.$item['id'].'/'.$depo.'/csv'), array(), __("CSV output. Are you all right?", true));
 ?>
 </p>
 <table cellpadding="0" cellspacing="0">

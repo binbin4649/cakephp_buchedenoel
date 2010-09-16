@@ -2300,6 +2300,9 @@ msgstr "本日分出荷リストCSV出力"
 msgid "Shipping List CSV output. Are you all right?"
 msgstr "本日分出荷リストCSVを出力します。よろしいですか？"
 
+msgid "CSV output. Are you all right?"
+msgstr "CSVを出力します。よろしいですか？"
+
 msgid "Special Order"
 msgstr "特別注文"
 

@@ -332,6 +332,104 @@ class OutputCsvComponent extends Object {
 		}
 		return $out;
 	}
+	
+	//親品番をベースに部門別に出力
+	function item_stocks($stocks, $item){
+		$out = '"'.$item['name'].'","'.$item['id'].'"'."\r\n";
+		$out .= '"部門","合計","#1","#3","#5","#7","#9","#11","#13","#15","#17","#19","#21","40cm","50cm","other"'."\r\n";
+		$total = array('1'=>0, '3'=>0, '5'=>0, '7'=>0, '9'=>0, '11'=>0, '13'=>0, '15'=>0, '17'=>0, '19'=>0, '21'=>0, '40'=>0, '50'=>0, 'other'=>0, 'total'=>0);
+		foreach($stocks as $section_id=>$stock){
+			$out .= '"'.$stock['section_name'].':'.$section_id.'","';
+			$out .= $stock['qty'].'","';
+			$total['total'] = $total['total'] + $stock['qty'];
+			if(!empty($stock['size']['#1'])){
+				$out .= $stock['size']['#1'].'","';
+				$total['1'] = $total['1'] + $stock['size']['#1'];
+			}else{
+				$out .= '","';
+			}
+			if(!empty($stock['size']['#3'])){
+				$out .= $stock['size']['#3'].'","';
+				$total['3'] = $total['3'] + $stock['size']['#3'];
+			}else{
+				$out .= '","';
+			}
+			if(!empty($stock['size']['#5'])){
+				$out .= $stock['size']['#5'].'","';
+				$total['5'] = $total['5'] + $stock['size']['#5'];
+			}else{
+				$out .= '","';
+			}
+			if(!empty($stock['size']['#7'])){
+				$out .= $stock['size']['#7'].'","';
+				$total['7'] = $total['7'] + $stock['size']['#7'];
+			}else{
+				$out .= '","';
+			}
+			if(!empty($stock['size']['#9'])){
+				$out .= $stock['size']['#9'].'","';
+				$total['9'] = $total['9'] + $stock['size']['#9'];
+			}else{
+				$out .= '","';
+			}
+			if(!empty($stock['size']['#11'])){
+				$out .= $stock['size']['#11'].'","';
+				$total['11'] = $total['11'] + $stock['size']['#11'];
+			}else{
+				$out .= '","';
+			}
+			if(!empty($stock['size']['#13'])){
+				$out .= $stock['size']['#13'].'","';
+				$total['13'] = $total['13'] + $stock['size']['#13'];
+			}else{
+				$out .= '","';
+			}
+			if(!empty($stock['size']['#15'])){
+				$out .= $stock['size']['#15'].'","';
+				$total['15'] = $total['15'] + $stock['size']['#15'];
+			}else{
+				$out .= '","';
+			}
+			if(!empty($stock['size']['#17'])){
+				$out .= $stock['size']['#17'].'","';
+				$total['17'] = $total['17'] + $stock['size']['#17'];
+			}else{
+				$out .= '","';
+			}
+			if(!empty($stock['size']['#19'])){
+				$out .= $stock['size']['#19'].'","';
+				$total['19'] = $total['19'] + $stock['size']['#19'];
+			}else{
+				$out .= '","';
+			}
+			if(!empty($stock['size']['#21'])){
+				$out .= $stock['size']['#21'].'","';
+				$total['21'] = $total['21'] + $stock['size']['#21'];
+			}else{
+				$out .= '","';
+			}
+			if(!empty($stock['size']['40cm'])){
+				$out .= $stock['size']['40cm'].'","';
+				$total['40'] = $total['40'] + $stock['size']['40cm'];
+			}else{
+				$out .= '","';
+			}
+			if(!empty($stock['size']['50cm'])){
+				$out .= $stock['size']['50cm'].'","';
+				$total['50'] = $total['50'] + $stock['size']['50cm'];
+			}else{
+				$out .= '","';
+			}
+			if(!empty($stock['size']['other'])){
+				$out .= $stock['size']['other'].'"'."\r\n";
+				$total['other'] = $total['other'] + $stock['size']['other'];
+			}else{
+				$out .= '"'."\r\n";
+			}
+		}
+		$out .= '"合計","'.$total['total'].'","'.$total['1'].'","'.$total['3'].'","'.$total['5'].'","'.$total['7'].'","'.$total['9'].'","'.$total['11'].'","'.$total['13'].'","'.$total['15'].'","'.$total['17'].'","'.$total['19'].'","'.$total['21'].'","'.$total['40'].'","'.$total['50'].'","'.$total['other'].'"'."\r\n";
+		return $out;
+	}
 
 	//移動一覧
 	function Transport($value){

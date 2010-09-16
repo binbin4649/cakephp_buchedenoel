@@ -104,7 +104,7 @@ class StocksController extends AppController {
 	}
 	
 	//親品番検索
-	function item_index($item_id = null, $ac = null){
+	function item_index($item_id = null, $ac = null, $ac2 = null){
 		if($item_id == null){
 			$this->redirect(array('controller'=>'items', 'action'=>'index'));
 		}else{
@@ -119,9 +119,19 @@ class StocksController extends AppController {
 				$item_stocks = $this->Stock->ItemStocksAll($item_id);
 				$this->set('depo', 'all');
 			}
-			if($ac == null){
+			if($ac == null or $ac == 'defa'){
 				$item_stocks = $this->Stock->ItemStocksDefault($item_id);
 				$this->set('depo', 'defa');
+			}
+			if($ac2 == 'csv'){
+				$output_csv = $this->OutputCsv->item_stocks($item_stocks, $item);
+				$file_name = $item['id'].'-'.date('Ymd-His').'.csv';
+				$path = WWW_ROOT.'/files/user_csv/'; //どうせ一時ファイルなんだから同じでいいや。ってことはフォルダ名はミスだね。でも面倒だからこのままで。
+				$output_csv = mb_convert_encoding($output_csv, 'SJIS', 'UTF-8');
+				file_put_contents($path.$file_name, $output_csv);
+				$output['url'] = '/buchedenoel/files/user_csv/'.$file_name;
+				$output['name'] = $file_name;
+				$this->set('csv', $output);
 			}
 			$this->set('item_stocks', $item_stocks);
 			$this->set('major_size', get_major_size());
