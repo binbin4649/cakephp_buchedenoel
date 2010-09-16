@@ -270,8 +270,10 @@ class SalesController extends AppController {
 				}
 				if($plus_flag) $quantity = 1;
 				if($this->Stock->stockConfirm($subitem_id, $depot_id, $quantity)){
-					$tax = $this->Total->single_tax($subitem['Item']['price'], $subitem_id);
-					$subitem['Subitem']['price'] = $subitem['Item']['price'] + $tax;
+					//税抜きに変更
+					//$tax = $this->Total->single_tax($subitem['Item']['price'], $subitem_id);
+					//$subitem['Subitem']['price'] = $subitem['Item']['price'] + $tax;
+					$subitem['Subitem']['price'] = $subitem['Item']['price'];
 					$subitem['Subitem']['depot'] = $depot_id;
 					$subitem['Subitem']['qty'] = $quantity;
 					$this->Session->write("SaleJan.subitems.".$subitem_id, $subitem);
