@@ -19,17 +19,7 @@ class Section extends AppModel {
 			'counterQuery' => ''
 		),
 	);
-	/*
-	function find() {
-		
-		if ($this->Behaviors->attached('Cache')) {
-			$args = func_get_args();
-			if($this->cacheEnabled()) return $this->cacheMethod(CACHE_TODAY, __FUNCTION__, $args);
-		}
-		$parent = get_parent_class($this);
-		return call_user_func_array(array($parent, __FUNCTION__), $args);
-	}
-	*/
+	
 	
 	// section_id を受け取ってクリーニングした名前を返す
 	function cleaningName($id){

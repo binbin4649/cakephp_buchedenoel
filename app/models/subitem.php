@@ -11,27 +11,13 @@ class Subitem extends AppModel {
 		var $hasMany = array(
 		'Part'=> array('className'=>'Part'),
 	);
-
-	/*　10/1　アニバの場合、重複しまくるので消した。
-	var $validate = array(
-		'name' => array('rule'=>'isUnique', 'message'=>'品番が重複している可能性があります。')
-	);
-	*/
-	
-	function find() {
-		if ($this->Behaviors->attached('Cache')) {
-			$args = func_get_args();
-			if($this->cacheEnabled()) return $this->cacheMethod(CACHE_TODAY, __FUNCTION__, $args);
-		}
-		$parent = get_parent_class($this);
-		return call_user_func_array(array($parent, __FUNCTION__), $args);
-	}
+		
 
 	function subitemName($subitem_id){
 		if(!empty($subitem_id)){
 			$params = array(
 				'conditions'=>array('Subitem.id'=>$subitem_id),
-				'recursive'=>0
+				'recursive'=>-1
 			);
 			$subitem = $this->find('first' ,$params);
 			if($subitem){
