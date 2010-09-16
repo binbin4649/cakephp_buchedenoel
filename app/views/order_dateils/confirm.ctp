@@ -29,8 +29,10 @@
 			$return_action = 'store_add';
 		}
 		echo '<dl>';
-		//echo '<dt>'.__('Order Type').'</dt><dd>'.$orderType[$Confirm['order']['order_type']].'　</dd>';
-		echo '<dt>'.__('Order Date').'</dt><dd>'.$Confirm['order']['date']['year'].'-'.$Confirm['order']['date']['month'].'-'.$Confirm['order']['date']['day'].'　</dd>';
+		if(!empty($Confirm['order']['order_status'])){
+			echo '<dt>'.__('Order Type').'</dt><dd>'.$orderStatus[$Confirm['order']['order_status']].'　</dd>';
+		}
+		echo '<dt>'.__('Sale Date').'</dt><dd>'.$Confirm['order']['date']['year'].'-'.$Confirm['order']['date']['month'].'-'.$Confirm['order']['date']['day'].'　</dd>';
 		echo '<dt>'.__('Section').'</dt><dd>'.$Confirm['order']['section_name'].':'.$Confirm['order']['section_id'].'</dd>';
 		echo '<dt>'.__('Destination').'</dt><dd>'.$Confirm['order']['destination_name'].'　</dd>';
 		echo '<dt>'.__('Partners No.').'</dt><dd>'.$Confirm['order']['partners_no'].'　</dd>';

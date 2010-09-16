@@ -517,6 +517,7 @@ class OrderDateilsController extends AppController {
 			$this->Session->write('Confirm', $Confirm);
 		}
 		$this->set('Confirm', $Confirm);
+		$this->set('orderStatus', get_order_status());
 		$this->set('orderType', get_order_type());
 	}
 
