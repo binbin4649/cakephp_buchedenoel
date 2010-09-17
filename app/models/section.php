@@ -127,7 +127,7 @@ class Section extends AppModel {
 		$sections = $this->find('list', $params);
 		foreach($sections as $id=>$name){
 			$name = $CleaningComponent->sectionName($name);
-			$sections[$id] = mb_substr($name, 0, 12);
+			$sections[$id] = mb_substr($name, 0, 20);
 		}
 		return $sections;
 	}

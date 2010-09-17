@@ -39,7 +39,6 @@ class AmountSection extends AppModel {
 		return $out;
 	}
 	
-
 	// year month day を受け取って、売上金額、未完金額、売上予算、目標、達成率を返す 
 	// amount を計算してsave & return
 	function mark($section_id, $year, $month, $day){
@@ -96,6 +95,7 @@ class AmountSection extends AppModel {
 			$AmountSection['AmountSection']['end_day'] = $target_date;
 			$AmountSection['AmountSection']['plan'] = 0;
 			$AmountSection['AmountSection']['mark'] = 0;
+			$AmountSection['AmountSection']['addsub'] = 0;
 		}
 		$AmountSection['AmountSection']['full_amount'] = $sales_total;
 		$this->create();
@@ -108,6 +108,7 @@ class AmountSection extends AppModel {
     	$result['incomplete_total'] = $incomplete_total;
     	$result['plan'] = $AmountSection['AmountSection']['plan'];
     	$result['mark'] = $AmountSection['AmountSection']['mark'];
+    	$result['addsub'] = $AmountSection['AmountSection']['addsub'];
     	$result['plan_achieve_rate'] = @floor(($sales_total / $AmountSection['AmountSection']['plan']) * 100);
     	$result['mark_achieve_rate'] = @floor(($sales_total / $AmountSection['AmountSection']['mark']) * 100);
     	return $result;

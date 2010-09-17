@@ -32,6 +32,7 @@ echo $form->end();
 	<th>日付</th>
 	<th>売上金額</th>
 	<th>未完金額</th>
+	<th>売上加減</th>
 	<th>売上予算</th>
 	<th>売上目標</th>
 	<th>予算達成率</th>
@@ -52,11 +53,20 @@ foreach($days as $day){
 	echo '<td>'.number_format($day['sales_total']).'</td>';
 	echo '<td>'.number_format($day['incomplete_total']).'</td>';
 	echo '<td>';
+	echo $form->input("AmountSections.mark.".$day['day'].".addsub", array(
+		'type'=>'text',
+		'div'=>false,
+		'label'=>false,
+		'size'=>5,
+		'value'=>$day['addsub']
+	));
+	echo '</td>';
+	echo '<td>';
 	echo $form->input("AmountSections.mark.".$day['day'].".plan", array(
 		'type'=>'text',
 		'div'=>false,
 		'label'=>false,
-		'size'=>7,
+		'size'=>5,
  		'value'=>$day['plan']
 	));
 	echo '</td>';
@@ -65,7 +75,7 @@ foreach($days as $day){
 		'type'=>'text',
 		'div'=>false,
 		'label'=>false,
-		'size'=>7,
+		'size'=>5,
  		'value'=>$day['mark']
 	));
 	echo '</td>';	
@@ -78,6 +88,7 @@ echo '<td></td>';
 echo '<td>合計</td>';
 echo '<td>'.number_format($total['month_total']).'</td>';
 echo '<td>'.number_format($total['month_incomplete']).'</td>';
+echo '<td></td>';
 echo '<td>'.number_format($total['month_plan']).'</td>';
 echo '<td>'.number_format($total['month_mark']).'</td>';
 echo '<td></td>';
@@ -89,6 +100,8 @@ echo '</tr>';
 <input type="submit" value="Submit" />
 </div>
 <ul>
+<li>数字の入力は、半角数字のみ、カンマ抜きです。</li>
 <li>売上金額：入力された売上全体の金額</li>
 <li>未完金額：お渡しがまだ済んでいない売上の金額</li>
 </ul>
+<?php pr($days); ?>

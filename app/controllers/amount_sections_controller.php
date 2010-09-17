@@ -130,12 +130,12 @@ class AmountSectionsController extends AppController {
 	//部門一覧を出す　→　年月選択画面　→　日付ごとの一覧虫食い画面
 	// sections/index  →  amount_sections/index_mark  →  amount_sections/days_mark	
 	//目標一覧画面
-	function mark($section_id = null, $year = null, $month = null){
-		if($section_id == null){
+	function mark($id = null, $year = null, $month = null){
+		if($id == null){
 			$this->redirect(array('controller'=>'sections', 'action'=>'index'));
 		}
 		$params = array(
-			'conditions'=>array('Section.id'=>$section_id),
+			'conditions'=>array('Section.id'=>$id),
 			'recursive'=>0,
 			'fields'=>'Section.name'
 		);
@@ -145,7 +145,7 @@ class AmountSectionsController extends AppController {
 			foreach($this->data['AmountSections']['mark'] as $value){
 				$this->AmountSection->saveMark($value);
 			}
-			$this->redirect(array('controller'=>'amount_sections', 'action'=>'mark/'.$section_id.'/'.$value['year'].'/'.$value['month']));
+			$this->redirect(array('controller'=>'amount_sections', 'action'=>'mark/'.$id.'/'.$value['year'].'/'.$value['month']));
 		}
 		if(!empty($year) and !empty($month)){
 			$this->data['AmountSections']['year'] = $year;
@@ -162,11 +162,7 @@ class AmountSectionsController extends AppController {
 		}
 		$month_plan_avg = 0; //平均予算達成率
 		$month_mark_avg = 0; //平均目標達成率
-		//if($year == null) $year = date('Y');
-		//if($month == null) $month = date('m');
-		//if($section_id == null) $section_id = 305; //test_code
-		
-		$total = $this->AmountSection->markIndex($section_id, $year, $month);
+		$total = $this->AmountSection->markIndex($id, $year, $month);
 		$days = $total['days'];
 		$yearList = get_year_list();
 		$monthList = get_month_list();

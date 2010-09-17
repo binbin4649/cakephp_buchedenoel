@@ -14,12 +14,13 @@ class SalesCsvComponent extends Object {
    		$month = date('m');
     	$days = $DateCalComponent->last_day($year, $month);
     	$d = 1;
-    	$out = '部門,';
+    	$out = '直営店売上集計,'.$year.'年'.$month.'月,'."\r\n";
+    	$out .= '部門,';
     	while($days >= $d){
-    		$out .= $d.',';
+    		$out .= $d.'日,';
     		$d++;
     	}
-		$out .= '合計'."\r\n";
+		$out .= '店別合計'."\r\n";
 		$sections = $SectionModel->amountSectionList();
 		$total = array();
 		$all_total = 0;
@@ -38,7 +39,7 @@ class SalesCsvComponent extends Object {
 			$out .= ','.$section_total."\r\n";
 		}
 		
-		$out .= '合計,';
+		$out .= '日計,';
 		$out .= implode(',', $total);
 		$out .= ','.$all_total."\r\n";
 		

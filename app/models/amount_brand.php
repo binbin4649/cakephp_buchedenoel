@@ -12,8 +12,7 @@ class AmountBrand extends AppModel {
 			'order' => ''
 		)
 	);
-
-
+	
 	/*
 	function save($data){
 		pr($data);
