@@ -15,23 +15,33 @@ class AmountSection extends AppModel {
 	);
 	
 	function markIndex($section_id = null, $year = null, $month = null){
+		if ($this->Behaviors->attached('Cache')) {
+			$args = func_get_args();
+			if($this->cacheEnabled()) return $this->cacheMethod(CACHE_TODAY, __FUNCTION__, $args);//
+		}
 		App::import('Component', 'DateCal');
    		$DateCalComponent = new DateCalComponent();
    		$month_total = 0; //売上月トータル
    		$month_incomplete = 0; //未完月トータル
    		$month_plan = 0; //予算合計
    		$month_mark = 0; //目標合計
+   		$month_plan_avg = 0; //平均予算達成率
+		$month_mark_avg = 0; //平均目標達成率
    		$out = array();
 		$last_day = $DateCalComponent->last_day($year, $month);
 		$days = array();
 		for($i = 1; $i <= $last_day; $i++){
 			$mark = $this->mark($section_id, $year, $month, $i);
 			$out['days'][] = $mark;
+			$month_plan_avg = $month_plan_avg + $mark['plan_achieve_rate'];
+			$month_mark_avg = $month_mark_avg + $mark['mark_achieve_rate'];
 			$month_total = $month_total + $mark['sales_total'];
 			$month_incomplete = $month_incomplete + $mark['incomplete_total'];
 			$month_plan = $month_plan + $mark['plan'];
 			$month_mark = $month_mark + $mark['mark'];
 		}
+		$out['month_plan_avg'] = @floor($month_plan_avg / date('d'));
+		$out['month_mark_avg'] = @floor($month_mark_avg / date('d'));
 		$out['month_total'] = $month_total;
 		$out['month_incomplete'] = $month_incomplete;
 		$out['month_plan'] = $month_plan;
@@ -42,41 +52,51 @@ class AmountSection extends AppModel {
 	// year month day を受け取って、売上金額、未完金額、売上予算、目標、達成率を返す 
 	// amount を計算してsave & return
 	function mark($section_id, $year, $month, $day){
-		
 		if ($this->Behaviors->attached('Cache')) {
 			$args = func_get_args();
 			if($this->cacheEnabled()) return $this->cacheMethod(CACHE_TODAY, __FUNCTION__, $args);//
 		}
-		
+		App::import('Component', 'Selector');
+   		$SelectorComponent = new SelectorComponent();
 		App::import('Model', 'Order');
     	$OrderModel = new Order();
+    	App::import('Model', 'Section');
+    	$SectionModel = new Section();
+    	$incomplete_total = 0; //未完金額合計
     	$sales_total = 0; //売上金額合計
-		$incomplete_total = 0; //未完金額合計
+    	$guest_qty = 0; //客数
+    	$score_qty = 0; //点数
+    	$cost_total = 0; //コスト合計
     	$target_date = $year.'-'.$month.'-'.$day;
     	
     	$params = array(
 			'conditions'=>array('Order.section_id'=>$section_id, 'Order.date'=>$target_date),
-			'recursive'=>0,
-			'fields'=>array('Order.total', 'Order.order_status', 'Order.updated')
+			'recursive'=>1,
 		);
+		$OrderModel->contain('OrderDateil');
 		$orders = $OrderModel->find('all' ,$params);
 		foreach($orders as $order){
-			if($order['Order']['order_status'] == 1){
+			if($order['Order']['order_status'] == 1 or $order['Order']['order_status'] == 2 or $order['Order']['order_status'] == 3){
 				$sales_total = $sales_total + $order['Order']['total'];
 				$incomplete_total = $incomplete_total + $order['Order']['total'];
-			}elseif($order['Order']['order_status'] == 2){
-				$sales_total = $sales_total + $order['Order']['total'];
-				$incomplete_total = $incomplete_total + $order['Order']['total'];
-			}elseif($order['Order']['order_status'] == 3){
-				$sales_total = $sales_total + $order['Order']['total'];
-				$incomplete_total = $incomplete_total + $order['Order']['total'];
+				$guest_qty++;
+				foreach($order['OrderDateil'] as $detail){
+					$score_qty = $score_qty + $detail['bid_quantity'];
+					$cost = $SelectorComponent->costSelector2($detail['subitem_id']);
+					$cost_total = $cost_total + $cost;
+				}
 			}elseif($order['Order']['order_status'] == 4){
 				$sales_total = $sales_total + $order['Order']['total'];
+				$guest_qty++;
+				foreach($order['OrderDateil'] as $detail){
+					$score_qty = $score_qty + $detail['bid_quantity'];
+					$cost = $SelectorComponent->costSelector2($detail['subitem_id']);
+					$cost_total = $cost_total + $cost;
+				}
 			}else{
 				//集計しない
 			}
 		}
-    	
     	$params = array(
 			'conditions'=>array(
 				'AmountSection.section_id'=>$section_id,
@@ -92,14 +112,21 @@ class AmountSection extends AppModel {
 		}else{
 			$AmountSection['AmountSection']['section_id'] = $section_id;
 			$AmountSection['AmountSection']['start_day'] = $target_date;
-			$AmountSection['AmountSection']['end_day'] = $target_date;
+			$AmountSection['AmountSection']['sales_qty'] = $target_date;
+			
 			$AmountSection['AmountSection']['plan'] = 0;
 			$AmountSection['AmountSection']['mark'] = 0;
 			$AmountSection['AmountSection']['addsub'] = 0;
 		}
 		$AmountSection['AmountSection']['full_amount'] = $sales_total;
+		$AmountSection['AmountSection']['guest_qty'] = $guest_qty;
+		$AmountSection['AmountSection']['sales_qty'] = $score_qty;
+		$AmountSection['AmountSection']['cost_amount'] = $cost_total;
 		$this->create();
     	$this->save($AmountSection);
+    	$result['guest_qty'] = $guest_qty;
+    	$result['score_qty'] = $score_qty;
+    	$result['cost_total'] = $cost_total;
     	$result['year'] = $year;
     	$result['month'] = $month;
     	$result['day'] = $day;
@@ -109,11 +136,13 @@ class AmountSection extends AppModel {
     	$result['plan'] = $AmountSection['AmountSection']['plan'];
     	$result['mark'] = $AmountSection['AmountSection']['mark'];
     	$result['addsub'] = $AmountSection['AmountSection']['addsub'];
+    	if($result['addsub'] > 0) $sales_total = $sales_total + $result['addsub'];
     	$result['plan_achieve_rate'] = @floor(($sales_total / $AmountSection['AmountSection']['plan']) * 100);
     	$result['mark_achieve_rate'] = @floor(($sales_total / $AmountSection['AmountSection']['mark']) * 100);
+    	//$result['plan_achieve_rate'] = @floor(($AmountSection['AmountSection']['plan'] / $sales_total) * 100);
+    	//$result['mark_achieve_rate'] = @floor(($AmountSection['AmountSection']['mark'] / $sales_total) * 100);
     	return $result;
 	}
-	
 	
 	//plan と mark を保存するだけなんだけど、汎用的にしてある（手抜き）
 	function saveMark($value){

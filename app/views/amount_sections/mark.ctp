@@ -63,8 +63,8 @@ echo '<td>'.number_format($total['month_total']).'</td>';
 echo '<td>'.number_format($total['month_incomplete']).'</td>';
 echo '<td>'.number_format($total['month_plan']).'</td>';
 echo '<td>'.number_format($total['month_mark']).'</td>';
-echo '<td></td>';
-echo '<td></td>';
+echo '<td>'.$total['month_plan_avg'].'%</td>';
+echo '<td>'.$total['month_mark_avg'].'%</td>';
 echo '</tr>';
 ?>
 </tbody>

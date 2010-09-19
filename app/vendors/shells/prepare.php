@@ -8,6 +8,15 @@ class PrepareShell extends Shell {
 		$this->out("");
 		$this->out("Start Shell");
 		$this->hr();
+		
+		/*
+		//テスト用
+		App::import('Model', 'AmountBrand');
+    	$AmountBrandModel = new AmountBrand();
+		$AmountBrandModel->markIndex('2010', '09');
+		*/
+		
+		
 		//タグ発行csvのファイルを削除
 		$old_file = array();
 		$path = WWW_ROOT.DS.'files'.DS.'pricetagcsv'.DS;
@@ -130,8 +139,6 @@ class PrepareShell extends Shell {
 		//部門別売上集計してCSV出力
 		//とりあえず直営店だけ
 		$SalesCsvComponent->storeSales();
-		
-		
 		
 		
 		//単品管理が複数あった場合、最新の在庫を残して、残りは在庫減修正する。

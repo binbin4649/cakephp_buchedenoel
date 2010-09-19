@@ -160,8 +160,6 @@ class AmountSectionsController extends AppController {
 			$year = date('Y');
 			$month = date('m');
 		}
-		$month_plan_avg = 0; //平均予算達成率
-		$month_mark_avg = 0; //平均目標達成率
 		$total = $this->AmountSection->markIndex($id, $year, $month);
 		$days = $total['days'];
 		$yearList = get_year_list();

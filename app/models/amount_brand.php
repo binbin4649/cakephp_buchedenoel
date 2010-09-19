@@ -13,6 +13,51 @@ class AmountBrand extends AppModel {
 		)
 	);
 	
+	//集計
+	function markIndex($brands, $year = null, $month = null){
+		App::import('Component', 'DateCal');
+   		$DateCalComponent = new DateCalComponent();
+		$out = array();
+		$last_day = $DateCalComponent->last_day($year, $month);
+		for($i = 1; $i <= $last_day; $i++){
+			$out[$i] = $this->mark($brands, $year, $month, $i);
+		}
+		return $out;
+	}
+	
+	//markIndexの子供
+	function mark($brands, $year, $month, $day){
+		App::import('Component', 'Selector');
+   		$SelectorComponent = new SelectorComponent();
+		App::import('Model', 'Order');
+    	$OrderModel = new Order();
+    	$target_date = $year.'-'.$month.'-'.$day;
+    	$out = array();
+    	foreach($brands as $id=>$name){
+    		$out[$id]['name'] = $name;
+    		$out[$id]['sales'] = 0;
+    		$out[$id]['qty'] = 0;
+    		$out[$id]['cost'] = 0;
+    	}
+    	$params = array(
+			'conditions'=>array('Order.date'=>$target_date),
+			'recursive'=>2,
+		);
+		$OrderModel->contain('OrderDateil.Item');
+		$orders = $OrderModel->find('all' ,$params);
+    	foreach($orders as $order){
+    		foreach($order['OrderDateil'] as $detail){
+    			$cost = $SelectorComponent->costSelector2($detail['subitem_id']);
+    			$out[$detail['Item']['brand_id']]['sales'] = @$out[$detail['Item']['brand_id']]['sales'] + $detail['bid'];
+    			$out[$detail['Item']['brand_id']]['qty'] = @$out[$detail['Item']['brand_id']]['qty'] + $detail['bid_quantity'];
+    			$out[$detail['Item']['brand_id']]['cost'] = @$out[$detail['Item']['brand_id']]['cost'] + $cost;
+    		}
+    		
+    	}
+    	return $out;
+	}
+	
+	
 	/*
 	function save($data){
 		pr($data);

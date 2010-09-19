@@ -2,7 +2,6 @@
 class Stock extends AppModel {
 
 	var $name = 'Stock';
-	//var $actsAs = array('Containable');
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	var $belongsTo = array(

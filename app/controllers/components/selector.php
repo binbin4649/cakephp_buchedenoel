@@ -24,10 +24,28 @@ class SelectorComponent extends Object {
 		}else{
 			$params = array(
 				'conditions'=>array('Item.id'=>$item_id),
-				'recursive'=>0
+				'recursive'=>0,
+				'fields'=>array('Item.cost')
 			);
 			$item = $ItemModel->find('first' ,$params);
 			return $item['Item']['cost'];
+		}
+	}
+	
+	function costSelector2($subitem_id){
+		App::import('Model', 'Subitem');
+    	$SubitemModel = new Subitem();
+    	$params = array(
+			'conditions'=>array('Subitem.id'=>$subitem_id),
+			'recursive'=>1,
+			'fields'=>array('Subitem.cost')
+		);
+		$SubitemModel->contain('Item.cost');
+		$subitem = $SubitemModel->find('first' ,$params);
+		if(!empty($subitem['Subitem']['cost'])){
+			return $subitem['Subitem']['cost'];
+		}else{
+			return $subitem['Item']['cost'];
 		}
 	}
 

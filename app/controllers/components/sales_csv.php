@@ -14,6 +14,9 @@ class SalesCsvComponent extends Object {
    		$month = date('m');
     	$days = $DateCalComponent->last_day($year, $month);
     	$d = 1;
+    	
+    	//はじめ//////////////////////////////////////売上金額
+    	$rankings = array();
     	$out = '直営店売上集計,'.$year.'年'.$month.'月,'."\r\n";
     	$out .= '部門,';
     	while($days >= $d){
@@ -37,12 +40,126 @@ class SalesCsvComponent extends Object {
 			$out .= $section_name.',';
 			$out .= implode(',', $i);
 			$out .= ','.$section_total."\r\n";
+			$rankings[$section_id] = $section_total;
+		}
+		$out .= '日計,';
+		$out .= implode(',', $total);
+		$out .= ','.$all_total."\r\n";
+		$out .= "\r\n";
+		$out .= '売上ランキング,';
+		$out .= "\r\n";
+		$out .= '部門,';
+		arsort($rankings);
+		foreach($rankings as $section_id=>$ranking){
+			$out .= $sections[$section_id].',';
+		}
+		$out .= "\r\n";
+		$out .= '金額,';
+		foreach($rankings as $section_id=>$ranking){
+			$out .= $ranking.',';
+		}
+		$out .= "\r\n";
+		$out .= '順位,';
+		$rank = 1;
+		foreach($rankings as $section_id=>$ranking){
+			$out .= $rank.',';
+			$rank++;
+		}
+		
+		
+		$out .= "\r\n";
+		$out .= "\r\n";
+		////////////////////////////////////////客数
+		$rankings = array();
+		$out .= '直営店客数集計,'.$year.'年'.$month.'月,'."\r\n";
+    	$out .= '部門,';
+    	$days = $DateCalComponent->last_day($year, $month);
+    	$d = 1;
+    	while($days >= $d){
+    		$out .= $d.'日,';
+    		$d++;
+    	}
+		$out .= '店別合計'."\r\n";
+		$sections = $SectionModel->amountSectionList();
+		$total = array();
+		$all_total = 0;
+		foreach($sections as $section_id=>$section_name){
+			$section_total = 0;
+			$i = array();
+			$amounts = $AmountSectionModel->markIndex($section_id, $year, $month);
+			foreach($amounts['days'] as $day){
+				@$total[$day['day']] = $total[$day['day']] + $day['guest_qty'];
+				$i[] = $day['guest_qty'];
+				$section_total = $section_total + $day['guest_qty'];
+				$all_total = $all_total + $day['guest_qty'];
+			}
+			$out .= $section_name.',';
+			$out .= implode(',', $i);
+			$out .= ','.$section_total."\r\n";
+			$rankings[$section_id] = $section_total;
 		}
 		
 		$out .= '日計,';
 		$out .= implode(',', $total);
 		$out .= ','.$all_total."\r\n";
+		$out .= "\r\n";
+		$out .= '客数ランキング,';
+		$out .= "\r\n";
+		$out .= '部門,';
+		arsort($rankings);
+		foreach($rankings as $section_id=>$ranking){
+			$out .= $sections[$section_id].',';
+		}
+		$out .= "\r\n";
+		$out .= '客数,';
+		foreach($rankings as $section_id=>$ranking){
+			$out .= $ranking.',';
+		}
+		$out .= "\r\n";
+		$out .= '順位,';
+		$rank = 1;
+		foreach($rankings as $section_id=>$ranking){
+			$out .= $rank.',';
+			$rank++;
+		}
 		
+		
+		
+		
+		$out .= "\r\n";
+		$out .= "\r\n";
+		////////////////////////////////////////ブランド集計
+		App::import('Model', 'AmountBrand');
+    	$AmountBrandModel = new AmountBrand();
+    	App::import('Model', 'Brand');
+    	$BrandModel = new Brand();
+    	$brands = $BrandModel->find('list');
+		
+		$out .= 'ブランド別売上,'.$year.'年'.$month.'月,'."\r\n";
+    	$out .= 'ブランド,';
+    	$days = $DateCalComponent->last_day($year, $month);
+    	$d = 1;
+    	while($days >= $d){
+    		$out .= $d.'日,';
+    		$d++;
+    	}
+		$out .= '合計'."\r\n";
+	
+		$total = array();
+		$all_total = 0;
+		$amounts = $AmountBrandModel->markIndex($brands, $year, $month);
+		foreach($brands as $brand_id=>$brand_name){
+			$brand_total = 0;
+			$out .= $brand_name.',';
+			foreach($amounts as $day=>$amount){
+				$out .= $amount[$brand_id]['sales'].',';
+				$brand_total = $brand_total + $amount[$brand_id]['sales'];
+			}
+			$out .= $brand_total."\r\n";
+		}
+		
+		
+		////////////////////////////////////////出力部
 		$file_name = 'store_sales'.date('Ymd-His').'.csv';
 		$path = WWW_ROOT.'/files/store_sales/';
 		$output_csv = mb_convert_encoding($out, 'SJIS', 'UTF-8');

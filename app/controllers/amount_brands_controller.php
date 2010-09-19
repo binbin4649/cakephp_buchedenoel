@@ -3,7 +3,8 @@ class AmountBrandsController extends AppController {
 
 	var $name = 'AmountBrands';
 	var $helpers = array('Html', 'Form');
-
+	
+	
 	function index() {
 		$modelName = 'AmountBrand';
 		if (!empty($this->data)) {

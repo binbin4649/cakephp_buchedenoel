@@ -38,7 +38,7 @@
  */
 class AppModel extends Model {
 
-	var $actsAs    = array('Cache');
+	var $actsAs = array('Cache', 'Containable');
 	
 	/*
 	function save($data){
