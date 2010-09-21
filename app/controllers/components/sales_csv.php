@@ -123,9 +123,6 @@ class SalesCsvComponent extends Object {
 			$rank++;
 		}
 		
-		
-		
-		
 		$out .= "\r\n";
 		$out .= "\r\n";
 		////////////////////////////////////////ブランド集計

@@ -10,10 +10,12 @@ class StocksController extends AppController {
 		$subitem_name = null;
 		$depot_name = null;
 		$conditions = array();
+		$contain_conditions = array();
 		if($ac == 'reset'){
 			$this->Session->delete("Stock");
 		}
 		if(!empty($this->data)){
+			//ブランド検索と部門検索を追加
 			$subitem_name = trim($this->data['Stock']['subitem_name']);
 			$depot_name = trim($this->data['Stock']['depot_name']);
 			$depot_id = mb_convert_kana($this->data['Stock']['depot_id'], 'a', 'UTF-8');
@@ -25,6 +27,10 @@ class StocksController extends AppController {
 			$subitem_jan = mb_convert_kana($this->data['Stock']['subitem_jan'], 'a', 'UTF-8');
 			$subitem_jan = ereg_replace("[^0-9]", "", $subitem_jan);//半角数字以外を削除
 			$this->data['Stock']['subitem_jan'] = $subitem_jan;
+			$section_id = mb_convert_kana($this->data['Stock']['section_id'], 'a', 'UTF-8');
+			$section_id = ereg_replace("[^0-9]", "", $section_id);//半角数字以外を削除
+			$this->data['Stock']['section_id'] = $section_id;
+			$brand_id = $this->data['Stock']['brand_id'];
 		}elseif($this->Session->check('Stock')){
 			$this->data = $this->Session->read('Stock');
 			$subitem_name = trim($this->data['Stock']['subitem_name']);
@@ -41,12 +47,14 @@ class StocksController extends AppController {
 		}else{
 			$this->Session->delete("Stock");
 		}
-		if(!empty($subitem_name) or !empty($depot_name) or !empty($depot_id) or !empty($item_id) or !empty($subitem_jan)){			
+		if(!empty($subitem_name) or !empty($depot_name) or !empty($depot_id) or !empty($item_id) or !empty($subitem_jan) or !empty($section_id) or !empty($brand_id)){
 			if(!empty($subitem_name)) $conditions[] = array('Subitem.name LIKE'=>'%'.$subitem_name.'%');
 			if(!empty($item_id)) $conditions[] = array('Subitem.item_id'=>$item_id);
 			if(!empty($subitem_jan)) $conditions[] = array('Subitem.jan'=>$subitem_jan);
 			if(!empty($depot_name)) $conditions[] = array('Depot.name LIKE'=>'%'.$depot_name.'%');
 			if(!empty($depot_id)) $conditions[] = array('Depot.id'=>$depot_id);
+			if(!empty($section_id)) $conditions[] = array('Depot.section_id'=>$section_id);
+			if(!empty($brand_id)) $conditions['or'] = $this->Item->brandItemQuery($brand_id);
 			$this->Session->write("Stock", $this->data);
 		}else{
 			$this->Session->delete("Stock");
@@ -79,16 +87,44 @@ class StocksController extends AppController {
 		$this->paginate = array(
 			'conditions'=>$conditions,
 			'limit'=>50,
-			'order'=>array('Stock.updated'=>'desc')
+			'order'=>array('Stock.updated'=>'desc'),
+			'recursive'=>2,
+			'contain'=>array('Depot', 'Subitem.Item'),
+			/*
+			'joins'=>array(array(
+				'type'=>'LEFT',
+				'alias'=>'Subitem',
+				'table'=>'subitems',
+				'conditions'=>'Stock.subitem_id = Subitem.id',
+			),array(
+				'type'=>'LEFT',
+				'alias'=>'Item',
+				'table'=>'items',
+				'conditions'=>'Subitem.item_id = Item.id',
+			
+			)),
+			*/
 		);
-		
-		$this->set('stocks', $this->paginate());
+		/*
+		$this->paginate->bindModel(array('belongsTo' => array('Subitem' => array(
+				'className' => 'Subitem',
+				'foreignKey' => 'subitem_id',
+				'conditions' => '',
+				'fields' => '',
+				'order' => ''
+				)
+		)));
+		*/
+		$stocks = $this->paginate();
+		$this->set('stocks', $stocks);
+		$this->set('brands', $this->Item->Brand->find('list'));
 		if(empty($this->data['Stock']['csv'])) $this->data['Stock']['csv'] = 0;
 		if($this->data['Stock']['csv'] == 1){
 			$params = array(
 				'conditions'=>$conditions,
-				'recursive'=>0,
-				'limit'=>5000
+				'recursive'=>2,
+				'limit'=>6000,
+				'contain'=>array('Depot', 'Subitem.Item'),
 			);
 			$stocks = $this->Stock->find('all' ,$params);
 			$output_csv = $this->OutputCsv->stocks($stocks);

@@ -303,18 +303,30 @@ class OutputCsvComponent extends Object {
 
 	//在庫一覧
 	function stocks($stocks){
-		$out = '"子品番ID","子品番名","JAN","倉庫ID","倉庫名","在庫数","加工コスト","支給品コスト","コスト合計","carat","color","clarity","cut",';
+		$itemproperty = get_itemproperty();
+		$itemtype = get_itemtype();
+		$out = '"子品番ID","子品番名","JAN","倉庫ID","倉庫名","ブランドID","属性","タイプ","在庫数","価格","在庫金額上代","在庫金額下代","加工コスト","支給品コスト","原価","carat","color","clarity","cut",';
 		$out .= '"鑑定書番号","受注番号","基本サイズ","基本サイズ外","石コスト","地金コスト","地金重さ","鑑定書コスト","部門ID","店舗番号（旧倉庫番号）"'."\r\n";
 		foreach($stocks as $stock){
+			$cost = $this->Selector->costSelector2($stock['Subitem']['id']);
+			$zaiko_total = $stock['Subitem']['Item']['price'] * $stock['Stock']['quantity'];
+			$zaiko_cost = $cost * $stock['Stock']['quantity'];
+			
 			$out .= '"'.$stock['Stock']['subitem_id'].'","';
 			$out .= $stock['Subitem']['name'].'","';
 			$out .= $stock['Subitem']['jan'].'","';
 			$out .= $stock['Stock']['depot_id'].'","';
 			$out .= $stock['Depot']['name'].'","';
+			$out .= $stock['Subitem']['Item']['brand_id'].'","';
+			$out .= @$itemproperty[$stock['Subitem']['Item']['itemproperty']].'","';
+			$out .= @$itemtype[$stock['Subitem']['Item']['itemtype']].'","';
 			$out .= $stock['Stock']['quantity'].'","';
+			$out .= $stock['Subitem']['Item']['price'].'","';
+			$out .= $zaiko_total.'","';
+			$out .= $zaiko_cost.'","';
 			$out .= $stock['Subitem']['labor_cost'].'","';
 			$out .= $stock['Subitem']['supply_full_cost'].'","';
-			$out .= $stock['Subitem']['cost'].'","';
+			$out .= $cost.'","';
 			$out .= $stock['Subitem']['carat'].'","';
 			$out .= $stock['Subitem']['color'].'","';
 			$out .= $stock['Subitem']['clarity'].'","';
