@@ -132,6 +132,22 @@ class Section extends AppModel {
 		return $sections;
 	}
 	
+	function amountSectionList2(){
+		//閉鎖部門以外、ついでに部門コード順
+		App::import('Component', 'Cleaning');
+   		$CleaningComponent = new CleaningComponent();
+		$params = array(
+			'conditions'=>array('Section.sales_code <>'=>4),
+			'recursive'=>0,
+			//'order'=>array('Section.kanjo_bugyo_code DESC')
+		);
+		$sections = $this->find('list', $params);
+		foreach($sections as $id=>$name){
+			$name = $CleaningComponent->sectionName($name);
+			$sections[$id] = mb_substr($name, 0, 20);
+		}
+		return $sections;
+	}
 	
 }
 ?>

@@ -84,6 +84,7 @@ class StocksController extends AppController {
 			$this->set('subitem', $subitem);
 		}
 		
+		$conditions[] = array('Stock.quantity >'=>0);
 		$this->paginate = array(
 			'conditions'=>$conditions,
 			'limit'=>50,

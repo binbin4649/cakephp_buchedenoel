@@ -12,6 +12,7 @@ class SalesCsvComponent extends Object {
    		$DateCalComponent = new DateCalComponent();
    		$year = date('Y');
    		$month = date('m');
+   		$day = date('d');
     	$days = $DateCalComponent->last_day($year, $month);
     	$d = 1;
     	
@@ -141,7 +142,7 @@ class SalesCsvComponent extends Object {
     		$d++;
     	}
 		$out .= '合計'."\r\n";
-	
+		
 		$total = array();
 		$all_total = 0;
 		$amounts = $AmountBrandModel->markIndex($brands, $year, $month);
@@ -155,6 +156,28 @@ class SalesCsvComponent extends Object {
 			$out .= $brand_total."\r\n";
 		}
 		
+		
+		$out .= "\r\n";
+		$out .= "\r\n";
+		////////////////////////////////////////店舗別
+		$out .= '部門別集計,'.$year.'年'.$month.'月'.$day.'日,'."\r\n";
+		$out .= "\r\n";
+		$stock_qty = 0;
+		$stock_price = 0;
+    	$sections = $SectionModel->amountSectionList2();
+    	foreach($sections as $section_id=>$section_name){
+    		$out .= $section_name."\r\n";
+    		$out_val = $AmountSectionModel->dayAmount($section_id);
+    		$out .= $out_val['value'];
+    		$stock_qty = $stock_qty + $out_val['out']['stock_qty'];
+			$stock_price = $stock_price + $out_val['out']['stock_price'];
+    		$out .= "\r\n";
+    	}
+		
+		$out .= "\r\n";
+		$out .= '全社合計'."\r\n";
+		$out .= '在庫数,'.$stock_qty."\r\n";
+		$out .= '在庫上代,'.$stock_price."\r\n";
 		
 		////////////////////////////////////////出力部
 		$file_name = 'store_sales'.date('Ymd-His').'.csv';

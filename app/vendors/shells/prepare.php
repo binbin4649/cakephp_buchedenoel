@@ -9,12 +9,12 @@ class PrepareShell extends Shell {
 		$this->out("Start Shell");
 		$this->hr();
 		
-		/*
+		
 		//テスト用
-		App::import('Model', 'AmountBrand');
-    	$AmountBrandModel = new AmountBrand();
-		$AmountBrandModel->markIndex('2010', '09');
-		*/
+		//App::import('Model', 'AmountSection');
+    	//$AmountSectionModel = new AmountSection();
+		//$AmountSectionModel->dayAmount('305');
+		
 		
 		
 		//タグ発行csvのファイルを削除

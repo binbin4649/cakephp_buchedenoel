@@ -14,6 +14,132 @@ class AmountSection extends AppModel {
 		)
 	);
 	
+	//日別、色々集計
+	function dayAmount($section_id){
+		App::import('Model', 'Stock');
+    	$StockModel = new Stock();
+    	App::import('Model', 'Depot');
+    	$DepotModel = new Depot();
+    	App::import('Component', 'Selector');
+   		$SelectorComponent = new SelectorComponent();
+    	$out['stock_qty'] = 0;
+    	$out['stock_price'] = 0;
+    	$out['stock_cost'] = 0;
+    	$out['brand'] = array();
+    	$out['type'] = array();
+    	$out['property'] = array();
+    	
+    	$out['in_qty'] = 0;
+    	$out['in_total'] = 0;
+    	$out['out_qty'] = 0;
+    	$out['out_total'] = 0;
+    	$out['up_qty'] = 0;
+    	$out['up_total'] = 0;
+    	$out['down_qty'] = 0;
+    	$out['down_total'] = 0;
+    	
+    	$params = array(
+			'conditions'=>array('Depot.section_id'=>$section_id),
+			'recursive'=>3,
+			'contain'=>array('Section', 'Stock.Subitem.Item'),
+		);
+		$depots = $DepotModel->find('all' ,$params);
+		foreach($depots as $depot){
+			foreach($depot['Stock'] as $stock){
+				$out['stock_qty'] = $out['stock_qty'] + $stock['quantity'];
+				$stock_price = @$stock['Subitem']['Item']['price'] * $stock['quantity'];
+				$out['stock_price'] = $out['stock_price'] + $stock_price;
+				$cost = $SelectorComponent->costSelector2($stock['subitem_id']);
+				$stock_cost = $cost * $stock['quantity'];
+				$out['stock_cost'] = $out['stock_cost'] + $stock_cost;
+				$brand_id = @$stock['Subitem']['Item']['brand_id'];
+				@$out['brand'][$brand_id]['stock_qty'] = $out['brand'][$brand_id]['stock_qty'] + $stock['quantity'];
+				@$out['brand'][$brand_id]['stock_price'] = $out['brand'][$brand_id]['stock_price'] + $stock_price;
+				@$out['brand'][$brand_id]['stock_cost'] = $out['brand'][$brand_id]['stock_cost'] + $stock_cost;
+				$itemtype = @$stock['Subitem']['Item']['itemtype'];
+				@$out['type'][$itemtype]['stock_qty'] = $out['type'][$itemtype]['stock_qty'] + $stock['quantity'];
+				@$out['type'][$itemtype]['stock_price'] = $out['type'][$itemtype]['stock_price'] + $stock_price;
+				@$out['type'][$itemtype]['stock_cost'] = $out['type'][$itemtype]['stock_cost'] + $stock_cost;
+				$itemproperty = @$stock['Subitem']['Item']['itemproperty'];
+				@$out['property'][$itemproperty]['stock_qty'] = $out['property'][$itemproperty]['stock_qty'] + $stock['quantity'];
+				@$out['property'][$itemproperty]['stock_price'] = $out['property'][$itemproperty]['stock_price'] + $stock_price;
+				@$out['property'][$itemproperty]['stock_cost'] = $out['property'][$itemproperty]['stock_cost'] + $stock_cost;
+			}
+		}
+		$itemproperty = get_itemproperty();
+		$itemtype = get_itemtype();
+		App::import('Model', 'Brand');
+    	$BrandModel = new Brand();
+    	$brands = $BrandModel->find('list');
+		
+		if($out['stock_qty'] > 0){
+			$value = '総在庫数,'.$out['stock_qty'].','."\r\n";
+			$value .= '総在庫上代,'.$out['stock_price'].','."\r\n";
+			//$value .= '総在庫下代,'.$out['stock_cost'].','."\r\n";
+			$value .= 'ブランド別在庫数量,'."\r\n";
+			foreach($out['brand'] as $id=>$val){
+				$value .= @$brands[$id].',';
+			}
+			$value .= "\r\n";
+			foreach($out['brand'] as $id=>$val){
+				$value .= $val['stock_qty'].',';
+			}
+			$value .= "\r\n";
+			$value .= 'ブランド別上代,'."\r\n";
+			foreach($out['brand'] as $id=>$val){
+				$value .= @$brands[$id].',';
+			}
+			$value .= "\r\n";
+			foreach($out['brand'] as $id=>$val){
+				$value .= $val['stock_price'].',';
+			}
+			
+			$value .= "\r\n";
+			$value .= '商品タイプ別在庫数量,'."\r\n";
+			foreach($out['type'] as $id=>$val){
+				$value .= @$itemtype[$id].',';
+			}
+			$value .= "\r\n";
+			foreach($out['type'] as $id=>$val){
+				$value .= $val['stock_qty'].',';
+			}
+			$value .= "\r\n";
+			$value .= '商品タイプ別上代,'."\r\n";
+			foreach($out['type'] as $id=>$val){
+				$value .= @$itemtype[$id].',';
+			}
+			$value .= "\r\n";
+			foreach($out['type'] as $id=>$val){
+				$value .= $val['stock_price'].',';
+			}
+			
+			$value .= "\r\n";
+			$value .= '商品属性別在庫数量,'."\r\n";
+			foreach($out['property'] as $id=>$val){
+				$value .= @$itemproperty[$id].',';
+			}
+			$value .= "\r\n";
+			foreach($out['property'] as $id=>$val){
+				$value .= $val['stock_qty'].',';
+			}
+			$value .= "\r\n";
+			$value .= '商品属性別上代,'."\r\n";
+			foreach($out['property'] as $id=>$val){
+				$value .= @$itemproperty[$id].',';
+			}
+			$value .= "\r\n";
+			foreach($out['property'] as $id=>$val){
+				$value .= $val['stock_price'].',';
+			}
+		}else{
+			$value = '';
+		}
+		$value .= "\r\n";
+		$out_val['value'] = $value;
+		$out_val['out'] = $out;
+		return $out_val;
+	}
+	
 	function markIndex($section_id = null, $year = null, $month = null){
 		if ($this->Behaviors->attached('Cache')) {
 			$args = func_get_args();
