@@ -30,6 +30,11 @@ class StocksController extends AppController {
 			$section_id = mb_convert_kana($this->data['Stock']['section_id'], 'a', 'UTF-8');
 			$section_id = ereg_replace("[^0-9]", "", $section_id);//半角数字以外を削除
 			$this->data['Stock']['section_id'] = $section_id;
+			
+			$old_system_no = mb_convert_kana($this->data['Stock']['old_system_no'], 'a', 'UTF-8');
+			$old_system_no = ereg_replace("[^0-9]", "", $old_system_no);//半角数字以外を削除
+			$this->data['Stock']['old_system_no'] = $old_system_no;
+			
 			$brand_id = $this->data['Stock']['brand_id'];
 		}elseif($this->Session->check('Stock')){
 			$this->data = $this->Session->read('Stock');
@@ -47,13 +52,14 @@ class StocksController extends AppController {
 		}else{
 			$this->Session->delete("Stock");
 		}
-		if(!empty($subitem_name) or !empty($depot_name) or !empty($depot_id) or !empty($item_id) or !empty($subitem_jan) or !empty($section_id) or !empty($brand_id)){
+		if(!empty($subitem_name) or !empty($depot_name) or !empty($depot_id) or !empty($item_id) or !empty($subitem_jan) or !empty($section_id) or !empty($brand_id) or !empty($old_system_no)){
 			if(!empty($subitem_name)) $conditions[] = array('Subitem.name LIKE'=>'%'.$subitem_name.'%');
 			if(!empty($item_id)) $conditions[] = array('Subitem.item_id'=>$item_id);
 			if(!empty($subitem_jan)) $conditions[] = array('Subitem.jan'=>$subitem_jan);
 			if(!empty($depot_name)) $conditions[] = array('Depot.name LIKE'=>'%'.$depot_name.'%');
 			if(!empty($depot_id)) $conditions[] = array('Depot.id'=>$depot_id);
 			if(!empty($section_id)) $conditions[] = array('Depot.section_id'=>$section_id);
+			if(!empty($old_system_no)) $conditions[] = array('Depot.old_system_no'=>$old_system_no);
 			if(!empty($brand_id)) $conditions['or'] = $this->Item->brandItemQuery($brand_id);
 			$this->Session->write("Stock", $this->data);
 		}else{
@@ -63,7 +69,7 @@ class StocksController extends AppController {
 				$id = $this->data['Stock']['id_ex'];
 			}
 		}
-		$this->Stock->recursive = 0;
+		//$this->Stock->recursive = 0;
 		if($ac == 'depot' and $id != null){
 			$conditions = array('Stock.depot_id'=>$id);
 			$params = array(

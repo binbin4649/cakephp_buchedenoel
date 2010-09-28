@@ -43,16 +43,14 @@ echo $form->text('Stock.section_id', array(
 	'label'=>false,
 	'size'=>5
 ));
-echo '　';
-/*
-controller はまた今度
-echo $form->input('Stock.is_stock',array(
-	'type'=>'checkbox',
+
+echo '　旧倉庫番号';
+echo $form->text('Stock.old_system_no', array(
 	'label'=>false,
-	'div'=>false
+	'size'=>5
 ));
-echo '在庫有のみ　';
-*/
+
+echo '　';
 if($addForm->opneUser(open_users(), $opneuser, 'access_authority')){
 	echo $form->input('Stock.csv',array(
 		'type'=>'checkbox',
