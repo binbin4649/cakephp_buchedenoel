@@ -2,7 +2,6 @@
 class Stock extends AppModel {
 
 	var $name = 'Stock';
-	//var $actsAs = array('Containable');
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	var $belongsTo = array(
@@ -22,155 +21,157 @@ class Stock extends AppModel {
 		)
 	);
 	
-	/*
-	function find() {
+	//部門別に、親品番単位で在庫を集計 デフォルト倉庫のみ
+	function ItemStocksDefault($item_id, $ac = null){
 		if ($this->Behaviors->attached('Cache')) {
 			$args = func_get_args();
-			if($this->cacheEnabled()) return $this->cacheMethod(CACHE_TODAY, __FUNCTION__, $args);
+			if($this->cacheEnabled()) return $this->cacheMethod('7200', __FUNCTION__, $args);//2時間
 		}
-		$parent = get_parent_class($this);
-		return call_user_func_array(array($parent, __FUNCTION__), $args);
+    	App::import('Model', 'Section');
+    	$SectionModel = new Section();
+    	$out = array();
+    	$sections = $SectionModel->defaultList();
+    	foreach($sections as $section_id=>$section){
+    		$depots = array();
+			$depots[]['Depot']['id'] = $section['default_depot'];
+			$item_stock = $this->item_stock($depots, $item_id);
+			$out[$section_id]['section_name'] = $section['name'];
+			$out[$section_id]['qty'] = $item_stock['item_qty'];
+			$out[$section_id]['size'] = $item_stock['size'];
+    	}
+    	return $out;
 	}
-	*/
 	
-	//部門別に、親品番単位で在庫を集計
-	function ItemStocks($item_id){
-		/*
+	//部門別に、親品番単位で在庫を集計　デフォルト以外全部
+	function ItemStocks($item_id, $ac = null){
 		if ($this->Behaviors->attached('Cache')) {
 			$args = func_get_args();
-			if($this->cacheEnabled()) return $this->cacheMethod(CACHE_TODAY, __FUNCTION__, $args);//
+			if($this->cacheEnabled()) return $this->cacheMethod('7200', __FUNCTION__, $args);
 		}
-		*/
-		App::import('Model', 'Subitem');
-    	$SubitemModel = new Subitem();
     	App::import('Model', 'Depot');
     	$DepotModel = new Depot();
     	App::import('Model', 'Section');
     	$SectionModel = new Section();
     	$out = array();
-    	$sections = $SectionModel->cleaningList();
-    	foreach($sections as $section_id=>$section_name){
-    		$item_qty = 0;
-    		$size = array();
+    	$sections = $SectionModel->defaultList();
+    	foreach($sections as $section_id=>$section){
     		$params = array(
-				'conditions'=>array('Depot.section_id'=>$section_id),
+				'conditions'=>array('Depot.section_id'=>$section_id, 'Depot.id <>'=>$section['default_depot']),
 				'fields'=>array('Depot.id'),
 			);
-			$DepotModel->contain('Section.default_depot');
+			//$DepotModel->contain('Section.default_depot');
 			$depots = $DepotModel->find('all' ,$params);
-			foreach($depots as $depot){
-				$params = array(
-					'conditions'=>array('Subitem.item_id'=>$item_id),
-					'fields'=>array('Subitem.id', 'Subitem.major_size'),
-				);
-				$SubitemModel->unbindModel(array('hasMany'=>array('Part')));
-				$subitems = $SubitemModel->find('all' ,$params);
-				foreach($subitems as $subitem){
-					$subitem_qty = 0;
-					$params = array(
-						'conditions'=>array('Stock.subitem_id'=>$subitem['Subitem']['id'], 'Stock.depot_id'=>$depot['Depot']['id']),
-						'recursive'=>0,
-						'fields'=>array('Stock.quantity'),
-					);
-					$stocks = $this->find('all' ,$params);
-					foreach($stocks as $stock){
-						$item_qty = $item_qty + $stock['Stock']['quantity'];
-						$subitem_qty = $subitem_qty + $stock['Stock']['quantity'];
-					}
-					//pr($subitem_qty);
-					//$out[$section_id]['size'][$subitem['Subitem']['major_size']] = $subitem_qty;
-					if(!empty($size[$subitem['Subitem']['major_size']])){
-						$size[$subitem['Subitem']['major_size']] = $size[$subitem['Subitem']['major_size']] + $subitem_qty;
-					}else{
-						$size[$subitem['Subitem']['major_size']] = $subitem_qty;
-					}
-				}
-			}
-			$out[$section_id]['section_name'] = $section_name;
-			$out[$section_id]['qty'] = $item_qty;
-			$out[$section_id]['default_depot'] = $depot['Section']['default_depot'];
-			$out[$section_id]['size'] = $size;
+			$item_stock = $this->item_stock($depots, $item_id);
+			$out[$section_id]['section_name'] = $section['name'];
+			$out[$section_id]['qty'] = $item_stock['item_qty'];
+			$out[$section_id]['size'] = $item_stock['size'];
     	}
     	return $out;
 	}
 	
-	
-	//親品番単位で在庫数を計算
-	//ページネーション忘れてた、また今度
-	/*
-	function ItemStocks($item_id = null, $limit = 100){
-		
-		App::import('Model', 'Item');
-    	$ItemModel = new Item();
+	//部門別に、親品番単位で在庫を集計　全倉庫
+	function ItemStocksAll($item_id){
+		if ($this->Behaviors->attached('Cache')) {
+			$args = func_get_args();
+			if($this->cacheEnabled()) return $this->cacheMethod('7200', __FUNCTION__, $args);
+		}
     	App::import('Model', 'Depot');
     	$DepotModel = new Depot();
     	App::import('Model', 'Section');
     	$SectionModel = new Section();
-    	
-    	if(!empty($item_id)){
-    		$item_id = mb_convert_kana($item_id, 'a', 'UTF-8');
-			$item_id = ereg_replace("[^0-9]", "", $item_id);//半角数字以外を削除
-    		$conditions = array('Item.id'=>$item_id);
-    	}elseif(!empty($item_name)){
-    		$item_name = trim($item_name);
-    		$conditions = array('Item.name LIKE'=>'%'.$item_name.'%');
-    	}else{
-    		return false;
+    	$out = array();
+    	$sections = $SectionModel->defaultList();
+    	foreach($sections as $section_id=>$section){
+    		$params = array(
+				'conditions'=>array('Depot.section_id'=>$section_id),
+				'fields'=>array('Depot.id'),
+			);
+			$depots = $DepotModel->find('all' ,$params);
+			$item_stock = $this->item_stock($depots, $item_id);
+			$out[$section_id]['section_name'] = $section['name'];
+			$out[$section_id]['qty'] = $item_stock['item_qty'];
+			$out[$section_id]['size'] = $item_stock['size'];
     	}
-		$params = array(
-			'conditions'=>$conditions,
-			'limit'=>$limit,
-			'fields'=>array('Item.id', 'Item.name'),
-		);
-		$ItemModel->contain('Subitem.id', 'Subitem.name');
-		$items = $ItemModel->find('all' ,$params);
-		$sections = $SectionModel->find('list');
-			
-		foreach($items as $item_key=>$item){
-			$item_qty = 0;
-			foreach($item['Subitem'] as $subitem_key=>$subitem){
-				$section_name = '';
-				$section_default_depot = '';
-				$conditions = array();
-				if($section_id == null){
-					
-					pr($sections);
-					$conditions = array('Stock.subitem_id'=>$subitem['id']);
+    	return $out;
+	}
+	
+	//ItemStocks の子供
+	function item_stock($depots, $item_id){
+		App::import('Model', 'Subitem');
+	    $SubitemModel = new Subitem();
+		$item_qty = 0;
+	    $size = array();
+		$result = array();
+		foreach($depots as $depot){
+			$params = array(
+				'conditions'=>array('Subitem.item_id'=>$item_id),
+				'fields'=>array('Subitem.id', 'Subitem.major_size'),
+			);
+			$SubitemModel->unbindModel(array('hasMany'=>array('Part')));
+			$subitems = $SubitemModel->find('all' ,$params);
+			foreach($subitems as $subitem){
+				$subitem_qty = 0;
+				$stock_qty = $this->SubitemDepotTotal($subitem['Subitem']['id'], $depot['Depot']['id']);
+				$item_qty = $item_qty + $stock_qty;
+				$subitem_qty = $subitem_qty + $stock_qty;
+				if(!empty($size[$subitem['Subitem']['major_size']])){
+					$size[$subitem['Subitem']['major_size']] = $size[$subitem['Subitem']['major_size']] + $subitem_qty;
 				}else{
-					$conditions['and'] = array('Stock.subitem_id'=>$subitem['id']);
-					$section_id = mb_convert_kana($section_id, 'a', 'UTF-8');
-					$section_id = ereg_replace("[^0-9]", "", $section_id);//半角数字以外を削除
-					$params = array(
-						'conditions'=>array('Depot.section_id'=>$section_id),
-						'fields'=>array('Depot.id'),
-					);
-					$DepotModel->contain('Section.name', 'Section.id', 'Section.default_depot');
-					$depots = $DepotModel->find('all' ,$params);
-					foreach($depots as $depot){
-						$conditions['and']['or'][] = array('Stock.depot_id'=>$depot['Depot']['id']);
-						$section_name = $depot['Section']['name'];
-						$section_default_depot = $depot['Section']['default_depot'];
-					}
-				}
-				$params = array(
-					'conditions'=>$conditions,
-					'recursive'=>0,
-					'fields'=>array('Stock.quantity'),
-				);
-				$stocks = $this->find('all' ,$params);
-				foreach($stocks as $stock){
-					$item_qty = $item_qty + $stock['Stock']['quantity'];
+					$size[$subitem['Subitem']['major_size']] = $subitem_qty;
 				}
 			}
-			$items[$item_key]['Item']['item_qty'] = $item_qty;
-			$items[$item_key]['Item']['section_name'] = $section_name;
-			$items[$item_key]['Item']['section_id'] = $section_id;
-			$items[$item_key]['Item']['section_default_depot'] = $section_default_depot;
 		}
-		
-		return $items;
+		$result['item_qty'] = $item_qty;
+		$result['size'] = $size;
+		return $result;
 	}
-	*/
+	
+	//その倉庫の、その子品番の在庫数を返す。ItemStocks の孫
+	function SubitemDepotTotal($subitem_id, $depot_id){
+		if ($this->Behaviors->attached('Cache')) {
+			$args = func_get_args();
+			if($this->cacheEnabled()) return $this->cacheMethod('3600', __FUNCTION__, $args);
+		}
+		$result = 0;
+		$params = array(
+			'conditions'=>array('and'=>array('Stock.subitem_id'=>$subitem_id, 'Stock.depot_id'=>$depot_id)),
+			'recursive'=>0,
+			'fields'=>array('Stock.quantity')
+		);
+		$totals = $this->find('all' ,$params);
+		foreach($totals as $total){
+			$result = $result + $total['Stock']['quantity'];
+		}
+		return $result;
+	}
+	
+	//全サイズを横に並べたバージョン、CSV出力用 9/16これが中途半端
+	function item_stock_suball($depots, $item_id){
+		App::import('Model', 'Subitem');
+	    $SubitemModel = new Subitem();
+	    App::import('Component', 'Selector');
+   		$SelectorComponent = new SelectorComponent();
+		$item_qty = 0;
+	    $size = array();
+		$result = array();
+		foreach($depots as $depot){
+			$params = array(
+				'conditions'=>array('Subitem.item_id'=>$item_id),
+				'fields'=>array('Subitem.id', 'Subitem.major_size', 'Subitem.minority_size'),
+			);
+			$SubitemModel->unbindModel(array('hasMany'=>array('Part')));
+			$subitems = $SubitemModel->find('all' ,$params);
+			foreach($subitems as $subitem){
+				$stock_qty = $this->SubitemDepotTotal($subitem['Subitem']['id'], $depot['Depot']['id']);
+				$item_qty = $item_qty + $stock_qty;
+				$select_size = $SelectorComponent->sizeSelector($subitem['Subitem']['major_size'], $subitem['Subitem']['minority_size']);
+				$size[$select_size] = $stock_qty;
+			}
+		}
+		$result['item_qty'] = $item_qty;
+		$result['size'] = $size;
+		return $result;
+	}
 	
 	//1倉庫の在庫数を計算する
 	function DepotTotal($depot_id){
@@ -187,20 +188,6 @@ class Stock extends AppModel {
 		return $return;
 	}
 	
-	//その倉庫の、その子品番の在庫数を返す
-	function SubitemDepotTotal($subitem_id, $depot_id){
-		$result = 0;
-		$params = array(
-			'conditions'=>array('and'=>array('Stock.subitem_id'=>$subitem_id, 'Stock.depot_id'=>$depot_id)),
-			'recursive'=>0,
-		);
-		$totals = $this->find('all' ,$params);
-		foreach($totals as $total){
-			$result = $result + $total['Stock']['quantity'];
-		}
-		return $result;
-	}
-
 	//在庫を増やす
 	function Plus($subitem_id, $depot, $quantity, $user_id, $status){
 		App::import('Model', 'StockLog');

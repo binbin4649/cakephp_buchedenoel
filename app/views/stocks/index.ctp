@@ -1,7 +1,7 @@
 <?php
 if(!empty($csv)){
 	echo '<br>在庫CSV：<a href="'.$csv['url'].'" target="_blank">'.$csv['name'].'</a>';
-	echo '<br>CSVが出力されました。右クリック「リンク先を保存」を選択して保存してください。<br>';
+	echo '<br>CSVが出力されました。右クリック「リンク先を保存」を選択して保存してください。<br><br>';
 }
 ?>
 <div class="stocks index">
@@ -9,7 +9,7 @@ if(!empty($csv)){
 echo $form->create('Stock' ,array('action'=>'index'));
 echo '子品番名';
 echo $form->text('Stock.subitem_name', array(
-	'size'=>7,
+	'size'=>10,
 ));
 echo '　JAN';
 echo $form->text('Stock.subitem_jan', array(
@@ -19,16 +19,29 @@ echo '　親品番ID';
 echo $form->text('Stock.item_id', array(
 	'size'=>4,
 ));
+echo '　ブランド';
+echo $form->input('Stock.brand_id', array(
+	'type'=>'select',
+	'options'=>$brands,
+	'label'=>'',
+	'empty'=>'select',
+	'div'=>false
+));
 echo '<br><br>';
 echo '　倉庫名';
 echo $form->text('Stock.depot_name', array(
 	'label'=>false,
-	'size'=>7
+	'size'=>5
 ));
 echo '　倉庫ID';
 echo $form->text('Stock.depot_id', array(
 	'label'=>false,
-	'size'=>7
+	'size'=>5
+));
+echo '　部門ID';
+echo $form->text('Stock.section_id', array(
+	'label'=>false,
+	'size'=>5
 ));
 echo '　';
 /*
@@ -47,7 +60,7 @@ if($addForm->opneUser(open_users(), $opneuser, 'access_authority')){
 	));
 	echo '　';
 }
-if(!empty($this->params['pass'])){
+if(!empty($this->params['pass']) AND $this->params['pass']['0'] != 'reset'){
 	echo $form->hidden('Stock.ac', array('value'=>$this->params['pass']['0']));
 	echo $form->hidden('Stock.id_ex', array('value'=>$this->params['pass']['1']));
 }
@@ -69,7 +82,7 @@ echo '</h2>';
 ?>
 <p>
 <?php
-if(!empty($this->params['pass'])){
+if(!empty($this->params['pass']) AND $this->params['pass']['0'] != 'reset'){
 	echo $paginator->options(array('url'=>array($this->params['pass']['0'].'/'.$this->params['pass']['1'])));
 }
 echo $paginator->counter(array(
@@ -127,6 +140,8 @@ foreach ($stocks as $stock):
 </div>
 <p>
 検索について<br>
+ブランド検索は時間が掛かります。気長にお願いします。<br>
 子品番、倉庫、それぞれ「あいまい検索」での検索になります。子品番の一部や倉庫名の一部などを入力して検索できます。<br>
 子品番、倉庫、両方入力すると絞込み検索になります。<br>
+新規に登録された品番の在庫は、最長で2時間遅れる可能性があります。<br>
 </p>

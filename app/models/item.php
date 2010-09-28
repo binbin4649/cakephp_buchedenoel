@@ -105,12 +105,32 @@ class Item extends AppModel {
 			$item['Item']['brand_id'] = $brand['Brand']['id'];
 		}
 		$item['Item']['title'] = $title;
+		$this->create();
 		if($this->save($item)){
 			$item['Item']['id'] = $this->getLastInsertID();
 			return $item;
 		}else{
 			return false;
 		}
+	}
+	
+	
+	function brandItemQuery($brand_id){
+		if ($this->Behaviors->attached('Cache')) {
+			$args = func_get_args();
+			if($this->cacheEnabled()) return $this->cacheMethod('7200', __FUNCTION__, $args);//2時間
+		}
+		$params = array(
+			'conditions'=>array('Item.brand_id'=>$brand_id),
+			'recursive'=>-1,
+			'fields'=>array('Item.id'),
+		);
+		$items = $this->find('all' ,$params);
+		$out = array();
+		foreach($items as $item){
+			$out[] = array('Subitem.item_id'=>$item['Item']['id']);
+		}
+		return $out;
 	}
 
 
