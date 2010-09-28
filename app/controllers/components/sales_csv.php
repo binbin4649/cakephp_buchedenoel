@@ -655,13 +655,15 @@ class SalesCsvComponent extends Object {
 				$item_name = trim($sj_row[5]);
 				$item_title = trim($sj_row[3]);
 				$item_brand = trim($sj_row[14]);
+				$subitem_cost = floor($sj_row[19]);
+				$subitem_kana = trim($sj_row[12]);
 				$qty = floor($sj_row[17]);
-				
+				$stock_code = '';
 				$StockModel->create();
 				$subitem = array();
 				$params = array(
 					'conditions'=>array('Subitem.jan'=>$subitem_jan),
-					'recursive'=>-1
+					'recursive'=>0
 				);
 				$subitem = $SubitemModel->find('first' ,$params);
 				if(!$subitem){//なかった場合
@@ -673,9 +675,19 @@ class SalesCsvComponent extends Object {
 					if(!$item){//なかった場合
 						$item = $ItemModel->NewItem($item_name, $item_title, $item_brand);//品番、タイトル、ブランド名
 					}
-					$subitem = $SubitemModel->NewSubitem($item['Item']['id'], $subitem_size, $subitem_jan, $item_name);//item_id、サイズ、JAN、品番
+					$subitem = $SubitemModel->NewSubitem($item['Item']['id'], $subitem_size, $subitem_jan, $item_name, $subitem_kana);//item_id、サイズ、JAN、品番
+				}
+				if(!empty($subitem['Item']['stock_code'])) $stock_code = $subitem['Item']['stock_code'];
+				if(!empty($item['Item']['stock_code'])) $stock_code = $item['Item']['stock_code'];
+				if($stock_code == '3'){
+					$save_value = array();
+					$SubitemModel->create();
+					$save_value['Subitem']['cost'] = $subitem_cost;
+					$save_value['Subitem']['id'] = $subitem['Subitem']['id'];
+					$SubitemModel->save($save_value);
 				}
 				$result = $StockModel->Plus($subitem['Subitem']['id'], $is_depot['Depot']['id'], $qty, 1135, 2);
+				
 			}
 			fclose($sj_opne);
 			$result = unlink($path.$file_name);

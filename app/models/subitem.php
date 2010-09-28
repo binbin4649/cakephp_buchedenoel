@@ -31,7 +31,7 @@ class Subitem extends AppModel {
 	}
 
 	//subitem新規登録（自動）　在庫移動スクリプト用に作ったもの
-	function NewSubitem($item_id, $size = NULL, $jan, $name){
+	function NewSubitem($item_id, $size = NULL, $jan, $name , $kana){
 		$subitem = array();
 		$major_size = get_major_size();
 		if(array_key_exists($size, $major_size)){//メジャーサイズだった場合
@@ -43,7 +43,7 @@ class Subitem extends AppModel {
 		$subitem['Subitem']['name'] = $name;
 		$subitem['Subitem']['item_id'] = $item_id;
 		$subitem['Subitem']['jan'] = $jan;
-		$subitem['Subitem']['name_kana'] = $size;
+		$subitem['Subitem']['name_kana'] = $kana;
 		$this->create();
 		if($this->save($subitem)){
 			$subitem['Subitem']['id'] = $this->getLastInsertID();
