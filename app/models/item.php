@@ -105,6 +105,7 @@ class Item extends AppModel {
 			$item['Item']['brand_id'] = $brand['Brand']['id'];
 		}
 		$item['Item']['title'] = $title;
+		$this->create();
 		if($this->save($item)){
 			$item['Item']['id'] = $this->getLastInsertID();
 			return $item;

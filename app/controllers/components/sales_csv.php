@@ -661,13 +661,13 @@ class SalesCsvComponent extends Object {
 				$subitem = array();
 				$params = array(
 					'conditions'=>array('Subitem.jan'=>$subitem_jan),
-					'recursive'=>0
+					'recursive'=>-1
 				);
 				$subitem = $SubitemModel->find('first' ,$params);
 				if(!$subitem){//なかった場合
 					$params = array(
 						'conditions'=>array('Item.name'=>$item_name),
-						'recursive'=>0
+						'recursive'=>-1,
 					);
 					$item = $ItemModel->find('first' ,$params);
 					if(!$item){//なかった場合

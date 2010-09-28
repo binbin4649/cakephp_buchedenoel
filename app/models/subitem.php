@@ -44,6 +44,7 @@ class Subitem extends AppModel {
 		$subitem['Subitem']['item_id'] = $item_id;
 		$subitem['Subitem']['jan'] = $jan;
 		$subitem['Subitem']['name_kana'] = $size;
+		$this->create();
 		if($this->save($subitem)){
 			$subitem['Subitem']['id'] = $this->getLastInsertID();
 			return $subitem;
