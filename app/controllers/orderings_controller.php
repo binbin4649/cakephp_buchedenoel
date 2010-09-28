@@ -7,24 +7,20 @@ class OrderingsController extends AppController {
 	var $components = array('Total', 'Print');
 
 	function index() {
-		if (!empty($this->data['Ordering']['word']) or !empty($this->data['Ordering']['status']) or !empty($this->data['Ordering']['orderings_type'])) {
-			$seach_word = $this->data['Ordering']['word'];
-			$seach_status = $this->data['Ordering']['status'];
-			$orderings_type = $this->data['Ordering']['orderings_type'];
-			$conditions['or'] = array('Ordering.id'=>$seach_word, 'Ordering.ordering_status'=>$seach_status, 'Ordering.orderings_type'=>$orderings_type);
-			$this->paginate = array(
-				'conditions'=>$conditions,
-				'limit'=>20,
-				'order'=>array('Ordering.updated'=>'desc')
-			);
+		$conditions = array();
+		if (!empty($this->data['Ordering'])) {
+			if(!empty($this->data['Ordering']['word'])) $conditions[] = array('Ordering.id'=>$this->data['Ordering']['word']);
+			if(!empty($this->data['Ordering']['status'])) $conditions[] = array('Ordering.ordering_status'=>$this->data['Ordering']['status']);
+			if(!empty($this->data['Ordering']['orderings_type'])) $conditions[] = array('Ordering.orderings_type'=>$this->data['Ordering']['orderings_type']);
 		}else{
-			$this->paginate = array(
-				'conditions'=>array('Ordering.ordering_status <>'=>'6'),
-				'limit'=>20,
-				'order'=>array('Ordering.updated'=>'desc')
-			);
+			$conditions = array('Ordering.ordering_status <>'=>'6');
 		}
-		$this->Ordering->recursive = 0;
+		$this->paginate = array(
+			'conditions'=>$conditions,
+			'limit'=>50,
+			'recursive'=>0,
+			'order'=>array('Ordering.updated'=>'desc')
+		);
 		$index_view = $this->paginate();
 		$ordering_status = get_ordering_status();
 		$factories = $this->Ordering->Factory->find('list');
@@ -34,7 +30,6 @@ class OrderingsController extends AppController {
 			if(!empty($index['Ordering']['factory_id']))$index['Ordering']['factory_id'] = $factories[$index['Ordering']['factory_id']];
 			$index_out[] = $index;
 		}
-		//pr($index_out);
 		$this->set('orderings', $index_out);
 		$ordering_status = get_ordering_status();
 		$this->set('status', $ordering_status);
