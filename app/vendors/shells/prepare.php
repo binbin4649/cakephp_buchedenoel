@@ -66,6 +66,7 @@ class PrepareShell extends Shell {
 		App::import('Component', 'SalesCsv');
    		$SalesCsvComponent = new SalesCsvComponent();
 		
+		/*
 		//旧、売上読み込み
 		$path = WWW_ROOT.DS.'files'.DS.'prepare'.DS;
 		$old_file = array();
@@ -87,6 +88,8 @@ class PrepareShell extends Shell {
 				}
 			}
 		}
+		*/
+		
 		//在庫移動プログラム　旧　→　新
 		//ファイル名がそのまま、旧倉庫番号になる
 		$path = WWW_ROOT.DS.'files'.DS.'pre_zaiko'.DS;
@@ -138,9 +141,9 @@ class PrepareShell extends Shell {
 		
 		//部門別売上集計してCSV出力
 		//とりあえず直営店だけ
-		$SalesCsvComponent->storeSales();
+		//$SalesCsvComponent->storeSales();
 		
-		
+		/*
 		//単品管理が複数あった場合、最新の在庫を残して、残りは在庫減修正する。
 		App::import('Model', 'Stock');
     	$StockModel = new Stock();
@@ -178,7 +181,7 @@ class PrepareShell extends Shell {
 				}
 			}
 		}
-		
+		*/
 		
 		exit("HAPPY END");
 	}
