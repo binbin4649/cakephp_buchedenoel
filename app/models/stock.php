@@ -190,6 +190,17 @@ class Stock extends AppModel {
 	
 	//在庫を増やす
 	function Plus($subitem_id, $depot, $quantity, $user_id, $status){
+		App::import('Model', 'Subitem');
+		$SubitemModel = new Subitem();
+		$params = array(
+			'conditions'=>array('Subitem.id'=>$subitem_id),
+			'recursive'=>0,
+		);
+		$SubitemModel->unbindModel(array('belongsTo'=>array('Process', 'Material')));
+		$subitem = $SubitemModel->find('first' ,$params);
+		if($subitem['Item']['stock_code'] == '2'){ //在庫管理しない、は true、増やさない。
+			return true;
+		}
 		App::import('Model', 'StockLog');
     	$StockLogModel = new StockLog();
 		$params = array(

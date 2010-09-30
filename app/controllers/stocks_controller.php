@@ -130,7 +130,7 @@ class StocksController extends AppController {
 			$params = array(
 				'conditions'=>$conditions,
 				'recursive'=>2,
-				'limit'=>6000,
+				'limit'=>8000,
 				'contain'=>array('Depot', 'Subitem.Item'),
 			);
 			$stocks = $this->Stock->find('all' ,$params);
