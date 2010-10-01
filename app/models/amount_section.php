@@ -141,10 +141,12 @@ class AmountSection extends AppModel {
 	}
 	
 	function markIndex($section_id = null, $year = null, $month = null){
+		/*
 		if ($this->Behaviors->attached('Cache')) {
 			$args = func_get_args();
 			if($this->cacheEnabled()) return $this->cacheMethod(CACHE_TODAY, __FUNCTION__, $args);//
 		}
+		*/
 		App::import('Component', 'DateCal');
    		$DateCalComponent = new DateCalComponent();
    		$month_total = 0; //売上月トータル
@@ -178,10 +180,12 @@ class AmountSection extends AppModel {
 	// year month day を受け取って、売上金額、未完金額、売上予算、目標、達成率を返す 
 	// amount を計算してsave & return
 	function mark($section_id, $year, $month, $day){
+		/*
 		if ($this->Behaviors->attached('Cache')) {
 			$args = func_get_args();
 			if($this->cacheEnabled()) return $this->cacheMethod(CACHE_TODAY, __FUNCTION__, $args);//
 		}
+		*/
 		App::import('Component', 'Selector');
    		$SelectorComponent = new SelectorComponent();
 		App::import('Model', 'Order');
@@ -233,13 +237,14 @@ class AmountSection extends AppModel {
 			'fields'=>array('AmountSection.plan', 'AmountSection.mark', 'AmountSection.id', 'AmountSection.addsub')
 		);
 		$AmountSection = $this->find('first' ,$params);
+		//var_dump($params);
 		if($AmountSection){
 			$final_total = $AmountSection['AmountSection']['addsub'] + $sales_total;
 		}else{
 			$AmountSection['AmountSection']['section_id'] = $section_id;
 			$AmountSection['AmountSection']['start_day'] = $target_date;
-			$AmountSection['AmountSection']['sales_qty'] = $target_date;
-			
+			$AmountSection['AmountSection']['end_day'] = $target_date;
+			$final_total = $sales_total;
 			$AmountSection['AmountSection']['plan'] = 0;
 			$AmountSection['AmountSection']['mark'] = 0;
 			$AmountSection['AmountSection']['addsub'] = 0;

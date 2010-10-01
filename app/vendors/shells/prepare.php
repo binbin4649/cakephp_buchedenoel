@@ -90,6 +90,7 @@ class PrepareShell extends Shell {
 		}
 		*/
 		
+		/*
 		//在庫移動プログラム　旧　→　新
 		//ファイル名がそのまま、旧倉庫番号になる
 		$path = WWW_ROOT.DS.'files'.DS.'pre_zaiko'.DS;
@@ -138,12 +139,8 @@ class PrepareShell extends Shell {
 				}
 			}
 		}
+		*/
 		
-		//部門別売上集計してCSV出力
-		//とりあえず直営店だけ
-		//$SalesCsvComponent->storeSales();
-		
-		/*
 		//単品管理が複数あった場合、最新の在庫を残して、残りは在庫減修正する。
 		App::import('Model', 'Stock');
     	$StockModel = new Stock();
@@ -174,17 +171,19 @@ class PrepareShell extends Shell {
 						if($StockModel->Mimus($subitem['id'], $stock['Stock']['depot_id'], $stock['Stock']['quantity'], 1135, 3)){
 							$this->out('tanpincleaning:'.$subitem['id'].':'.$stock['Stock']['depot_id'].':'.$stock['Stock']['quantity']);
 						}else{
-							exit("BAD END");
+							echo("BAD");
 						}
 					}
 					$counter = $counter -1;
 				}
 			}
 		}
-		*/
+		
+		//部門別売上集計してCSV出力
+		//とりあえず直営店だけ
+		$SalesCsvComponent->storeSales();
 		
 		exit("HAPPY END");
 	}
 }
-
 ?>
