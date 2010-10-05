@@ -182,15 +182,17 @@ class Order extends AppModel {
 		$this->unbindModel(array('hasMany'=>array('OrderingsDetail', 'PurchaseDetail')));
 		$order = $this->find('first' ,$params);
 		$juge = True;
-		foreach($order['OrderDateil'] as $key=>$value){
-			if(($value['bid_quantity'] - $value['an_quantity']) <= $value['sell_quantity']){
-			}else{
-				$juge = false;
+		if($order['Order']['order_status'] != '6'){
+			foreach($order['OrderDateil'] as $key=>$value){
+				if(($value['bid_quantity'] - $value['an_quantity']) <= $value['sell_quantity']){
+				}else{
+					$juge = false;
+				}
 			}
-		}
-		if($juge){
-			$order['Order']['order_status'] = 4;
-			$this->save($order);
+			if($juge){
+				$order['Order']['order_status'] = 4;
+				$this->save($order);
+			}
 		}
 	}
 
