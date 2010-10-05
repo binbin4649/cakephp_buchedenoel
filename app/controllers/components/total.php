@@ -47,7 +47,7 @@ class TotalComponent extends Object {
     			$detail_total = $detail_total + (($subitem['money'] + $single_tax) * $subitem['quantity']);
     			$tax = $tax + ($single_tax * $subitem['quantity']);
     		}
-    		$result['total'] = $detail_total + $tax;
+    		$result['total'] = $detail_total;
     		$result['detail_total'] = $detail_total;
     		$result['tax'] = $tax;
     		return $result;
