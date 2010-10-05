@@ -43,7 +43,14 @@ foreach ($destinations as $destination):
 			<?php echo $html->link($destination['Destination']['name'], array('action'=>'view', $destination['Destination']['id'])); ?>
 		</td>
 		<td>
-			<?php echo $html->link($destination['Destination']['company_name'], array('controller'=>'companies', 'action'=>'view', $destination['Destination']['company_id'])); ?>
+			<?php 
+				if(empty($destination['Destination']['company_name'])){
+					echo '取引先が登録されていません。';
+				}else{
+					echo $html->link($destination['Destination']['company_name'], array('controller'=>'companies', 'action'=>'view', $destination['Destination']['company_id'])); 
+				}
+				
+			?>
 		</td>
 		<td>
 			<?php echo $destination['Destination']['updated']; ?>
