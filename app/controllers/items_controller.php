@@ -576,8 +576,8 @@ class ItemsController extends AppController {
 					}
 
 				}else{//itemが無かった時の処理
-					//アニバ、ファサード、カフナ、LUVは単品管理に変える
-					if($item_brand_id == 10 or $item_brand_id == 11 or $item_brand_id == 12 or $item_brand_id == 3 or $item_brand_id == 4 or $item_brand_id == 13){
+					//アニバ、ファサード、カフナ、LUV sweetsは単品管理に変える
+					if($item_brand_id == 10 or $item_brand_id == 11 or $item_brand_id == 12 or $item_brand_id == 3 or $item_brand_id == 4 or $item_brand_id == 13 or $item_brand_id == 183){
 						$stock_code = 3;
 					}else{
 						$stock_code = 1;
@@ -680,6 +680,7 @@ class ItemsController extends AppController {
 					));
 					$this->Subitem->save($save_subitem);
 					$subitem_id = $this->Subitem->getInsertID();
+					//単品管理を無理やり在庫増
 					if($stock_code == '3'){
 						$this->Stock->Plus($subitem_id, 910, 1, 1135, 1);
 					}
