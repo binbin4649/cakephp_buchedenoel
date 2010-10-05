@@ -26,7 +26,8 @@
 			));
 			echo $form->input('StockRevision.stock_change', array(
 				'type'=>'select',
-				'options'=>array('1'=>'在庫増'),
+				//'options'=>array('1'=>'在庫増'),
+				'options'=>$stockChange,
 				'div'=>true,
 				'label'=>__('Stock Change', true),
 			));
