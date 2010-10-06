@@ -187,6 +187,7 @@ class Sale extends AppModel {
 			$subitem = $SubitemModel->find('first' ,$params);
 			$cost = $SelectorComponent->costSelector($subitem['Subitem']['item_id'], $subitem['Subitem']['cost']);
 			$size = $SelectorComponent->sizeSelector($subitem['Subitem']['major_size'], $subitem['Subitem']['minority_size']);
+			if(!empty($detail['subitem_jan'])) $detail['sell_quantity'] = 1;
 			//ここから、配列あわせのつづき
 			$sales_dateils['SalesDateil'] = array(
 				'sale_id'=>$sales_id, 'detail_no'=>$i, 'item_id'=>$subitem['Subitem']['item_id'],
