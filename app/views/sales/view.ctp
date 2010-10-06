@@ -48,7 +48,7 @@
 		}
 		echo '</ul>';
 		$total_quantity = 0;
-		echo '<table class="itemDetail"><tr><th colspan="6">売上明細</th></tr><tr><th>子品番</th><th>売上単価</th><th>'.$ex_bid_title.'</th><th>'.$cost_title.'</th><th>刻印</th><th>数量</th></tr>';
+		echo '<table class="itemDetail"><tr><th colspan="6">売上明細</th></tr><tr><th>子品番</th><th>売上単価</th><th>'.$ex_bid_title.'</th><th>備考</th><th>刻印</th><th>数量</th></tr>';
 		foreach($sale['SalesDateil'] as $detail){
 			if($addForm->opneUser(open_users(), $opneuser, 'access_authority') == false){
 				$detail['cost'] = '';
@@ -58,7 +58,7 @@
 			echo '<td>'.$detail['subitem_name'].'</td>';
 			echo '<td>'.number_format($detail['bid']).'</td>';
 			echo '<td>'.number_format($detail['ex_bid']).'</td>';
-			echo '<td>'.number_format($detail['cost']).'</td>';
+			echo '<td>'.$detail['sub_remarks'].'</td>';
 			echo '<td>'.$detail['marking'].'</td>';
 			echo '<td>'.$detail['bid_quantity'].'</td>';
 			echo '</tr>';
@@ -70,9 +70,11 @@
 			echo '<table class="itemDetail"><tr><th colspan="6">受注データ</th></tr>';
 			echo '<tr><th>Id</th><th>受注タイプ</th><th>倉庫</th><th>受注日</th><th>商品合計</th><th>更新日</th></tr>';
 			foreach($sale['Order'] as $order){
+				$order_type = '';
+				if(!empty($order['order_type'])) $order_type = $orderType[$order['order_type']];
 				echo '<tr>';
 				echo '<td>'.$html->link($order['id'], array('controller'=>'orders', 'action'=>$order_view_action.'/'.$order['id'])).'</td>';
-				echo '<td>'.$orderType[$order['order_type']].'</td>';
+				echo '<td>'.$order_type.'</td>';
 				echo '<td>'.$order['depot_id'].'</td>';
 				echo '<td>'.$order['date'].'</td>';
 				echo '<td>'.number_format($order['price_total']).'</td>';

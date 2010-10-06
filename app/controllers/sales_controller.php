@@ -464,7 +464,7 @@ class SalesController extends AppController {
 			$this->redirect(array('action'=>'index'));
 		}
 		if (!empty($this->data)) {
-			$this->data['Sale']['total'] = $this->data['Sale']['item_price_total'] + $this->data['Sale']['tax'] + $this->data['Sale']['shipping'] + $this->data['Sale']['adjustment'];
+			$this->data['Sale']['total'] = $this->data['Sale']['total'] + $this->data['Sale']['tax'] + $this->data['Sale']['shipping'] + $this->data['Sale']['adjustment'];
 			if ($this->Sale->save($this->data)) {
 				$this->Session->setFlash(__('The Sale has been saved', true));
 				$this->redirect(array('action'=>'view/'.$this->data['Sale']['id']));

@@ -192,7 +192,7 @@ class Sale extends AppModel {
 				'subitem_id'=>$detail['subitem_id'], 'size'=>$size, 'bid'=>$detail['bid'],
 				'bid_quantity'=>$detail['bid_quantity'], 'cost'=>$cost,
 				'marking'=>$detail['marking'], 'created_user'=>$sub_sale['created_user'],
-				'ex_bid'=>$detail['ex_bid']
+				'ex_bid'=>$detail['ex_bid'], 'sub_remarks'=>$detail['sub_remarks']
 			);
 			$SalesDateilModel->create();
 			$SalesDateilModel->save($sales_dateils);

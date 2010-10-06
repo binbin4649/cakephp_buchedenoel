@@ -1233,7 +1233,6 @@ class PrintComponent extends Object {
     	$xml .= 'header("Content-Disposition:inline;filename=\"'.$file_name.'.pxd\""); '."\n";
     	$xml .= 'print \'<?xml version="1.0" encoding="utf-8"?>\'; ?>'."\n";
     	$xml .= '<pxd paper-type="a4" title="[THE KISS Inc.]" xmlns:xlink="http://www.w3.org/1999/xlink">';
-
     	$text_y = 620;
     	$rect_y = 580;
     	$rect_height = 55;
@@ -1310,7 +1309,6 @@ class PrintComponent extends Object {
 			);
 			$item = $ItemModel->find('first' ,$params);
 			$item_total_qty = $item_total_qty + $dateil['bid_quantity'];
-
 			$rect_y = $rect_y + $rect_height;
     		$text_y = $text_y + $rect_height;
     		$xml .= '<text x="107" y="'.$text_y.'" font-size="25" fill="black" font-family="ＭＳ ゴシック">'.$no_counter;
@@ -1320,7 +1318,7 @@ class PrintComponent extends Object {
 			$xml .= '<tspan x="1130" y="'.$text_y.'" text-anchor="end">'.number_format($dateil['ex_bid']).'</tspan>';
 			$xml .= '<tspan x="1230" y="'.$text_y.'" text-anchor="end">'.$dateil['bid_quantity'].'</tspan>';
 			$xml .= '<tspan x="1400" y="'.$text_y.'" text-anchor="end">'.number_format($dateil['bid']).'</tspan>';
-			$xml .= '<tspan x="1440" y="'.$text_y.'"></tspan>';
+			$xml .= '<tspan x="1440" y="'.$text_y.'">'.$dateil['sub_remarks'].'</tspan>';
 			$xml .= '</text>';
 			$xml .= '<rect x="100" y="'.$rect_y.'" width="40" height="'.$rect_height.'" fill="none" stroke="#808080" stroke-width="1"/>';
 			$xml .= '<rect x="140" y="'.$rect_y.'" width="380" height="'.$rect_height.'" fill="none" stroke="#808080" stroke-width="1"/>';
@@ -1332,14 +1330,16 @@ class PrintComponent extends Object {
 			$xml .= '<rect x="1420" y="'.$rect_y.'" width="580" height="'.$rect_height.'" fill="none" stroke="#808080" stroke-width="1"/>';
 
     		if($no_counter == count($sale['SalesDateil'])){//表のフッター出力
+    			/*
     			$rect_y = $rect_y + $rect_height;
     			$text_y = $text_y + $rect_height;
     			$xml .= '<text x="107" y="'.$text_y.'" font-size="25" fill="black" font-family="ＭＳ ゴシック">';
     			$xml .= '<tspan x="1065" y="'.$text_y.'" text-anchor="middle">商品合計</tspan>';
 				$xml .= '<tspan x="1230" y="'.$text_y.'" text-anchor="end"></tspan>';
-				$xml .= '<tspan x="1400" y="'.$text_y.'" text-anchor="end">'.number_format($sale['Sale']['item_price_total']).'</tspan>';
+				$xml .= '<tspan x="1400" y="'.$text_y.'" text-anchor="end">'.number_format($sale['Sale']['total']).'</tspan>';
 				$xml .= '<tspan x="1510" y="'.$text_y.'"></tspan>';
 				$xml .= '</text>';
+				*/
 				$xml .= '<rect x="100" y="'.$rect_y.'" width="40" height="'.$rect_height.'" fill="none" stroke="#808080" stroke-width="1"/>';
 				$xml .= '<rect x="140" y="'.$rect_y.'" width="380" height="'.$rect_height.'" fill="none" stroke="#808080" stroke-width="1"/>';
 				$xml .= '<rect x="520" y="'.$rect_y.'" width="140" height="'.$rect_height.'" fill="none" stroke="#808080" stroke-width="1"/>';

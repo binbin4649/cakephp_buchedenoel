@@ -670,8 +670,6 @@ class OrdersController extends AppController {
 		foreach($session_read['confirm']['OrderDateil'] as $value){
 			$OrderDateil = array();
 			if(!empty($value['subitem_jan'])) $value['sell_quantity'] = 1;
-			//pr($value);
-			//exit;
 			if($this->Stock->Mimus($value['subitem_id'], $value['depot_id'], $value['sell_quantity'], $this->Auth->user('id'), 1)){
 				$OrderDateil['OrderDateil']['id'] = $value['id'];
 				$OrderDateil['OrderDateil']['sell_quantity'] = $value['sell_quantity'] + $value['before_sell_quantity'];
