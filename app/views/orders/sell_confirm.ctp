@@ -3,13 +3,17 @@
 <h5>Order Data</h5>
 	<fieldset>
 	<?php
+		$total = $confirm['Sale']['total'] + $confirm['Order']['shipping'] + $confirm['Order']['adjustment'];
 		echo '<dl>';
 		echo '<dt>'.__('Order No.').'</dt><dd>'.$confirm['Order']['id'].'　</dd>';
 		echo '<dt>'.__('Status').'</dt><dd>'.$orderStatus[$confirm['Order']['order_status']].'　</dd>';
 		
-		echo '<dt>'.__('Sales').'</dt><dd>'.number_format($confirm['Sale']['total']).'　</dd>';
+		echo '<dt>'.__('Sales').'</dt><dd>'.number_format($total).'　</dd>';
 		echo '<dt>'.__('Sales Price Total').'</dt><dd>'.number_format($confirm['Sale']['ex_total']).'　</dd>';
 		echo '<dt>'.__('Tax').'</dt><dd>'.$confirm['Sale']['tax'].'　</dd>';
+		
+		echo '<dt>'.__('Shipping').'</dt><dd>'.$confirm['Order']['shipping'].'　</dd>';
+		echo '<dt>'.__('Adjustment').'</dt><dd>'.$confirm['Order']['adjustment'].'　</dd>';
 		
 		echo '<dt>'.__('Shipping Date').'</dt><dd>'.$confirm['Sale']['date']['year'].'-'.$confirm['Sale']['date']['month'].'-'.$confirm['Sale']['date']['day'].'　</dd>';
 		echo '<dt>'.__('Close Date').'</dt><dd>'.$confirm['Sale']['total_day']['year'].'-'.$confirm['Sale']['total_day']['month'].'-'.$confirm['Sale']['total_day']['day'].'　</dd>';

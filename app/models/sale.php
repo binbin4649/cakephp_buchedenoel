@@ -162,14 +162,15 @@ class Sale extends AppModel {
 		$order = $val['confirm']['Order'];
 		$details = $val['confirm']['OrderDateil'];
 		$sub_sale = $val['confirm']['Sale'];
+		$total = $sub_sale['total'] + $order['shipping'] + $order['adjustment'];
 		$sales['Sale'] = array(
 			'sale_type'=>1, 'depot_id'=>null, 'destination_id'=>$order['destination_id'],
 			'event_no'=>$order['events_no'], 'span_no'=>null, 'date'=>date('Y-m-d'),
 			'contact1'=>$order['contact1'], 'contact2'=>$order['contact2'], 'contact3'=>$order['contact3'], 'contact4'=>$order['contact4'],
 			'contribute1'=>null, 'contribute2'=>null, 'contribute3'=>null, 'contribute4'=>null,
-			'customers_name'=>$order['customers_name'], 'partners_no'=>$order['partners_no'], 'total'=>$sub_sale['total'],
+			'customers_name'=>$order['customers_name'], 'partners_no'=>$order['partners_no'], 'total'=>$total,
 			'item_price_total'=>$sub_sale['ex_total'], 'tax'=>$sub_sale['tax'], 'shipping'=>$order['shipping'],
-			'adjustment'=>0, 'total_day'=>$sub_sale['total_day'], 'remark'=>$sub_sale['remark'],
+			'adjustment'=>$order['adjustment'], 'total_day'=>$sub_sale['total_day'], 'remark'=>$sub_sale['remark'],
 			'created_user'=>$sub_sale['created_user'], 'sale_status'=>1, 'section_id'=>309
 		);
 		$sales['Order'] = array($order['id']);
@@ -190,7 +191,7 @@ class Sale extends AppModel {
 			$sales_dateils['SalesDateil'] = array(
 				'sale_id'=>$sales_id, 'detail_no'=>$i, 'item_id'=>$subitem['Subitem']['item_id'],
 				'subitem_id'=>$detail['subitem_id'], 'size'=>$size, 'bid'=>$detail['bid'],
-				'bid_quantity'=>$detail['bid_quantity'], 'cost'=>$cost,
+				'bid_quantity'=>$detail['sell_quantity'], 'cost'=>$cost,
 				'marking'=>$detail['marking'], 'created_user'=>$sub_sale['created_user'],
 				'ex_bid'=>$detail['ex_bid'], 'sub_remarks'=>$detail['sub_remarks']
 			);
