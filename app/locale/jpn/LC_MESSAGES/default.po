@@ -2379,3 +2379,6 @@ msgstr "その他発注"
 msgid "The Other Ordering. Are you sure?"
 msgstr "その他の発注します。よろしいですか？"
 
+msgid "Management can not be increased more than one item separately."
+msgstr "単品管理の商品は1以上増やせません。"
+

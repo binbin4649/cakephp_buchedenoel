@@ -21,6 +21,34 @@ class Stock extends AppModel {
 		)
 	);
 	
+	//単品管理で、かつ1以上在庫が有ればtrue、それ以外はfalse
+	function only1check($subitem_id){
+		App::import('Model', 'Subitem');
+	    $SubitemModel = new Subitem();
+	    $params = array(
+			'conditions'=>array('and'=>array('Subitem.id'=>$subitem_id)),
+			'recursive'=>0,
+			//'fields'=>array('Subitem.stock_code')
+		);
+		$subitem = $SubitemModel->find('first' ,$params);
+	    if($subitem['Item']['stock_code'] != 3) return true;
+		$params = array(
+			'conditions'=>array('and'=>array('Stock.subitem_id'=>$subitem_id)),
+			'recursive'=>-1,
+			'fields'=>array('Stock.quantity')
+		);
+		$stocks = $this->find('all' ,$params);
+		$total = 0;
+		foreach($stocks as $stock){
+			$total = $total + $stock['Stock']['quantity'];
+		}
+		if($total > 1){
+			return false;
+		}else{
+			return true;
+		}
+	}
+	
 	//部門別に、親品番単位で在庫を集計 デフォルト倉庫のみ
 	function ItemStocksDefault($item_id, $ac = null){
 		if ($this->Behaviors->attached('Cache')) {

@@ -142,6 +142,7 @@ class PrepareShell extends Shell {
 		*/
 		
 		//単品管理が複数あった場合、最新の在庫を残して、残りは在庫減修正する。
+		/*
 		App::import('Model', 'Stock');
     	$StockModel = new Stock();
 		App::import('Model', 'Item');
@@ -178,6 +179,7 @@ class PrepareShell extends Shell {
 				}
 			}
 		}
+		*/
 		
 		//部門別売上集計してCSV出力
 		//とりあえず直営店だけ
