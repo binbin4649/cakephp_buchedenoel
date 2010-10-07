@@ -44,10 +44,11 @@ class TotalComponent extends Object {
     			if($tax_fraction == '1' or empty($tax_fraction)) $single_tax = floor($single_tax);
     			if($tax_fraction == '2') $single_tax = ceil($single_tax);
     			if($tax_fraction == '3') $single_tax = round($single_tax);
-    			$detail_total = $detail_total + (($subitem['money'] + $single_tax) * $subitem['quantity']);
+    			//$detail_total = $detail_total + (($subitem['money'] + $single_tax) * $subitem['quantity']);
+    			$detail_total = $detail_total + ($subitem['money'] * $subitem['quantity']);
     			$tax = $tax + ($single_tax * $subitem['quantity']);
     		}
-    		$result['total'] = $detail_total;
+    		$result['total'] = $detail_total + $tax;
     		$result['detail_total'] = $detail_total;
     		$result['tax'] = $tax;
     		return $result;
