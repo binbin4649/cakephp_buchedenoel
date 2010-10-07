@@ -6,14 +6,21 @@ echo $form->create($modelName ,array('action'=>'index'));
 echo '子品番名';
 echo $form->text($modelName.'.subitem', array(
 	'type'=>'text',
-	'size'=>7,
+	'size'=>5,
 	'div'=>false
 ));
 echo '　';
 echo '倉庫id';
 echo $form->text($modelName.'.depot', array(
 	'type'=>'text',
-	'size'=>7,
+	'size'=>5,
+	'div'=>false
+));
+echo '　';
+echo 'JAN';
+echo $form->text($modelName.'.jan', array(
+	'type'=>'text',
+	'size'=>14,
 	'div'=>false
 ));
 echo '　';
@@ -21,7 +28,7 @@ echo $form->input($modelName.'.plus', array(
 	'type'=>'select',
 	'options'=>$logPlus,
 	'label'=>'Plus',
-	'empty'=>__('(Please Select)', true),
+	'empty'=>__('(Select)', true),
 	'div'=>false
 ));
 echo '　';
@@ -29,7 +36,34 @@ echo $form->input($modelName.'.mimus', array(
 	'type'=>'select',
 	'options'=>$logMimus,
 	'label'=>'Mimus',
-	'empty'=>__('(Please Select)', true),
+	'empty'=>__('(Select)', true),
+	'div'=>false
+));
+echo '<br><br>';
+echo $form->input($modelName.'.start_date', array(
+	'type'=>'date',
+	'dateFormat'=>'YMD',
+	'label'=>false,
+	'minYear'=>MINYEAR,
+	'maxYear' => MAXYEAR,
+	'empty'=>'select',
+	'div'=>false
+));
+echo '～';
+echo $form->input($modelName.'.end_date', array(
+	'type'=>'date',
+	'dateFormat'=>'YMD',
+	'label'=>false,
+	'minYear'=>MINYEAR,
+	'maxYear' => MAXYEAR,
+	'empty'=>'select',
+	'div'=>false
+));
+echo '　';
+echo '作成者id';
+echo $form->text($modelName.'.created_user', array(
+	'type'=>'text',
+	'size'=>3,
 	'div'=>false
 ));
 echo '　';
