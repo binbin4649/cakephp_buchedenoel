@@ -119,10 +119,11 @@ class TransportsController extends AppController {
 		foreach($views['TransportDateil'] as $key=>$value){
 			$params = array(
 				'conditions'=>array('Subitem.id'=>$value['subitem_id']),
-				'recursive'=>0
+				'recursive'=>-1
 			);
 			$subitem = $this->Subitem->find('first' ,$params);
 			$views['TransportDateil'][$key]['subitem_name'] = $subitem['Subitem']['name'];
+			$views['TransportDateil'][$key]['subitem_jan'] = $subitem['Subitem']['jan'];
 		}
 		$out_depot = $this->Depot->sectionMarge($views['Transport']['out_depot']);
 		$views['Transport']['out_depot_name'] = $out_depot['depot_name'];

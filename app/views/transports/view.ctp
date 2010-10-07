@@ -95,10 +95,11 @@
 </div>
 <?php endif; ?>
 <?php
-	echo '<table class="itemDetail"><tr><th>子品番</th><th>出庫数</th><th>引当数</th><th>入庫数</th><th>受注番号</th></tr>';
+	echo '<table class="itemDetail"><tr><th>子品番</th><th>JAN</th><th>出庫数</th><th>引当数</th><th>入庫数</th><th>受注番号</th></tr>';
 	foreach($transport['TransportDateil'] as $dateil){
 		echo '<tr>';
 		echo '<td>'.$dateil['subitem_name'].'</td>';
+		echo '<td>'.$dateil['subitem_jan'].'</td>';
 		echo '<td>'.$dateil['out_qty'].'</td>';
 		echo '<td>'.$dateil['pairing_quantity'].'</td>';
 		echo '<td>'.$dateil['in_qty'].'</td>';
@@ -110,4 +111,3 @@
 <ul>
 	<li>Cancell：キャンセル（取消）すると未入庫分は出庫倉庫に戻ります。入庫済みの分は戻りません。</li>
 </ul>
-<?php //pr($transport['Transport']['transport_status']);?>
