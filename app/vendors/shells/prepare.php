@@ -90,7 +90,7 @@ class PrepareShell extends Shell {
 		}
 		*/
 		
-		/*
+		
 		//在庫移動プログラム　旧　→　新
 		//ファイル名がそのまま、旧倉庫番号になる
 		$path = WWW_ROOT.DS.'files'.DS.'pre_zaiko'.DS;
@@ -117,6 +117,7 @@ class PrepareShell extends Shell {
 			}
 		}
 		
+		/*
 		//旧から新へ、毎日JANを移行させる。為のプログラム
 		$path = WWW_ROOT.DS.'files'.DS.'SyohinIchiran'.DS;
 		App::import('Component', 'StratCsv');

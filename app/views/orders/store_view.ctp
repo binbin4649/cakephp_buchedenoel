@@ -115,4 +115,3 @@
 	?>
 	</fieldset>
 </div>
-<?php pr($order); ?>
