@@ -555,7 +555,7 @@ class OrdersController extends AppController {
 				$params = array(
 					'conditions'=>array('Subitem.jan'=>$value['subitem_jan']),
 					'recursive'=>0,
-					'fields'=>array('Subitem.id')
+					'fields'=>array('Subitem.id', 'Subitem.item_id', 'Subitem.jan')
 				);
 				$subitem = $this->Subitem->find('first' ,$params);
 				
@@ -570,7 +570,7 @@ class OrdersController extends AppController {
 					'recursive'=>0
 				);
 				$subitem_stock = $this->Stock->find('first' ,$params);
-				if(!$subitem_stock){
+				if(empty($subitem_stock)){
 					$this->Session->setFlash('629-処理を中断しました。旧システムから仕入データが転送されていない可能性があります。');
 					if(empty($this->data['Order']['destination_id'])){
 						$this->redirect(array('action'=>'store_sell/'.$this->data['Order']['id']));
