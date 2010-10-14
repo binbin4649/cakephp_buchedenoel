@@ -109,10 +109,12 @@ class StockRevisionsController extends AppController {
 			$quantity = $this->data['StockRevision']['quantity'];
 			$user_id = $this->data['StockRevision']['created_user'];
 			//単品管理で既に在庫が有る場合は、増できない。
-			if($this->Stock->only1check($subitem_id)){
-			}else{
-				$this->Session->setFlash(__('Management can not be increased more than one item separately.', true));
-				$this->redirect(array('controller'=>'subitems', 'action'=>'view/'.$subitem_id));
+			if($this->data['StockRevision']['stock_change'] == 1){
+				if($this->Stock->only1check($subitem_id)){
+				}else{
+					$this->Session->setFlash(__('Management can not be increased more than one item separately.', true));
+					$this->redirect(array('controller'=>'subitems', 'action'=>'view/'.$subitem_id));
+				}
 			}
 			$this->StockRevision->create();
 			if ($this->StockRevision->save($this->data)) {
