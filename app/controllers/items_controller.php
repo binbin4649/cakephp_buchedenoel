@@ -292,7 +292,7 @@ class ItemsController extends AppController {
 	function add() {
 		if (!empty($this->data)) {
 			$this->data['Item']['name'] = trim($this->data['Item']['name']);
-			$this->data['Item']['name'] = strtoupper($this->data['Item']['name']);
+			//$this->data['Item']['name'] = strtoupper($this->data['Item']['name']);
 			$this->Item->create();
 			if ($this->Item->save($this->data)) {
 				$id = $this->Item->getInsertID();
@@ -332,7 +332,7 @@ class ItemsController extends AppController {
 		if (!empty($this->data['Item']['id'])) {
 			if(!empty($this->data['Item']['AutoItemName'])){
 				$auto_item_name = trim($this->data['Item']['AutoItemName']);
-				$auto_item_name = strtoupper($auto_item_name);
+				//$auto_item_name = strtoupper($auto_item_name);
 				$result = $this->Item->find('first', array('conditions'=>array('Item.name'=>$auto_item_name),));
 				if($result) $this->data['Item']['pair_id'] = $result['Item']['id'];
 			}else{
