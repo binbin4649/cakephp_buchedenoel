@@ -43,7 +43,7 @@
 //EOF
 
 //在庫が無くても永久に取り置き出来るモード、TRUEで在庫とか無視、通常はFALSE
-define('EMERGENCY_LANDING', FALSE);
+define('EMERGENCY_LANDING', TRUE);
 
 define('MAXYEAR', 2010);
 define('MINYEAR', 2009);
