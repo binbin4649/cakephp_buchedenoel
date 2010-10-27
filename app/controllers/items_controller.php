@@ -345,7 +345,7 @@ class ItemsController extends AppController {
 				$this->data['Item']['pair_id'] = null;
 			}
 			$this->data['Item']['name'] = trim($this->data['Item']['name']);
-			$this->data['Item']['name'] = strtoupper($this->data['Item']['name']);
+			//$this->data['Item']['name'] = strtoupper($this->data['Item']['name']);
 			//工賃　+　至急品合計　＝　原価　ただし親品番の　　なにも入っていない場合は無視
 			$item_cost = $this->data['Item']['labor_cost'] + $this->data['Item']['supply_full_cost'];
 			if($item_cost >= 1){
