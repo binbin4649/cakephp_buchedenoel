@@ -40,7 +40,7 @@ echo $content_for_layout;
 インターネットエクスプローラー(Internet Explorer) Ver.6および7では表示が崩れ、一部機能が働きません。<br>
 当システムは FireFox3 以降を推奨します。<br>
 下記からインストーラーをダウンロードできます。<br>
-<a href="http://download.mozilla.org/?product=firefox-3.6.11&os=win&lang=ja" target="_blank">Firefox Setup 3.6.11.exe</a><br>
+<a href="http://download.mozilla.org/?product=firefox-3.6.12&os=win&lang=ja" target="_blank">Firefox Setup 3.6.12.exe</a><br>
 </p>
 <p>
 印刷ソフトとして、当システムは PXDoc を使用します。<br>
