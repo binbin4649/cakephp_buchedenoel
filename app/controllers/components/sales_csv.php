@@ -696,6 +696,45 @@ class SalesCsvComponent extends Object {
 			return 'not depot';
 		}
 	}
+	
+	
+	//コストが0以下だったら、CSVの原価を入れとく
+	function reTryCost($path, $file_name){
+		$file_name = $file_name.'.CSV';
+		App::import('Component', 'Selector');
+   		$SelectorComponent = new SelectorComponent();
+   		App::import('Model', 'Subitem');
+    	$SubitemModel = new Subitem();
+		App::import('Model', 'Item');
+    	$ItemModel = new Item();
+		
+		$sj_file_stream = file_get_contents($path.$file_name);
+		$sj_file_stream = mb_convert_encoding($sj_file_stream, 'UTF-8', 'ASCII,JIS,EUC-JP,SJIS');
+		$sj_rename_opne = fopen($path.$file_name, 'w');
+		$result = fwrite($sj_rename_opne, $sj_file_stream);
+		fclose($sj_rename_opne);
+		$sj_opne = fopen($path.$file_name, 'r');
+		$csv_header = fgetcsv($sj_opne);
+		while($sj_row = fgetcsv($sj_opne)){
+			$subitem_cost = floor($sj_row[19]);
+			$subitem_jan = trim($sj_row[2]);
+			$params = array(
+				'conditions'=>array('Subitem.jan'=>$subitem_jan),
+				'recursive'=>0
+			);
+			$subitem = $SubitemModel->find('first' ,$params);
+			$cost = $SelectorComponent->costSelector2($subitem['Subitem']['id']);
+			if(empty($cost)){
+				$save_value = array();
+				$ItemModel->create();
+				$save_value['Item']['cost'] = $subitem_cost;
+				$save_value['Item']['id'] = $subitem['Item']['id'];
+				$ItemModel->save($save_value);
+			}
+		}
+		fclose($sj_opne);
+		return unlink($path.$file_name);
+	}
 
 
 

@@ -67,6 +67,30 @@ class HogeShell extends Shell {
     	exit("HAPPY END");
 	}
 	
+	//コスト0円のに、改めてコストを挿入
+	function reTryCost(){
+		$path = WWW_ROOT.DS.'files'.DS.'reTryCost'.DS;
+		App::import('Component', 'SalesCsv');
+   		$SalesCsvComponent = new SalesCsvComponent();
+		$old_file = array();
+		$handle = opendir($path);
+		while (false !== ($file = readdir($handle))) {
+			$old_file[] = $file;
+		}
+		closedir($handle);
+		foreach($old_file as $file_name){
+			if($file_name != '.' AND $file_name != '..'){
+				$file_name = mb_convert_kana($file_name, 'a', 'UTF-8');
+				$file_name = ereg_replace("[^0-9]", "", $file_name);//半角数字以外を削除
+				$result = $SalesCsvComponent->reTryCost($path, $file_name);
+				if($result){
+					$this->out($result.':'.$file_name);
+				}else{
+					exit("BAD END");
+				}
+			}
+		}
+	}
 }
 
 ?>
