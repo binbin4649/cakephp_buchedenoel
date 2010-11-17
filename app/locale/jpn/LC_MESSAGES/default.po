@@ -2395,3 +2395,6 @@ msgstr "帳簿"
 
 msgid "Real Qty"
 msgstr "実棚"
+
+msgid "New Inventory"
+msgstr "棚卸開始"

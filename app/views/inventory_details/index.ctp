@@ -21,14 +21,11 @@ if(!empty($csv)){
 <?php
 $modelName = 'InventoryDetail';
 echo $form->create($modelName ,array('action'=>'index/'.$inventory_id));
-echo 'Id';
-echo $form->text($modelName.'.id', array('type'=>'text','size'=>2,'div'=>false));
-echo '　';
 echo __('Depot');
 echo $form->text($modelName.'.depot_id', array('type'=>'text','size'=>2,'div'=>false));
 echo '　';
 echo 'Jan';
-echo $form->text($modelName.'.jan', array('type'=>'text','size'=>2,'div'=>false));
+echo $form->text($modelName.'.jan', array('type'=>'text','size'=>13,'div'=>false));
 echo '　';
 echo 'Span';
 echo $form->text($modelName.'.span', array('type'=>'text','size'=>2,'div'=>false));
@@ -53,7 +50,6 @@ echo $paginator->counter(array(
 ?></p>
 <table cellpadding="0" cellspacing="0">
 <tr>
-	<th>Id</th>
 	<th><?php echo __('Depot');?></th>
 	<th><?php echo __('Item Name');?></th>
 	<th>Jan Code</th>
@@ -73,9 +69,6 @@ $depot_total = $depot_total + $inventoryDetail['InventoryDetail']['depot_quantit
 $real_total = $real_total + $inventoryDetail['InventoryDetail']['qty'];
 ?>
 	<tr>
-		<td>
-			<?php echo $inventoryDetail['InventoryDetail']['id']; ?>
-		</td>
 		<td>
 			<?php echo $inventoryDetail['Depot']['name'].':'.$inventoryDetail['Depot']['id']; ?>
 		</td>
@@ -117,7 +110,7 @@ $real_total = $real_total + $inventoryDetail['InventoryDetail']['qty'];
 	</tr>
 <?php endforeach; ?>
 <tr>
-	<td colspan="4"><td>
+	<td colspan="3"><td>
 	<td>合計</td>
 	<td><?php echo $depot_total; ?></td>
 	<td><?php echo $real_total; ?></td>
@@ -130,3 +123,6 @@ $real_total = $real_total + $inventoryDetail['InventoryDetail']['qty'];
  | 	<?php echo $paginator->numbers();?>
 	<?php echo $paginator->next(__('next', true).' >>', array(), null, array('class'=>'disabled'));?>
 </div>
+<ul>
+<li>倉庫は倉庫番号、作成者はユーザー番号で検索できます。</li>
+<li>CSV出力は、CSVにチェックを入れてSearchボタンを押して下さい。totalに表示されている分のデータが出力されます。</ul>
