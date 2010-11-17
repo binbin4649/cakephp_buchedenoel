@@ -21,7 +21,7 @@ foreach ($memoDatas as $memoData):
 			<?php echo $memoData['MemoData']['id']; ?>
 		</td>
 		<td>
-			<?php echo $html->link($memoData['MemoData']['name'], array('controller'=>'memo_datas', 'action'=>'view', $memoData['MemoData']['id'])); ?>
+			<?php echo $html->link(mb_substr($memoData['MemoData']['name'], 0, 30), array('controller'=>'memo_datas', 'action'=>'view', $memoData['MemoData']['id'])); ?>
 		</td>
 		<td>
 			<?php echo $html->link($memoCategories[$memoData['MemoData']['memo_category_id']], array('controller'=>'memo_datas', 'action'=>'category_index', $memoData['MemoData']['memo_category_id'])); ?>
