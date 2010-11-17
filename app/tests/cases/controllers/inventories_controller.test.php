@@ -1,6 +1,6 @@
 <?php 
 /* SVN FILE: $Id$ */
-/* InventoriesController Test cases generated on: 2009-08-08 18:08:05 : 1249724225*/
+/* InventoriesController Test cases generated on: 2010-11-02 16:11:10 : 1288684150*/
 App::import('Controller', 'Inventories');
 
 class TestInventories extends InventoriesController {

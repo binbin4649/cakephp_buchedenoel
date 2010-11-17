@@ -20,6 +20,19 @@ class Section extends AppModel {
 		),
 	);
 	
+	// そのsection_id の下に、そのdepot_idがあるのか？調べてくれる。trueだったら名前を返す
+	function relationConfirm($section_id, $depot_id){
+		$params = array(
+			'conditions'=>array('Section.id'=>$section_id),
+			'recursive'=>0,
+		);
+		$section = $this->find('first', $params);
+		pr($section);
+		exit;
+		foreach($section['depot'] as $depot){
+			
+		}
+	}
 	
 	// section_id を受け取ってクリーニングした名前を返す
 	function cleaningName($id){

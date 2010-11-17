@@ -691,5 +691,11 @@ function get_orderings_type(){
 	);
 }
 
+function get_inventory_status(){
+	return array(
+		'1'=>'棚卸中',
+		'2'=>'終了',
+	);
+}
 
 ?>

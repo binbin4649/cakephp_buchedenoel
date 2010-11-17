@@ -90,10 +90,8 @@ class Depot extends AppModel {
 			$args = func_get_args();
 			if($this->cacheEnabled()) return $this->cacheMethod(CACHE_TODAY, __FUNCTION__, $args);//
 		}
-		
 		App::import('Model', 'Section');
     	$SectionModel = new Section();
-
     	App::import('Component', 'Cleaning');
    		$CleaningComponent = new CleaningComponent();
     	$params = array(

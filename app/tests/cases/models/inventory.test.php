@@ -1,11 +1,11 @@
 <?php 
 /* SVN FILE: $Id$ */
-/* Inventory Test cases generated on: 2009-08-08 18:08:31 : 1249724191*/
+/* Inventory Test cases generated on: 2010-11-02 16:11:16 : 1288684096*/
 App::import('Model', 'Inventory');
 
 class InventoryTestCase extends CakeTestCase {
 	var $Inventory = null;
-	var $fixtures = array('app.inventory');
+	var $fixtures = array('app.inventory', 'app.section', 'app.inventory_detail');
 
 	function startTest() {
 		$this->Inventory =& ClassRegistry::init('Inventory');
@@ -22,11 +22,13 @@ class InventoryTestCase extends CakeTestCase {
 
 		$expected = array('Inventory' => array(
 			'id'  => 1,
-			'subitem_id'  => 1,
-			'depot_id'  => 1,
-			'quantity'  => 1,
-			'created'  => '2009-08-08 18:36:31',
-			'created_user'  => 1
+			'section_id'  => 1,
+			'status'  => 1,
+			'print_file'  => 'Lorem ipsum dolor sit amet',
+			'created'  => '2010-11-02 16:48:03',
+			'created_user'  => 1,
+			'updated'  => '2010-11-02 16:48:03',
+			'updated_user'  => 1
 		));
 		$this->assertEqual($results, $expected);
 	}

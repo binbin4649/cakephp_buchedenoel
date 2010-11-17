@@ -53,7 +53,8 @@ if($addForm->opneUser(open_users(), $opneuser, 'access_authority')){
 		__('Item Master',true)=>array('item', 'pages/masters'),
 		__('User Master',true)=>array('item', 'pages/users_masters'),
 		__('Company Master',true)=>array('item', 'pages/company_masters'),
-		__('Amount Master',true)=>array('item', 'pages/amount_masters'),
+		__('Inventory',true)=>array('item', 'inventories/index'),
+		//__('Amount Master',true)=>array('item', 'pages/amount_masters'),
 		//スタートアップ
 		__('Start Up',true)=>array('sect', '0'),
 		__('ItemCSV Insert',true)=>array('item', 'items/csv_add'),
@@ -88,6 +89,9 @@ if($addForm->opneUser(open_users(), $opneuser, 'access_authority')){
 		__('User',true)=>array('sect', '0'),
 		__('User Saech',true)=>array('item', 'users/index'),
 		__('Section List',true)=>array('item', 'sections/index'),
+		
+		__('Master',true)=>array('sect', '0'),
+		__('Inventory',true)=>array('item', 'inventories/index'),
 	);
 }
 

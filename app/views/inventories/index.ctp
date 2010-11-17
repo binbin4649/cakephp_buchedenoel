@@ -8,13 +8,12 @@ echo $paginator->counter(array(
 ?></p>
 <table cellpadding="0" cellspacing="0">
 <tr>
+	<th></th>
 	<th><?php echo $paginator->sort('id');?></th>
-	<th><?php echo $paginator->sort('subitem_id');?></th>
-	<th><?php echo $paginator->sort('depot_id');?></th>
-	<th><?php echo $paginator->sort('quantity');?></th>
+	<th><?php echo $paginator->sort('section_id');?></th>
+	<th><?php echo $paginator->sort('status');?></th>
 	<th><?php echo $paginator->sort('created');?></th>
-	<th><?php echo $paginator->sort('created_user');?></th>
-	<th class="actions"><?php __('Actions');?></th>
+	<th><?php echo $paginator->sort('updated');?></th>
 </tr>
 <?php
 $i = 0;
@@ -24,29 +23,30 @@ foreach ($inventories as $inventory):
 		$class = ' class="altrow"';
 	}
 ?>
-	<tr<?php echo $class;?>>
+	<tr>
 		<td>
-			<?php echo $inventory['Inventory']['id']; ?>
+			<?php
+			if($inventory['Inventory']['status'] == 1){
+				echo $html->link(__('Input', true), array('controller'=>'inventory_details', 'action'=>'add', $inventory['Inventory']['id'])); 
+			}else{
+				echo __('Input', true);
+			}
+			?>
 		</td>
 		<td>
-			<?php echo $inventory['Inventory']['subitem_id']; ?>
+			<?php echo $html->link(__($inventory['Inventory']['id'], true), array('controller'=>'inventories', 'action'=>'view', $inventory['Inventory']['id'])); ?>
 		</td>
 		<td>
-			<?php echo $inventory['Inventory']['depot_id']; ?>
+			<?php echo $inventory['Inventory']['section_id']; ?>
 		</td>
 		<td>
-			<?php echo $inventory['Inventory']['quantity']; ?>
+			<?php echo $status[$inventory['Inventory']['status']]; ?>
 		</td>
 		<td>
 			<?php echo $inventory['Inventory']['created']; ?>
 		</td>
 		<td>
-			<?php echo $inventory['Inventory']['created_user']; ?>
-		</td>
-		<td class="actions">
-			<?php echo $html->link(__('View', true), array('action'=>'view', $inventory['Inventory']['id'])); ?>
-			<?php echo $html->link(__('Edit', true), array('action'=>'edit', $inventory['Inventory']['id'])); ?>
-			<?php echo $html->link(__('Delete', true), array('action'=>'delete', $inventory['Inventory']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $inventory['Inventory']['id'])); ?>
+			<?php echo $inventory['Inventory']['updated']; ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -59,6 +59,8 @@ foreach ($inventories as $inventory):
 </div>
 <div class="actions">
 	<ul>
-		<li><?php echo $html->link(__('New Inventory', true), array('action'=>'add')); ?></li>
+	<li><?php 
+	echo $html->link(__('New Inventory', true), array('action'=>'add'), null, sprintf(__('%s inventory begins. Are you sure?', true), $loginUser['User']['section_name'])); 
+	?> </li>
 	</ul>
 </div>

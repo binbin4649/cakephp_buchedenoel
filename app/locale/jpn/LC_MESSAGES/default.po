@@ -446,7 +446,7 @@ msgid "Delete"
 msgstr "削除"
 
 msgid "Are you sure you want to delete # %s?"
-msgstr "削除します。よろしいですか？"
+msgstr "%s を削除します。よろしいですか？"
 
 msgid "Brands"
 msgstr "ブランド"
@@ -2372,7 +2372,6 @@ msgstr "修理発注"
 msgid "The Repair Ordering. Are you sure?"
 msgstr "修理を発注します。よろしいですか？"
 
-
 msgid "Other Ordering"
 msgstr "その他発注"
 
@@ -2382,3 +2381,17 @@ msgstr "その他の発注します。よろしいですか？"
 msgid "Management can not be increased more than one item separately."
 msgstr "単品管理の商品は1以上増やせません。"
 
+msgid "Inventory Detail"
+msgstr "棚卸詳細"
+
+msgid "Inventory Input"
+msgstr "棚卸入力"
+
+msgid "%s inventory begins. Are you sure?"
+msgstr "%s 棚卸を開始します。よろしいですか？"
+
+msgid "Depot Qty"
+msgstr "帳簿"
+
+msgid "Real Qty"
+msgstr "実棚"

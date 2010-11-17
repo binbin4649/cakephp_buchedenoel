@@ -4,10 +4,11 @@
  		<legend><?php __('Edit Inventory');?></legend>
 	<?php
 		echo $form->input('id');
-		echo $form->input('subitem_id');
-		echo $form->input('depot_id');
-		echo $form->input('quantity');
+		echo $form->input('section_id');
+		echo $form->input('status');
+		echo $form->input('print_file');
 		echo $form->input('created_user');
+		echo $form->input('updated_user');
 	?>
 	</fieldset>
 <?php echo $form->end('Submit');?>
