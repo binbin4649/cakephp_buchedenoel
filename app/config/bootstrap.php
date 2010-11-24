@@ -45,7 +45,7 @@
 //在庫が無くても永久に取り置き出来るモード、TRUEで在庫とか無視、通常はFALSE
 define('EMERGENCY_LANDING', TRUE);
 
-define('MAXYEAR', 2010);
+define('MAXYEAR', 2011);
 define('MINYEAR', 2009);
 define('TAX_RATE', 5);//5=5%
 define('INC_NAME_JA', '株式会社ザ･キッス');
