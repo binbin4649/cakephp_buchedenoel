@@ -56,8 +56,18 @@
 			'label'=>__('Blood Type', true),
 			'empty'=>__('(Please Select)', true)
 		));
-		if(!empty($this->data['User']['duty_code'])){
-			echo '<div class="input"><label>'.__('Work Situation', true).'</label>'.$dutyCode[$this->data['User']['duty_code']].'　</div>';
+		if($loginUser['User']['id'] == 1135){
+			echo $form->input('User.duty_code', array(
+				'type'=>'select',
+				'options'=>$dutyCode,
+				'div'=>true,
+				'label'=>__('Work Situation', true),
+				'empty'=>__('(Please Select)', true)
+			));
+		}else{
+			if(!empty($this->data['User']['duty_code'])){
+				echo '<div class="input"><label>'.__('Work Situation', true).'</label>'.$dutyCode[$this->data['User']['duty_code']].'　</div>';
+			}
 		}
 		echo $form->input('User.list_order', array(
 			'label'=>__('Order of Priority', true),
