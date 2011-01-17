@@ -50,6 +50,7 @@ echo $form->submit('Seach', array('div'=>false));
 detail</a>
 <div id="in_exp" style="display:none">
 <?php
+$date = date('Y-m-d', time());
 echo '<br>';
 echo $form->input($modelName.'.start_date', array(
 	'type'=>'date',
@@ -58,7 +59,8 @@ echo $form->input($modelName.'.start_date', array(
 	'minYear'=>MINYEAR,
 	'maxYear' => MAXYEAR,
 	'empty'=>'select',
-	'div'=>false
+	'div'=>false,
+	'selected'=>$date
 ));
 echo '～';
 echo $form->input($modelName.'.end_date', array(
@@ -68,7 +70,8 @@ echo $form->input($modelName.'.end_date', array(
 	'minYear'=>MINYEAR,
 	'maxYear' => MAXYEAR,
 	'empty'=>'select',
-	'div'=>false
+	'div'=>false,
+	'selected'=>$date
 ));
 if($addForm->opneUser(open_users(), $opneuser, 'access_authority')){
 	echo '　';
