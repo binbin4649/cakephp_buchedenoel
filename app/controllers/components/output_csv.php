@@ -148,6 +148,11 @@ class OutputCsvComponent extends Object {
 		$order_type = get_order_type();
 		$order_status = get_order_status();
 		$out = '"受注番号","受注タイプ","受注状態","倉庫","出荷先","イベントNo","スパンNo","受注日","担当者1","担当者2","担当者3","担当者4","お客様名","施設番号","合計金額","商品合計","消費税合計","送料","調整金額","前受金","作成日","作成者","更新日","更新者","親品番","子品番","納期","店着","入荷","出荷","上代単価","受注数量","引当数量","発注数量","売上済数量","刻印"'."\r\n";
+		
+		//2011-01-18　作り直す予定だった
+		//$out = '"","","","","","","","","","","担当者3","担当者4","お客様名","施設番号","合計金額","商品合計","消費税合計","送料","調整金額","前受金","作成日","作成者","更新日","更新者","親品番","子品番","納期","店着","入荷","出荷","上代単価","受注数量","引当数量","発注数量","売上済数量","刻印"'."\r\n";
+		//$out = '"日時","店舗名","品番","サイズ","個数","刻印","お客様名","客注番号","受注番号","店着日","備考",';
+		//$out .= '"受注タイプ","受注状態","倉庫","出荷先","イベントNo","スパンNo","受注日","担当者1","担当者2","","","","","","","","","","","","","","","","","","","","","","","","",'."\r\n";
 		foreach($orders as $order){
 			$contact1_name = $UserModel->userName($order['Order']['contact1']);
 			$contact2_name = $UserModel->userName($order['Order']['contact2']);
@@ -478,10 +483,14 @@ class OutputCsvComponent extends Object {
 	function Transport($value){
 		App::import('Model', 'Subitem');
     	$SubitemModel = new Subitem();
+    	App::import('Model', 'Depot');
+    	$DepotModel = new Depot();
     	$transport_status = get_transport_status();
     	$layaway_type = get_layaway_type();
-		$out = '"移動番号ID","子品番名","JAN","親品番名","上代","コスト","出庫数","入庫数","出庫倉庫","入庫倉庫","移動状況","出荷予定日","着荷予定日","取置状況","取置担当者",';
-		$out .= '"売上番号","作成者","作成日"'."\r\n";
+		//$out = '"移動番号ID","子品番名","JAN","親品番名","上代","コスト","出庫数","入庫数","出庫倉庫","入庫倉庫","移動状況","出荷予定日","着荷予定日","取置状況","取置担当者",';
+		//$out = '"","","","","","","","","","","","","","","",';
+		$out = '"入力日時","部門（店舗）","親品番名","サイズ","個数","","","","取置番号","店着日","備考","子品番名","JAN","上代","コスト",';
+		$out .= '"出庫数","入庫数","出庫倉庫","入庫倉庫","移動状況","出荷予定日","取置状況","取置担当者"'."\r\n";
 		foreach($value as $val){
 			foreach($val['TransportDateil'] as $detail){
 				$params = array(
@@ -490,11 +499,22 @@ class OutputCsvComponent extends Object {
 				);
 				$SubitemModel->unbindModel(array('belongsTo'=>array('Process', 'Material')));
 				$subitem = $SubitemModel->find('first' ,$params);
+				$section_name = $DepotModel->sectionMarge($val['Transport']['in_depot']);
+				$size = $this->Selector->sizeSelector($subitem['Subitem']['major_size'], $subitem['Subitem']['minority_size']);
 				$cost = $this->Selector->costSelector($subitem['Item']['id'], $subitem['Subitem']['cost']);
-				$out .= '"'.$val['Transport']['id'].'","';
+				$out .= '"'.$val['Transport']['created'].'","';
+				$out .= $section_name['section_name'].'","';
+				$out .= $subitem['Item']['name'].'","';
+				$out .= $size.'","';
+				$out .= $detail['out_qty'].'","';
+				$out .= '","'; //元刻印
+				$out .= '","'; //元お客様名
+				$out .= '","'; //元客注番号
+				$out .= $val['Transport']['id'].'","';
+				$out .= $val['Transport']['arrival_date'].'","';
+				$out .= $val['Transport']['remark'].'","';
 				$out .= $subitem['Subitem']['name'].'","';
 				$out .= $subitem['Subitem']['jan'].'","';
-				$out .= $subitem['Item']['name'].'","';
 				$out .= $subitem['Item']['price'].'","';
 				$out .= $cost.'","';
 				$out .= $detail['out_qty'].'","';
@@ -507,16 +527,12 @@ class OutputCsvComponent extends Object {
 					$out .= '","';
 				}
 				$out .= $val['Transport']['delivary_date'].'","';
-				$out .= $val['Transport']['arrival_date'].'","';
 				if(!empty($val['Transport']['layaway_type'])){
 					$out .= $layaway_type[$val['Transport']['layaway_type']].'","';
 				}else{
 					$out .= '","';
 				}
-				$out .= $val['Transport']['layaway_user'].'","';
-				$out .= $detail['order_id'].'","';
-				$out .= $val['Transport']['created_user'].'","';
-				$out .= $val['Transport']['created'].'"'."\r\n";
+				$out .= $val['Transport']['layaway_user'].'"'."\r\n";
 			}
 		}
 		return $out;
