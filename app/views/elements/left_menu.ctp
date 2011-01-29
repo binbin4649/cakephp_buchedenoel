@@ -31,6 +31,7 @@ if($addForm->opneUser(open_users(), $opneuser, 'access_authority')){
 		__('Input Sale(JAN)',true)=>array('item', 'sales/add'),
 		__('Sell Input',true)=>array('item', 'order_dateils/store_add'),
 		__('Store Sale List',true)=>array('item', 'orders/store_index'),
+		__('Sale Item List',true)=>array('item', 'order_dateils/index'),
 		//受注
 		__('Sales',true)=>array('sect', '0'),
 		__('Order Input',true)=>array('item', 'order_dateils/add'),
@@ -85,6 +86,7 @@ if($addForm->opneUser(open_users(), $opneuser, 'access_authority')){
 		__('Input Sale(JAN)',true)=>array('item', 'sales/add'),
 		__('Sell Input',true)=>array('item', 'order_dateils/store_add'),
 		__('Store Sale List',true)=>array('item', 'orders/store_index'),
+		__('Sale Item List',true)=>array('item', 'order_dateils/index'),
 		
 		__('User',true)=>array('sect', '0'),
 		__('User Saech',true)=>array('item', 'users/index'),

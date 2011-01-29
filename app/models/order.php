@@ -173,13 +173,18 @@ class Order extends AppModel {
 	}
 
 	function finish_juge($id){
+		App::import('Model', 'TransportDateil');
+    	$TransportDateilModel = new TransportDateil();
+    	App::import('Model', 'OrderDateil');
+    	$OrderDateilModel = new OrderDateil();
 		$params = array(
 			'conditions'=>array('Order.id'=>$id),
 			'recursive'=>1
 		);
-		$this->unbindModel(array('hasAndBelongsToMany'=>array('Sale')));
-		$this->unbindModel(array('belongsTo'=>array('Depot')));
-		$this->unbindModel(array('hasMany'=>array('OrderingsDetail', 'PurchaseDetail')));
+		//$this->unbindModel(array('hasAndBelongsToMany'=>array('Sale')));
+		//$this->unbindModel(array('belongsTo'=>array('Depot')));
+		//$this->unbindModel(array('hasMany'=>array('OrderingsDetail', 'PurchaseDetail')));
+		$this->contain('OrderDateil');
 		$order = $this->find('first' ,$params);
 		$juge = True;
 		if($order['Order']['order_status'] != '6'){
@@ -194,6 +199,48 @@ class Order extends AppModel {
 				$this->save($order);
 			}
 		}
+		
+//		2011/1/25 取り置きステータスの更新を追加
+//		取置番号 transport_id のdetail_idが、全部order_detailに入っているか？　取置されたものが全部orderに入っていればOK、ステータス更新
+		foreach($order['OrderDateil'] as $key=>$hoge){
+			if(!empty($hoge['transport_dateil_id'])){
+    			$params = array(
+					'conditions'=>array('TransportDateil.id'=>$hoge['transport_dateil_id']),
+					'recursive'=>0,
+					//'fields'=>array('TransportDateil.transport_id'),
+				);
+    			$value = $TransportDateilModel->find('first' ,$params);
+    			if($value['Transport']['layaway_type'] == '1'){
+	    			$params = array(
+						'conditions'=>array('TransportDateil.transport_id'=>$value['Transport']['id']),
+						'recursive'=>0,
+						//'fields'=>array('TransportDateil.transport_id'),
+					);
+	    			$vals = $TransportDateilModel->find('all' ,$params);
+	    			$trans_order_boolen = true; //チェックして最後までtrueだったら、ステータス更新
+	    			foreach($vals as $val){
+		    			$params = array(
+							'conditions'=>array('OrderDateil.transport_dateil_id'=>$val['TransportDateil']['id']),
+							'recursive'=>-1,
+							//'fields'=>array('TransportDateil.transport_id'),
+						);
+		    			$trans_order_juge = $OrderDateilModel->find('first' ,$params);
+	    				if(!$trans_order_juge){ $trans_order_boolen = false; }
+	    			}
+	    			if($trans_order_boolen){
+	    				App::import('Model', 'Transport');
+    					$TransportModel = new Transport();
+    					$TransportModel->create();
+    					$Transport['Transport']['id'] = $value['Transport']['id'];
+    					$Transport['Transport']['layaway_type'] = '2';
+    					$Transport['Transport']['in_depot'] = $hoge['depot_id'];
+    					$TransportModel->save($Transport);
+    					$TransportModel->id = null;
+	    			}
+    			}
+			}
+		}//取置ステータスの更新終わり
+		
 	}
 
 	function beforeSave(){

@@ -209,6 +209,42 @@ class OutputCsvComponent extends Object {
 		}
 		return $out;
 	}
+	
+	function OrderDateil($values){
+		App::import('Model', 'Section');
+    	$SectionModel = new Section();
+    	App::import('Model', 'User');
+    	$UserModel = new User();
+		$order_type = get_order_type();
+		$out = '"ID","区分","売上ID","取置ID","部門ID","部門名","品番ID","品番名","入力日","店着日","出荷日","入力担当者ID","入力担当者名","備考","ブランドID","工場ID","上代","子品番名"'."\r\n";
+		foreach($values as $value){
+			$out .= '"'.$value['OrderDateil']['id'].'","';
+			$out .= $value['Order']['id'].'","';
+			if(!empty($value['OrderDateil']['order_type'])){
+				$out .= $order_type[$value['OrderDateil']['order_type']].'","';
+			}else{
+				$out .= '","';
+			}
+			$out .= $value['OrderDateil']['transport_dateil_id'].'","';
+			$out .= $value['Order']['section_id'].'","';
+			$section_name = $SectionModel->cleaningName($value['Order']['section_id']);
+			$out .= $section_name.'","';
+			$out .= $value['Item']['id'].'","';
+			$out .= $value['Item']['name'].'","';
+			$out .= $value['OrderDateil']['created'].'","';
+			$out .= $value['OrderDateil']['store_arrival_date'].'","';
+			$out .= $value['OrderDateil']['shipping_date'].'","';
+			$out .= $value['OrderDateil']['created_user'].'","';
+			$user = $UserModel->findById($value['OrderDateil']['created_user']);
+			$out .= $user['User']['name'].'","';
+			$out .= $value['OrderDateil']['sub_remarks'].'","';
+			$out .= $value['Item']['brand_id'].'","';
+			$out .= $value['Item']['factory_id'].'","';
+			$out .= $value['Item']['price'].'","';
+			$out .= $value['Subitem']['name'].'"'."\r\n";
+		}
+		return $out;
+	}
 
 	//支払一覧
 	function pays($pays){

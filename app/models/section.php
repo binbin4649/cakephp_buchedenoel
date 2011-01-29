@@ -20,6 +20,21 @@ class Section extends AppModel {
 		),
 	);
 	
+	// section_id を指定するとdefault_depot_idを返す
+	function defaultDepotId($section_id){
+		$params = array(
+			'conditions'=>array('Section.id'=>$section_id),
+			'recursive'=>-1,
+			'fields'=>array('Section.default_depot'),
+		);
+		$section = $this->find('first', $params);
+		if($section){
+			return $section['Section']['default_depot'];
+		}else{
+			return false;
+		}
+	}
+	
 	// そのsection_id の下に、そのdepot_idがあるのか？調べてくれる。trueだったら名前を返す
 	function relationConfirm($section_id, $depot_id){
 		$params = array(

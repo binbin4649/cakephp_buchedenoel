@@ -3,12 +3,95 @@ class OrderDateilsController extends AppController {
 
 	var $name = 'OrderDateils';
 	var $helpers = array("Javascript","Ajax");
-	var $uses = array('OrderDateil', 'Subitem', 'Depot', 'Item', 'Order', 'Destination', 'Stock');
-	var $components = array('Total', 'Print');
+	var $uses = array('OrderDateil', 'Subitem', 'Depot', 'Item', 'Order', 'Destination', 'Stock', 'Transport');
+	var $components = array('Total', 'Print', 'OutputCsv');
 
 	function index() {
-		$this->OrderDateil->recursive = 0;
-		$this->set('orderDateils', $this->paginate());
+		$modelName = 'OrderDateil';
+		$conditions = array();
+		if (!empty($this->data)) {
+			foreach($this->data[$modelName]['ordertype'] as $key=>$value){
+				if($value == '1'){
+					//$conditions[] = array('or'=>array('OrderDateil.order_type'=>$key));
+					$conditions['OR'][] = array('OrderDateil.order_type'=>$key);
+				}
+			}
+			if(!empty($this->data[$modelName]['order_id'])){
+				//$conditions[] = array('and'=>array('Order.id'=>$this->data[$modelName]['order_id']));
+				$conditions['AND'][] = array('Order.id'=>$this->data[$modelName]['order_id']);
+			}
+			if(!empty($this->data[$modelName]['transport_id'])){
+				//$conditions[] = array('and'=>array('TransportDateil.transport_id'=>$this->data[$modelName]['transport_id']));
+				$conditions['AND'][] = array('TransportDateil.transport_id'=>$this->data[$modelName]['transport_id']);
+			}
+			if(!empty($this->data[$modelName]['section_id'])){
+				//$conditions[] = array('and'=>array('Order.section_id'=>$this->data[$modelName]['section_id']));
+				$conditions['AND'][] = array('Order.section_id'=>$this->data[$modelName]['section_id']);
+			}
+			if(!empty($this->data[$modelName]['item_name'])){
+				//$conditions[] = array('and'=>array('Item.name LIKE'=>'%'.$this->data[$modelName]['item_name'].'%'));
+				$conditions['AND'][] = array('Item.name LIKE'=>'%'.$this->data[$modelName]['item_name'].'%');
+			}
+			if(!empty($this->data[$modelName]['start_created']['year']) and !empty($this->data[$modelName]['start_created']['month']) and !empty($this->data[$modelName]['start_created']['day'])){
+				$start_created = $this->data[$modelName]['start_created']['year'].'-'.$this->data[$modelName]['start_created']['month'].'-'.$this->data[$modelName]['start_created']['day'].' 00:00:00';
+				//$conditions[] = array('and'=>array('OrderDateil.created >='=>$start_created));
+				$conditions['AND'][] = array('OrderDateil.created >='=>$start_created);
+			}
+			if(!empty($this->data[$modelName]['end_created']['year']) and !empty($this->data[$modelName]['end_created']['month']) and !empty($this->data[$modelName]['end_created']['day'])){
+				$end_created = $this->data[$modelName]['end_created']['year'].'-'.$this->data[$modelName]['end_created']['month'].'-'.$this->data[$modelName]['end_created']['day'].' 23:59:59';
+				//$conditions[] = array('and'=>array('OrderDateil.created <='=>$end_created));
+				$conditions['AND'][] = array('OrderDateil.created <='=>$end_created);
+			}
+			if(!empty($this->data[$modelName]['start_arrival']['year']) and !empty($this->data[$modelName]['start_arrival']['month']) and !empty($this->data[$modelName]['start_arrival']['day'])){
+				$start_arrival = $this->data[$modelName]['start_arrival']['year'].'-'.$this->data[$modelName]['start_arrival']['month'].'-'.$this->data[$modelName]['start_arrival']['day'].' 00:00:00';
+				//$conditions[] = array('and'=>array('OrderDateil.store_arrival_date >='=>$start_arrival));
+				$conditions['AND'][] = array('OrderDateil.store_arrival_date >='=>$start_arrival);
+			}
+			if(!empty($this->data[$modelName]['end_arrival']['year']) and !empty($this->data[$modelName]['end_arrival']['month']) and !empty($this->data[$modelName]['end_arrival']['day'])){
+				$end_arrival = $this->data[$modelName]['end_arrival']['year'].'-'.$this->data[$modelName]['end_arrival']['month'].'-'.$this->data[$modelName]['end_arrival']['day'].' 23:59:59';
+				//$conditions[] = array('and'=>array('OrderDateil.store_arrival_date <='=>$end_arrival));
+				$conditions['AND'][] = array('OrderDateil.store_arrival_date <='=>$end_arrival);
+			}
+			if(!empty($this->data[$modelName]['start_shipping']['year']) and !empty($this->data[$modelName]['start_shipping']['month']) and !empty($this->data[$modelName]['start_shipping']['day'])){
+				$start_shipping = $this->data[$modelName]['start_shipping']['year'].'-'.$this->data[$modelName]['start_shipping']['month'].'-'.$this->data[$modelName]['start_shipping']['day'].' 00:00:00';
+				//$conditions[] = array('and'=>array('OrderDateil.shipping_date >='=>$start_shipping));
+				$conditions['AND'][] = array('OrderDateil.shipping_date >='=>$start_shipping);
+			}
+			if(!empty($this->data[$modelName]['end_shipping']['year']) and !empty($this->data[$modelName]['end_shipping']['month']) and !empty($this->data[$modelName]['end_shipping']['day'])){
+				$end_shipping = $this->data[$modelName]['end_shipping']['year'].'-'.$this->data[$modelName]['end_shipping']['month'].'-'.$this->data[$modelName]['end_shipping']['day'].' 23:59:59';
+				//$conditions[] = array('and'=>array('OrderDateil.shipping_date <='=>$end_shipping));
+				$conditions['AND'][] = array('OrderDateil.shipping_date <='=>$end_shipping);
+			}
+			if(empty($this->data[$modelName]['csv'])) $this->data[$modelName]['csv'] = 0;
+			if($this->data[$modelName]['csv'] == 1){
+				$params = array(
+					'conditions'=>$conditions,
+					'limit'=>5000,
+					'order'=>array('OrderDateil.created'=>'desc')
+				);
+				$details = $this->OrderDateil->find('all' ,$params);
+				$output_csv = $this->OutputCsv->OrderDateil($details);
+				$file_name = 'orderdetails_csv'.date('Ymd-His').'.csv';
+				$path = WWW_ROOT.'/files/user_csv/'; //どうせ一時ファイルなんだから同じでいいや。ってことはフォルダ名はミスだね。でも面倒だからこのままで。
+				$output_csv = mb_convert_encoding($output_csv, 'SJIS', 'UTF-8');
+				file_put_contents($path.$file_name, $output_csv);
+				$output['url'] = '/buchedenoel/files/user_csv/'.$file_name;
+				$output['name'] = $file_name;
+				$this->set('csv', $output);
+				$this->data[$modelName]['csv'] = null;
+			}
+		}
+		
+		$this->paginate = array(
+			'conditions'=>$conditions,
+			'limit'=>50,
+			'order'=>array('OrderDateil.created'=>'desc')
+		);
+		$values = $this->paginate();
+		foreach($values as $key=>$value){
+			$values[$key]['Order']['section_name'] = $this->Section->cleaningName($value['Order']['section_id']);
+		}
+		$this->set('orderDateils', $values);
 	}
 
 	function view($id = null) {
@@ -34,7 +117,7 @@ class OrderDateilsController extends AppController {
 			}
 		}
 		$this->store_add($ac, $id);
-		$order_type = array('1'=>'受注(卸)', '3'=>'注残破棄(卸)', '4'=>'特別注文');
+		$order_type = array('1'=>'受注(卸)', '3'=>'注残破棄(卸)', '4'=>'特別注文', '7'=>'取置');
 		$this->set('orderType', $order_type);
 		$params = array(
 			'conditions'=>array('Depot.section_id'=>309),
@@ -71,23 +154,24 @@ class OrderDateilsController extends AppController {
 		}
 		$total_quantity = 0;
 		if(@$this->data['OrderDateil']['step'] == '1') {
-			$params = array(
-				'conditions'=>array('Item.name'=>$this->data['OrderDateil']['AutoItemName']),
-				'recursive'=>0,
-			);
-			$item = $this->Item->find('first' ,$params);
-			if($item){
-				$this->set('item', $item);
+			if(!empty($this->data['OrderDateil']['AutoItemName'])){
 				$params = array(
-					'conditions'=>array('Subitem.item_id'=>$item['Item']['id']),
+					'conditions'=>array('Item.name'=>$this->data['OrderDateil']['AutoItemName']),
 					'recursive'=>0,
-					'order'=>array('Subitem.name'=>'asc')
 				);
-				$subitems = $this->Subitem->find('all' ,$params);
-				$this->set('subitems', $subitems);
-
-			}else{
-				$this->Session->setFlash(__('品番を間違えてるかも、', true));
+				$item = $this->Item->find('first' ,$params);
+				if($item){
+					$this->set('item', $item);
+					$params = array(
+						'conditions'=>array('Subitem.item_id'=>$item['Item']['id']),
+						'recursive'=>0,
+						'order'=>array('Subitem.name'=>'asc')
+					);
+					$subitems = $this->Subitem->find('all' ,$params);
+					$this->set('subitems', $subitems);
+				}else{
+					$this->Session->setFlash(__('品番を間違えてるかも、', true));
+				}
 			}
 			//Orderデータの整形
 			if(!empty($this->data['OrderDateil']['destination_id'])){
@@ -147,12 +231,57 @@ class OrderDateilsController extends AppController {
 			}else{
 				$this->Session->delete("Order.prev_money");
 			}
-			if(!empty($this->data['OrderDateil']['order_status'])){
+			if(!empty($this->data['OrderDateil']['order_status']) OR $this->data['OrderDateil']['order_status'] == '0'){
 				$this->Session->write("Order.order_status", $this->data['OrderDateil']['order_status']);
 			}else{
 				$this->Session->delete("Order.order_status");
 			}
 		}
+		//取り置き入力
+		if(!empty($this->data['OrderDateil']['reserve'])){
+			$transport_id = $this->data['OrderDateil']['reserve'];
+			$params = array(
+				'conditions'=>array('Transport.id'=>$transport_id),
+				'recursive'=>3,
+			);
+			$this->Transport->contain('TransportDateil.Subitem.Item');
+			$Transport = $this->Transport->find('first' ,$params);
+			if($Transport){
+				if($Transport['Transport']['layaway_type'] == 1){
+					$session_detail = $this->Session->read('OrderDateil');
+					$this->Session->delete("OrderDateil");
+					foreach($Transport['TransportDateil'] as $reserv){
+						$reserv_write = array();
+						$reserv_write['Subitem']['transport_detail_id'] = $reserv['id'];
+						$reserv_write['Subitem']['transport_id'] = $Transport['Transport']['id'];
+						$reserv_write['Subitem']['id'] = $reserv['Subitem']['id'];
+						$reserv_write['Subitem']['name'] = $reserv['Subitem']['name'];
+						$reserv_write['Subitem']['quantity'] = $reserv['out_qty'];
+						$reserv_write['Subitem']['minority_size'] = $reserv['Subitem']['minority_size'];
+						$reserv_write['Subitem']['major_size'] = $reserv['Subitem']['major_size'];
+						$reserv_write['Item']['id'] = $reserv['Subitem']['item_id'];
+						$reserv_write['Subitem']['specified_date'] = $Transport['Transport']['arrival_date'];
+						$reserv_write['Subitem']['marking'] = '';
+						$reserv_write['Subitem']['order_type'] = '7';
+						$reserv_write['Subitem']['discount'] = '';
+						$reserv_write['Subitem']['adjustment'] = '';
+						$reserv_write['Item']['price'] = $reserv['Subitem']['Item']['price'];
+						$reserv_write['Subitem']['sub_remarks'] = $Transport['Transport']['remark'];
+						$reserv_write['Subitem']['span_no'] = '';
+						//$reserv_write['Subitem']['depot_id'] = $Transport['Transport']['in_depot'];
+						$reserv_write['Subitem']['depot_id'] = $this->Section->defaultDepotId($this->Auth->user('section_id'));
+						$session_detail[] = $reserv_write;
+					}
+					$this->Session->write("OrderDateil", $session_detail);
+					$this->data['OrderDateil']['reserve'] = '';
+				}else{
+					$this->Session->setFlash(__('既に取り置き入力が済んでいる、番号です。', true));
+				}
+			}else{
+				$this->Session->setFlash(__('取置番号を間違えていると思われます。', true));
+			}
+		}
+		
 		//saleから渡ってきた売上を無理栗マージ
 		if($ac == 'addsale'){
 			$session_reader = $this->Session->read('SaleJan');
@@ -239,9 +368,27 @@ class OrderDateilsController extends AppController {
 				$this->Session->write("OrderDateil.".$i, $session_write);
 			}
 		}
+		if($ac == 'edit'){
+			$session_read = $this->Session->read('OrderDateil');
+			$params = array(
+				'conditions'=>array('Item.id'=>$session_read[$id]['Item']['id']),
+				'recursive'=>0,
+			);
+			$item = $this->Item->find('first' ,$params);
+			$this->set('item', $item);
+			$params = array(
+				'conditions'=>array('Subitem.item_id'=>$item['Item']['id']),
+				'recursive'=>0,
+				'order'=>array('Subitem.name'=>'asc')
+			);
+			$subitems = $this->Subitem->find('all' ,$params);
+			$this->set('subitems', $subitems);
+			$this->set('edit', $session_read[$id]);
+			$this->Session->delete("OrderDateil.".$id);
+			unset($session_read[$id]);
+		}
 		
-		
-		if(@$this->data['OrderDateil']['step'] == '2') {
+		if(@$this->data['OrderDateil']['step'] == '2'){
 			$subitems = array_keys($this->data['subitem']);
 			foreach($subitems as $subitem_id){
 				if($this->data['subitem'][$subitem_id] > 0){
@@ -259,7 +406,8 @@ class OrderDateilsController extends AppController {
 					$session_write['Subitem']['quantity'] = $quantity;
 					$session_write['Subitem']['major_size'] = $subitem['Subitem']['major_size'];
 					$session_write['Subitem']['minority_size'] = $subitem['Subitem']['minority_size'];
-					$session_write['Item']['id'] =  $subitem['Subitem']['item_id'];
+					$session_write['Item']['id'] =  $subitem['Subitem']['item_id'];					
+					$session_write['Subitem']['transport_detail_id'] = $this->data['OrderDateil']['transport_detail_id'];
 					$session_write['Subitem']['marking'] = trim($this->data['OrderDateil']['marking']);
 					$session_write['Subitem']['specified_date'] = $this->data['OrderDateil']['specified_date'];
 					$session_write['Subitem']['discount'] = $this->data['OrderDateil']['discount'];
@@ -284,12 +432,16 @@ class OrderDateilsController extends AppController {
 					$session_write['Item']['price'] =  $price_element['price'];
 					$session_write['Subitem']['sub_remarks'] =  $this->data['OrderDateil']['sub_remarks'];
 					$session_count = $this->Session->read('OrderDateil');
+					/*
 					if($session_count){
-						$i = count($session_count) + 1;
+						$i = count($session_count);
 					}else{
 						$i = 0;
 					}
-					$this->Session->write("OrderDateil.".$i, $session_write);
+					$this->Session->write("OrderDateil.".$i, $session_write);//ここでまとめて、詳細をセッションに追加している
+					*/
+					$session_count[] = $session_write;
+					$this->Session->write("OrderDateil", $session_count);
 				}
 			}
 		}
@@ -317,7 +469,7 @@ class OrderDateilsController extends AppController {
 				
 				//(7/21)　1受注の中に複数の部門は存在しないようにする。
 				//　という前提の下、１つ目のdetailのdepot_idから、section_id を引いて、念のため格納する。
-				//if(!empty($session_order['depot_id'])){
+				//if(!empty($session_order['depot_id']))
 				if(!empty($session_read['0']['Subitem']['depot_id'])){
 					$params = array(
 						'conditions'=>array('Depot.id'=>$session_read['0']['Subitem']['depot_id']),
@@ -368,9 +520,8 @@ class OrderDateilsController extends AppController {
 				$this->Session->write("Confirm.details", $session_read);
 				$this->redirect(array('controller'=>'order_dateils', 'action'=>'confirm'));
 			}
-			$this->set('details', $session_read);
+			$this->set('details', $session_read); //ここで詳細をセット
 		}
-		//閉じカッコ追加、これでいいのか？ Emeditorが間違えてるらしいぞ
 		//デフォルトDepotを用意
 		$params = array(
 			'conditions'=>array('Section.id'=>$this->Auth->user('section_id')),
@@ -386,6 +537,7 @@ class OrderDateilsController extends AppController {
 		}else{
 			$this->set('order_status', '');
 		}
+		
 		if($this->Session->check('Order.order_type')){
 			$this->set('order_type', $this->Session->read('Order.order_type'));
 		}else{
@@ -410,11 +562,6 @@ class OrderDateilsController extends AppController {
 			$this->set('events_no', $this->Session->read('Order.events_no'));
 		}else{
 			$this->set('events_no', '');
-		}
-		if($this->Session->check('Order.span_no')){
-			$this->set('span_no', $this->Session->read('Order.span_no'));
-		}else{
-			$this->set('span_no', '');
 		}
 		if($this->Session->check('Order.customers_name')){
 			$this->set('customers_name', $this->Session->read('Order.customers_name'));
@@ -520,6 +667,7 @@ class OrderDateilsController extends AppController {
 		$this->set('orderStatus', get_order_status());
 		$this->set('orderType', get_order_type());
 	}
+	
 
 	function add_confirm(){
 		//ここの途中に、モデルを直接叩いてsaleを保存する。　→　817 sale要らないんじゃね？
@@ -537,6 +685,7 @@ class OrderDateilsController extends AppController {
 		$order_id = $this->Order->getInsertID();
 		$Order['Order']['id'] = $order_id;
 		//$Input_processing_sales = false;
+		//$transportDetailId = array();
 		foreach($confirm['details'] as $detail){
 			//order_typeが4の時は、先にsubitemを登録する。お渡し入力の時にjanを入れてもらい、更新する。
 			if($detail['Subitem']['order_type'] == 4){
@@ -546,7 +695,6 @@ class OrderDateilsController extends AppController {
 				$this->Subitem->save($Subitem);
 				$detail['Subitem']['id'] = $this->Subitem->getInsertID();
 			}
-			
 			$OrderDateil = array();
 			$OrderDateil['OrderDateil']['order_id'] = $order_id;
 			$OrderDateil['OrderDateil']['item_id'] = $detail['Item']['id'];
@@ -555,14 +703,15 @@ class OrderDateilsController extends AppController {
 			$OrderDateil['OrderDateil']['bid'] = $detail['Item']['price'];
 			$OrderDateil['OrderDateil']['bid_quantity'] = $detail['Subitem']['quantity'];
 			$OrderDateil['OrderDateil']['marking'] = $detail['Subitem']['marking'];
-			
+			if(!empty($detail['Subitem']['transport_detail_id'])){
+				$OrderDateil['OrderDateil']['transport_dateil_id'] = $detail['Subitem']['transport_detail_id'];
+			}
 			$OrderDateil['OrderDateil']['discount'] = $detail['Subitem']['discount'];
 			$OrderDateil['OrderDateil']['adjustment'] = $detail['Subitem']['adjustment'];
 			$OrderDateil['OrderDateil']['depot_id'] = $detail['Subitem']['depot_id'];
 			$OrderDateil['OrderDateil']['order_type'] = $detail['Subitem']['order_type'];
 			$OrderDateil['OrderDateil']['span_no'] = $detail['Subitem']['span_no'];
 			$OrderDateil['OrderDateil']['sub_remarks'] = $detail['Subitem']['sub_remarks'];
-			
 			$OrderDateil['OrderDateil']['created_user'] = $this->Auth->user('id');
 			// order_type = 6 現売
 			if($OrderDateil['OrderDateil']['order_type'] == 6){
@@ -581,8 +730,15 @@ class OrderDateilsController extends AppController {
 					$OrderDateil['OrderDateil']['sell_quantity'] = $detail['Subitem']['quantity'];
 				}
 			}
+			if(empty($OrderDateil['OrderDateil']['discount'])){
+				$OrderDateil['OrderDateil']['discount'] = 0;
+			}
 			$this->OrderDateil->save($OrderDateil);
 			$this->OrderDateil->id = null;
+		}
+		//layaway status も変更、明細単位で全部揃っていたらステータスを更新する。
+		if(!empty($transportDetailId)){
+			$this->layawayStatusUpdate($transportDetailId);
 		}
 		$this->Order->finish_juge($order_id);
 		$this->Session->delete("Confirm");

@@ -91,6 +91,21 @@ class HogeShell extends Shell {
 			}
 		}
 	}
+	
+	// modelテスト用
+	function modelTest(){
+		App::import('Model', 'Order');
+    	$OrderModel = new Order();
+    	$id = '4';
+    	$result = $OrderModel->finish_juge($id);
+    	pr($result);
+    	
+	}
+	
+	
+	
+	
+	
 }
 
 ?>

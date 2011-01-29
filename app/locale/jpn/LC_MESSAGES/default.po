@@ -2398,3 +2398,6 @@ msgstr "実棚"
 
 msgid "New Inventory"
 msgstr "棚卸開始"
+
+msgid "Sale Item List"
+msgstr "売上商品単位"
