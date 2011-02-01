@@ -8,58 +8,65 @@ class OrderDateilsController extends AppController {
 
 	function index() {
 		$modelName = 'OrderDateil';
+		//出荷日一括更新
+		//8桁を検証する
+		if(!empty($this->data[$modelName]['new_shipping_date'])){
+			$this->data[$modelName]['new_shipping_date'] = mb_convert_kana($this->data[$modelName]['new_shipping_date'], 'a', 'UTF-8');
+			$this->data[$modelName]['new_shipping_date'] = ereg_replace("[^0-9]", "", $this->data[$modelName]['new_shipping_date']);//半角数字以外を削除;
+		}
+		if(!empty($this->data[$modelName]['new_shipping_date'])){
+			foreach($this->data[$modelName]['update'] as $upid=>$check){
+				if($check == '1'){
+					$this->OrderDateil->create();
+					$save_data['OrderDateil']['id'] = $upid;
+					$save_data['OrderDateil']['shipping_date'] = $this->data[$modelName]['new_shipping_date'];
+					$this->OrderDateil->save($save_data);
+					$this->OrderDateil->id = null;
+				}
+			}
+			$this->data[$modelName]['new_shipping_date'] = null;
+		}
 		$conditions = array();
 		if (!empty($this->data)) {
 			foreach($this->data[$modelName]['ordertype'] as $key=>$value){
 				if($value == '1'){
-					//$conditions[] = array('or'=>array('OrderDateil.order_type'=>$key));
 					$conditions['OR'][] = array('OrderDateil.order_type'=>$key);
 				}
 			}
 			if(!empty($this->data[$modelName]['order_id'])){
-				//$conditions[] = array('and'=>array('Order.id'=>$this->data[$modelName]['order_id']));
 				$conditions['AND'][] = array('Order.id'=>$this->data[$modelName]['order_id']);
 			}
 			if(!empty($this->data[$modelName]['transport_id'])){
-				//$conditions[] = array('and'=>array('TransportDateil.transport_id'=>$this->data[$modelName]['transport_id']));
 				$conditions['AND'][] = array('TransportDateil.transport_id'=>$this->data[$modelName]['transport_id']);
 			}
 			if(!empty($this->data[$modelName]['section_id'])){
-				//$conditions[] = array('and'=>array('Order.section_id'=>$this->data[$modelName]['section_id']));
 				$conditions['AND'][] = array('Order.section_id'=>$this->data[$modelName]['section_id']);
 			}
 			if(!empty($this->data[$modelName]['item_name'])){
-				//$conditions[] = array('and'=>array('Item.name LIKE'=>'%'.$this->data[$modelName]['item_name'].'%'));
 				$conditions['AND'][] = array('Item.name LIKE'=>'%'.$this->data[$modelName]['item_name'].'%');
 			}
 			if(!empty($this->data[$modelName]['start_created']['year']) and !empty($this->data[$modelName]['start_created']['month']) and !empty($this->data[$modelName]['start_created']['day'])){
 				$start_created = $this->data[$modelName]['start_created']['year'].'-'.$this->data[$modelName]['start_created']['month'].'-'.$this->data[$modelName]['start_created']['day'].' 00:00:00';
-				//$conditions[] = array('and'=>array('OrderDateil.created >='=>$start_created));
 				$conditions['AND'][] = array('OrderDateil.created >='=>$start_created);
 			}
 			if(!empty($this->data[$modelName]['end_created']['year']) and !empty($this->data[$modelName]['end_created']['month']) and !empty($this->data[$modelName]['end_created']['day'])){
 				$end_created = $this->data[$modelName]['end_created']['year'].'-'.$this->data[$modelName]['end_created']['month'].'-'.$this->data[$modelName]['end_created']['day'].' 23:59:59';
-				//$conditions[] = array('and'=>array('OrderDateil.created <='=>$end_created));
 				$conditions['AND'][] = array('OrderDateil.created <='=>$end_created);
 			}
 			if(!empty($this->data[$modelName]['start_arrival']['year']) and !empty($this->data[$modelName]['start_arrival']['month']) and !empty($this->data[$modelName]['start_arrival']['day'])){
 				$start_arrival = $this->data[$modelName]['start_arrival']['year'].'-'.$this->data[$modelName]['start_arrival']['month'].'-'.$this->data[$modelName]['start_arrival']['day'].' 00:00:00';
-				//$conditions[] = array('and'=>array('OrderDateil.store_arrival_date >='=>$start_arrival));
 				$conditions['AND'][] = array('OrderDateil.store_arrival_date >='=>$start_arrival);
 			}
 			if(!empty($this->data[$modelName]['end_arrival']['year']) and !empty($this->data[$modelName]['end_arrival']['month']) and !empty($this->data[$modelName]['end_arrival']['day'])){
 				$end_arrival = $this->data[$modelName]['end_arrival']['year'].'-'.$this->data[$modelName]['end_arrival']['month'].'-'.$this->data[$modelName]['end_arrival']['day'].' 23:59:59';
-				//$conditions[] = array('and'=>array('OrderDateil.store_arrival_date <='=>$end_arrival));
 				$conditions['AND'][] = array('OrderDateil.store_arrival_date <='=>$end_arrival);
 			}
 			if(!empty($this->data[$modelName]['start_shipping']['year']) and !empty($this->data[$modelName]['start_shipping']['month']) and !empty($this->data[$modelName]['start_shipping']['day'])){
 				$start_shipping = $this->data[$modelName]['start_shipping']['year'].'-'.$this->data[$modelName]['start_shipping']['month'].'-'.$this->data[$modelName]['start_shipping']['day'].' 00:00:00';
-				//$conditions[] = array('and'=>array('OrderDateil.shipping_date >='=>$start_shipping));
 				$conditions['AND'][] = array('OrderDateil.shipping_date >='=>$start_shipping);
 			}
 			if(!empty($this->data[$modelName]['end_shipping']['year']) and !empty($this->data[$modelName]['end_shipping']['month']) and !empty($this->data[$modelName]['end_shipping']['day'])){
 				$end_shipping = $this->data[$modelName]['end_shipping']['year'].'-'.$this->data[$modelName]['end_shipping']['month'].'-'.$this->data[$modelName]['end_shipping']['day'].' 23:59:59';
-				//$conditions[] = array('and'=>array('OrderDateil.shipping_date <='=>$end_shipping));
 				$conditions['AND'][] = array('OrderDateil.shipping_date <='=>$end_shipping);
 			}
 			if(empty($this->data[$modelName]['csv'])) $this->data[$modelName]['csv'] = 0;
@@ -90,6 +97,7 @@ class OrderDateilsController extends AppController {
 		$values = $this->paginate();
 		foreach($values as $key=>$value){
 			$values[$key]['Order']['section_name'] = $this->Section->cleaningName($value['Order']['section_id']);
+			
 		}
 		$this->set('orderDateils', $values);
 	}

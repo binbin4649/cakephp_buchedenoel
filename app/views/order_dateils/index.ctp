@@ -53,7 +53,7 @@ echo '　';
 echo '取置';
 echo $form->checkbox($modelName.'.ordertype.7');
 echo '　';
-echo $form->submit('Seach', array('div'=>false));
+echo $form->submit('Submit', array('div'=>false));
 ?>
 <br/><br/>
 <span style="margin-left:20px;">
@@ -130,10 +130,16 @@ echo $form->input($modelName.'.end_shipping', array(
 ));
 if($addForm->opneUser(open_users(), $opneuser, 'access_authority')){
 	echo '　';
+	echo '出荷日一括更新';
+	echo $form->text($modelName.'.new_shipping_date', array(
+	'type'=>'text',
+	'size'=>8,
+	'div'=>false
+	));
+	echo '　';
 	echo 'CSV出力';
 	echo $form->checkbox($modelName.'.csv');
 }
-echo $form->end();
 ?>
 </div>
 <br/>
@@ -146,6 +152,7 @@ echo $form->end();
 	<th>入力日</th>
 	<th>店着日</th>
 	<th>出荷日</th>
+	<th></th>
 </tr>
 <?php foreach($orderDateils as $orderDateil): ?>
 	<tr>
@@ -170,8 +177,14 @@ echo $form->end();
 		<td>
 			<?php echo substr($orderDateil['OrderDateil']['shipping_date'], 0, 10); ?><!-- 出荷日 -->
 		</td>
+		<td>
+			<?php if($addForm->opneUser(open_users(), $opneuser, 'access_authority')) echo $form->checkbox('OrderDateil.update.'.$orderDateil['OrderDateil']['id'], array('checked'=>1)); ?>
+		</td>
 	</tr>
-<?php endforeach; ?>
+<?php 
+	endforeach;
+	echo $form->end();
+?>
 </table>
 </div>
 <div class="paging">
@@ -185,4 +198,7 @@ echo $form->end();
 	<li>店着日：店舗が入力した、店着希望日。</li>
 	<li>出荷日：商品部が出荷した日</li>
 	<li>売上は売上番号、取置は取置番号です。</li>
+	<li>現売、特注などのチェックボックスはOR検索になります。</li>
+	<li>出荷日一括更新は、8桁の半角数字で入力して下さい。</li>
+	<li>出荷日一括更新は、チェックを外すと更新されません。検索結果の中からチェックボックスにチェックが入っているものが更新対象になります。</li>
 </ul>
