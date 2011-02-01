@@ -150,7 +150,7 @@ if($addForm->opneUser(open_users(), $opneuser, 'access_authority')){
 	<th>部門</th>
 	<th>品番</th>
 	<th>入力日</th>
-	<th>店着日</th>
+	<th>納期</th>
 	<th>出荷日</th>
 	<th></th>
 </tr>
@@ -172,7 +172,7 @@ if($addForm->opneUser(open_users(), $opneuser, 'access_authority')){
 			<?php echo substr($orderDateil['OrderDateil']['created'], 0, 10); ?><!-- 入力日 -->
 		</td>
 		<td>
-			<?php echo substr($orderDateil['OrderDateil']['store_arrival_date'], 0, 10); ?><!-- 店着日 -->
+			<?php echo substr($orderDateil['OrderDateil']['specified_date'], 0, 10); ?><!-- 納期 -->
 		</td>
 		<td>
 			<?php echo substr($orderDateil['OrderDateil']['shipping_date'], 0, 10); ?><!-- 出荷日 -->
@@ -195,7 +195,7 @@ if($addForm->opneUser(open_users(), $opneuser, 'access_authority')){
 
 <ul>
 	<li>入力日：店舗が入力した日。</li>
-	<li>店着日：店舗が入力した、店着希望日。</li>
+	<li>納期：店舗が入力した、店着希望日。</li>
 	<li>出荷日：商品部が出荷した日</li>
 	<li>売上は売上番号、取置は取置番号です。</li>
 	<li>現売、特注などのチェックボックスはOR検索になります。</li>

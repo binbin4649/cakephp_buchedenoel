@@ -31,7 +31,7 @@ class MemoDatasController extends AppController {
 			}
 			$this->set($category, $memo_datas_ext);
 		}
-
+		$this->set('cates', $this->MemoCategory->memoCategoryArray());
 		$top_flag = get_top_flag();
 		$memo_categories = $this->MemoData->MemoCategory->find('list');
 		$this->set(compact('memo_categories', 'top_flag', 'memo_sections'));

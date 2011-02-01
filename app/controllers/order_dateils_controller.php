@@ -55,11 +55,11 @@ class OrderDateilsController extends AppController {
 			}
 			if(!empty($this->data[$modelName]['start_arrival']['year']) and !empty($this->data[$modelName]['start_arrival']['month']) and !empty($this->data[$modelName]['start_arrival']['day'])){
 				$start_arrival = $this->data[$modelName]['start_arrival']['year'].'-'.$this->data[$modelName]['start_arrival']['month'].'-'.$this->data[$modelName]['start_arrival']['day'].' 00:00:00';
-				$conditions['AND'][] = array('OrderDateil.store_arrival_date >='=>$start_arrival);
+				$conditions['AND'][] = array('OrderDateil.specified_date >='=>$start_arrival);
 			}
 			if(!empty($this->data[$modelName]['end_arrival']['year']) and !empty($this->data[$modelName]['end_arrival']['month']) and !empty($this->data[$modelName]['end_arrival']['day'])){
 				$end_arrival = $this->data[$modelName]['end_arrival']['year'].'-'.$this->data[$modelName]['end_arrival']['month'].'-'.$this->data[$modelName]['end_arrival']['day'].' 23:59:59';
-				$conditions['AND'][] = array('OrderDateil.store_arrival_date <='=>$end_arrival);
+				$conditions['AND'][] = array('OrderDateil.specified_date <='=>$end_arrival);
 			}
 			if(!empty($this->data[$modelName]['start_shipping']['year']) and !empty($this->data[$modelName]['start_shipping']['month']) and !empty($this->data[$modelName]['start_shipping']['day'])){
 				$start_shipping = $this->data[$modelName]['start_shipping']['year'].'-'.$this->data[$modelName]['start_shipping']['month'].'-'.$this->data[$modelName]['start_shipping']['day'].' 00:00:00';

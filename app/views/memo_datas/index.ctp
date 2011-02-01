@@ -40,10 +40,16 @@ foreach ($this->viewVars[$category] as $memoData):
 <?php endforeach; ?>
 </table>
 </div>
+<div style="margin:-14px 0 13px 0;">
+	<?php
+	foreach($cates[$key] as $this_cate){
+		echo '　|　';
+		echo $html->link($this_cate['MemoCategory']['name'], array('action'=>'category_index',$this_cate['MemoCategory']['id']));
+	}
+	?>
+</div>
 <div class="actions">
-	<ul>
-		<li><?php echo $html->link($value.'index', array('action'=>'section_index/'.$key)); ?></li>
-		<li><?php echo $html->link(__('New MemoData', true), array('action'=>'add/'.$key)); ?></li>
-	</ul>
+		<?php echo $html->link($value.'index', array('action'=>'section_index/'.$key)); ?>　｜
+		<?php echo $html->link(__('New MemoData', true), array('action'=>'add/'.$key)); ?>
 </div>
 <?php endforeach; ?>

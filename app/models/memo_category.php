@@ -34,6 +34,22 @@ class MemoCategory extends AppModel {
 		return call_user_func_array(array($parent, __FUNCTION__), $args);
 	}
 	
+	//get_memo_sections と memoCategoryを連想配列にして返す
+	function memoCategoryArray(){
+		$memo_cates = array();
+		$memo_sections = get_memo_sections();
+		foreach($memo_sections as $key=>$value){
+			$params = array(
+				'conditions'=>array('MemoCategory.memo_sections_id'=>$key),
+				'recursive'=>-1,
+				//'fields'=>array('User.name')
+			);
+			$memo_cates[$key] = $this->find('all', $params);
+		}
+		return $memo_cates;
+	}
+	
+	
 
 }
 ?>
