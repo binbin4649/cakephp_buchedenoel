@@ -215,22 +215,32 @@ class OutputCsvComponent extends Object {
     	$SectionModel = new Section();
     	App::import('Model', 'User');
     	$UserModel = new User();
+    	App::import('Model', 'Factory');
+    	$FactoryModel = new Factory();
 		$order_type = get_order_type();
-		$out = '"ID","区分","売上ID","取置ID","部門ID","部門名","品番ID","品番名","入力日","店着日","出荷日","入力担当者ID","入力担当者名","備考","ブランドID","工場ID","上代","子品番名"'."\r\n";
+		$order_status = get_order_status();
+		$out = '"ID","区分","状態","売上ID","取置ID","部門ID","部門名","品番ID","品番名","サイズ","入力日","店着日","出荷日","入力担当者ID","入力担当者名","備考","ブランドID","工場ID","工場名","上代","子品番名"'."\r\n";
 		foreach($values as $value){
 			$out .= '"'.$value['OrderDateil']['id'].'","';
-			$out .= $value['Order']['id'].'","';
 			if(!empty($value['OrderDateil']['order_type'])){
 				$out .= $order_type[$value['OrderDateil']['order_type']].'","';
 			}else{
 				$out .= '","';
 			}
-			$out .= $value['OrderDateil']['transport_dateil_id'].'","';
+			if(!empty($value['Order']['order_status'])){
+				$out .= $order_status[$value['Order']['order_status']].'","';
+			}else{
+				$out .= '","';
+			}
+			$out .= $value['Order']['id'].'","';
+			$out .= $value['TransportDateil']['transport_id'].'","';
 			$out .= $value['Order']['section_id'].'","';
 			$section_name = $SectionModel->cleaningName($value['Order']['section_id']);
 			$out .= $section_name.'","';
 			$out .= $value['Item']['id'].'","';
 			$out .= $value['Item']['name'].'","';
+			$size = $this->Selector->sizeSelector($value['Subitem']['major_size'], $value['Subitem']['minority_size']);
+			$out .= $size.'","';
 			$out .= $value['OrderDateil']['created'].'","';
 			$out .= $value['OrderDateil']['store_arrival_date'].'","';
 			$out .= $value['OrderDateil']['shipping_date'].'","';
@@ -240,6 +250,7 @@ class OutputCsvComponent extends Object {
 			$out .= $value['OrderDateil']['sub_remarks'].'","';
 			$out .= $value['Item']['brand_id'].'","';
 			$out .= $value['Item']['factory_id'].'","';
+			$out .= $FactoryModel->cleaningName($value['Item']['factory_id']).'","';
 			$out .= $value['Item']['price'].'","';
 			$out .= $value['Subitem']['name'].'"'."\r\n";
 		}

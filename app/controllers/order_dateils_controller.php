@@ -8,14 +8,14 @@ class OrderDateilsController extends AppController {
 
 	function index() {
 		$modelName = 'OrderDateil';
-		//出荷日一括更新
-		//8桁を検証する
+		//出荷日一括更新 「今度」8桁を検証する
 		if(!empty($this->data[$modelName]['new_shipping_date'])){
 			$this->data[$modelName]['new_shipping_date'] = mb_convert_kana($this->data[$modelName]['new_shipping_date'], 'a', 'UTF-8');
 			$this->data[$modelName]['new_shipping_date'] = ereg_replace("[^0-9]", "", $this->data[$modelName]['new_shipping_date']);//半角数字以外を削除;
 		}
 		if(!empty($this->data[$modelName]['new_shipping_date'])){
 			foreach($this->data[$modelName]['update'] as $upid=>$check){
+				$save_data = array();
 				if($check == '1'){
 					$this->OrderDateil->create();
 					$save_data['OrderDateil']['id'] = $upid;
@@ -26,6 +26,25 @@ class OrderDateilsController extends AppController {
 			}
 			$this->data[$modelName]['new_shipping_date'] = null;
 		}
+		//入荷日一括更新
+		if(!empty($this->data[$modelName]['new_stock_date'])){
+			$this->data[$modelName]['new_stock_date'] = mb_convert_kana($this->data[$modelName]['new_stock_date'], 'a', 'UTF-8');
+			$this->data[$modelName]['new_stock_date'] = ereg_replace("[^0-9]", "", $this->data[$modelName]['new_stock_date']);//半角数字以外を削除;
+		}
+		if(!empty($this->data[$modelName]['new_stock_date'])){
+			foreach($this->data[$modelName]['update'] as $upid=>$check){
+				$save_data = array();
+				if($check == '1'){
+					$this->OrderDateil->create();
+					$save_data['OrderDateil']['id'] = $upid;
+					$save_data['OrderDateil']['stock_date'] = $this->data[$modelName]['new_stock_date'];
+					$this->OrderDateil->save($save_data);
+					$this->OrderDateil->id = null;
+				}
+			}
+			$this->data[$modelName]['new_stock_date'] = null;
+		}
+		
 		$conditions = array();
 		if (!empty($this->data)) {
 			foreach($this->data[$modelName]['ordertype'] as $key=>$value){
@@ -60,6 +79,14 @@ class OrderDateilsController extends AppController {
 			if(!empty($this->data[$modelName]['end_arrival']['year']) and !empty($this->data[$modelName]['end_arrival']['month']) and !empty($this->data[$modelName]['end_arrival']['day'])){
 				$end_arrival = $this->data[$modelName]['end_arrival']['year'].'-'.$this->data[$modelName]['end_arrival']['month'].'-'.$this->data[$modelName]['end_arrival']['day'].' 23:59:59';
 				$conditions['AND'][] = array('OrderDateil.specified_date <='=>$end_arrival);
+			}
+			if(!empty($this->data[$modelName]['start_stock']['year']) and !empty($this->data[$modelName]['start_stock']['month']) and !empty($this->data[$modelName]['start_stock']['day'])){
+				$start_stock = $this->data[$modelName]['start_stock']['year'].'-'.$this->data[$modelName]['start_stock']['month'].'-'.$this->data[$modelName]['start_stock']['day'].' 00:00:00';
+				$conditions['AND'][] = array('OrderDateil.stock_date >='=>$start_stock);
+			}
+			if(!empty($this->data[$modelName]['end_stock']['year']) and !empty($this->data[$modelName]['end_stock']['month']) and !empty($this->data[$modelName]['end_stock']['day'])){
+				$end_stock = $this->data[$modelName]['end_stock']['year'].'-'.$this->data[$modelName]['end_stock']['month'].'-'.$this->data[$modelName]['end_stock']['day'].' 23:59:59';
+				$conditions['AND'][] = array('OrderDateil.stock_date <='=>$end_stock);
 			}
 			if(!empty($this->data[$modelName]['start_shipping']['year']) and !empty($this->data[$modelName]['start_shipping']['month']) and !empty($this->data[$modelName]['start_shipping']['day'])){
 				$start_shipping = $this->data[$modelName]['start_shipping']['year'].'-'.$this->data[$modelName]['start_shipping']['month'].'-'.$this->data[$modelName]['start_shipping']['day'].' 00:00:00';
@@ -100,6 +127,7 @@ class OrderDateilsController extends AppController {
 			
 		}
 		$this->set('orderDateils', $values);
+		$this->set('orderStatus', get_order_status());
 	}
 
 	function view($id = null) {

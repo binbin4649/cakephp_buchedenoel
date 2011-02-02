@@ -2,7 +2,7 @@
 class OrdersController extends AppController {
 
 	var $name = 'Orders';
-	var $helpers = array('AddForm');
+	var $helpers = array('AddForm', 'Time');
 	var $uses = array('Order', 'OrderDateil', 'Company', 'Item', 'Destination', 'Depot', 'Stock', 'Invoice', 'Process', 'Material', 'Subitem', 'Sale');
 	var $components = array('Print', 'DateCal', 'Total', 'JanCode', 'Selector', 'OutputCsv', 'Cleaning');
 

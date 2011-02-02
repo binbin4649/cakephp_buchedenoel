@@ -260,7 +260,7 @@
 					'type'=>'text',
 					'div'=>false,
 					'label'=>false,
-	 				'size'=>1,
+	 				'size'=>10,
 	 				'value'=>$detail['sub_remarks']
 				));
 				echo '</td>';

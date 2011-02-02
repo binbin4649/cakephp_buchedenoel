@@ -23,6 +23,20 @@ class Factory extends AppModel {
 		$factory_name = $this->find('first' ,$params);
 		return $factory_name['Factory']['name'];
 	}
+	
+	function cleaningName($id){
+		$params = array(
+			'conditions'=>array('Factory.id'=>$id),
+			'recursive'=>0,
+			'fields'=>array('Factory.name')
+		);
+		$factory = $this->find('first' ,$params);
+		$factory_name = $factory['Factory']['name'];
+		$factory_name = str_replace('株式会社', '', $factory_name);
+		$factory_name = str_replace('有限会社', '', $factory_name);
+		$factory_name = trim($factory_name);
+		return $factory_name;
+	}
 
 }
 ?>

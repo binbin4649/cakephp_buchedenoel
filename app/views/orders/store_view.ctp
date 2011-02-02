@@ -29,13 +29,21 @@
 		echo '<dt>'.__('Remarks').'</dt><dd>'.nl2br($order['Order']['remark']).'　</dd>';
 		echo '</dl>';
 		echo '<ul>';
-		echo '<li>'.$addForm->switchAnchor('orders/delete/store/'.$order['Order']['id'], array(5), 'Sales Cancel it. Are you all right?', 'Sales Cancel', $order['Order']['order_status']).'</li>';
-		echo '<li>'.$addForm->switchAnchor('orders/store_edit/'.$order['Order']['id'], array(4, 5), null, 'Edit', $order['Order']['order_status']).'</li>';
-		if($order['Order']['section_id'] == $loginUser['User']['section_id']){
-			echo '<li>'.$addForm->switchAnchor('orders/store_sell/'.$order['Order']['id'], array(4, 5), null, 'Pass Input', $order['Order']['order_status']).'</li>';
+		echo '<li>';
+		if($time->isToday($order['Order']['created'])){
+			echo $addForm->switchAnchor('orders/delete/store/'.$order['Order']['id'], array(5), 'Sales Cancel it. Are you all right?', 'Sales Cancel', $order['Order']['order_status']);
 		}else{
-			echo '<li>'.__('Pass Input').'</li>';
+			echo __('Sales Cancel');
 		}
+		echo '</li>';
+		echo '<li>'.$addForm->switchAnchor('orders/store_edit/'.$order['Order']['id'], array(4, 5), null, 'Edit', $order['Order']['order_status']).'</li>';
+		echo '<li>';
+		if($order['Order']['section_id'] == $loginUser['User']['section_id']){
+			echo $addForm->switchAnchor('orders/store_sell/'.$order['Order']['id'], array(4, 5), null, 'Pass Input', $order['Order']['order_status']);
+		}else{
+			echo __('Pass Input');
+		}
+		echo '</li>';
 		echo '</ul>';
 		if($addForm->opneUser(open_users(), $opneuser, 'access_authority')){
 			echo $html->link('PL印刷済みを未完に戻す', array('controller'=>'orders', 'action'=>'return_pl/'.$order['Order']['id']));
@@ -115,3 +123,6 @@
 	?>
 	</fieldset>
 </div>
+<ul>
+	<li>売上取消は入力した当日しかできません。過ぎた場合は「商品部」までご連絡下さい。</li>
+</ul>

@@ -66,7 +66,7 @@ echo $paginator->counter(array(
 <br/>
 <div id="in_exp" style="display:none">
 <?php
-echo '入力日';
+echo '入力';
 echo $form->input($modelName.'.start_created', array(
 	'type'=>'date',
 	'dateFormat'=>'YMD',
@@ -87,7 +87,7 @@ echo $form->input($modelName.'.end_created', array(
 	'div'=>false
 ));
 echo '<br/><br/>';
-echo '店着日';
+echo '納期';
 echo $form->input($modelName.'.start_arrival', array(
 	'type'=>'date',
 	'dateFormat'=>'YMD',
@@ -108,7 +108,39 @@ echo $form->input($modelName.'.end_arrival', array(
 	'div'=>false
 ));
 echo '<br/><br/>';
-echo '出荷日';
+echo '入荷';
+echo $form->input($modelName.'.start_stock', array(
+	'type'=>'date',
+	'dateFormat'=>'YMD',
+	'label'=>false,
+	'minYear'=>MINYEAR,
+	'maxYear' => MAXYEAR,
+	'empty'=>'select',
+	'div'=>false
+));
+echo '～';
+echo $form->input($modelName.'.end_stock', array(
+	'type'=>'date',
+	'dateFormat'=>'YMD',
+	'label'=>false,
+	'minYear'=>MINYEAR,
+	'maxYear' => MAXYEAR,
+	'empty'=>'select',
+	'div'=>false
+));
+
+if($addForm->opneUser(open_users(), $opneuser, 'access_authority')){
+	echo '　';
+	echo '入荷一括更新';
+	echo $form->text($modelName.'.new_stock_date', array(
+	'type'=>'text',
+	'size'=>8,
+	'div'=>false
+	));
+}
+
+echo '<br/><br/>';
+echo '出荷';
 echo $form->input($modelName.'.start_shipping', array(
 	'type'=>'date',
 	'dateFormat'=>'YMD',
@@ -130,14 +162,14 @@ echo $form->input($modelName.'.end_shipping', array(
 ));
 if($addForm->opneUser(open_users(), $opneuser, 'access_authority')){
 	echo '　';
-	echo '出荷日一括更新';
+	echo '出荷一括更新';
 	echo $form->text($modelName.'.new_shipping_date', array(
 	'type'=>'text',
 	'size'=>8,
 	'div'=>false
 	));
 	echo '　';
-	echo 'CSV出力';
+	echo 'CSV';
 	echo $form->checkbox($modelName.'.csv');
 }
 ?>
@@ -145,19 +177,34 @@ if($addForm->opneUser(open_users(), $opneuser, 'access_authority')){
 <br/>
 <table cellpadding="0" cellspacing="0">
 <tr>
+	<th></th>
 	<th>売上</th>
 	<th>取置</th>
 	<th>部門</th>
 	<th>品番</th>
-	<th>入力日</th>
+	<th>入力</th>
 	<th>納期</th>
-	<th>出荷日</th>
+	<th>入荷</th>
+	<th>出荷</th>
 	<th></th>
 </tr>
 <?php foreach($orderDateils as $orderDateil): ?>
 	<tr>
 		<td>
-			<?php echo $html->link($orderDateil['Order']['id'], array('controller'=>'orders', 'action'=>'view', $orderDateil['Order']['id'])); ?>
+			<?php
+				$status_name = $orderStatus[$orderDateil['Order']['order_status']];
+				echo mb_substr($status_name, 0, 2); 
+				
+			?>
+		</td>
+		<td>
+			<?php
+				if($addForm->opneUser(open_users(), $opneuser, 'access_authority')){
+					echo $html->link($orderDateil['Order']['id'], array('controller'=>'orders', 'action'=>'view', $orderDateil['Order']['id']));
+				}else{
+					echo $html->link($orderDateil['Order']['id'], array('controller'=>'orders', 'action'=>'store_view', $orderDateil['Order']['id']));
+				}
+			?>
 		</td>
 		<td>
 			<?php echo $html->link($orderDateil['TransportDateil']['transport_id'], array('controller'=>'transports', 'action'=>'view', $orderDateil['TransportDateil']['transport_id'])); ?>
@@ -169,13 +216,16 @@ if($addForm->opneUser(open_users(), $opneuser, 'access_authority')){
 			<?php echo $orderDateil['Item']['name']; ?>
 		</td>
 		<td>
-			<?php echo substr($orderDateil['OrderDateil']['created'], 0, 10); ?><!-- 入力日 -->
+			<?php echo substr($orderDateil['OrderDateil']['created'], 5, 5); ?><!-- 入力 -->
 		</td>
 		<td>
-			<?php echo substr($orderDateil['OrderDateil']['specified_date'], 0, 10); ?><!-- 納期 -->
+			<?php echo substr($orderDateil['OrderDateil']['specified_date'], 5, 5); ?><!-- 納期 -->
 		</td>
 		<td>
-			<?php echo substr($orderDateil['OrderDateil']['shipping_date'], 0, 10); ?><!-- 出荷日 -->
+			<?php echo substr($orderDateil['OrderDateil']['stock_date'], 5, 5); ?><!-- 入荷 -->
+		</td>
+		<td>
+			<?php echo substr($orderDateil['OrderDateil']['shipping_date'], 5, 5); ?><!-- 出荷 -->
 		</td>
 		<td>
 			<?php if($addForm->opneUser(open_users(), $opneuser, 'access_authority')) echo $form->checkbox('OrderDateil.update.'.$orderDateil['OrderDateil']['id'], array('checked'=>1)); ?>
@@ -192,11 +242,11 @@ if($addForm->opneUser(open_users(), $opneuser, 'access_authority')){
  | 	<?php echo $paginator->numbers();?>
 	<?php echo $paginator->next(__('next', true).' >>', array(), null, array('class'=>'disabled'));?>
 </div>
-
 <ul>
-	<li>入力日：店舗が入力した日。</li>
+	<li>入力：店舗が入力をした日。</li>
 	<li>納期：店舗が入力した、店着希望日。</li>
-	<li>出荷日：商品部が出荷した日</li>
+	<li>入荷：商品部から出荷する、出荷予定日。商品が入荷する日、と覚えて下さい。</li>
+	<li>出荷日：商品部が実際に出荷した日。入力されている　＝　出荷した。</li>
 	<li>売上は売上番号、取置は取置番号です。</li>
 	<li>現売、特注などのチェックボックスはOR検索になります。</li>
 	<li>出荷日一括更新は、8桁の半角数字で入力して下さい。</li>
