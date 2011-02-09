@@ -96,6 +96,15 @@ class OrderDateilsController extends AppController {
 				$end_shipping = $this->data[$modelName]['end_shipping']['year'].'-'.$this->data[$modelName]['end_shipping']['month'].'-'.$this->data[$modelName]['end_shipping']['day'].' 23:59:59';
 				$conditions['AND'][] = array('OrderDateil.shipping_date <='=>$end_shipping);
 			}
+			if(empty($this->data[$modelName]['null_shipping'])) $this->data[$modelName]['null_shipping'] = 0;
+			if($this->data[$modelName]['null_shipping'] == 1){
+				$conditions['AND'][] = array('OrderDateil.shipping_date'=>null);
+			}
+			if(empty($this->data[$modelName]['null_stock'])) $this->data[$modelName]['null_stock'] = 0;
+			if($this->data[$modelName]['null_stock'] == 1){
+				$conditions['AND'][] = array('OrderDateil.stock_date'=>null);
+			}
+			
 			if(empty($this->data[$modelName]['csv'])) $this->data[$modelName]['csv'] = 0;
 			if($this->data[$modelName]['csv'] == 1){
 				$params = array(

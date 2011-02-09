@@ -138,6 +138,9 @@ if($addForm->opneUser(open_users(), $opneuser, 'access_authority')){
 	'div'=>false
 	));
 }
+echo '　';
+echo '入荷未定';
+echo $form->checkbox($modelName.'.null_stock');
 
 echo '<br/><br/>';
 echo '出荷';
@@ -168,10 +171,13 @@ if($addForm->opneUser(open_users(), $opneuser, 'access_authority')){
 	'size'=>8,
 	'div'=>false
 	));
-	echo '　';
-	echo 'CSV';
-	echo $form->checkbox($modelName.'.csv');
 }
+echo '　';
+echo '未出荷　';
+echo $form->checkbox($modelName.'.null_shipping');
+echo '　';
+echo 'CSV';
+echo $form->checkbox($modelName.'.csv');
 ?>
 </div>
 <br/>

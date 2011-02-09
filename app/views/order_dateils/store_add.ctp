@@ -16,7 +16,7 @@
 			);
 		}
 ?>
-<!--<h3><?php __('Sell Input');?></h3>-->
+<h3><?php __('Sell Input');?></h3>
 <div class="form">
 	<fieldset>
  	<?php

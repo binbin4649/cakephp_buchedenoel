@@ -50,5 +50,21 @@ class TransportDateil extends AppModel {
 		}
 		return $jugement;
 	}
+	
+	//transport_dateil_id をもらって、['Transport']['layaway_type'] を1に戻す。取消だから。
+	function detailToLayaway1($detail_id){
+		$transport = array();
+		$params = array(
+			'conditions'=>array('TransportDateil.id'=>$detail_id),
+			'recursive'=>0
+		);
+		$value = $this->find('first' ,$params);
+		$this->Transport->create();
+		$transport['Transport'] = $value['Transport'];
+		$transport['Transport']['layaway_type'] = 1;
+		$transport['Transport']['in_depot'] = null;
+		return $this->Transport->save($transport);
+	}
+	
 }
 ?>

@@ -219,7 +219,7 @@ class OutputCsvComponent extends Object {
     	$FactoryModel = new Factory();
 		$order_type = get_order_type();
 		$order_status = get_order_status();
-		$out = '"ID","区分","状態","売上ID","取置ID","部門ID","部門名","品番ID","品番名","サイズ","入力日","店着日","出荷日","入力担当者ID","入力担当者名","備考","ブランドID","工場ID","工場名","上代","子品番名"'."\r\n";
+		$out = '"ID","区分","状態","売上ID","取置ID","部門ID","部門名","品番ID","品番名","サイズ","入力","納期","入荷","出荷","入力担当者ID","入力担当者名","備考","ブランドID","工場ID","工場名","上代","子品番名"'."\r\n";
 		foreach($values as $value){
 			$out .= '"'.$value['OrderDateil']['id'].'","';
 			if(!empty($value['OrderDateil']['order_type'])){
@@ -242,7 +242,8 @@ class OutputCsvComponent extends Object {
 			$size = $this->Selector->sizeSelector($value['Subitem']['major_size'], $value['Subitem']['minority_size']);
 			$out .= $size.'","';
 			$out .= $value['OrderDateil']['created'].'","';
-			$out .= $value['OrderDateil']['store_arrival_date'].'","';
+			$out .= $value['OrderDateil']['specified_date'].'","';
+			$out .= $value['OrderDateil']['stock_date'].'","';
 			$out .= $value['OrderDateil']['shipping_date'].'","';
 			$out .= $value['OrderDateil']['created_user'].'","';
 			$user = $UserModel->findById($value['OrderDateil']['created_user']);

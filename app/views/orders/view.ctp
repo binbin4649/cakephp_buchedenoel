@@ -8,8 +8,8 @@
 		echo '<dt>'.__('Status').'</dt><dd>'.$orderStatus[$order['Order']['order_status']].'　</dd>';
 		echo '<dt>'.__('Order Date').'</dt><dd>'.$order['Order']['date'].'　</dd>';
 		
-		echo '<dt>'.__('Destination').'</dt><dd>'.$order['Destination']['name'].'</dd>';
-		echo '<dt> 出荷先ID </dt><dd>'.$order['Destination']['id'].'</dd>';
+		echo '<dt>'.__('Destination').'</dt><dd>'.$order['Destination']['name'].'　</dd>';
+		echo '<dt> 出荷先ID </dt><dd>'.$order['Destination']['id'].'　</dd>';
 		//echo '<dt>'.__('Depot').'</dt><dd>'.$order['Depot']['section_name'].':'.$order['Depot']['name'].':'.$order['Depot']['id'].'</dd>';
 		echo '<dt>'.__('Partners No.').'</dt><dd>'.$order['Order']['partners_no'].'　</dd>';
 		echo '<dt>'.__('Events No.').'</dt><dd>'.$order['Order']['events_no'].'　</dd>';

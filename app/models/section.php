@@ -24,12 +24,21 @@ class Section extends AppModel {
 	function defaultDepotId($section_id){
 		$params = array(
 			'conditions'=>array('Section.id'=>$section_id),
-			'recursive'=>-1,
-			'fields'=>array('Section.default_depot'),
+			'recursive'=>1,
+			//'fields'=>array('Section.default_depot'),
 		);
+		$this->contain('Depot');
 		$section = $this->find('first', $params);
 		if($section){
-			return $section['Section']['default_depot'];
+			if(empty($section['Section']['default_depot'])){
+				if(empty($section['Depot'][0]['id'])){//無かったら1番最初のやつを返す
+					return false;
+				}else{
+					return $section['Depot'][0]['id'];
+				}
+			}else{
+				return $section['Section']['default_depot'];
+			}
 		}else{
 			return false;
 		}

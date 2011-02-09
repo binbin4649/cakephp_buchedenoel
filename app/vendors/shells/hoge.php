@@ -9,6 +9,51 @@ class HogeShell extends Shell {
 
 	}
 	
+	//客注＆取置の手引き用に、ダミー取置データ（移動データ）を作成
+	//全部門分の取置データを作る
+	function transportDammy(){
+		App::import('Model', 'Transport');
+    	$TransportModel = new Transport();
+    	App::import('Model', 'TransportDateil');
+    	$TransportDateilModel = new TransportDateil();
+    	App::import('Model', 'Section');
+    	$SectionModel = new Section();
+    	
+    	$section_list = $SectionModel->find('list');
+    	//pr($section_list);
+    	foreach($section_list as $section_id=>$section_name){
+    		
+    		$transport = array();
+    		$TransportModel->create();
+    		/*
+    		$params = array(
+				'conditions'=>array('Transport.id'=>$section_id),
+				'recursive'=>1,
+			);
+			$transport = $TransportModel->find('first', $params);
+			pr($transport);
+			exit;
+			*/
+			
+			$transport['Transport'] = array(
+				'id'=>$section_id,
+				'out_depot'=>910,
+				'in_depot'=>null,
+				'transport_status'=>2,
+				'delivary_date'=>null,
+				'arrival_date'=>null,
+				'layaway_type'=>1,
+				'layaway_user'=>null,
+				'created_user'=>2063,
+				'created'=>date('Y-m-d'),
+				'updated'=>date('Y-m-d'),
+				'print_file '=>null,
+			);
+			$TransportModel->save($transport);
+    	}
+	}
+	
+	
 	//部門のリストから、一人ずつ、フリーユーザーを作る 9/2まーだまーだ
 	//post_id が　15　の奴はフリーユーザー
 	function crateFreeUser(){

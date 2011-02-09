@@ -3,7 +3,7 @@ class OrdersController extends AppController {
 
 	var $name = 'Orders';
 	var $helpers = array('AddForm', 'Time');
-	var $uses = array('Order', 'OrderDateil', 'Company', 'Item', 'Destination', 'Depot', 'Stock', 'Invoice', 'Process', 'Material', 'Subitem', 'Sale');
+	var $uses = array('Order', 'OrderDateil', 'Company', 'Item', 'Destination', 'Depot', 'Stock', 'Invoice', 'Process', 'Material', 'Subitem', 'Sale', 'TransportDateil');
 	var $components = array('Print', 'DateCal', 'Total', 'JanCode', 'Selector', 'OutputCsv', 'Cleaning');
 
 	function index($ac = null) {
@@ -709,6 +709,10 @@ class OrdersController extends AppController {
 			$this->Order->contain('OrderDateil.Item');
 			$Order = $this->Order->find('first' ,$params);
 			foreach($Order['OrderDateil'] as $OrderDateil){
+				//transport_dateil_id を拾って、['Transport']['layaway_type'] を1に戻す。
+				if(!empty($OrderDateil['transport_dateil_id'])){
+					$this->TransportDateil->detailToLayaway1($OrderDateil['transport_dateil_id']);
+				}
 				if($OrderDateil['sell_quantity'] > 0 AND $OrderDateil['Item']['stock_code'] <> 2){
 					$this->Stock->Plus($OrderDateil['subitem_id'], $OrderDateil['depot_id'], $OrderDateil['sell_quantity'], $this->Auth->user('id'), 5);
 					$return_qty = $return_qty + $OrderDateil['sell_quantity'];
