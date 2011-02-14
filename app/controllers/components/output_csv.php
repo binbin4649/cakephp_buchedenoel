@@ -219,7 +219,7 @@ class OutputCsvComponent extends Object {
     	$FactoryModel = new Factory();
 		$order_type = get_order_type();
 		$order_status = get_order_status();
-		$out = '"ID","区分","状態","売上ID","取置ID","部門ID","部門名","品番ID","品番名","サイズ","入力","納期","入荷","出荷","入力担当者ID","入力担当者名","備考","ブランドID","工場ID","工場名","上代","子品番名"'."\r\n";
+		$out = '"ID","区分","状態","売上ID","取置ID","部門ID","部門名","品番ID","品番名","サイズ","入力","納期","入荷","出荷","入力担当者ID","入力担当者名","備考","詳細備考","ブランドID","工場ID","工場名","上代","子品番名"'."\r\n";
 		foreach($values as $value){
 			$out .= '"'.$value['OrderDateil']['id'].'","';
 			if(!empty($value['OrderDateil']['order_type'])){
@@ -248,6 +248,7 @@ class OutputCsvComponent extends Object {
 			$out .= $value['OrderDateil']['created_user'].'","';
 			$user = $UserModel->findById($value['OrderDateil']['created_user']);
 			$out .= $user['User']['name'].'","';
+			$out .= $value['Order']['remark'].'","';
 			$out .= $value['OrderDateil']['sub_remarks'].'","';
 			$out .= $value['Item']['brand_id'].'","';
 			$out .= $value['Item']['factory_id'].'","';
