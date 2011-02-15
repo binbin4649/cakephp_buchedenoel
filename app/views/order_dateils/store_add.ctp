@@ -152,8 +152,9 @@
 	if(!empty($subitems)){
 		echo $form->create('OrderDateil', array('action'=>'store_add'));
 		echo $form->hidden('Item.name', array('value'=>$item['Item']['name']));
-		echo $form->hidden('OrderDateil.transport_detail_id', array('value'=>$edit['Subitem']['transport_detail_id']));
-		
+		if(!empty($edit['Subitem']['transport_detail_id'])){
+			echo $form->hidden('OrderDateil.transport_detail_id', array('value'=>$edit['Subitem']['transport_detail_id']));
+		}
 		echo '<table class="itemVars"><tr>';
 		echo '<td>'.$item['Item']['name'].' / ￥'.$item['Item']['price'].' / '.$item['Factory']['name'];
 		echo ' / 納期';
@@ -240,9 +241,47 @@
 		
 		echo '<hr></td></tr><tr><td>';
 		if($item['Item']['stock_code'] == '3'){
-			echo '単品管理の商品は、商品詳細から入力して下さい。';
-		}else{
+			//echo '単品管理の商品は、商品詳細から入力して下さい。';
 			
+			
+			
+			if(empty($edit)){
+				echo '単品管理の商品は、商品詳細から入力して下さい。';
+			}else{
+				
+				foreach($subitems as $subitem){
+					if($subitem['Subitem']['id'] == $edit['Subitem']['id']){
+						if(empty($subitem['Subitem']['major_size']) or $subitem['Subitem']['major_size'] == 'other'){
+							if(!empty($subitem['Subitem']['minority_size'])){
+								$size = $subitem['Subitem']['minority_size'];
+							}
+						}else{
+							$size = $subitem['Subitem']['major_size'];
+						}
+						if($subitem['Subitem']['id'] == $edit['Subitem']['id']){
+							$default_value = $edit['Subitem']['quantity'];
+						}else{
+							if(count($subitems) == 1){
+								$default_value = 1;
+							}else{
+								$default_value = null;
+							}
+						}
+						if(empty($size)) $size = '#';
+						echo '<div class="onesize">'.$size;
+						echo $form->input("subitem.".$subitem['Subitem']['id'], array(
+							'type'=>'text',
+							'div'=>false,
+							'label'=>false,
+							'size'=>1,
+							'value'=>$default_value
+						));
+						echo '</div>';
+					}
+				}
+			}
+			
+		}else{
 			foreach($subitems as $subitem){
 				if(empty($subitem['Subitem']['major_size']) or $subitem['Subitem']['major_size'] == 'other'){
 					if(!empty($subitem['Subitem']['minority_size'])){

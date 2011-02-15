@@ -304,7 +304,7 @@ class TransportDateilsController extends AppController {
 					if($newitem_flag){
 						$session_reader[$subitem['Subitem']['id']]['subitem_name'] = $subitem['Subitem']['name'];
 						$session_reader[$subitem['Subitem']['id']]['view_quantity'] = $stock['Stock']['quantity'];
-						$session_reader[$subitem['Subitem']['id']]['stock_id'] = $stock['Stock']['id'];
+						@$session_reader[$subitem['Subitem']['id']]['stock_id'] = $stock['Stock']['id'];
 						$session_reader[$subitem['Subitem']['id']]['quantity'] = 1;
 						$session_reader[$subitem['Subitem']['id']]['subitem_jan'] = $subitem['Subitem']['jan'];
 					}

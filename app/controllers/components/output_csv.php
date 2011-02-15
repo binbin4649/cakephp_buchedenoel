@@ -219,9 +219,35 @@ class OutputCsvComponent extends Object {
     	$FactoryModel = new Factory();
 		$order_type = get_order_type();
 		$order_status = get_order_status();
-		$out = '"ID","区分","状態","売上ID","取置ID","部門ID","部門名","品番ID","品番名","サイズ","入力","納期","入荷","出荷","入力担当者ID","入力担当者名","備考","詳細備考","ブランドID","工場ID","工場名","上代","子品番名"'."\r\n";
+		//$out = '"ID","区分","状態","売上ID","取置ID","部門ID","部門名","品番ID","品番名","サイズ","入力","納期","入荷","出荷","入力担当者ID","入力担当者名","備考","詳細備考","ブランドID","工場ID","工場名","上代","子品番名"'."\r\n";
+		$out = '"入力","","取置番号","","品番","サイズ","個数","出荷","入荷","納期","客注番号","部門名","お客様名","刻印","詳細備考","備考","区分","状態","入力担当者ID","入力担当者名","親品番ID","子品番ID","ブランドID","工場ID","工場名","上代"'."\r\n";
 		foreach($values as $value){
-			$out .= '"'.$value['OrderDateil']['id'].'","';
+			$out .= '"'.$value['OrderDateil']['created'].'","';
+			$out .= '","';
+			$out .= $value['TransportDateil']['transport_id'].'","';
+			$out .= '","';
+			//SAMPLEだった場合は、詳細備考とチェンジ
+			if($value['Item']['id'] == 1499){
+				$hinban = $value['OrderDateil']['sub_remarks'];
+				$biko = $value['Item']['name'];
+			}else{
+				$hinban = $value['Item']['name'];
+				$biko = $value['OrderDateil']['sub_remarks'];
+			}
+			$out .= $hinban.'","';
+			$size = $this->Selector->sizeSelector($value['Subitem']['major_size'], $value['Subitem']['minority_size']);
+			$out .= $size.'","';
+			$out .= $value['OrderDateil']['bid_quantity'].'","';
+			$out .= $value['OrderDateil']['shipping_date'].'","';
+			$out .= $value['OrderDateil']['stock_date'].'","';
+			$out .= $value['OrderDateil']['specified_date'].'","';
+			$out .= $value['Order']['partners_no'].'","';
+			$section_name = $SectionModel->cleaningName($value['Order']['section_id']);
+			$out .= $section_name.'","';
+			$out .= $value['Order']['customers_name'].'","';
+			$out .= $value['OrderDateil']['marking'].'","';
+			$out .= $biko.'","';
+			$out .= $value['Order']['remark'].'","';
 			if(!empty($value['OrderDateil']['order_type'])){
 				$out .= $order_type[$value['OrderDateil']['order_type']].'","';
 			}else{
@@ -232,29 +258,15 @@ class OutputCsvComponent extends Object {
 			}else{
 				$out .= '","';
 			}
-			$out .= $value['Order']['id'].'","';
-			$out .= $value['TransportDateil']['transport_id'].'","';
-			$out .= $value['Order']['section_id'].'","';
-			$section_name = $SectionModel->cleaningName($value['Order']['section_id']);
-			$out .= $section_name.'","';
-			$out .= $value['Item']['id'].'","';
-			$out .= $value['Item']['name'].'","';
-			$size = $this->Selector->sizeSelector($value['Subitem']['major_size'], $value['Subitem']['minority_size']);
-			$out .= $size.'","';
-			$out .= $value['OrderDateil']['created'].'","';
-			$out .= $value['OrderDateil']['specified_date'].'","';
-			$out .= $value['OrderDateil']['stock_date'].'","';
-			$out .= $value['OrderDateil']['shipping_date'].'","';
-			$out .= $value['OrderDateil']['created_user'].'","';
 			$user = $UserModel->findById($value['OrderDateil']['created_user']);
+			$out .= $user['User']['id'].'","';
 			$out .= $user['User']['name'].'","';
-			$out .= $value['Order']['remark'].'","';
-			$out .= $value['OrderDateil']['sub_remarks'].'","';
+			$out .= $value['Item']['id'].'","';
+			$out .= $value['Subitem']['id'].'","';
 			$out .= $value['Item']['brand_id'].'","';
 			$out .= $value['Item']['factory_id'].'","';
 			$out .= $FactoryModel->cleaningName($value['Item']['factory_id']).'","';
-			$out .= $value['Item']['price'].'","';
-			$out .= $value['Subitem']['name'].'"'."\r\n";
+			$out .= $value['Item']['price'].'"'."\r\n";
 		}
 		return $out;
 	}
