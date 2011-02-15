@@ -84,11 +84,13 @@
 		<li><?php echo $addForm->switchAnchor('transports/file_print/'.$transport['Transport']['id'], array(), 'Print OK?', 'Print', $transport['Transport']['transport_status']); ?></li>
 		<li><?php echo $addForm->switchAnchor('transports/edit/'.$transport['Transport']['id'], array(3, 4), null, 'Warehousing', $transport['Transport']['transport_status']); ?></li>
 		<?php
+			/*
 			if(!empty($transport['Transport']['layaway_type'])){
 				echo '<li>';
 				echo $addForm->switchAnchor('transports/input_reserve/'.$transport['Transport']['id'], array(2), null, 'Input Reserve', $transport['Transport']['layaway_type']);
 				echo '</li>';
 			}
+			*/
 		?>
 		<li><?php echo $addForm->switchAnchor('transports/cancell/'.$transport['Transport']['id'], array(3, 4), 'Cancell OK?', 'Cancell', $transport['Transport']['transport_status']); ?></li>
 	</ul>
