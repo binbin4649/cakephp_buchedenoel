@@ -104,7 +104,18 @@ class OrderDateilsController extends AppController {
 			if($this->data[$modelName]['null_stock'] == 1){
 				$conditions['AND'][] = array('OrderDateil.stock_date'=>null);
 			}
-			
+			if(empty($this->data[$modelName]['cancel_not'])) $this->data[$modelName]['cancel_not'] = 0;
+			if($this->data[$modelName]['cancel_not'] == 1){
+				$conditions['AND'][] = array('Order.order_status <>'=>5);
+			}
+			if(empty($this->data[$modelName]['sample_not'])) $this->data[$modelName]['sample_not'] = 0;
+			if($this->data[$modelName]['sample_not'] == 1){
+				$conditions['AND'][] = array('Item.id <>'=>1499);
+			}
+			if(empty($this->data[$modelName]['sample_only'])) $this->data[$modelName]['sample_only'] = 0;
+			if($this->data[$modelName]['sample_only'] == 1){
+				$conditions['AND'][] = array('Item.id'=>1499);
+			}
 			if(empty($this->data[$modelName]['csv'])) $this->data[$modelName]['csv'] = 0;
 			if($this->data[$modelName]['csv'] == 1){
 				$params = array(
@@ -127,7 +138,7 @@ class OrderDateilsController extends AppController {
 		
 		$this->paginate = array(
 			'conditions'=>$conditions,
-			'limit'=>50,
+			'limit'=>100,
 			'order'=>array('OrderDateil.created'=>'desc')
 		);
 		$values = $this->paginate();

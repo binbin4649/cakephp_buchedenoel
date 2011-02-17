@@ -65,7 +65,17 @@ echo $paginator->counter(array(
 ?>
 <br/>
 <div id="in_exp" style="display:none">
+<br/>
 <?php
+echo '取消非表示';
+echo $form->checkbox($modelName.'.cancel_not');
+echo '　';
+echo 'SAMPLE非表示';
+echo $form->checkbox($modelName.'.sample_not');
+echo '　';
+echo 'SAMPLEのみ';
+echo $form->checkbox($modelName.'.sample_only');
+echo '<br/><br/>';
 echo '入力';
 echo $form->input($modelName.'.start_created', array(
 	'type'=>'date',
@@ -200,7 +210,6 @@ echo $form->checkbox($modelName.'.csv');
 			<?php
 				$status_name = $orderStatus[$orderDateil['Order']['order_status']];
 				echo mb_substr($status_name, 0, 2); 
-				
 			?>
 		</td>
 		<td>
@@ -216,7 +225,7 @@ echo $form->checkbox($modelName.'.csv');
 			<?php echo $html->link($orderDateil['TransportDateil']['transport_id'], array('controller'=>'transports', 'action'=>'view', $orderDateil['TransportDateil']['transport_id'])); ?>
 		</td>
 		<td>
-			<?php echo $orderDateil['Order']['section_name']; ?>
+			<?php echo $orderDateil['Order']['section_name'].':'.$orderDateil['Order']['section_id']; ?>
 		</td>
 		<td>
 			<?php echo $orderDateil['Item']['name']; ?>
