@@ -4,7 +4,7 @@ class PricetagDetailsController extends AppController {
 	var $name = 'PricetagDetails';
 	var $helpers = array("Javascript", "Ajax");
 	var $uses = array('PricetagDetail', 'Subitem', 'User', 'Depot', 'Pricetag', 'Item');
-	var $components = array('OutputCsv');
+	var $components = array('OutputCsv', 'Selector');
 
 	function add($ac = null, $id = null) {
 		$total_quantity = 0;
@@ -35,6 +35,7 @@ class PricetagDetailsController extends AppController {
 		}
 		if(@$this->data['PricetagDetail']['step'] == '2') {
 			$subitems = array_keys($this->data['subitem']);
+			//pr($subitems);
 			foreach($subitems as $subitem_id){
 				if($this->data['subitem'][$subitem_id] > 0){
 					$params = array(
@@ -47,13 +48,14 @@ class PricetagDetailsController extends AppController {
 					$session_write['Subitem']['quantity'] = $this->data['subitem'][$subitem_id];
 					$session_write['Subitem']['major_size'] = $subitem['Subitem']['major_size'];
 					$session_write['Subitem']['minority_size'] = $subitem['Subitem']['minority_size'];
+					$session_write['Subitem']['jan'] = $subitem['Subitem']['jan'];
 					$session_write['Item']['id'] =  $subitem['Subitem']['item_id'];
 					$session_write['Item']['name'] =  $this->data['Item']['name'];
 					$session_write['Item']['price'] =  $this->data['Item']['price'];
 					$session_write['Section']['id'] =  $this->data['Section']['id'];
 					$session_write['Factory']['name'] =  $this->data['Factory']['name'];
 					$session_write['Factory']['id'] =  $this->data['Factory']['id'];
-					$this->Session->write("PricetagDetail.".$subitem['Subitem']['name'], $session_write);
+					$this->Session->write("PricetagDetail.".$subitem['Subitem']['id'], $session_write);
 				}
 			}
 		}
@@ -108,7 +110,6 @@ class PricetagDetailsController extends AppController {
 				$session_read = array();
 			}
 
-
 			if($ac == 'ordering'){
 				$Pricetag = array();
 				$PricetagDetail = array();
@@ -146,6 +147,10 @@ class PricetagDetailsController extends AppController {
 				}
 				$this->Session->delete("PricetagDetail");
 				$this->redirect(array('controller'=>'pricetags', 'action'=>'index'));
+			}
+			foreach($session_read as $ki=>$val){
+				$size = $this->Selector->sizeSelector($val['Subitem']['major_size'], $val['Subitem']['minority_size']);
+				$session_read[$ki]['Subitem']['size'] = $size;
 			}
 			$this->set('details', $session_read);
 		}

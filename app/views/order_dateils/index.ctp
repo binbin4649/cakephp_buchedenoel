@@ -202,9 +202,13 @@ echo $form->checkbox($modelName.'.csv');
 	<th>納期</th>
 	<th>入荷</th>
 	<th>出荷</th>
-	<th></th>
+	<th>数</th>
+	<th><?php if($addForm->opneUser(open_users(), $opneuser, 'access_authority')) //echo $form->checkbox('OrderDateil.allchecker', array('checked'=>$checkk)); ?></th>
 </tr>
-<?php foreach($orderDateils as $orderDateil): ?>
+<?php
+	$qty_total = 0;
+	foreach($orderDateils as $orderDateil):
+?>
 	<tr>
 		<td>
 			<?php
@@ -228,7 +232,7 @@ echo $form->checkbox($modelName.'.csv');
 			<?php echo $orderDateil['Order']['section_name'].':'.$orderDateil['Order']['section_id']; ?>
 		</td>
 		<td>
-			<?php echo $orderDateil['Item']['name']; ?>
+			<?php echo $orderDateil['Item']['name'].':'.$orderDateil['OrderDateil']['size']; ?>
 		</td>
 		<td>
 			<?php echo substr($orderDateil['OrderDateil']['created'], 5, 5); ?><!-- 入力 -->
@@ -243,13 +247,23 @@ echo $form->checkbox($modelName.'.csv');
 			<?php echo substr($orderDateil['OrderDateil']['shipping_date'], 5, 5); ?><!-- 出荷 -->
 		</td>
 		<td>
-			<?php if($addForm->opneUser(open_users(), $opneuser, 'access_authority')) echo $form->checkbox('OrderDateil.update.'.$orderDateil['OrderDateil']['id'], array('checked'=>1)); ?>
+			<?php echo $orderDateil['OrderDateil']['bid_quantity']; ?>
+		</td>
+		<td>
+			<?php 
+				if($addForm->opneUser(open_users(), $opneuser, 'access_authority')){
+					echo $form->checkbox('OrderDateil.updating.'.$orderDateil['OrderDateil']['id'], array());
+					//echo $form->checkbox('OrderDateil.update.'.$orderDateil['OrderDateil']['id'], array('checked'=>$checkk)); 
+				}
+			?>
 		</td>
 	</tr>
-<?php 
+<?php
+	$qty_total = $qty_total + $orderDateil['OrderDateil']['bid_quantity'];
 	endforeach;
-	echo $form->end();
 ?>
+<tr><td colspan="8"></td><td>合計</td><td><?php echo $qty_total; ?></td><td></td></tr>
+<?php echo $form->end(); ?>
 </table>
 </div>
 <div class="paging">

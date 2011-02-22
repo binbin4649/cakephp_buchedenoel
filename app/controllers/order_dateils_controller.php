@@ -4,17 +4,27 @@ class OrderDateilsController extends AppController {
 	var $name = 'OrderDateils';
 	var $helpers = array("Javascript","Ajax");
 	var $uses = array('OrderDateil', 'Subitem', 'Depot', 'Item', 'Order', 'Destination', 'Stock', 'Transport');
-	var $components = array('Total', 'Print', 'OutputCsv');
+	var $components = array('Total', 'Print', 'OutputCsv', 'Selector');
 
 	function index() {
 		$modelName = 'OrderDateil';
-		//出荷日一括更新 「今度」8桁を検証する
+		
+		//pr($this->data[$modelName]['updating']);
+		
+		
 		if(!empty($this->data[$modelName]['new_shipping_date'])){
 			$this->data[$modelName]['new_shipping_date'] = mb_convert_kana($this->data[$modelName]['new_shipping_date'], 'a', 'UTF-8');
-			$this->data[$modelName]['new_shipping_date'] = ereg_replace("[^0-9]", "", $this->data[$modelName]['new_shipping_date']);//半角数字以外を削除;
+			//$this->data[$modelName]['new_shipping_date'] = ereg_replace("[^0-9]", "", $this->data[$modelName]['new_shipping_date']);//半角数字以外を削除;
+			if(ereg("[0-9]{8}", $this->data[$modelName]['new_shipping_date'])){
+				
+			}else{
+				$this->data[$modelName]['new_shipping_date'] = null;
+				$this->Session->setFlash(__('出荷日は、半角数字8文字で入力して下さい。', true));
+			}
 		}
 		if(!empty($this->data[$modelName]['new_shipping_date'])){
-			foreach($this->data[$modelName]['update'] as $upid=>$check){
+			//pr($this->data[$modelName]['update']);
+			foreach($this->data[$modelName]['updating'] as $upid=>$check){
 				$save_data = array();
 				if($check == '1'){
 					$this->OrderDateil->create();
@@ -29,10 +39,16 @@ class OrderDateilsController extends AppController {
 		//入荷日一括更新
 		if(!empty($this->data[$modelName]['new_stock_date'])){
 			$this->data[$modelName]['new_stock_date'] = mb_convert_kana($this->data[$modelName]['new_stock_date'], 'a', 'UTF-8');
-			$this->data[$modelName]['new_stock_date'] = ereg_replace("[^0-9]", "", $this->data[$modelName]['new_stock_date']);//半角数字以外を削除;
+			//$this->data[$modelName]['new_stock_date'] = ereg_replace("[^0-9]", "", $this->data[$modelName]['new_stock_date']);//半角数字以外を削除;
+			if(ereg("[0-9]{8}", $this->data[$modelName]['new_stock_date'])){
+				
+			}else{
+				$this->data[$modelName]['new_stock_date'] = null;
+				$this->Session->setFlash(__('入荷日は、半角数字8文字で入力して下さい。', true));
+			}
 		}
 		if(!empty($this->data[$modelName]['new_stock_date'])){
-			foreach($this->data[$modelName]['update'] as $upid=>$check){
+			foreach($this->data[$modelName]['updating'] as $upid=>$check){
 				$save_data = array();
 				if($check == '1'){
 					$this->OrderDateil->create();
@@ -143,6 +159,8 @@ class OrderDateilsController extends AppController {
 		);
 		$values = $this->paginate();
 		foreach($values as $key=>$value){
+			$size = $this->Selector->sizeSelector($value['Subitem']['major_size'], $value['Subitem']['minority_size']);
+			$values[$key]['OrderDateil']['size'] = $size;
 			$values[$key]['Order']['section_name'] = $this->Section->cleaningName($value['Order']['section_id']);
 			
 		}

@@ -56,12 +56,12 @@
 	}
 
 	if(!empty($details)){
-		echo '<table class="itemDetail"><tr><th>品番</th><th>小品番</th><th>工場</th><th>価格</th><th>数量</th><th></th></tr>';
+		echo '<table class="itemDetail"><tr><th>品番</th><th>サイズ</th><th>JAN</th><th>価格</th><th>数量</th><th></th></tr>';
 		foreach($details as $key=>$value){
 			echo '<tr>';
 			echo '<td>'.$value['Item']['name'].'</td>';
-			echo '<td>'.$key.'</td>';
-			echo '<td>'.$value['Factory']['name'].'</td>';
+			echo '<td>'.$value['Subitem']['size'].'</td>';
+			echo '<td>'.$value['Subitem']['jan'].'</td>';
 			echo '<td>'.number_format($value['Item']['price']).'</td>';
 			echo '<td>'.$value['Subitem']['quantity'].'</td>';
 			echo '<td>'.$html->link(__('Del', true), array('action'=>'add/del/'.$value['Subitem']['id'])).'</td>';
