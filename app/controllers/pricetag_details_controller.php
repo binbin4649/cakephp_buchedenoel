@@ -63,6 +63,7 @@ class PricetagDetailsController extends AppController {
 			$details = array();
 			$session_read = $this->Session->read('PricetagDetail');
 			if($ac == 'del'){
+				/*
 				$params = array(
 					'conditions'=>array('Subitem.id'=>$id),
 					'recursive'=>0,
@@ -71,6 +72,9 @@ class PricetagDetailsController extends AppController {
 				$del_subitem = $this->Subitem->find('first' ,$params);
 				$this->Session->delete("PricetagDetail.".$del_subitem['Subitem']['name']);
 				unset($session_read[$del_subitem['Subitem']['name']]);
+				*/
+				$this->Session->delete("PricetagDetail.".$id);
+				unset($session_read[$id]);
 			}
 			if($ac == 'alldel'){
 				$this->Session->delete("PricetagDetail");

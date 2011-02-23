@@ -480,8 +480,10 @@ class OrderDateilsController extends AppController {
 					$session_write['Subitem']['quantity'] = $quantity;
 					$session_write['Subitem']['major_size'] = $subitem['Subitem']['major_size'];
 					$session_write['Subitem']['minority_size'] = $subitem['Subitem']['minority_size'];
-					$session_write['Item']['id'] =  $subitem['Subitem']['item_id'];					
-					$session_write['Subitem']['transport_detail_id'] = $this->data['OrderDateil']['transport_detail_id'];
+					$session_write['Item']['id'] =  $subitem['Subitem']['item_id'];
+					if(!empty($this->data['OrderDateil']['transport_detail_id'])){
+						$session_write['Subitem']['transport_detail_id'] = $this->data['OrderDateil']['transport_detail_id'];
+					}
 					$session_write['Subitem']['marking'] = trim($this->data['OrderDateil']['marking']);
 					$session_write['Subitem']['specified_date'] = $this->data['OrderDateil']['specified_date'];
 					$session_write['Subitem']['discount'] = $this->data['OrderDateil']['discount'];
