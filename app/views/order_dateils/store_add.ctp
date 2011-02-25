@@ -240,15 +240,14 @@
 		));
 		
 		echo '<hr></td></tr><tr><td>';
+		$tanpin_judge = true;
 		if($item['Item']['stock_code'] == '3'){
 			//echo '単品管理の商品は、商品詳細から入力して下さい。';
 			
-			
-			
-			if(empty($edit)){
-				echo '単品管理の商品は、商品詳細から入力して下さい。';
+			if(empty($edit['Subitem']['id'])){
+				$tanpin_judge = false;
+				echo '単品管理の商品は、品番「SAMPLE」を入力して、備考に品番、サイズ等を入力して下さい。';
 			}else{
-				
 				foreach($subitems as $subitem){
 					if($subitem['Subitem']['id'] == $edit['Subitem']['id']){
 						if(empty($subitem['Subitem']['major_size']) or $subitem['Subitem']['major_size'] == 'other'){
@@ -313,8 +312,10 @@
 		}
 		
 		echo $form->hidden('Item.price', array('value'=>$item['Item']['price']));
-		echo $form->hidden('step', array('value'=>'2'));
-		echo '<input type="submit" value="Submit" />';
+		if($tanpin_judge){ //単品管理を入力されたら、ボタンを表示しない。
+			echo $form->hidden('step', array('value'=>'2'));
+			echo '<input type="submit" value="Submit" />';
+		}
 		echo '</td>';
 		echo '</tr></table>';
 	}
