@@ -344,7 +344,10 @@
 			echo '<td>'.$value['Subitem']['adjustment'].'</td>';
 			echo '<td>'.$value['Subitem']['sub_remarks'].'</td>';
 			
-			echo '<td>'.$html->link('Edit', array('action'=>'store_add/edit/'.$key)).' | ';
+			echo '<td>';
+			if($value['Subitem']['order_type'] <> 4){
+				echo $html->link('Edit', array('action'=>'store_add/edit/'.$key)).' | ';
+			}
 			echo $html->link('Del', array('action'=>'store_add/del/'.$key)).'</td>';
 			echo '</tr>';
 		}

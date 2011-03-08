@@ -765,6 +765,10 @@ class OrdersController extends AppController {
 		$materials = $this->Material->find('list');
 		$this->set(compact('processes', 'materials','color','clarity','cut','item', 'major_size', 'userSection'));
 		$this->set('sectionDepot', $this->Depot->sectionDepots($this->Auth->user('section_id')));
+		/* order_type が選択式になった時用
+		$order_type = array('2'=>'客注', '5'=>'手配済');
+		$this->set('orderType', $order_type);
+		*/
 	}
 
 	function special_add_confirm($ac = null){

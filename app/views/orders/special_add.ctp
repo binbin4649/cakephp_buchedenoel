@@ -16,6 +16,13 @@
  			'options'=>$sectionDepot,
  			'selected'=>$userSection['Section']['default_depot']
 		));
+		/* order_typeが選択式になった時
+		echo $form->input('Order.order_type', array(
+			'label'=>__('Order Type', true),
+			'type'=>'select',
+			'options'=>$orderType,
+		));
+		*/
 		/*
 		echo '<div class="separater"><p>Only Wholesale</p>';
 		echo $form->input("Order.destination_id", array(
@@ -96,6 +103,11 @@
 			'label'=>__('Marking', true),
 			'size'=>20
 		));
+		echo $form->input('Order.remark', array(
+			'type'=>'text',
+			'label'=>__('Remarks', true),
+			'size'=>30,
+		));
 		echo '<div class="separater"><p>Only Special case</p>';
 		echo $form->input('Subitem.process_id', array(
 			'label'=>__('Process', true),
@@ -131,11 +143,6 @@
 			'empty'=>__('(Please Select)', true)
 		));
 		echo '</div>';
-		echo $form->input('Order.remark', array(
-			'type'=>'text',
-			'label'=>__('Remarks', true),
-			'size'=>20,
-		));
 		echo $form->end(__('Register', true));
 	?>
 	</fieldset>
