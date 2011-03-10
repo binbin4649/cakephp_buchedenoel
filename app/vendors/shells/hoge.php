@@ -112,9 +112,11 @@ class HogeShell extends Shell {
     	exit("HAPPY END");
 	}
 	
-	//コスト0円のに、改めてコストを挿入
+	//旧システム→在庫管理→在庫一覧表　ZAIKO.CSV
+	//コスト0円のに、改めてコストを挿入、上代無くてCSVにあった場合は上書きする
 	function reTryCost(){
-		$path = WWW_ROOT.DS.'files'.DS.'reTryCost'.DS;
+		//$path = WWW_ROOT.DS.'files'.DS.'reTryCost'.DS;
+		$path = WWW_ROOT.'files'.DS.'reTryCost'.DS;
 		App::import('Component', 'SalesCsv');
    		$SalesCsvComponent = new SalesCsvComponent();
 		$old_file = array();
@@ -125,8 +127,8 @@ class HogeShell extends Shell {
 		closedir($handle);
 		foreach($old_file as $file_name){
 			if($file_name != '.' AND $file_name != '..'){
-				$file_name = mb_convert_kana($file_name, 'a', 'UTF-8');
-				$file_name = ereg_replace("[^0-9]", "", $file_name);//半角数字以外を削除
+				//$file_name = mb_convert_kana($file_name, 'a', 'UTF-8');
+				//$file_name = ereg_replace("[^0-9]", "", $file_name);//半角数字以外を削除
 				$result = $SalesCsvComponent->reTryCost($path, $file_name);
 				if($result){
 					$this->out($result.':'.$file_name);

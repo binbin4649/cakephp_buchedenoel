@@ -117,7 +117,12 @@ class PrepareShell extends Shell {
 			}
 		}
 		
-		/*
+		
+		
+		//2011年3月10日,JAN移行を試しに動かしてみる
+		//NEXT：hoge.phpからreTryCostを移植してきて、テストする。とりあえず以上
+		
+		
 		//旧から新へ、毎日JANを移行させる。為のプログラム
 		$path = WWW_ROOT.DS.'files'.DS.'SyohinIchiran'.DS;
 		App::import('Component', 'StratCsv');
@@ -140,7 +145,7 @@ class PrepareShell extends Shell {
 				}
 			}
 		}
-		*/
+		
 		
 		//単品管理が複数あった場合、最新の在庫を残して、残りは在庫減修正する。
 		/*

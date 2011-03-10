@@ -698,9 +698,12 @@ class SalesCsvComponent extends Object {
 	}
 	
 	
+	//旧システム→在庫管理→在庫一覧表　ZAIKO.CSV
 	//コストが0以下だったら、CSVの原価を入れとく
+	// 2011年3月8日NEXTタスク
+	//上代も0だったらCSVの上代に差し替える
 	function reTryCost($path, $file_name){
-		$file_name = $file_name.'.CSV';
+		//$file_name = $file_name.'.CSV';
 		App::import('Component', 'Selector');
    		$SelectorComponent = new SelectorComponent();
    		App::import('Model', 'Subitem');
@@ -717,7 +720,9 @@ class SalesCsvComponent extends Object {
 		$csv_header = fgetcsv($sj_opne);
 		while($sj_row = fgetcsv($sj_opne)){
 			$subitem_cost = floor($sj_row[19]);
+			$price = floor($sj_row[20]);
 			$subitem_jan = trim($sj_row[2]);
+			
 			$params = array(
 				'conditions'=>array('Subitem.jan'=>$subitem_jan),
 				'recursive'=>0
@@ -725,11 +730,22 @@ class SalesCsvComponent extends Object {
 			$subitem = $SubitemModel->find('first' ,$params);
 			$cost = $SelectorComponent->costSelector2($subitem['Subitem']['id']);
 			if(empty($cost)){
-				$save_value = array();
-				$ItemModel->create();
-				$save_value['Item']['cost'] = $subitem_cost;
-				$save_value['Item']['id'] = $subitem['Item']['id'];
-				$ItemModel->save($save_value);
+				if($subitem_cost > 1){
+					$save_value = array();
+					$ItemModel->create();
+					$save_value['Item']['cost'] = $subitem_cost;
+					$save_value['Item']['id'] = $subitem['Item']['id'];
+					$ItemModel->save($save_value);
+				}
+			}
+			if(empty($subitem['Item']['price'])){
+				if($price > 1){
+					$save_value = array();
+					$ItemModel->create();
+					$save_value['Item']['price'] = $price;
+					$save_value['Item']['id'] = $subitem['Item']['id'];
+					$ItemModel->save($save_value);
+				}
 			}
 		}
 		fclose($sj_opne);
