@@ -356,16 +356,12 @@ class OrderDateilsController extends AppController {
 			}
 		}
 		
-		//saleから渡ってきた売上を無理栗マージ
+		//saleから渡ってきた売上を無理栗マージ   2011/3/17 ラベリング　未テストｗ
 		if($ac == 'addsale'){
 			$session_reader = $this->Session->read('SaleJan');
 			$this->Session->delete("SaleJan");
-			$session_count = $this->Session->read('OrderDateil');
-			if($session_count){
-				$i = count($session_count) + 1;
-			}else{
-				$i = 0;
-			}
+			$session_detail = $this->Session->read('OrderDateil');
+			
 			foreach($session_reader as $key=>$value){
 				$session_write = array();
 				$session_write['Subitem']['id'] = $value['Subitem']['id'];
@@ -386,20 +382,15 @@ class OrderDateilsController extends AppController {
 				$session_write['Subitem']['span_no'] = ereg_replace("[^0-9a-zA-Z]", "", $value['span_no']);//半角英数字以外を削除
 				$value['depot'] = mb_convert_kana($value['depot'], 'a', 'UTF-8');
 				$session_write['Subitem']['depot_id'] = ereg_replace("[^0-9]", "", $value['depot']);//半角数字以外を削除;
-				$this->Session->write("OrderDateil.".$i, $session_write);
-				$i++;
+				$session_detail[] = $session_write;
+				$this->Session->write("OrderDateil", $session_detail);
 			}
 		}
 		//特別注文を無理栗マージ
 		if($ac == 'special'){
 			if(!empty($this->data)){
 				$session = $this->data;
-				$session_count = $this->Session->read('OrderDateil');
-				if($session_count){
-					$i = count($session_count) + 1;
-				}else{
-					$i = 0;
-				}
+				$session_detail = $this->Session->read('OrderDateil');
 				$session_write = array();
 				$session_write['Subitem']['id'] = '';
 				$params = array(
@@ -439,7 +430,8 @@ class OrderDateilsController extends AppController {
 				$session_write['Order']['destination_id'] = $session['Order']['destination_id'];
 				$session_write['Order']['shipping'] = $session['Order']['shipping'];
 				$session_write['Item']['stock_code'] = 3;
-				$this->Session->write("OrderDateil.".$i, $session_write);
+				$session_detail[] = $session_write;
+				$this->Session->write("OrderDateil", $session_detail);
 			}
 		}
 		if($ac == 'edit'){

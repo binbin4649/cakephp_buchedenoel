@@ -1,6 +1,242 @@
 <?php
 class StratCsvComponent extends Object {
 
+	// SyohinIchiran.csv の内容、読み込み関数
+	function loadSyohinIchiranCsv($stream){
+		$csv_header = fgetcsv($stream);
+		$starter = true;
+		if(trim($csv_header[0]) != '商品CD') $starter = false;
+		if(trim($csv_header[1]) != '品名') $starter = false;
+		if(trim($csv_header[2]) != '規格') $starter = false;
+		if(trim($csv_header[3]) != '型番') $starter = false;
+		if(trim($csv_header[4]) != 'サイズCD') $starter = false;
+		if(trim($csv_header[5]) != 'サイズ記号') $starter = false;
+		if(trim($csv_header[6]) != 'メーカ型番') $starter = false;
+		if(trim($csv_header[7]) != '鑑定') $starter = false;
+		if(trim($csv_header[8]) != '鑑別') $starter = false;
+		if(trim($csv_header[9]) != '分類') $starter = false;
+		if(trim($csv_header[10]) != '分類名') $starter = false;
+		if(trim($csv_header[11]) != '石') $starter = false;
+		if(trim($csv_header[12]) != '石名') $starter = false;
+		if(trim($csv_header[13]) != '枠素材') $starter = false;
+		if(trim($csv_header[14]) != '枠素材名') $starter = false;
+		if(trim($csv_header[15]) != 'カラット') $starter = false;
+		if($starter == false) return false; //ファイル違うよと
+		
+		App::import('Component', 'DateCal');
+   		$DateCalComponent = new DateCalComponent();
+   		App::import('Model', 'Item');
+    	$this->Item = new Item();
+    	App::import('Model', 'Stock');
+    	$this->Stock = new Stock();
+    	App::import('Model', 'Subitem');
+    	$this->Subitem = new Subitem();
+    	App::import('Model', 'Itembase');
+    	$this->Itembase = new Itembase();
+    	App::import('Model', 'ItemImage');
+    	$this->ItemImage = new ItemImage();
+   		
+		while($sj_row = fgetcsv($stream)){
+			$item_remark = '';//リマーク　よく分からないものは、ココにぶち込む
+			$item_secret_remark = '';//シークレットリマーク　さらによく分からないものはここへ
+			//$tags = array();
+			$item_stone_other = '';
+			$item_stone_spec = '';
+			$item_message_stamp = '';
+			$item_message_stamp_ja = '';
+			$item_weight = '';
+			$item_demension = '';
+
+			$subitem_jan = $sj_row[0];//JAN
+			$item_title = trim($sj_row[1]);//品名
+			$item_name = trim($sj_row[3]);//品番
+			$subitem_sub_name = substr($sj_row[4], 1, 2);//サイズ　：3桁の数字を2桁にする
+			//$subitem_size = trim($sj_row[5]);伝票印刷用に、メジャーサイズを創設
+			$subitem_minority_size = '';
+			$subitem_major_size = $this->baseMajorSize(trim($sj_row[5]));
+			if($subitem_major_size == 'other'){
+				$subitem_minority_size = trim($sj_row[5]);
+			}
+			//$pre_sj10 = mb_convert_kana($sj_row[10], 'K', 'UTF-8');
+			//$tags[] = $this->StratCsv->masterDump('Tag', $pre_sj10);//タグのid
+			$subitem_name_kana = $sj_row[12];//ルース名　半角カナ　subitemに入れる
+				$sj12_zen = mb_convert_kana($subitem_name_kana, 'K', 'UTF-8');
+			$item_stone_id = $this->masterDump('Stone', $sj12_zen);//ルースのid
+			$item_material_id = $this->masterDump('Material', $sj_row[14]);//マテリアルのid
+			$item_price = floor($sj_row[26]);//上代 切捨て整数化floor
+			$subitem_cost = floor($sj_row[29]);//仕入単価
+			$item_cost = floor($sj_row[32]);//在庫原価
+			if($subitem_cost == 0) $subitem_cost = $item_cost;
+				if(!empty($sj_row[36])){
+					$pre_sj36 = mb_convert_kana($sj_row[36], 'K', 'UTF-8');
+				}else{
+					$pre_sj36 = '';
+				}
+			$item_factory_id = $this->masterDump('Factory', $pre_sj36);//工場のid
+				if($sj_row[73] == 'Mauloa') $sj_row[73] = 'Kapio';//Mauloaを無理やりKapioに変える
+				if($item_title == 'ハワイアン雑貨') $sj_row[73] = 'Kapio';//タイトルが「ハワイアン雑貨」だったら、ブランドを無理やりKapioに変える
+				if($sj_row[36] == 'ﾕﾆｵﾝｸﾗﾌﾄ') $sj_row[73] = 'SELECT';
+				if($sj_row[36] == 'ﾚﾉﾝ') $sj_row[73] = 'SELECT';
+				if($sj_row[36] == 'ｱﾄﾘｴ･ｵﾄﾞｰ') $sj_row[73] = 'SELECT';
+				if($sj_row[36] == 'ｴﾝﾄﾘｰ') $sj_row[73] = 'SELECT';
+				if($sj_row[36] == 'ｷﾞﾝﾔｲｯﾌﾟｳﾄﾞｳ') $sj_row[73] = 'SELECT';
+				if($sj_row[36] == 'ﾅｶｶﾞﾜｿｳｼﾝｸﾞｺｳｷﾞｮｳ') $sj_row[73] = 'SELECT';
+				if($sj_row[36] == 'ｽﾍﾟｰｽｸﾘｴｰﾀｰ') $sj_row[73] = 'SELECT';
+				if($sj_row[36] == 'ﾊﾟｳﾞｪｷｶｸ') $sj_row[73] = 'SELECT';
+
+			$item_brand_id = $this->masterDump('Brand', $sj_row[73]);//ブランドのid
+			//$subitem_name = $this->StratCsv->sjSubItemName($sj_row[4], $item_name);
+			$subitem_name = $this->sjSubItemName($subitem_sub_name, $item_name);
+			//$subitem_name = $item_name.'-'.$subitem_sub_name;//subitemの品番
+			$params = array(
+				'conditions'=>array('Item.name'=>$item_name),
+				'recursive'=>0
+			);
+			$find_item = $this->Item->find('first' ,$params);
+			if($find_item){//あったときの処理　次にsubitemを探す
+				$item_id = $find_item['Item']['id'];
+				$params = array(
+					'conditions'=>array('Subitem.jan'=>$subitem_jan),
+					'recursive'=>0
+				);
+				$find_subitem = $this->Subitem->find('first' ,$params);
+				if($find_subitem){
+
+				}else{
+					$save_subitem = array('Subitem'=>array(
+						'name'=>$subitem_name,
+						'item_id'=>$item_id,
+						'major_size'=>$subitem_major_size,
+						'minority_size'=>$subitem_minority_size,
+						'name_kana'=>$subitem_name_kana,
+						'jan'=>$subitem_jan,
+						'cost'=>$subitem_cost,
+					));
+					$this->Subitem->save($save_subitem);
+					$subitem_id = $this->Subitem->getInsertID();
+					if($find_item['Item']['stock_code'] == '3'){
+						$this->Stock->Plus($subitem_id, 910, 1, 1135, 1);
+					}
+					$this->Subitem->id = null;
+				}
+
+			}else{//itemが無かった時の処理
+				//アニバ、ファサード、カフナ、LUV sweetsは単品管理に変える
+				if($item_brand_id == 10 or $item_brand_id == 11 or $item_brand_id == 12 or $item_brand_id == 3 or $item_brand_id == 4 or $item_brand_id == 13 or $item_brand_id == 183){
+					$stock_code = 3;
+				}else{
+					$stock_code = 1;
+				}
+				$params = array(
+					'conditions'=>array('Itembase.itemnum'=>$item_name),
+					'recursive'=>0
+				);
+				$Itembase = $this->Itembase->find('first' ,$params);
+				if($Itembase){
+					$item_release_day = $this->baseRelease($Itembase['Itembase']['release']);//リリース日
+					$itemtype = $this->baseItemType($Itembase['Itembase']['item_type']);//アイテムタイプ
+					$itemproperty = $this->baseSex($Itembase['Itembase']['sex']);//性別
+						//$separater = $this->StratCsv->baseSeparateProcess($base[8]);//M or P マテリアルかプロセスかを振り分ける。企画倒れ
+					$item_process_id = $this->baseProcess($Itembase['Itembase']['process']);//プロセスのid　マテリアル無視　無い場合は''
+					if(!empty($Itembase['Itembase']['other_process'])) $item_remark .= $Itembase['Itembase']['other_process'];
+					if(!empty($Itembase['Itembase']['other_loose'])) $item_stone_other = $Itembase['Itembase']['other_loose'];
+					if(!empty($Itembase['Itembase']['loose_spec'])) $item_stone_spec = $Itembase['Itembase']['loose_spec'];
+					if(!empty($Itembase['Itembase']['messeage'])) $item_message_stamp = $Itembase['Itembase']['messeage'];
+					if(!empty($Itembase['Itembase']['trans'])) $item_message_stamp_ja = $Itembase['Itembase']['trans'];
+					$basic_size = $this->baseBasicSize($Itembase['Itembase']['basic_size']);
+					$order_size = $this->baseOrderSize($Itembase['Itembase']['order_size']);
+					$item_trans_approve = $this->baseTransApprove($Itembase['Itembase']['repair_size']);
+					$item_in_chain = $this->baseInChain($Itembase['Itembase']['chain'], $Itembase['Itembase']['other_chain']);//チェーン品番または工場名が入る。無い場合は空値''。
+					$item_sales_state_code = $this->baseSalesStateCode($Itembase['Itembase']['ado']);//ado　販売状況salesStateCodeのid
+					if(!empty($Itembase['Itembase']['remark'])) $item_remark .= $Itembase['Itembase']['remark'];//リマーク追加
+					$item_atelier_trans_approve = $this->baseAtelierTransApprove($Itembase['Itembase']['atelier_repair_size']);
+					if(!empty($Itembase['Itembase']['secret_remark'])) $item_secret_remark .= $Itembase['Itembase']['secret_remark'];//シークレットリマーク
+					$item_unit = $this->baseUnit($Itembase['Itembase']['unit']);//寸法基準のid
+					if(!empty($Itembase['Itembase']['weight'])) $item_weight = $Itembase['Itembase']['weight'];
+					if(!empty($Itembase['Itembase']['spec'])) $item_demension = $Itembase['Itembase']['spec'];
+					$save_item = array('Item'=>array(
+						'name'=>$item_name,
+						'stone_id'=>$item_stone_id,
+						'material_id'=>$item_material_id,
+						'price'=>$item_price,
+						'cost'=>$item_cost,
+						'factory_id'=>$item_factory_id,
+						'brand_id'=>$item_brand_id,
+						'release_day'=>$item_release_day,
+						'process_id'=>$item_process_id,
+						'remark'=>$item_remark,
+						'stone_other'=>$item_stone_other,
+						'stone_spec'=>$item_stone_spec,
+						'message_stamp'=>$item_message_stamp,
+						'message_stamp_ja'=>$item_message_stamp_ja,
+						'trans_approve'=>$item_trans_approve,
+						'in_chain'=>$item_in_chain,
+						'sales_state_code_id'=>$item_sales_state_code,
+						'atelier_trans_approve'=>$item_atelier_trans_approve,
+						'secret_remark'=>$item_secret_remark,
+						'unit'=>$item_unit,
+						'weight'=>$item_weight,
+						'demension'=>$item_demension,
+						'title'=>$item_title,
+						'itemtype'=>$itemtype,
+						'itemproperty'=>$itemproperty,
+						'basic_size'=>$basic_size,
+						'order_size'=>$order_size,
+						'stock_code'=>$stock_code,
+					));
+					$this->Item->save($save_item);
+					$item_id = $this->Item->getInsertID();
+					$this->Item->id = null;
+				}else{
+					$save_item = array('Item'=>array(
+						'name'=>$item_name,
+						'stone_id'=>$item_stone_id,
+						'material_id'=>$item_material_id,
+						'price'=>$item_price,
+						'cost'=>$item_cost,
+						'factory_id'=>$item_factory_id,
+						'brand_id'=>$item_brand_id,
+						'title'=>$item_title,
+						'stock_code'=>$stock_code,
+					));
+				$this->Item->save($save_item);
+				$item_id = $this->Item->getInsertID();
+				$this->Item->id = null;
+				}
+				//$result = fopen(WWW_ROOT.'/img/itemimage-old/'.$item_name.'.jpg', 'r');
+				if(@fopen(WWW_ROOT.'/img/itemimage-old/'.$item_name.'.jpg', 'r')){
+					$save_item_image = array('ItemImage'=>array(
+						'item_id'=>$item_id,
+					));
+					$this->ItemImage->save($save_item_image);
+					$item_image_id = $this->ItemImage->getInsertID();
+					copy(WWW_ROOT.'/img/itemimage-old/'.$item_name.'.jpg' , WWW_ROOT.'/img/itemimage/'.$item_image_id.'.jpg');
+					//fclose($result);
+					$this->ItemImage->id = null;
+				}
+				$save_subitem = array('Subitem'=>array(
+					'name'=>$subitem_name,
+					'item_id'=>$item_id,
+					'major_size'=>$subitem_major_size,
+					'minority_size'=>$subitem_minority_size,
+					'name_kana'=>$subitem_name_kana,
+					'jan'=>$subitem_jan,
+					'cost'=>$subitem_cost,
+				));
+				$this->Subitem->save($save_subitem);
+				$subitem_id = $this->Subitem->getInsertID();
+				//単品管理を無理やり在庫増
+				if($stock_code == '3'){
+					$this->Stock->Plus($subitem_id, 910, 1, 1135, 1);
+				}
+				$this->Subitem->id = null;
+			}
+		} //while終わり
+		return true;
+	}
+	
+	
+	
 	//旧システムＮｏと売上日を受け取り、Ｎｏと期間が一致したらuser_idを返す
 	function oldContact($old_no, $old_date){
 		App::import('Model', 'User');
@@ -1083,6 +1319,7 @@ function baseMajorSize($id){
     	return $value;
     }
 
+// 2011/3/11 新しく作り直したのが上にあるよ
 //旧の商品紹介からだせるCSVを読み込む
 function sj2bsnItemCsv($path, $file_name){
 	App::import('Model', 'Item');
