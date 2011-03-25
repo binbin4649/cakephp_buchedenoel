@@ -11,13 +11,14 @@ class HogeShell extends Shell {
 	//テスト期間に入力されたテストデータを削除する。
 	// created 2011-03-22 00:00:00 > 2011-03-24 18:00:00
 	// order_status = 5
+	//./cake hoge orderTestDelete -app /var/www/html/buchedenoel/app
 	function orderTestDelete(){
 		App::import('Model', 'Order');
     	$OrderModel = new Order();
     	App::import('Model', 'OrderDateil');
     	$OrderDateilModel = new OrderDateil();
 		$params = array(
-			'conditions'=>array('Order.order_status'=>5, 'Order.created >'=>'2011-03-15 00:00:00', 'Order.created <'=>'2011-03-15 23:59:59'),
+			'conditions'=>array('Order.order_status'=>5, 'Order.created >'=>'2011-03-22 00:00:00', 'Order.created <'=>'2011-03-24 18:00:00'),
 			'recursive'=>1,
 		);
 		$OrderModel->contain('OrderDateil');
@@ -30,6 +31,31 @@ class HogeShell extends Shell {
 		}
     	exit("HAPPY END");
 	}
+	
+	//ホンさんシステムから売上吸い上げ
+	//./cake hoge uptakeSales -app /var/www/html/buchedenoel/app
+	function uptakeSales(){
+		$path = WWW_ROOT.'files'.DS.'reTryCost'.DS;
+		App::import('Component', 'SalesCsv');
+   		$SalesCsvComponent = new SalesCsvComponent();
+		$old_file = array();
+		$handle = opendir($path);
+		while (false !== ($file = readdir($handle))) {
+			$old_file[] = $file;
+		}
+		closedir($handle);
+		foreach($old_file as $file_name){
+			if($file_name != '.' AND $file_name != '..'){
+				$result = $SalesCsvComponent->uptakeSale($path, $file_name);
+				if($result){
+					$this->out($result.':'.$file_name);
+				}else{
+					exit("BAD END");
+				}
+			}
+		}
+	}
+	
 	
 	//客注＆取置の手引き用に、ダミー取置データ（移動データ）を作成
 	//全部門分の取置データを作る

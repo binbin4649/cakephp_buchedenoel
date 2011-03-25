@@ -752,7 +752,92 @@ class SalesCsvComponent extends Object {
 		return unlink($path.$file_name);
 	}
 
-
+	//ホンさんシステムから売上吸い上げ
+	function uptakeSale($path, $file_name){
+		//$file_name = $file_name.'.CSV';
+		App::import('Component', 'Selector');
+   		$SelectorComponent = new SelectorComponent();
+   		App::import('Model', 'Section');
+    	$SectionModel = new Section();
+    	App::import('Model', 'AmountSection');
+    	$AmountSectionModel = new AmountSection();
+		
+		$tenpo_path = WWW_ROOT.'files'.DS.'default'.DS;
+		$tenpo_name = 'tenpo.csv';
+		/*2回回すと何故か文字化け
+		$tenpo_stream = file_get_contents($tenpo_path.$tenpo_name);
+		$tenpo_stream = mb_convert_encoding($tenpo_stream, 'UTF-8', 'ASCII,JIS,EUC-JP,SJIS');
+		$tenpo_opne = fopen($tenpo_path.$tenpo_name, 'w');
+		$result = fwrite($tenpo_opne, $tenpo_stream);
+		fclose($tenpo_opne);
+		*/
+		$tenpOpne = fopen($tenpo_path.$tenpo_name, 'r');
+		$tenpos = array();
+		while($val = fgetcsv($tenpOpne)){
+			$tenpos[] = $val;
+		}
+		
+		$sj_file_stream = file_get_contents($path.$file_name);
+		$sj_file_stream = mb_convert_encoding($sj_file_stream, 'UTF-8', 'ASCII,JIS,EUC-JP,SJIS');
+		$sj_rename_opne = fopen($path.$file_name, 'w');
+		$result = fwrite($sj_rename_opne, $sj_file_stream);
+		fclose($sj_rename_opne);
+		$sj_opne = fopen($path.$file_name, 'r');
+		//$csv_header = fgetcsv($sj_opne);
+		
+		while($rows = fgetcsv($sj_opne)){
+			$saveData = array();
+			//"売上日"	"店舗ID"	"フロアＮＯ"	"売上実績"	"販売目標"	"確定目標"
+			$saveData['start_day'] = mb_substr(str_replace("/", "-", $rows[0]),0,8); //売上日
+			$saveData['end_day'] = mb_substr(str_replace("/", "-", $rows[0]),0,8); //売上日
+			$saveData['full_amount'] = str_replace("\\", "", $rows[3]); //売上実績
+			//$saveData['full_amount'] = str_replace("\\", "", $rows[4]); //販売目標、昔店側で設定していた目標。今使ってない。
+ 			$saveData['mark'] = str_replace("\\", "", $rows[5]); //確定目標、本社側で設定している目標。本社で割り振ったものを、店側が日割りにしてそれを目標にしている。
+			
+			// section_id をゲットする、無かったら作ってしまう。
+			$hon_id = $rows[1]; //店舗ID
+			$params = array(
+				'conditions'=>array('Section.kyuuyo_bugyo5'=>$hon_id),
+				'recursive'=>-1
+			);
+			$section = $SectionModel->find('first' ,$params);
+			if($section){
+				$saveData['section_id'] = $section['Section']['id'];
+			}else{
+				$SectionModel->create();
+				$new_sec = array();
+				foreach($tenpos as $tenpo){
+					if($tenpo[0] == $hon_id){
+						$new_sec['Section']['id'] = '';
+						$new_sec['Section']['name'] = $tenpo[1];
+						$new_sec['Section']['kyuuyo_bugyo5'] = $hon_id;
+						$SectionModel->save($new_sec);
+						$saveData['section_id'] = $SectionModel->getInsertID();
+					}
+				}
+			}
+			//その店舗の、その日の売上が、あったら上書き
+			$saveData['id'] = '';
+			$sData = array();
+			$params = array(
+				'conditions'=>array(
+					'AmountSection.start_day'=>$saveData['start_day'],
+					'AmountSection.end_day'=>$saveData['end_day'],
+					'AmountSection.section_id'=>$saveData['section_id'],
+				),
+				'recursive'=>-1
+			);
+			$amount = $AmountSectionModel->find('first' ,$params);
+			if($amount){
+				$saveData['id'] = $amount['AmountSection']['id'];
+			}
+			$AmountSectionModel->create();
+			$sData['AmountSection'] = $saveData;
+			$AmountSectionModel->save($sData);
+		}
+		fclose($sj_opne);
+		return unlink($path.$file_name);
+	}
 
 }
 ?>
