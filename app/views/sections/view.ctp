@@ -231,4 +231,7 @@
 <ul>
 	<li><?php echo $html->link(__('New Depot', true), array('controller'=>'depots', 'action'=>'add', $section['Section']['id'])); ?></li>
 </ul>
+<ul>
+<li>営業開始開始日、営業終了日のどちらか、又は両方が入っている部門は、売上の集計対象となります。</li>
+</ul>
 </div>

@@ -5,6 +5,73 @@ class DateCalComponent extends Object {
 //--------------
 // 月の末日計算
 //--------------
+
+	//その日の曜日を返す、和曜日で
+	function this_youbi($yyyy, $mm, $dd){
+		$t = mktime(0,0,0,$mm,$dd,$yyyy);
+		$w = date('w', $t);
+		switch($w) {
+			case  0: return '日'; break;
+			case  1: return '月'; break;
+			case  2: return '火'; break;
+			case  3: return '水'; break;
+			case  4: return '木'; break;
+			case  5: return '金'; break;
+			case  6: return '土'; break;
+		}
+	}
+	
+	//今月を受け取り、今期は何ヶ月経過したのか返す。計算式が思い浮かばないのでゴリゴリ書く
+	function this_passd_term($mm){
+		switch($mm) {
+			case  04: return 1; break;
+			case  05: return 2; break;
+			case  06: return 3; break;
+			case  07: return 4; break;
+			case  08: return 5; break;
+			case  09: return 6; break;
+			case  10: return 7; break;
+			case  11: return 8; break;
+			case  12: return 9; break;
+			case  01: return 10; break;
+			case  02: return 11; break;
+			case  03: return 12; break;
+		}
+	}
+	
+	//今月を受け取り、今月を含め経過した月を配列で返す
+	function this_passd_term_arr($mm){
+		switch($mm) {
+			case  04: return array('04'); break;
+			case  05: return array('04','05'); break;
+			case  06: return array('04','05','06'); break;
+			case  07: return array('04','05','06','07'); break;
+			case  08: return array('04','05','06','07','08'); break;
+			case  09: return array('04','05','06','07','08','09'); break;
+			case  10: return array('04','05','06','07','08','09','10'); break;
+			case  11: return array('04','05','06','07','08','09','10','11'); break;
+			case  12: return array('04','05','06','07','08','09','10','11','12'); break;
+			case  01: return array('04','05','06','07','08','09','10','11','12','01'); break;
+			case  02: return array('04','05','06','07','08','09','10','11','12','01','02'); break;
+			case  03: return array('04','05','06','07','08','09','10','11','12','01','02','03'); break;
+		}
+	}
+	
+	//その期の月並びを配列で返す
+	function this_term($yyyy, $mm){
+		$out = array();
+		if($mm <= 3){
+			$year = $yyyy -1;
+			$out[$year] = array('04','05','06','07','08','09','10','11','12');
+			$out[$yyyy] = array('01','02','03');
+		}else{
+			$year = $yyyy +1;
+			$out[$yyyy] = array('04','05','06','07','08','09','10','11','12');
+			$out[$year] = array('01','02','03');
+		}
+		return $out;
+	}
+
 	//その月の月末の日を返す
 	function last_day($year, $month) {
 		return lastday($year, $month);

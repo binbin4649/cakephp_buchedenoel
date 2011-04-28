@@ -1,7 +1,35 @@
 <?php
-
+//計算周りのコンポーネント
 class TotalComponent extends Object {
-
+	
+	function not_chang_rank($values){
+		// (id=>value)配列を受け取って、valueで昇順ソートして順位をつけた配列(id=>rank)を並び順を変えずに返す。
+		$ranking = $values;
+		arsort($ranking);
+		$sort = array();
+		$rank = 1;
+		foreach($ranking as $id=>$val){
+			$sort[$id] = $rank;
+			$rank++;
+		}
+		foreach($values as $id=>$val){
+			$values[$id] = $sort[$id];
+		}
+		return $values;
+	}
+	
+	function fprate2($value , $mark){
+		//Floating point rate 2 浮動小数点の率で小数点第2位まで返す
+		//例えば、 $value=実績 , $mark=目標
+		App::import('Helper', 'Number');
+   		$NumberHelper = new NumberHelper();
+   		if(empty($value) OR empty($mark)){
+   			return 0;
+   		}else{
+   			return $NumberHelper->precision(($value / $mark) * 100, 2);
+   		}
+	}
+	
     function slipTotal($subitems, $tax_method, $tax_fraction){
     	/*伝票単位の計算関数
     	*合計金額を計算して返す。

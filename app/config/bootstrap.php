@@ -45,6 +45,9 @@
 //在庫が無くても永久に取り置き出来るモード、TRUEで在庫とか無視、通常はFALSE
 define('EMERGENCY_LANDING', TRUE);
 
+//AmountでOrderを無視して売上合計を直接入力するモード
+define('AMOUNT_LANDING', TRUE);
+
 define('MAXYEAR', 2011);
 define('MINYEAR', 2009);
 define('TAX_RATE', 5);//5=5%
@@ -74,6 +77,7 @@ function get_year_list(){
 	return array(
 		'2009'=>'2009',
 		'2010'=>'2010',
+		'2011'=>'2011',
 	);
 }
 

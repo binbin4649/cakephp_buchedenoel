@@ -2401,3 +2401,6 @@ msgstr "棚卸開始"
 
 msgid "Sale Item List"
 msgstr "売上商品単位"
+
+msgid "Section Open"
+msgstr "営業開始日"

@@ -151,13 +151,57 @@ class Section extends AppModel {
 		return $out;
 	}
 	
+	//本当は下記のようにしようと思ったけど面倒なので、1or4全部。売上が無ければ加算されないでしょ？ っていう考え方。
+	//全店のlistを返す、sales_code が 1 or 4 で、営業終了日が2年以内のsection。対象から外す場合は2年以前の前の日付で登録する。
+	function amountSectionList4(){
+		App::import('Component', 'Cleaning');
+   		$CleaningComponent = new CleaningComponent();
+		$params = array(
+			'conditions'=>array(
+				'Section.sales_code'=>array('1','4'),
+				//'Section.close_date >'=>date("Y-m-d",strtotime("-2 year"))
+				),
+			'recursive'=>0,
+			'order'=>array('Section.kanjo_bugyo_code DESC')
+		);
+		$sections = $this->find('list', $params);
+		foreach($sections as $id=>$name){
+			$name = $CleaningComponent->sectionName($name);
+			$sections[$id] = mb_substr($name, 0, 20);
+		}
+		return $sections;
+	}
+	
+	
+	//既存店のみのlistを返す、ここ1年以内にオープンした店を除外する
+	function amountSectionList3(){
+		App::import('Component', 'Cleaning');
+   		$CleaningComponent = new CleaningComponent();
+		$params = array(
+			'conditions'=>array(
+				'AND'=>array('Section.sales_code'=>1),
+				'NOT'=>array('Section.start_date >'=>date("Y-m-d",strtotime("-1 year"))),
+				),
+			'recursive'=>0,
+		);
+		$sections = $this->find('list', $params);
+		foreach($sections as $id=>$name){
+			$name = $CleaningComponent->sectionName($name);
+			$sections[$id] = mb_substr($name, 0, 20);
+		}
+		return $sections;
+	}
+	
+	//閉店した店も含めた。全店、営業部門（店舗）とここ1年で閉店した店舗も含める
+	
+	
 	//集計対象の部門一覧を返す
 	function amountSectionList(){
 		//とりあえず、直営店だけ、ついでに部門コード順
 		App::import('Component', 'Cleaning');
    		$CleaningComponent = new CleaningComponent();
 		$params = array(
-			'conditions'=>array('Section.sales_code'=>1),
+			'conditions'=>array('Section.sales_code'=>1), //営業部門（店舗）のみ
 			'recursive'=>0,
 			//'order'=>array('Section.kanjo_bugyo_code DESC')
 		);
@@ -174,7 +218,7 @@ class Section extends AppModel {
 		App::import('Component', 'Cleaning');
    		$CleaningComponent = new CleaningComponent();
 		$params = array(
-			'conditions'=>array('Section.sales_code <>'=>4),
+			'conditions'=>array('Section.sales_code <>'=>4), //4=CloseCector 以外
 			'recursive'=>0,
 			//'order'=>array('Section.kanjo_bugyo_code DESC')
 		);

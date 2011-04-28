@@ -189,7 +189,8 @@ class PrepareShell extends Shell {
 		
 		//部門別売上集計してCSV出力
 		//とりあえず直営店だけ
-		$SalesCsvComponent->storeSales();
+		//$SalesCsvComponent->storeSales();
+		$SalesCsvComponent->dairyReport();
 		
 		exit("HAPPY END");
 	}

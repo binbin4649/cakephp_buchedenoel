@@ -12,6 +12,7 @@ class HogeShell extends Shell {
 	// created 2011-03-22 00:00:00 > 2011-03-24 18:00:00
 	// order_status = 5
 	//./cake hoge orderTestDelete -app /var/www/html/buchedenoel/app
+	//失敗したかも
 	function orderTestDelete(){
 		App::import('Model', 'Order');
     	$OrderModel = new Order();
@@ -32,6 +33,17 @@ class HogeShell extends Shell {
     	exit("HAPPY END");
 	}
 	
+	//ファイル分割 ファイルネームを入力
+	//中途半端 shで作った
+	function fileDivision(){
+		$file_name = 'uptake.csv';
+		$path = WWW_ROOT.'files'.DS.'reTryCost'.DS.$file_name;
+		
+		$file_size = filesize($path);
+		
+		exit;
+	}
+	
 	//ホンさんシステムから売上吸い上げ
 	//./cake hoge uptakeSales -app /var/www/html/buchedenoel/app
 	function uptakeSales(){
@@ -45,7 +57,7 @@ class HogeShell extends Shell {
 		}
 		closedir($handle);
 		foreach($old_file as $file_name){
-			if($file_name != '.' AND $file_name != '..'){
+			if($file_name != '.' AND $file_name != '..' AND $file_name != 'file_division.sh' AND $file_name != 'uptake.csv'){
 				$result = $SalesCsvComponent->uptakeSale($path, $file_name);
 				if($result){
 					$this->out($result.':'.$file_name);
@@ -56,6 +68,28 @@ class HogeShell extends Shell {
 		}
 	}
 	
+	// section に start_date を適当（適切？）に入れ込むスクリプト
+	// ./cake hoge sectionInsertStartdate -app /var/www/html/buchedenoel/app
+	function sectionInsertStartdate(){
+		App::import('Model', 'Section');
+    	$SectionModel = new Section();
+		
+		$params = array(
+			'conditions'=>array('Section.sales_code'=>1, 'Section.start_date'=>NULL),
+			//'conditions'=>array('Section.sales_code'=>1, 'Section.start_date'=>'0000-00-00'),
+			'recursive'=>-1,
+		);
+		$sections = $SectionModel->find('all', $params);
+		$i = 0;
+		foreach($sections as $section){
+			$SectionModel->create();
+			$SectionModel->id = null;
+			$section['Section']['start_date'] = '2008-01-01';
+			$SectionModel->save($section);
+			$i++;
+		}
+		echo $i;
+	}
 	
 	//客注＆取置の手引き用に、ダミー取置データ（移動データ）を作成
 	//全部門分の取置データを作る
