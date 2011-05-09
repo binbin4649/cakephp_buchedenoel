@@ -28,7 +28,11 @@ p#compressor {margin-top:0.2em;}
 //var_dump($loginUser);
 if($loginUser){
 	echo '<em>';
-	echo sprintf(__('　Logon:　%s' ,true) ,$html->link($loginUser['User']['section_name'], array('controller'=>'sections', 'action'=>'view/'.$loginUser['User']['section_id'])).' ： '.$html->link($loginUser['User']['name'], array('controller'=>'users', 'action'=>'view/'.$loginUser['User']['id'])));
+	if(!empty($loginUser['User']['section_name'])){
+		echo sprintf(__('　Logon:　%s' ,true) ,$html->link($loginUser['User']['section_name'], array('controller'=>'sections', 'action'=>'view/'.$loginUser['User']['section_id'])).' ： '.$html->link($loginUser['User']['name'], array('controller'=>'users', 'action'=>'view/'.$loginUser['User']['id'])));
+	}else{
+		echo sprintf(__('　Logon:　%s' ,true) ,'部門に所属されていません。従業員編集から部門番号を登録してください。'.' ： '.$html->link($loginUser['User']['name'], array('controller'=>'users', 'action'=>'view/'.$loginUser['User']['id'])));
+	}
 	echo '　- ';
 	echo '　( <a href="/buchedenoel/users/logout">'.__('Logout' ,true).'</a> )';
 	echo '</em>';

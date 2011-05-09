@@ -47,7 +47,7 @@ class AppController extends Controller {
             $login_user = $this->Auth->user();
             $params = array(
 				'conditions'=>array('Section.id'=>$login_user['User']['section_id']),
-				'recursive'=>0,
+				'recursive'=>-1,
     			'fields'=>array('Section.name')
 			);
 			$section_name = $this->Section->find('first', $params);
