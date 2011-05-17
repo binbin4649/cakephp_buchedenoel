@@ -16,9 +16,9 @@ class SalesCsvComponent extends Object {
    		$month = date('m');
    		$day = date('d');
 		//////////////////////////////////////////////テストデータ
-    	$year = '2011';
-   		$month = '03';
-   		$day = '15';
+    	//$year = '2011';
+   		//$month = '03';
+   		//$day = '15';
    		
    		//昨年の売上に含める店舗、つまり既存店のリストを作成
 		$prev_days_total = 0; //既存店同日前期実績、同日までの合計、既存店＝1年以上前から売上がある店舗
@@ -1282,6 +1282,7 @@ class SalesCsvComponent extends Object {
 		//$csv_header = fgetcsv($sj_opne);
 		
 		while($rows = fgetcsv($sj_opne)){
+			mysql_ping();
 			$saveData = array();
 			//"売上日"	"店舗ID"	"フロアＮＯ"	"売上実績"	"販売目標"	"確定目標"
 			//$saveData['start_day'] = mb_substr(str_replace("/", "-", $rows[0]),0,8); //売上日

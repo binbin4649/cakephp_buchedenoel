@@ -175,7 +175,7 @@ class UsersController extends AppController {
 				$bugyo_employment = trim($row[2]);
 				$params = array(
 					'conditions'=>array('Employment.kyuuyo_bugyo_code'=>$bugyo_employment),
-					'recursive'=>0
+					'recursive'=>-1
 				);
 				$find_employment = $this->Employment->find('first' ,$params);
 				if($find_employment){
@@ -256,6 +256,7 @@ class UsersController extends AppController {
 						//$save_user['User']['username'] = $username.$randam;
 						$save_user['User']['username'] = $randam;
 					}
+					
 					$result = $this->User->save($save_user);
 					if($result){
 						$this->User->id = null;

@@ -65,6 +65,7 @@ class HogeShell extends Shell {
 					exit("BAD END");
 				}
 			}
+			mysql_ping();
 		}
 	}
 	

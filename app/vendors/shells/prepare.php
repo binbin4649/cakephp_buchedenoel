@@ -191,7 +191,6 @@ class PrepareShell extends Shell {
 		//とりあえず直営店だけ
 		//$SalesCsvComponent->storeSales();
 		$SalesCsvComponent->dairyReport();
-		
 		exit("HAPPY END");
 	}
 }
