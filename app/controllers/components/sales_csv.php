@@ -22,8 +22,8 @@ class SalesCsvComponent extends Object {
    		
    		//昨年の売上に含める店舗、つまり既存店のリストを作成
 		$prev_days_total = 0; //既存店同日前期実績、同日までの合計、既存店＝1年以上前から売上がある店舗
-		$prev_existing_total = 0; //既存店同月前期実績、ひと月合計
-		$this_existing_total = 0; //既存店同月今期実績
+		$prev_existing_total = 0; //既存店同月昨年実績、ひと月合計
+		$this_existing_total = 0; //既存店同月今年実績
 		$prev_all_total = 0; //全店同日前期実績 
 		$this_all_total = 0; //全店同日今期実績
 		$prev_all_month_total = 0;//全店同月前期実績
@@ -60,7 +60,7 @@ class SalesCsvComponent extends Object {
    			'既存店同日昨年実績',
    			$prev_days_total,
    			'既存店同月昨年実績',
-   			$this_existing_total,
+   			$prev_existing_total,
    			'全店同日昨年実績',
    			$prev_all_total,
    			'全店同月昨年実績',

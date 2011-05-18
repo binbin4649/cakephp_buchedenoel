@@ -48,7 +48,7 @@ if($addForm->opneUser(open_users(), $opneuser, 'access_authority')){
 		//従業員
 		__('User',true)=>array('sect', '0'),
 		__('User Saech',true)=>array('item', 'users/index'),
-		__('Section List',true)=>array('item', 'sections/index'),
+		__('Section List',true)=>array('item', 'sections/index/1'),
 		//マスタ
 		__('Master',true)=>array('sect', '0'),
 		__('Item Master',true)=>array('item', 'pages/masters'),
@@ -90,7 +90,7 @@ if($addForm->opneUser(open_users(), $opneuser, 'access_authority')){
 		
 		__('User',true)=>array('sect', '0'),
 		__('User Saech',true)=>array('item', 'users/index'),
-		__('Section List',true)=>array('item', 'sections/index'),
+		__('Section List',true)=>array('item', 'sections/index/1'),
 		
 		__('Master',true)=>array('sect', '0'),
 		__('Inventory',true)=>array('item', 'inventories/index'),
