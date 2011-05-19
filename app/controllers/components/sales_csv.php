@@ -77,7 +77,7 @@ class SalesCsvComponent extends Object {
    			$this_all_total
    		);
    		$days_total_comp = $TotalComponent->fprate2($this_existing_total, $prev_days_total);//既存店同日対比
-   		$existing_total_comp = $TotalComponent->fprate2($this_existing_total, $this_existing_total);//既存店同月対比
+   		$existing_total_comp = $TotalComponent->fprate2($this_existing_total, $prev_existing_total);//既存店同月対比
    		$all_total_comp = $TotalComponent->fprate2($this_all_total, $prev_all_total);//全店同日対比
    		$all_month_total_comp = $TotalComponent->fprate2($this_all_total, $prev_all_month_total);//全店同月対比
    		$summary3 = array(
