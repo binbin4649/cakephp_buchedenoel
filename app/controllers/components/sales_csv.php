@@ -151,7 +151,7 @@ class SalesCsvComponent extends Object {
 		$all_mark_exp = 0; //全店合計 目標見込の合計
 		$all_mark_exp_avg = 0; //全店合計 目標見込の平均
 		$passd_term_arr = $DateCalComponent->this_passd_term_arr($month);
-		$prev_sction_total = array(); // 部門別 昨年実績合計
+		$prev_sction_total = array(); // 部門別 昨年同日実績合計
 		$prev_section_comp = array(); // 部門別 昨年対比
 		$prev_total = 0; //昨年実績 全店合計
 		$section_comp_profit = array(); //部門別 昨年差益 今期-前期
@@ -179,10 +179,20 @@ class SalesCsvComponent extends Object {
 				$term_section_sub = $term_section_sub + $term_days['month_total'];
 				$mark_section_sub = $mark_section_sub + $term_days['month_mark'];
 			}
-			$prev_total_passd = 0; //昨年実績 仮入れ
+			$prev_total_passd = 0; //昨年実績 仮入れ 、これが昨年 [同日] 実績になる
+			/* //昨年実績が、昨年の月単位の実績と勘違いしてて使っていたもの
 			foreach($passd_term_arr as $passd_month){
 				$prev_total_passd = $prev_total_passd + $outReport[$section_id]['prev_term'][$passd_month]['month_total'];
 			}
+			*/
+			for($i=1; $i <= $day; $i++){
+				foreach($outReport[$section_id]['prev_term'][$month]['days'] as $days ){
+					if($days['day'] == $i){
+						$prev_total_passd = $prev_total_passd + $days['sales_total'];
+					}
+				}
+			}
+			
 			$prev_total = $prev_total + $prev_total_passd;
 			$prev_sction_total[$section_id] = $prev_total_passd;
 			$prev_section_comp[$section_id] = $TotalComponent->fprate2($term_section_sub , $prev_total_passd);
@@ -323,10 +333,6 @@ class SalesCsvComponent extends Object {
 			$section_mark_total = 0;
 			$i = array();
 			$amounts = $AmountSectionModel->markIndex($section_id, $year, $month);
-			
-			pr($amounts);
-			exit;
-			
 			$prev_amounts = $AmountSectionModel->markIndex($section_id, $prev_year, $month); //昨年同月
 			$prevComparison[$section_id]['this_total'] = $amounts['month_total'];
 			$prevComparison[$section_id]['last_year_total'] = $prev_amounts['month_total'];
