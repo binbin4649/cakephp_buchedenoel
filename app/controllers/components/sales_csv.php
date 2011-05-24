@@ -132,33 +132,40 @@ class SalesCsvComponent extends Object {
 			$line[] = $i.'('.$youbi.'),'.implode(',',$value).','.$amont;
 		}
 		
+		//部門別
 		$section_total = array(); //部門番号=>当月合計
-		$days_total = 0; //当月全店合計
-		$prev_section_month = array(); //部門別 昨年同月実績
-		$prev_month_total = 0; //昨年同月実績 合計
-		$section_month_cont = array(); //部門別 昨対%
-		$section_month_mark = array(); //部門別 今月目標
-		$month_mark_total = 0; //目標金額合計
-		$section_mark_cont = array(); //部門別 達成率
+		$prev_section_month = array(); //昨年同月実績
+		$section_month_cont = array(); //昨対%
+		$section_month_mark = array(); //今月目標
+		$section_mark_cont = array(); //達成率
 		$this_term = array(); //今期実績
 		$term_section_total = array(); //部門別 今期の合計
-		$term_all_total = 0; //今期総合計
 		$section_mark_term = array(); // 部門別 今期の目標合計
-		$section_mark_rate = array(); // 部門別 今期の目標達成率
-		$section_mark_term_total = 0; // 今期 目標総合計
-		$section_mark_total_rate = 0; //今期の目標 総合計達成率
-		$section_mark_exp = array(); //部門別目標見込
-		$all_mark_exp = 0; //全店合計 目標見込の合計
-		$all_mark_exp_avg = 0; //全店合計 目標見込の平均
+		$section_mark_rate = array(); // 部門別 今期の目標達成率 (6-1)
+		$section_mark_exp = array(); //部門別目標見込 (6-2)
+		$prev_sction_total = array(); // 昨年同日実績合計 (6-6)
+		$prev_section_comp = array(); // 昨年対比 (6-3)
+		$section_comp_profit = array(); //昨年差益 今期-前期 (6-4)
+		$section_comp_exp = array(); //昨対見込 (6-5)
+ 		$section_exp_avg = array(); //平均見込 (6-7)
+		
+		//全店合計
+		$days_total = 0; //当月合計
+		$prev_month_total = 0; //昨年同月実績 合計
+		$month_mark_total = 0; //目標金額合計
+		$all_mark_exp = 0; //目標見込の合計
+		$all_mark_exp_avg = 0; //目標見込の平均
+		$prev_total = 0; //昨年実績
+		
+		//総合計
+		$term_all_total = 0; //今期 合計
+		$section_mark_term_total = 0; // 今期 目標
+		$section_mark_total_rate = 0; //今期の目標 達成率
+		$all_comp_profit = 0; //総昨年差益 今期-前期
+		$all_comp_profit = 0; //昨年差益 今期-前期
+		$all_comp_exp = 0; //昨対見込
+		
 		$passd_term_arr = $DateCalComponent->this_passd_term_arr($month);
-		$prev_sction_total = array(); // 部門別 昨年同日実績合計
-		$prev_section_comp = array(); // 部門別 昨年対比
-		$prev_total = 0; //昨年実績 全店合計
-		$section_comp_profit = array(); //部門別 昨年差益 今期-前期
-		$all_comp_profit = 0; //総合計 昨年差益 今期-前期
-		$section_comp_exp = array(); //部門別 昨対見込
-		$all_comp_exp = 0; //総合計 昨対見込
-		$section_exp_avg = array(); //部門別 平均見込
 		
 		foreach($sections as $section_id=>$section_name){
 			$this_month_total = $outReport[$section_id]['this_month']['month_total']; //当月合計
@@ -168,7 +175,7 @@ class SalesCsvComponent extends Object {
 			$prev_section_month[$section_id] = $prev_term_month_total;
 			$prev_month_total = $prev_month_total + $prev_term_month_total;
 			$section_month_cont[$section_id] = $TotalComponent->fprate2($this_month_total, $prev_term_month_total);
-			$this_month_mark = $outReport[$section_id]['this_month']['month_mark'];
+			$this_month_mark = $outReport[$section_id]['this_month']['month_mark']; //当月目標
 			$section_month_mark[$section_id] = $this_month_mark;
 			$month_mark_total = $month_mark_total + $this_month_mark;
 			$section_mark_cont[$section_id] = $TotalComponent->fprate2($this_month_total, $this_month_mark);
@@ -193,20 +200,22 @@ class SalesCsvComponent extends Object {
 				}
 			}
 			
+			//6段目は全部同日対比なんだと思う!!!!!!!!!!!
+			
 			$prev_total = $prev_total + $prev_total_passd;
 			$prev_sction_total[$section_id] = $prev_total_passd;
-			$prev_section_comp[$section_id] = $TotalComponent->fprate2($term_section_sub , $prev_total_passd);
+			$prev_section_comp[$section_id] = $TotalComponent->fprate2($this_month_total , $prev_total_passd);//20110524 今期＞今月に変更
 			$term_section_total[$section_id] = $term_section_sub;
 			$term_all_total = $term_all_total + $term_section_sub;
 			$section_mark_term[$section_id] = $mark_section_sub;
 			$section_mark_term_total = $section_mark_term_total + $mark_section_sub;
-			$this_section_mark_rate = $TotalComponent->fprate2($term_section_sub, $mark_section_sub);
+			$this_section_mark_rate = $TotalComponent->fprate2($this_month_total, $this_month_mark);//20110524 今期＞今月に変更
 			$section_mark_rate[$section_id] = $this_section_mark_rate;
 			$this_section_mark_exp = floor($this_month_mark * ($this_section_mark_rate / 100));
 			$section_mark_exp[$section_id] = $this_section_mark_exp; //部門別目標見込
 			$all_mark_exp = $all_mark_exp + $this_section_mark_exp;
-			$section_comp_profit[$section_id] = $term_section_sub - $prev_total_passd;
-			$this_section_mark_exp = floor($this_month_mark * ($prev_section_comp[$section_id] / 100));
+			$section_comp_profit[$section_id] = $this_month_total - $prev_total_passd;//20110524 今期＞今月に変更
+			$this_section_mark_exp = floor($prev_term_month_total * ($prev_section_comp[$section_id] / 100));
 			$section_comp_exp[$section_id] = $this_section_mark_exp; //部門別昨対見込
 			$all_comp_exp = $all_comp_exp + $this_section_mark_exp;
 			$section_exp_avg[$section_id] = floor(($this_section_mark_exp + $this_section_mark_exp) / 2);
