@@ -123,7 +123,11 @@ class SalesCsvComponent extends Object {
 				$section_amount = 0; //部門別合計
 				foreach($outReport[$section_id]['this_month']['days'] as $days){
 					if($days['day'] == $i){
-						$value[] = $days['sales_total'];
+						if($days['plan'] == '#' OR $days['mark'] == '#'){// plan mark が#だったら、休
+							$value[] = '休';
+						}else{
+							$value[] = $days['sales_total'];
+						}
 						$amont = $amont + $days['sales_total'];
 						$youbi = $days['youbi'];
 					}
@@ -293,10 +297,9 @@ class SalesCsvComponent extends Object {
 	}
 	
 	
-	
-	
 	//部門別売上集計してCSV出力
 	//とりあえず直営店だけ
+	// dairyReport に譲った
 	function storeSales(){
 		App::import('Model', 'AmountSection');
     	$AmountSectionModel = new AmountSection();

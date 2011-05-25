@@ -45,13 +45,20 @@ echo $form->end();
 <tbody>
 <?php
 foreach($days as $day){
+	if($day['plan'] == '#' OR $day['mark'] == '#'){
+		$plan = '休';
+		$mark = '休';
+	}else{
+		$plan = number_format($day['plan']);
+		$mark = number_format($day['mark']);
+	}
 	echo '<tr id="item-index">';
 	echo '<td>'.$day['year'].$day['month'].'</td>';
 	echo '<td>'.$day['day'].'</td>';
 	echo '<td>'.number_format($day['sales_total']).'</td>';
 	echo '<td>'.number_format($day['incomplete_total']).'</td>';
-	echo '<td>'.number_format($day['plan']).'</td>';
-	echo '<td>'.number_format($day['mark']).'</td>';	
+	echo '<td>'.$plan.'</td>';
+	echo '<td>'.$mark.'</td>';
 	echo '<td>'.$day['plan_achieve_rate'].'%</td>';
 	echo '<td>'.$day['mark_achieve_rate'].'%</td>';
 	echo '</tr>';
