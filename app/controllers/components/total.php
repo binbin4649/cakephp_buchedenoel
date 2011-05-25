@@ -24,9 +24,9 @@ class TotalComponent extends Object {
 		App::import('Helper', 'Number');
    		$NumberHelper = new NumberHelper();
    		if(empty($value) OR empty($mark)){
-   			return 0;
+   			return '0%';
    		}else{
-   			return $NumberHelper->precision(($value / $mark) * 100, 2);
+   			return $NumberHelper->precision(($value / $mark) * 100, 2).'%';
    		}
 	}
 	
