@@ -151,6 +151,42 @@ class Section extends AppModel {
 		return $out;
 	}
 	
+	//営業部門（店舗）のみ、新店のみを返す
+	function amountSectionList5(){
+		App::import('Component', 'Cleaning');
+   		$CleaningComponent = new CleaningComponent();
+   		$params = array(
+			'conditions'=>array(
+				'AND'=>array('Section.sales_code'=>1, 'Section.start_date >'=>NEW_SHOP_FLAG)
+				),
+			'recursive'=>-1,
+		);
+   		$sections = $this->find('list', $params);
+		foreach($sections as $id=>$name){
+			$name = $CleaningComponent->sectionName($name);
+			$sections[$id] = mb_substr($name, 0, 20);
+		}
+   		return $sections;
+	}
+	
+	//営業部門（店舗）のみ、海外店のみを返す
+	//とりあえず面倒だからid直接指定する。
+	function amountSectionList6(){
+		App::import('Component', 'Cleaning');
+   		$CleaningComponent = new CleaningComponent();
+   		$shop_list = get_overseashop_list();
+   		$params = array(
+			'conditions'=>array('id'=>$shop_list),
+			'recursive'=>-1,
+		);
+   		$sections = $this->find('list', $params);
+		foreach($sections as $id=>$name){
+			$name = $CleaningComponent->sectionName($name);
+			$sections[$id] = mb_substr($name, 0, 20);
+		}
+   		return $sections;
+   	}
+	
 	//本当は下記のようにしようと思ったけど面倒なので、1or4全部。売上が無ければ加算されないでしょ？ っていう考え方。
 	//全店のlistを返す、sales_code が 1 or 4 で、営業終了日が2年以内のsection。対象から外す場合は2年以前の前の日付で登録する。
 	function amountSectionList4(){
@@ -174,6 +210,7 @@ class Section extends AppModel {
 	
 	
 	//既存店のみのlistを返す、ここ1年以内にオープンした店を除外する
+	//新店と海外店も除外する 20110526
 	function amountSectionList3(){
 		App::import('Component', 'Cleaning');
    		$CleaningComponent = new CleaningComponent();
@@ -192,12 +229,9 @@ class Section extends AppModel {
 		return $sections;
 	}
 	
-	//閉店した店も含めた。全店、営業部門（店舗）とここ1年で閉店した店舗も含める
-	
-	
 	//集計対象の部門一覧を返す
+	//とりあえず、直営店だけ、ついでに部門コード順
 	function amountSectionList(){
-		//とりあえず、直営店だけ、ついでに部門コード順
 		App::import('Component', 'Cleaning');
    		$CleaningComponent = new CleaningComponent();
 		$params = array(

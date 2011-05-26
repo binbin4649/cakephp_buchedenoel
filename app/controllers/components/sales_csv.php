@@ -20,6 +20,13 @@ class SalesCsvComponent extends Object {
    		//$month = '03';
    		//$day = '15';
    		
+   		/*
+   		$new_sections = $SectionModel->amountSectionList5(); //新店だけのリスト
+   		$oversea_sections = $SectionModel->amountSectionList6();  //海外店だけのリスト
+   		pr($oversea_sections);
+   		exit;
+   		*/
+   		
    		//昨年の売上に含める店舗、つまり既存店のリストを作成
 		$prev_days_total = 0; //既存店同日前期実績、同日までの合計、既存店＝1年以上前から売上がある店舗
 		$prev_existing_total = 0; //既存店同月昨年実績、ひと月合計
@@ -159,13 +166,13 @@ class SalesCsvComponent extends Object {
 		$month_mark_total = 0; //目標金額合計
 		$all_mark_exp = 0; //目標見込の合計
 		$all_mark_exp_avg = 0; //目標見込の平均
-		$prev_total = 0; //昨年実績
+		$prev_total = 0; //昨年実績 同日昨対 合計
 		
 		//総合計
 		$term_all_total = 0; //今期 合計
 		$section_mark_term_total = 0; // 今期 目標
 		$section_mark_total_rate = 0; //今期の目標 達成率
-		$all_comp_profit = 0; //総昨年差益 今期-前期
+		//$all_comp_profit = 0; //総昨年差益 今期-前期
 		$all_comp_profit = 0; //昨年差益 今期-前期
 		$all_comp_exp = 0; //昨対見込
 		
@@ -203,7 +210,6 @@ class SalesCsvComponent extends Object {
 					}
 				}
 			}
-			
 			//6段目は全部同日対比なんだと思う!!!!!!!!!!!
 			
 			$prev_total = $prev_total + $prev_total_passd;
@@ -224,10 +230,10 @@ class SalesCsvComponent extends Object {
 			$all_comp_exp = $all_comp_exp + $this_section_mark_exp;
 			$section_exp_avg[$section_id] = floor(($this_section_mark_exp + $this_section_mark_exp) / 2);
 		}
-		$all_comp_profit = $term_all_total - $prev_total;
-		$all_mark_exp_avg = floor($all_mark_exp / $sections_counter);
+		$all_comp_profit = $days_total - $prev_total;
+		//$all_mark_exp_avg = floor($all_mark_exp / $sections_counter); //これは目標見込みの平均だった orz
 		$section_mark_total_rate = $TotalComponent->fprate2($term_all_total, $section_mark_term_total);
-		$prev_section_comp_avg = $TotalComponent->fprate2($term_all_total, $prev_total);
+		$prev_section_comp_avg = $TotalComponent->fprate2($days_total, $prev_total);
 		foreach($this_term as $line_month=>$line_array){
 			$term_month_sub = 0; //月別 今期の合計 仮入れ
 			foreach($line_array as $line_arr){
@@ -269,8 +275,8 @@ class SalesCsvComponent extends Object {
 		$section_avg_ranking = $TotalComponent->not_chang_rank($term_section_avg);
 		$line[] = '順位,'.implode(',', $section_avg_ranking);
 		$line[] = ',';
-		$line[] = '目標%,'.implode(',', $section_mark_rate).','.$section_mark_term_total;
-		$line[] = '目標見込,'.implode(',', $section_mark_exp).','.$all_mark_exp_avg;
+		$line[] = '目標%,'.implode(',', $section_mark_rate).','.$section_mark_total_rate;
+		$line[] = '目標見込,'.implode(',', $section_mark_exp).','.$all_mark_exp;
 		$line[] = '昨対%,'.implode(',', $prev_section_comp).','.$prev_section_comp_avg;
 		$line[] = '昨対差益,'.implode(',', $section_comp_profit).','.$all_comp_profit;
 		$line[] = '昨対見込,'.implode(',', $section_comp_exp).','.$all_comp_exp;
