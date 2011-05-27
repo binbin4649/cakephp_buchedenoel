@@ -25,6 +25,12 @@ class SalesCsvComponent extends Object {
    		$oversea_sections = $SectionModel->amountSectionList6();  //海外店だけのリスト
    		pr($oversea_sections);
    		exit;
+   		
+   		todo
+   		amountSectionList
+   		の新店と海外を抜く処理を書く。
+   		実際に出力する処理を書く。
+   		
    		*/
    		
    		//昨年の売上に含める店舗、つまり既存店のリストを作成
@@ -65,22 +71,30 @@ class SalesCsvComponent extends Object {
    		
    		$summary1 = array(
    			'既存店同日昨年実績',
+   			'',
    			$prev_days_total,
    			'既存店同月昨年実績',
+   			'',
    			$prev_existing_total,
    			'全店同日昨年実績',
+   			'',
    			$prev_all_total,
    			'全店同月昨年実績',
+   			'',
    			$prev_all_month_total
    		);
    		$summary2 = array(
    			'既存店同日今年実績',
+   			'',
    			$this_existing_total,
    			'既存店同月今年実績',
+   			'',
    			$this_existing_total,
    			'全店同日今年実績',
+   			'',
    			$this_all_total,
    			'全店同月今年実績',
+   			'',
    			$this_all_total
    		);
    		$days_total_comp = $TotalComponent->fprate2($this_existing_total, $prev_days_total);//既存店同日対比
@@ -89,12 +103,16 @@ class SalesCsvComponent extends Object {
    		$all_month_total_comp = $TotalComponent->fprate2($this_all_total, $prev_all_month_total);//全店同月対比
    		$summary3 = array(
    			'既存店同日対比',
+   			'',
    			$days_total_comp,
    			'既存店同月対比',
+   			'',
    			$existing_total_comp,
    			'全店同日対比',
+   			'',
    			$all_total_comp,
    			'全店同月対比',
+   			'',
    			$all_month_total_comp
    		);
    		
@@ -232,7 +250,7 @@ class SalesCsvComponent extends Object {
 		}
 		$all_comp_profit = $days_total - $prev_total;
 		//$all_mark_exp_avg = floor($all_mark_exp / $sections_counter); //これは目標見込みの平均だった orz
-		$section_mark_total_rate = $TotalComponent->fprate2($term_all_total, $section_mark_term_total);
+		$section_mark_total_rate = $TotalComponent->fprate2($days_total, $section_mark_term_total); //(6-1)目標%
 		$prev_section_comp_avg = $TotalComponent->fprate2($days_total, $prev_total);
 		foreach($this_term as $line_month=>$line_array){
 			$term_month_sub = 0; //月別 今期の合計 仮入れ
@@ -281,7 +299,7 @@ class SalesCsvComponent extends Object {
 		$line[] = '昨対差益,'.implode(',', $section_comp_profit).','.$all_comp_profit;
 		$line[] = '昨対見込,'.implode(',', $section_comp_exp).','.$all_comp_exp;
 		$line[] = '昨年実績,'.implode(',', $prev_sction_total).','.$prev_total;
-		$all_exp_avg = floor(($all_mark_exp_avg + $all_comp_exp) / 2);
+		$all_exp_avg = floor(($all_mark_exp + $all_comp_exp) / 2);
 		$line[] = '平均見込,'.implode(',', $section_exp_avg).','.$all_exp_avg;
 		$line[] = ',';
 		$line[] = ',';
