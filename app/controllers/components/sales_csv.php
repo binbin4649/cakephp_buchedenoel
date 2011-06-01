@@ -12,9 +12,9 @@ class SalesCsvComponent extends Object {
    		$DateCalComponent = new DateCalComponent();
    		App::import('Component', 'Total');
    		$TotalComponent = new TotalComponent();
-   		$year = date('Y');
-   		$month = date('m');
-   		$day = date('d');
+   		$year = date('Y', strtotime("-1 day"));
+   		$month = date('m', strtotime("-1 day"));
+   		$day = date('d', strtotime("-1 day"));
 		//////////////////////////////////////////////テストデータ
     	//$year = '2011';
    		//$month = '03';
@@ -334,9 +334,9 @@ class SalesCsvComponent extends Object {
    		App::import('Component', 'Total');
    		$TotalComponent = new TotalComponent();
    		
-   		$year = date('Y');
-   		$month = date('m');
-   		$day = date('d');
+   		$year = date('Y', strtotime("-1 day"));
+   		$month = date('m', strtotime("-1 day"));
+   		$day = date('d', strtotime("-1 day"));
    		//////////////////////////////////////////////テストデータ
     	$year = '2010';
    		$month = '12';
