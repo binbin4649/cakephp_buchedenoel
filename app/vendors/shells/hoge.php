@@ -8,6 +8,55 @@ class HogeShell extends Shell {
 		
 	}
 	
+	//設定された新店をザクっとつくる、と思ったけど、手動で作っちまったｗ
+	//add section , 3depot , free user
+	function bulkAddSection(){
+		$section_name = ''; // 店舗名を入れる
+		App::import('Model', 'Section');
+    	$SectionModel = new Section();
+		App::import('Model', 'Depot');
+    	$DepotModel = new Depot();
+		App::import('Model', 'User');
+    	$UserModel = new User();
+		
+		
+	}
+	
+	//決められたセクションにフリーを作る
+	//./cake hoge newFreeUser -app /var/www/html/buchedenoel/app
+	function newFreeUser(){
+		$section_id = ''; //部門IDを書き換える
+		if(empty($section_id)){
+			echo '部門ID入ってないよ!'."\n";
+			exit;
+		}
+		App::import('Model', 'Section');
+    	$SectionModel = new Section();
+    	App::import('Model', 'User');
+    	$UserModel = new User();
+    	$params = array(
+			'conditions'=>array('Section.id'=>$section_id),
+			'recursive'=>-1,
+		);
+		$section = $SectionModel->find('first', $params);
+    	$User = array();
+    	$user = array();
+    	$user['name'] = 'フリー　'.$section['Section']['name'];
+		$user['section_id'] = $section_id;
+		$user['post_id'] = 15;
+		$user['employment_id'] = 7;
+		$user['duty_code'] = 10;
+		$user['username'] = $section_id.'9999';
+		$user['password'] = $section_id.'1122';
+		$User['User'] = $user;
+		$UserModel->create();
+		if($UserModel->save($User)){
+			echo 'OK!';
+		}else{
+			echo 'ERROR';
+		}
+	}
+	
 	//テスト期間に入力されたテストデータを削除する。
 	// created 2011-03-22 00:00:00 > 2011-03-24 18:00:00
 	// order_status = 5
@@ -31,17 +80,6 @@ class HogeShell extends Shell {
 			}
 		}
     	exit("HAPPY END");
-	}
-	
-	//ファイル分割 ファイルネームを入力
-	//中途半端 shで作った
-	function fileDivision(){
-		$file_name = 'uptake.csv';
-		$path = WWW_ROOT.'files'.DS.'reTryCost'.DS.$file_name;
-		
-		$file_size = filesize($path);
-		
-		exit;
 	}
 	
 	//ホンさんシステムから売上吸い上げ
@@ -135,7 +173,6 @@ class HogeShell extends Shell {
 			$TransportModel->save($transport);
     	}
 	}
-	
 	
 	//部門のリストから、一人ずつ、フリーユーザーを作る 9/2まーだまーだ
 	//post_id が　15　の奴はフリーユーザー
