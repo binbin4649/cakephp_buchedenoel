@@ -18,6 +18,7 @@ class CleaningComponent extends Object {
 		$section_name = str_replace('KOREA', 'KR', $section_name);
 		$section_name = str_replace('KOREA', 'KR', $section_name);
 		$section_name = str_replace('イオンモール', 'イオン', $section_name);
+		$section_name = str_replace('ららぽーと', '', $section_name);
 		
         return $section_name;
     }
