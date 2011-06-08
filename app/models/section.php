@@ -160,6 +160,7 @@ class Section extends AppModel {
 				'AND'=>array('Section.sales_code'=>1, 'Section.start_date >'=>NEW_SHOP_FLAG)
 				),
 			'recursive'=>-1,
+			'order'=>array('Section.start_date ASC')
 		);
    		$sections = $this->find('list', $params);
 		foreach($sections as $id=>$name){
@@ -178,6 +179,7 @@ class Section extends AppModel {
    		$params = array(
 			'conditions'=>array('id'=>$shop_list),
 			'recursive'=>-1,
+			'order'=>array('Section.start_date ASC')
 		);
    		$sections = $this->find('list', $params);
 		foreach($sections as $id=>$name){
@@ -216,7 +218,7 @@ class Section extends AppModel {
 		$params = array(
 			'conditions'=>array(
 				'AND'=>array('Section.sales_code'=>1),
-				'NOT'=>array('Section.start_date >'=>date("Y-m-d",strtotime("-1 year"))),
+				'NOT'=>array('Section.start_date >'=>NEW_SHOP_FLAG),
 				),
 			'recursive'=>0,
 		);
@@ -229,7 +231,7 @@ class Section extends AppModel {
 	}
 	
 	//集計対象の部門一覧を返す
-	//とりあえず、直営店だけ、ついでに部門コード順 、新店と海外店も除外する 20110526
+	//とりあえず、直営店だけ、(ついでに部門コード順)出来た順 、新店と海外店 除外する 20110526
 	function amountSectionList(){
 		$shop_list = get_overseashop_list();
 		App::import('Component', 'Cleaning');
@@ -240,7 +242,7 @@ class Section extends AppModel {
 				'NOT'=>array('Section.id'=>$shop_list, 'Section.start_date >'=>NEW_SHOP_FLAG),
 				),
 			'recursive'=>0,
-			//'order'=>array('Section.kanjo_bugyo_code DESC')
+			'order'=>array('Section.start_date ASC')
 		);
 		$sections = $this->find('list', $params);
 		foreach($sections as $id=>$name){

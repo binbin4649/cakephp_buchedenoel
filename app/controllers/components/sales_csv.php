@@ -44,10 +44,11 @@ class SalesCsvComponent extends Object {
 		$sections_counter = $tenpo_count['kizon_count']; //対象の部門数
 		///////////////////////////////////////////////集計の部
 		//キャッシュは開発のために設置してある
+		//Cache::set(array('duration' => '3600'));
 		Cache::set(array('duration' => '+1 year'));
    		$outReport = Cache::read('sales_csv_test');
    		if(empty($outReport)){
-   			$outReport = $this->outReportReader($sections);
+   			$outReport = $this->outReportReader($sections_merge);
    			Cache::set(array('duration' => '+1 year'));
    			Cache::write('sales_csv_test', $outReport);
    		}
@@ -109,7 +110,6 @@ class SalesCsvComponent extends Object {
 			}
 			$value[] = $oversea_section_amount;
 			$line[] = $i.'('.$youbi.'),'.implode(',',$value).','.$amont;
-			$line2[] = $i.'('.$youbi.'),'.implode(',',$value);
 		}
 		
 		//部門別
@@ -322,7 +322,6 @@ class SalesCsvComponent extends Object {
 		$section_comp_exp2 = $TotalComponent->kizonCount2($section_comp_exp, $sections, $new_sections, $oversea_sections);
 		$prev_sction_total2 = $TotalComponent->kizonCount2($prev_sction_total, $sections, $new_sections, $oversea_sections);
 		$section_exp_avg2 = $TotalComponent->kizonCount2($section_exp_avg, $sections, $new_sections, $oversea_sections);
-		
 		$line[] = '目標%,'.implode(',', $section_mark_rate2).','.$section_mark_total_rate;
 		$line[] = '目標見込,'.implode(',', $section_mark_exp2).','.$all_mark_exp;
 		$line[] = '昨対%,'.implode(',', $prev_section_comp2).','.$prev_section_comp_avg;
@@ -333,19 +332,23 @@ class SalesCsvComponent extends Object {
 		$line[] = '平均見込,'.implode(',', $section_exp_avg2).','.$all_exp_avg;
 		$line[] = ',';
 		$line[] = ',';
-		$line[] = ',';
 		
 		$line[] = implode(',', $summar['summary1']);
 		$line[] = implode(',', $summar['summary2']);
 		$line[] = implode(',', $summar['summary3']);
 		
+		//$line[] = ',';
+		//$line[] = ',';
+		
+		//$prev_sction_total2 = $TotalComponent->kizonCount2($prev_sction_total, $sections, $new_sections, $oversea_sections);
+		//$line[] = '昨年同日合計,'.implode(',', $prev_sction_total2);
 		/////////////////////////////////////////出力用文字列の部
 		$out = '';
 		foreach($line as $li){
 			$out .= $li."\r\n";
 		}
 		////////////////////////////////////////出力部
-		$file_name = 'store_2_sales'.date('Ymd-His').'.csv';
+		$file_name = 'store_sales'.date('Ymd-His').'.csv';
 		$path = WWW_ROOT.'/files/store_sales/';
 		$output_csv = mb_convert_encoding($out, 'SJIS', 'UTF-8');
 		file_put_contents($path.$file_name, $output_csv);
@@ -381,22 +384,26 @@ class SalesCsvComponent extends Object {
 		$stackSection['this_term'][$section_id] = $sectionPrev['this_term'];
 		$stackSection['prev_sction_total'][$section_id] = $sectionPrev['prev_total_passd'];//昨年 [同日] 実績
 		$stackAmount['prev_total'] = $stackAmount['prev_total'] + $sectionPrev['prev_total_passd'];//昨年 [同日] 実績合計
-		$stackSection['prev_section_comp'][$section_id] = $TotalComponent->fprate2($this_month_total , $sectionPrev['prev_total_passd']);//20110524 今期＞今月に変更
+		$stackSection['prev_section_comp'][$section_id] = $TotalComponent->fprate2($this_month_total , $sectionPrev['prev_total_passd']);//
 		$stackSection['term_section_total'][$section_id] = $sectionPrev['term_section_sub'];//部門別 今期 合計
 		$stackAmount['tukibetu_shoukei'] = $stackAmount['tukibetu_shoukei'] + $sectionPrev['term_section_sub'];
 		$stackAmount['term_all_total'] = $stackAmount['term_all_total'] + $sectionPrev['term_section_sub'];//部門別 今期 総合計
 		$stackSection['section_mark_term'][$section_id] = $sectionPrev['mark_section_sub'];//部門別 今期 目標合計
 		$stackAmount['section_mark_term_total'] = $stackAmount['section_mark_term_total'] + $sectionPrev['mark_section_sub'];//部門別 今期 目標 総合計
-		$this_section_mark_rate = $TotalComponent->fprate2($this_month_total, $this_month_mark);//20110524 今期＞今月に変更
+		$this_section_mark_rate = $TotalComponent->fprate2($this_month_total, $sectionPrev['thisdays_mark_total']);//
 		$stackSection['section_mark_rate'][$section_id] = $this_section_mark_rate;
 		$this_section_mark_exp = floor($this_month_mark * ($this_section_mark_rate / 100));
 		$stackSection['section_mark_exp'][$section_id] = $this_section_mark_exp;//部門別目標見込
 		$stackAmount['all_mark_exp'] = $stackAmount['all_mark_exp'] + $this_section_mark_exp;
 		$stackSection['section_comp_profit'][$section_id] = $this_month_total - $sectionPrev['prev_total_passd'];//20110524 今期＞今月に変更
+		$stackSection['prev_section_comp'][$section_id] = str_replace('%', '', $stackSection['prev_section_comp'][$section_id]);
 		$this_section_comp_exp = floor($prev_term_month_total * ($stackSection['prev_section_comp'][$section_id] / 100));
-		$stackSection['section_comp_exp'][$section_id] = $this_section_mark_exp;//部門別昨対見込
+		
+		$stackSection['section_comp_exp'][$section_id] = $this_section_comp_exp;//部門別昨対見込
+		
 		$stackAmount['all_comp_exp'] = $stackAmount['all_comp_exp'] + $this_section_comp_exp;
 		$stackSection['section_exp_avg'][$section_id] = floor(($this_section_mark_exp + $this_section_comp_exp) / 2);
+		//部門別 日割目標 同日合計
 		
 		extract($stackAmount);
 		extract($stackSection);
@@ -438,7 +445,20 @@ class SalesCsvComponent extends Object {
 				}
 			}
 		}
-		return array('this_term'=>$this_term, 'term_section_sub'=>$term_section_sub, 'mark_section_sub'=>$mark_section_sub, 'prev_total_passd'=>$prev_total_passd);
+		$thisdays_mark_total = 0;//部門別 今月の 日割目標 同日合計
+		if(!empty($outReport[$section_id]['this_term'][$month]['days'])){
+			for($i=1; $i <= $day; $i++){
+				foreach($outReport[$section_id]['this_term'][$month]['days'] as $days ){
+					if($days['day'] == $i){
+						$thisdays_mark_total = $thisdays_mark_total + $days['mark'];
+					}
+				}
+			}
+		}
+		
+		return array('this_term'=>$this_term, 'term_section_sub'=>$term_section_sub, 'mark_section_sub'=>$mark_section_sub, 
+			'prev_total_passd'=>$prev_total_passd, 'thisdays_mark_total' =>$thisdays_mark_total,
+		);
 	}
 	
 	//計算の元データを生成
