@@ -210,7 +210,6 @@ class Section extends AppModel {
 	
 	
 	//既存店のみのlistを返す、ここ1年以内にオープンした店を除外する
-	//新店と海外店も除外する 20110526
 	function amountSectionList3(){
 		App::import('Component', 'Cleaning');
    		$CleaningComponent = new CleaningComponent();
@@ -230,12 +229,16 @@ class Section extends AppModel {
 	}
 	
 	//集計対象の部門一覧を返す
-	//とりあえず、直営店だけ、ついでに部門コード順
+	//とりあえず、直営店だけ、ついでに部門コード順 、新店と海外店も除外する 20110526
 	function amountSectionList(){
+		$shop_list = get_overseashop_list();
 		App::import('Component', 'Cleaning');
    		$CleaningComponent = new CleaningComponent();
 		$params = array(
-			'conditions'=>array('Section.sales_code'=>1), //営業部門（店舗）のみ
+			'conditions'=>array(
+				'AND'=>array('Section.sales_code'=>1),
+				'NOT'=>array('Section.id'=>$shop_list, 'Section.start_date >'=>NEW_SHOP_FLAG),
+				),
 			'recursive'=>0,
 			//'order'=>array('Section.kanjo_bugyo_code DESC')
 		);
@@ -247,8 +250,8 @@ class Section extends AppModel {
 		return $sections;
 	}
 	
+	//閉鎖部門以外、ついでに部門コード順
 	function amountSectionList2(){
-		//閉鎖部門以外、ついでに部門コード順
 		App::import('Component', 'Cleaning');
    		$CleaningComponent = new CleaningComponent();
 		$params = array(

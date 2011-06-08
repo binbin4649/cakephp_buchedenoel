@@ -2,9 +2,14 @@
 //計算周りのコンポーネント
 class TotalComponent extends Object {
 	
-	function not_chang_rank($values){
+	function not_chang_rank($values, $tenpo_count = null){
 		// (id=>value)配列を受け取って、valueで昇順ソートして順位をつけた配列(id=>rank)を並び順を変えずに返す。
-		$ranking = $values;
+		$ranking = array();
+		foreach($values as $id=>$val){
+			if(is_int($id)){
+				$ranking[$id] = $val;
+			}
+		}
 		arsort($ranking);
 		$sort = array();
 		$rank = 1;
@@ -12,11 +17,101 @@ class TotalComponent extends Object {
 			$sort[$id] = $rank;
 			$rank++;
 		}
-		foreach($values as $id=>$val){
-			$values[$id] = $sort[$id];
+		$out = $this->kizonCount($values, $tenpo_count);
+		foreach($out as $id=>$value){
+			if(empty($sort[$id])){
+				$out[$id] = '';
+			}else{
+				$out[$id] = $sort[$id];
+			}
 		}
-		return $values;
+		return $out;
 	}
+	
+	//既存、新店、海外の数に合わせて空白セルを挿入して返す
+	function kizonCount($values, $tenpo_count = null){
+		$kizon_blank = true;
+		$new_blank = false;
+		$oversea_blank = false;
+		$kizon_blank_point = 0;
+		$new_blank_point = 0;
+		$oversea_blank_point = 0;
+		
+		$out = array();
+		foreach($values as $id=>$val){
+			$blank_flag = true;
+			if($tenpo_count){
+				if($kizon_blank){
+					if($kizon_blank_point == $tenpo_count['kizon_count']){
+						$out['kizon_count'] = '';
+						$kizon_blank = false;
+						$new_blank = true;
+						$blank_flag = false;
+					}
+					$kizon_blank_point++;
+				}elseif($new_blank){
+					if($new_blank_point == $tenpo_count['new_count']){
+						$out['new_count'] = '';
+						$new_blank = false;
+						$oversea_blank = true;
+						$blank_flag = false;
+					}
+					$new_blank_point++;
+				}elseif($oversea_blank){
+					if($oversea_blank_point == $tenpo_count['oversea_count']){
+						$out['oversea_count'] = '';
+						$oversea_blank = false;
+						$blank_flag = false;
+					}
+					$oversea_blank_point++;
+				}
+			}
+			if($blank_flag){
+				$out[$id] = $val;
+			}
+		}
+		return $out;
+	}
+	
+	//既存、新店、海外の数に合わせて空白セルを挿入して返す (たぶんこっちが正解)
+	function kizonCount2($values, $sections, $new_sections, $oversea_sections){
+		$out = array();
+		foreach($sections as $key=>$value){
+			$flag = true;
+			foreach($values as $section_id=>$val){
+				if($key == $section_id){
+					$out[$key] = $val;
+					$flag = false;
+				}
+			}
+			if($flag) $out[$key] = '';
+		}
+		$out['kizon'] = '';
+		foreach($new_sections as $key=>$value){
+			$flag = true;
+			foreach($values as $section_id=>$val){
+				if($key == $section_id){
+					$out[$key] = $val;
+					$flag = false;
+				}
+			}
+			if($flag) $out[$key] = '';
+		}
+		$out['new'] = '';
+		foreach($oversea_sections as $key=>$value){
+			$flag = true;
+			foreach($values as $section_id=>$val){
+				if($key == $section_id){
+					$out[$key] = $val;
+					$flag = false;
+				}
+			}
+			if($flag) $out[$key] = '';
+		}
+		$out['oversea'] = '';
+		return $out;
+	}
+	
 	
 	function fprate2($value , $mark){
 		//Floating point rate 2 浮動小数点の率で小数点第2位まで返す
