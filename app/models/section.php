@@ -211,7 +211,7 @@ class Section extends AppModel {
 	}
 	
 	
-	//既存店のみのlistを返す、ここ1年以内にオープンした店を除外する
+	//既存店のみのlistを返す
 	function amountSectionList3(){
 		App::import('Component', 'Cleaning');
    		$CleaningComponent = new CleaningComponent();

@@ -37,16 +37,21 @@ class SalesCsvComponent extends Object {
 		$new_count = count($new_sections);
 		$oversea_count = count($oversea_sections);
 		$tenpo_count = array('kizon_count'=>$kizon_count, 'new_count'=>$new_count, 'oversea_count'=>$oversea_count);
-		
 		$goukei = array('小計');
 		$sections_title = Set::merge($sections,$goukei,$new_sections,$goukei,$oversea_sections,$goukei);
-		$sections_merge = Set::merge($sections,$new_sections,$oversea_sections);
-		
+		//$sections_merge = Set::merge($sections,$new_sections,$oversea_sections);
+		$sections_merge = $sections;
+		foreach($new_sections as $key=>$value){
+			$sections_merge[$key] = $value;
+		}
+		foreach($oversea_sections as $key=>$value){
+			$sections_merge[$key] = $value;
+		}
 		$sections_counter = $tenpo_count['kizon_count']; //対象の部門数
 		///////////////////////////////////////////////集計の部
 		//キャッシュは開発のために設置してある
-		$cache_time = '3600';
-		//$cache_time = '+1 year';
+		//$cache_time = '3600';
+		$cache_time = '+1 year';
 		Cache::set(array('duration' => $cache_time));
    		$outReport = Cache::read('sales_csv_test');
    		if(empty($outReport)){
@@ -61,9 +66,6 @@ class SalesCsvComponent extends Object {
    			Cache::set(array('duration' => $cache_time));
    			Cache::write('summary_test', $summar);
    		}
-		
-		echo 'NG';
-		exit;
 		
 		/////////////////////////////////////////////出力用配列作成の部
 		$line = array(); //配列一つに対して、出力1行
@@ -470,10 +472,6 @@ class SalesCsvComponent extends Object {
     	$prev_date = $this->DateCalComponent->prev_month($this->year, $this->month);
    		$prev_month = $prev_date['month'];
    		$thisTerm = $this->DateCalComponent->this_term($this->year, $this->month);
-   		
-   		pr($sections);
-   		exit;
-   		
 		foreach($sections as $section_id=>$section_name){
 			$outReport[$section_id]['section_name'] = $section_name;
 			$outReport[$section_id]['this_month'] = $this->AmountSectionModel->markIndex($section_id, $this->year, $this->month); //今月
