@@ -143,7 +143,7 @@ class AmountSection extends AppModel {
 	function markIndex($section_id = null, $year = null, $month = null){
 		if ($this->Behaviors->attached('Cache')) {
 			$args = func_get_args();
-			if($this->cacheEnabled()) return $this->cacheMethod(86400, __FUNCTION__, $args);//24時間
+			if($this->cacheEnabled()) return $this->cacheMethod(21600, __FUNCTION__, $args);//24時間
 		}
 		App::import('Component', 'DateCal');
    		$DateCalComponent = new DateCalComponent();

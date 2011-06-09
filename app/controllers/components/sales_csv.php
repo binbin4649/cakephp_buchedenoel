@@ -1,37 +1,38 @@
 <?php
 class SalesCsvComponent extends Object {
 	
+	function __construct(){
+		// 毎日午前2時にcronが動くので、日付を前日に合わせる
+		$this->year = date('Y', strtotime("-1 day"));
+		$this->month = date('m', strtotime("-1 day"));
+		$this->day = date('d', strtotime("-1 day"));
+		//読み込み etc
+		App::import('Model', 'AmountSection');
+    	$this->AmountSectionModel = new AmountSection();
+		App::import('Model', 'Section');
+    	$this->SectionModel = new Section();
+    	App::import('Component', 'DateCal');
+   		$this->DateCalComponent = new DateCalComponent();
+   		App::import('Component', 'Total');
+   		$this->TotalComponent = new TotalComponent();
+		
+	}
+	
 	//直営店の売上実績
 	//./cake prepare importSales -app /var/www/html/buchedenoel/app
 	function dairyReport(){
-		App::import('Model', 'AmountSection');
-    	$AmountSectionModel = new AmountSection();
-		App::import('Model', 'Section');
-    	$SectionModel = new Section();
-    	App::import('Component', 'DateCal');
-   		$DateCalComponent = new DateCalComponent();
-   		App::import('Component', 'Total');
-   		$TotalComponent = new TotalComponent();
-   		$year = date('Y', strtotime("-1 day"));
-   		$month = date('m', strtotime("-1 day"));
-   		$day = date('d', strtotime("-1 day"));
 		//////////////////////////////////////////////テストデータ
-   		
    		/*
-   		todo
-   		amountSectionList
-   		の新店と海外を抜く処理を書く。
-   		実際に出力する処理を書く。
-   		*/
    		
+   		*/
    		//////////////////////////////////////////////
-   		$prev_date = $DateCalComponent->prev_month($year, $month);
+   		$prev_date = $this->DateCalComponent->prev_month($this->year, $this->month);
    		$prev_month = $prev_date['month'];
-   		$thisTerm = $DateCalComponent->this_term($year, $month);
+   		$thisTerm = $this->DateCalComponent->this_term($this->year, $this->month);
    		$outReport = array(); //色々配列にして格納
-		$sections = $SectionModel->amountSectionList(); //集計対象の部門一覧を返す
-		$new_sections = $SectionModel->amountSectionList5(); //新店だけのリスト
-   		$oversea_sections = $SectionModel->amountSectionList6();  //海外店だけのリスト
+		$sections = $this->SectionModel->amountSectionList(); //集計対象の部門一覧を返す
+		$new_sections = $this->SectionModel->amountSectionList5(); //新店だけのリスト
+   		$oversea_sections = $this->SectionModel->amountSectionList6();  //海外店だけのリスト
 		$kizon_count = count($sections);
 		$new_count = count($new_sections);
 		$oversea_count = count($oversea_sections);
@@ -44,28 +45,29 @@ class SalesCsvComponent extends Object {
 		$sections_counter = $tenpo_count['kizon_count']; //対象の部門数
 		///////////////////////////////////////////////集計の部
 		//キャッシュは開発のために設置してある
-		//Cache::set(array('duration' => '3600'));
-		Cache::set(array('duration' => '+1 year'));
+		//$cache_time = '3600';
+		$cache_time = '+1 year';
+		Cache::set(array('duration' => $cache_time));
    		$outReport = Cache::read('sales_csv_test');
    		if(empty($outReport)){
    			$outReport = $this->outReportReader($sections_merge);
-   			Cache::set(array('duration' => '+1 year'));
+   			Cache::set(array('duration' => $cache_time));
    			Cache::write('sales_csv_test', $outReport);
    		}
-   		Cache::set(array('duration' => '+1 year'));
+   		Cache::set(array('duration' => $cache_time));
    		$summar = Cache::read('summary_test');
    		if(empty($summar)){
-   			$summar = $this->dairySummary1($year,$month,$day);
-   			Cache::set(array('duration' => '+1 year'));
+   			$summar = $this->dairySummary1();
+   			Cache::set(array('duration' => $cache_time));
    			Cache::write('summary_test', $summar);
    		}
 		
 		/////////////////////////////////////////////出力用配列作成の部
 		$line = array(); //配列一つに対して、出力1行
-		$line[] = $year.'年'.$month.'月'.$day.'日集計 販売実績';
+		$line[] = $this->year.'年'.$this->month.'月'.$this->day.'日集計 販売実績';
 		$line[] = ','.implode(',',$sections_title).',合計';
 		for($i=1; $i<=31; $i++){
-			$youbi = $DateCalComponent->this_youbi($year, $month, $i);
+			$youbi = $this->DateCalComponent->this_youbi($this->year, $this->month, $i);
 			$value = array(); // 各店の日割り売上
 			$amont = 0; //日割り合計
 			$exi_section_amount = 0; //既存店 日割り合計
@@ -157,18 +159,18 @@ class SalesCsvComponent extends Object {
 			'section_mark_term'=>$section_mark_term, 'section_mark_rate'=>$section_mark_rate, 'section_mark_exp'=>$section_mark_exp,
 			'section_comp_profit'=>$section_comp_profit, 'section_comp_exp'=>$section_comp_exp, 'section_exp_avg'=>$section_exp_avg,
 		);
-		$passd_term_arr = $DateCalComponent->this_passd_term_arr($month);
+		$passd_term_arr = $this->DateCalComponent->this_passd_term_arr($this->month);
 		
 		foreach($sections as $section_id=>$section_name){
-			$outAmount = $this->outAmount($outReport, $section_id, $month, $day, $stackAmount, $stackSection);
+			$outAmount = $this->outAmount($outReport, $section_id, $stackAmount, $stackSection);
 			$stackAmount = $outAmount['stackAmount'];
 			$stackSection = $outAmount['stackSection'];
 		}
 		$stackSection['section_total']['kizon_shoukei'] = $stackAmount['sections_shoukei'];
 		$stackSection['prev_section_month']['kizon_shoukei'] = $stackAmount['sections_sakunen'];
-		$stackSection['section_month_cont']['kizon_shoukei'] = $TotalComponent->fprate2($stackAmount['sections_shoukei'], $stackAmount['sections_sakunen']);
+		$stackSection['section_month_cont']['kizon_shoukei'] = $this->TotalComponent->fprate2($stackAmount['sections_shoukei'], $stackAmount['sections_sakunen']);
 		$stackSection['section_month_mark']['kizon_shoukei'] = $stackAmount['mokuhyo_shoukei'];
-		$stackSection['section_mark_cont']['kizon_shoukei'] = $TotalComponent->fprate2($stackAmount['sections_shoukei'], $stackAmount['mokuhyo_shoukei']);
+		$stackSection['section_mark_cont']['kizon_shoukei'] = $this->TotalComponent->fprate2($stackAmount['sections_shoukei'], $stackAmount['mokuhyo_shoukei']);
 		$stackSection['term_section_total']['kizon_shoukei'] = $stackAmount['tukibetu_shoukei'];
 		$stackAmount['mokuhyo_shoukei'] = 0;
 		$stackAmount['sections_shoukei'] = 0;
@@ -176,15 +178,15 @@ class SalesCsvComponent extends Object {
 		$stackAmount['tukibetu_shoukei'] = 0;
 		
 		foreach($new_sections as $section_id=>$section_name){
-			$outAmount = $this->outAmount($outReport, $section_id, $month, $day, $stackAmount, $stackSection);
+			$outAmount = $this->outAmount($outReport, $section_id, $stackAmount, $stackSection);
 			$stackAmount = $outAmount['stackAmount'];
 			$stackSection = $outAmount['stackSection'];
 		}
 		$stackSection['section_total']['new_shoukei'] = $stackAmount['sections_shoukei'];
 		$stackSection['prev_section_month']['new_shoukei'] = $stackAmount['sections_sakunen'];
-		$stackSection['section_month_cont']['new_shoukei'] = $TotalComponent->fprate2($stackAmount['sections_shoukei'], $stackAmount['sections_sakunen']);
+		$stackSection['section_month_cont']['new_shoukei'] = $this->TotalComponent->fprate2($stackAmount['sections_shoukei'], $stackAmount['sections_sakunen']);
 		$stackSection['section_month_mark']['new_shoukei'] = $stackAmount['mokuhyo_shoukei'];
-		$stackSection['section_mark_cont']['new_shoukei'] = $TotalComponent->fprate2($stackAmount['sections_shoukei'], $stackAmount['mokuhyo_shoukei']);
+		$stackSection['section_mark_cont']['new_shoukei'] = $this->TotalComponent->fprate2($stackAmount['sections_shoukei'], $stackAmount['mokuhyo_shoukei']);
 		$stackSection['term_section_total']['new_shoukei'] = $stackAmount['tukibetu_shoukei'];
 		$stackAmount['mokuhyo_shoukei'] = 0;
 		$stackAmount['sections_shoukei'] = 0;
@@ -192,15 +194,15 @@ class SalesCsvComponent extends Object {
 		$stackAmount['tukibetu_shoukei'] = 0;
 		
 		foreach($oversea_sections as $section_id=>$section_name){
-			$outAmount = $this->outAmount($outReport, $section_id, $month, $day, $stackAmount, $stackSection);
+			$outAmount = $this->outAmount($outReport, $section_id, $stackAmount, $stackSection);
 			$stackAmount = $outAmount['stackAmount'];
 			$stackSection = $outAmount['stackSection'];
 		}
 		$stackSection['section_total']['oversea_shoukei'] = $stackAmount['sections_shoukei'];
 		$stackSection['prev_section_month']['oversea_shoukei'] = $stackAmount['sections_sakunen'];
-		$stackSection['section_month_cont']['oversea_shoukei'] = $TotalComponent->fprate2($stackAmount['sections_shoukei'], $stackAmount['sections_sakunen']);
+		$stackSection['section_month_cont']['oversea_shoukei'] = $this->TotalComponent->fprate2($stackAmount['sections_shoukei'], $stackAmount['sections_sakunen']);
 		$stackSection['section_month_mark']['oversea_shoukei'] = $stackAmount['mokuhyo_shoukei'];
-		$stackSection['section_mark_cont']['oversea_shoukei'] = $TotalComponent->fprate2($stackAmount['sections_shoukei'], $stackAmount['mokuhyo_shoukei']);
+		$stackSection['section_mark_cont']['oversea_shoukei'] = $this->TotalComponent->fprate2($stackAmount['sections_shoukei'], $stackAmount['mokuhyo_shoukei']);
 		$stackSection['term_section_total']['oversea_shoukei'] = $stackAmount['tukibetu_shoukei'];
 		$stackAmount['mokuhyo_shoukei'] = 0;
 		$stackAmount['sections_shoukei'] = 0;
@@ -210,8 +212,8 @@ class SalesCsvComponent extends Object {
 		extract($stackSection);
 		$all_comp_profit = $days_total - $prev_total;
 		//$all_mark_exp_avg = floor($all_mark_exp / $sections_counter); //これは目標見込みの平均だった orz
-		$section_mark_total_rate = $TotalComponent->fprate2($days_total, $section_mark_term_total); //(6-1)目標%
-		$prev_section_comp_avg = $TotalComponent->fprate2($days_total, $prev_total);
+		$section_mark_total_rate = $this->TotalComponent->fprate2($days_total, $section_mark_term_total); //(6-1)目標%
+		$prev_section_comp_avg = $this->TotalComponent->fprate2($days_total, $prev_total);
 		
 		$new_this_term = array();
 		foreach($this_term as $section_id=>$month_arr){
@@ -250,7 +252,7 @@ class SalesCsvComponent extends Object {
 		}
 		
 		$term_section_avg = array(); //部門別 月平均額
-		$passd_month = $DateCalComponent->this_passd_term($month);
+		$passd_month = $this->DateCalComponent->this_passd_term($this->month);
 		
 		$avg_total = 0;
 		foreach($sections as $section_id=>$section_name){
@@ -287,19 +289,19 @@ class SalesCsvComponent extends Object {
 		
 		$term_total_avg = floor(($term_all_total / $sections_counter) / $passd_month);
 		$line[] = '合計,'.implode(',', $section_total).','.$days_total;
-		$days_section_ranking = $TotalComponent->not_chang_rank($section_total, $tenpo_count);
+		$days_section_ranking = $this->TotalComponent->not_chang_rank($section_total, $tenpo_count);
 		$line[] = '順位,'.implode(',', $days_section_ranking);
 		$line[] = ',';
 		
 		$line[] = '昨年実績,'.implode(',', $prev_section_month).','.$prev_month_total;
 		$line[] = '今年実績,'.implode(',', $section_total).','.$days_total;
-		$section_cont_avg = $TotalComponent->fprate2($days_total, $prev_month_total);
+		$section_cont_avg = $this->TotalComponent->fprate2($days_total, $prev_month_total);
 		$line[] = '昨対%,'.implode(',', $section_month_cont).','.$section_cont_avg;
-		$section_cont_ranking = $TotalComponent->not_chang_rank($section_month_cont, $tenpo_count);
+		$section_cont_ranking = $this->TotalComponent->not_chang_rank($section_month_cont, $tenpo_count);
 		$line[] = '順位,'.implode(',', $section_cont_ranking);
 		$line[] = ',';
 		$line[] = '目標,'.implode(',', $section_month_mark).','.$month_mark_total;
-		$mark_cont_avg = $TotalComponent->fprate2($days_total, $month_mark_total);
+		$mark_cont_avg = $this->TotalComponent->fprate2($days_total, $month_mark_total);
 		$line[] = '達成率,'.implode(',', $section_mark_cont).','.$mark_cont_avg;
 		$line[] = ',';
 		$line[] = '月別,'.implode(',',$sections_title).',合計';
@@ -307,21 +309,21 @@ class SalesCsvComponent extends Object {
 			$line[] = $line_month.'月,'.implode(',', $line_array);
 		}
 		$line[] = '合計,'.implode(',', $term_section_total).','.$term_all_total;
-		$term_section_ranking = $TotalComponent->not_chang_rank($term_section_total, $tenpo_count);
+		$term_section_ranking = $this->TotalComponent->not_chang_rank($term_section_total, $tenpo_count);
 		$line[] = '順位,'.implode(',', $term_section_ranking);
 		$line[] = ',';
 		$line[] = '月平均高,'.implode(',', $term_section_avg).','.$term_total_avg;
-		$section_avg_ranking = $TotalComponent->not_chang_rank($term_section_avg);
+		$section_avg_ranking = $this->TotalComponent->not_chang_rank($term_section_avg);
 		$line[] = '順位,'.implode(',', $section_avg_ranking);
 		$line[] = ',';
 		
-		$section_mark_rate2 = $TotalComponent->kizonCount2($section_mark_rate, $sections, $new_sections, $oversea_sections);
-		$section_mark_exp2 = $TotalComponent->kizonCount2($section_mark_exp, $sections, $new_sections, $oversea_sections);
-		$prev_section_comp2 = $TotalComponent->kizonCount2($prev_section_comp, $sections, $new_sections, $oversea_sections);
-		$section_comp_profit2 = $TotalComponent->kizonCount2($section_comp_profit, $sections, $new_sections, $oversea_sections);
-		$section_comp_exp2 = $TotalComponent->kizonCount2($section_comp_exp, $sections, $new_sections, $oversea_sections);
-		$prev_sction_total2 = $TotalComponent->kizonCount2($prev_sction_total, $sections, $new_sections, $oversea_sections);
-		$section_exp_avg2 = $TotalComponent->kizonCount2($section_exp_avg, $sections, $new_sections, $oversea_sections);
+		$section_mark_rate2 = $this->TotalComponent->kizonCount2($section_mark_rate, $sections, $new_sections, $oversea_sections);
+		$section_mark_exp2 = $this->TotalComponent->kizonCount2($section_mark_exp, $sections, $new_sections, $oversea_sections);
+		$prev_section_comp2 = $this->TotalComponent->kizonCount2($prev_section_comp, $sections, $new_sections, $oversea_sections);
+		$section_comp_profit2 = $this->TotalComponent->kizonCount2($section_comp_profit, $sections, $new_sections, $oversea_sections);
+		$section_comp_exp2 = $this->TotalComponent->kizonCount2($section_comp_exp, $sections, $new_sections, $oversea_sections);
+		$prev_sction_total2 = $this->TotalComponent->kizonCount2($prev_sction_total, $sections, $new_sections, $oversea_sections);
+		$section_exp_avg2 = $this->TotalComponent->kizonCount2($section_exp_avg, $sections, $new_sections, $oversea_sections);
 		$line[] = '目標%,'.implode(',', $section_mark_rate2).','.$section_mark_total_rate;
 		$line[] = '目標見込,'.implode(',', $section_mark_exp2).','.$all_mark_exp;
 		$line[] = '昨対%,'.implode(',', $prev_section_comp2).','.$prev_section_comp_avg;
@@ -340,7 +342,7 @@ class SalesCsvComponent extends Object {
 		//$line[] = ',';
 		//$line[] = ',';
 		
-		//$prev_sction_total2 = $TotalComponent->kizonCount2($prev_sction_total, $sections, $new_sections, $oversea_sections);
+		//$prev_sction_total2 = $this->TotalComponent->kizonCount2($prev_sction_total, $sections, $new_sections, $oversea_sections);
 		//$line[] = '昨年同日合計,'.implode(',', $prev_sction_total2);
 		/////////////////////////////////////////出力用文字列の部
 		$out = '';
@@ -354,9 +356,7 @@ class SalesCsvComponent extends Object {
 		file_put_contents($path.$file_name, $output_csv);
 	}// report 終わり
 	
-	function outAmount($outReport, $section_id, $month, $day, $stackAmount, $stackSection){
-		App::import('Component', 'Total');
-   		$TotalComponent = new TotalComponent();
+	function outAmount($outReport, $section_id, $stackAmount, $stackSection){
 		$this_month_total = 0;
 		$prev_term_month_total = 0;
 		$this_month_mark = 0;
@@ -368,29 +368,29 @@ class SalesCsvComponent extends Object {
 		$stackAmount['sections_shoukei'] = $stackAmount['sections_shoukei'] + $this_month_total;//当月合計 既存新店海外タイプ別小計
 		$stackSection['section_total'][$section_id] = $this_month_total;//部門別 当月 合計
 		$stackAmount['days_total'] = $stackAmount['days_total'] + $this_month_total;//日別 合計
-		if(empty($outReport[$section_id]['prev_term'][$month]['month_total'])) $outReport[$section_id]['prev_term'][$month]['month_total'] = 0;
-		$prev_term_month_total = $outReport[$section_id]['prev_term'][$month]['month_total'];//昨年 同月 合計
+		if(empty($outReport[$section_id]['prev_term'][$this->month]['month_total'])) $outReport[$section_id]['prev_term'][$this->month]['month_total'] = 0;
+		$prev_term_month_total = $outReport[$section_id]['prev_term'][$this->month]['month_total'];//昨年 同月 合計
 		$stackSection['prev_section_month'][$section_id] = $prev_term_month_total;//部門別 昨年 同月 合計
 		$stackAmount['prev_month_total'] = $stackAmount['prev_month_total'] + $prev_term_month_total;//昨年 合計
 		$stackAmount['sections_sakunen'] = $stackAmount['sections_sakunen'] + $prev_term_month_total;
-		$stackSection['section_month_cont'][$section_id] = $TotalComponent->fprate2($this_month_total, $prev_term_month_total);//部門別 昨対％
+		$stackSection['section_month_cont'][$section_id] = $this->TotalComponent->fprate2($this_month_total, $prev_term_month_total);//部門別 昨対％
 		if(empty($outReport[$section_id]['this_month']['month_mark'])) $outReport[$section_id]['this_month']['month_mark'] = 0;
 		$this_month_mark = $outReport[$section_id]['this_month']['month_mark'];//当月目標
 		$stackSection['section_month_mark'][$section_id] = $this_month_mark;//部門別 当月目標
 		$stackAmount['month_mark_total'] = $stackAmount['month_mark_total'] + $this_month_mark;//当月目標 合計
 		$stackAmount['mokuhyo_shoukei'] = $stackAmount['mokuhyo_shoukei'] + $this_month_mark;
-		$stackSection['section_mark_cont'][$section_id] = $TotalComponent->fprate2($this_month_total, $this_month_mark);//部門別 目標達成率
-			$sectionPrev = $this->sectionPrevDays($section_id, $outReport, $month, $day);
+		$stackSection['section_mark_cont'][$section_id] = $this->TotalComponent->fprate2($this_month_total, $this_month_mark);//部門別 目標達成率
+			$sectionPrev = $this->sectionPrevDays($section_id, $outReport);
 		$stackSection['this_term'][$section_id] = $sectionPrev['this_term'];
 		$stackSection['prev_sction_total'][$section_id] = $sectionPrev['prev_total_passd'];//昨年 [同日] 実績
 		$stackAmount['prev_total'] = $stackAmount['prev_total'] + $sectionPrev['prev_total_passd'];//昨年 [同日] 実績合計
-		$stackSection['prev_section_comp'][$section_id] = $TotalComponent->fprate2($this_month_total , $sectionPrev['prev_total_passd']);//
+		$stackSection['prev_section_comp'][$section_id] = $this->TotalComponent->fprate2($this_month_total , $sectionPrev['prev_total_passd']);//
 		$stackSection['term_section_total'][$section_id] = $sectionPrev['term_section_sub'];//部門別 今期 合計
 		$stackAmount['tukibetu_shoukei'] = $stackAmount['tukibetu_shoukei'] + $sectionPrev['term_section_sub'];
 		$stackAmount['term_all_total'] = $stackAmount['term_all_total'] + $sectionPrev['term_section_sub'];//部門別 今期 総合計
 		$stackSection['section_mark_term'][$section_id] = $sectionPrev['mark_section_sub'];//部門別 今期 目標合計
 		$stackAmount['section_mark_term_total'] = $stackAmount['section_mark_term_total'] + $sectionPrev['mark_section_sub'];//部門別 今期 目標 総合計
-		$this_section_mark_rate = $TotalComponent->fprate2($this_month_total, $sectionPrev['thisdays_mark_total']);//
+		$this_section_mark_rate = $this->TotalComponent->fprate2($this_month_total, $sectionPrev['thisdays_mark_total']);//
 		$stackSection['section_mark_rate'][$section_id] = $this_section_mark_rate;
 		$this_section_mark_exp = floor($this_month_mark * ($this_section_mark_rate / 100));
 		$stackSection['section_mark_exp'][$section_id] = $this_section_mark_exp;//部門別目標見込
@@ -408,7 +408,7 @@ class SalesCsvComponent extends Object {
 		extract($stackAmount);
 		extract($stackSection);
 		
-		$out['stackAmount'] = array('days_total'=>$days_total, 'prev_month_total'=>$prev_month_total, 'month_mark_total'=>$month_mark_total,
+		$out['stackAmount'] = array('days_total'=>$days_total, 'prev_month_total'=>$prev_month_total, 'month_mark_total'=>$this->month_mark_total,
 			'prev_total'=>$prev_total, 'term_all_total'=>$term_all_total, 'section_mark_term_total'=>$section_mark_term_total,
 			'all_mark_exp'=>$all_mark_exp, 'all_comp_exp'=>$all_comp_exp, 'sections_shoukei'=>$sections_shoukei, 'sections_sakunen'=>$sections_sakunen,
 			'mokuhyo_shoukei'=>$mokuhyo_shoukei, 'tukibetu_shoukei'=>$tukibetu_shoukei, 
@@ -424,7 +424,7 @@ class SalesCsvComponent extends Object {
 	
 	
 	// 部門別 昨年"同日" 実績
-	function sectionPrevDays($section_id, $outReport, $month, $day){
+	function sectionPrevDays($section_id, $outReport){
 		$term_section_sub = 0; //部門別 今期の合計 仮入れ
 		$mark_section_sub = 0; //部門別 今期の目標合計 仮入れ
 		$this_term = array();
@@ -436,9 +436,9 @@ class SalesCsvComponent extends Object {
 			}
 		}
 		$prev_total_passd = 0; //昨年実績 仮入れ 、これが昨年 [同日] 実績になる
-		if(!empty($outReport[$section_id]['prev_term'][$month]['days'])){
-			for($i=1; $i <= $day; $i++){
-				foreach($outReport[$section_id]['prev_term'][$month]['days'] as $days ){
+		if(!empty($outReport[$section_id]['prev_term'][$this->month]['days'])){
+			for($i=1; $i <= $this->day; $i++){
+				foreach($outReport[$section_id]['prev_term'][$this->month]['days'] as $days ){
 					if($days['day'] == $i){
 						$prev_total_passd = $prev_total_passd + $days['sales_total'];
 					}
@@ -446,9 +446,9 @@ class SalesCsvComponent extends Object {
 			}
 		}
 		$thisdays_mark_total = 0;//部門別 今月の 日割目標 同日合計
-		if(!empty($outReport[$section_id]['this_term'][$month]['days'])){
-			for($i=1; $i <= $day; $i++){
-				foreach($outReport[$section_id]['this_term'][$month]['days'] as $days ){
+		if(!empty($outReport[$section_id]['this_term'][$this->month]['days'])){
+			for($i=1; $i <= $this->day; $i++){
+				foreach($outReport[$section_id]['this_term'][$this->month]['days'] as $days ){
 					if($days['day'] == $i){
 						$thisdays_mark_total = $thisdays_mark_total + $days['mark'];
 					}
@@ -464,25 +464,17 @@ class SalesCsvComponent extends Object {
 	//計算の元データを生成
 	function outReportReader($sections){
 		$outReport = array();
-		$year = date('Y', strtotime("-1 day"));
-   		$month = date('m', strtotime("-1 day"));
-   		$day = date('d', strtotime("-1 day"));
-		App::import('Model', 'AmountSection');
-    	$AmountSectionModel = new AmountSection();
-    	App::import('Component', 'DateCal');
-   		$DateCalComponent = new DateCalComponent();
-    	$prev_date = $DateCalComponent->prev_month($year, $month);
+    	$prev_date = $this->DateCalComponent->prev_month($this->year, $this->month);
    		$prev_month = $prev_date['month'];
-   		$thisTerm = $DateCalComponent->this_term($year, $month);
-    	
+   		$thisTerm = $this->DateCalComponent->this_term($this->year, $this->month);
 		foreach($sections as $section_id=>$section_name){
 			$outReport[$section_id]['section_name'] = $section_name;
-			$outReport[$section_id]['this_month'] = $AmountSectionModel->markIndex($section_id, $year, $month); //今月
-			$outReport[$section_id]['prev_month'] = $AmountSectionModel->markIndex($section_id, $year, $prev_month); //前月
+			$outReport[$section_id]['this_month'] = $this->AmountSectionModel->markIndex($section_id, $this->year, $this->month); //今月
+			$outReport[$section_id]['prev_month'] = $this->AmountSectionModel->markIndex($section_id, $this->year, $prev_month); //前月
 			foreach($thisTerm as $term_year => $values){
 				foreach($values as $term_month){
-					$outReport[$section_id]['this_term'][$term_month] = $AmountSectionModel->markIndex($section_id, $term_year, $term_month); //今期を月毎に
-					$outReport[$section_id]['prev_term'][$term_month] = $AmountSectionModel->markIndex($section_id, $term_year -1, $term_month); //前期を月毎に
+					$outReport[$section_id]['this_term'][$term_month] = $this->AmountSectionModel->markIndex($section_id, $term_year, $term_month); //今期を月毎に
+					$outReport[$section_id]['prev_term'][$term_month] = $this->AmountSectionModel->markIndex($section_id, $term_year -1, $term_month); //前期を月毎に
 				}
 			}
 		}
@@ -515,27 +507,21 @@ class SalesCsvComponent extends Object {
 	}
 	
 	//昨年の売上に含める店舗、つまり既存店のリストを作成
-	function dairySummary1($year,$month,$day){
-		App::import('Model', 'AmountSection');
-    	$AmountSectionModel = new AmountSection();
-		App::import('Model', 'Section');
-    	$SectionModel = new Section();
-    	App::import('Component', 'Total');
-   		$TotalComponent = new TotalComponent();
+	function dairySummary1(){
 		$prev_days_total = 0; //既存店同日前期実績、同日までの合計、既存店＝1年以上前から売上がある店舗
 		$prev_existing_total = 0; //既存店同月昨年実績、ひと月合計
 		$this_existing_total = 0; //既存店同月今年実績
 		$prev_all_total = 0; //全店同日前期実績 
 		$this_all_total = 0; //全店同日今期実績
 		$prev_all_month_total = 0;//全店同月前期実績
-   		$full_sections = $SectionModel->amountSectionList4();// 全店。営業開始日と終了日だけでsectionsを出力。つまりこの二つのうち何れかが入っている部門は、集計対象となる。 全店合計を出す時用。
-   		$exis_sections = $SectionModel->amountSectionList3(); //既存店一覧を返す
+   		$full_sections = $this->SectionModel->amountSectionList4();// 全店。営業開始日と終了日だけでsectionsを出力。つまりこの二つのうち何れかが入っている部門は、集計対象となる。 全店合計を出す時用。
+   		$exis_sections = $this->SectionModel->amountSectionList3(); //既存店一覧を返す
    		foreach($exis_sections as $section_id=>$section_name){//既存店
-   		 	$this_value = $AmountSectionModel->markIndex($section_id, $year, $month);
-   		 	$prev_value = $AmountSectionModel->markIndex($section_id, $year -1, $month);
+   		 	$this_value = $this->AmountSectionModel->markIndex($section_id, $this->year, $this->month);
+   		 	$prev_value = $this->AmountSectionModel->markIndex($section_id, $this->year -1, $this->month);
    		 	$prev_existing_total = $prev_existing_total + $prev_value['month_total'];
    		 	$this_existing_total = $this_existing_total + $this_value['month_total'];
-   		 	for($i=1; $i <= $day; $i++){
+   		 	for($i=1; $i <= $this->day; $i++){
    				foreach($prev_value['days'] as $days){
    					if($days['day'] == $i){
    						$prev_days_total = $prev_days_total + $days['sales_total'];
@@ -544,11 +530,11 @@ class SalesCsvComponent extends Object {
    			}
    		}
    		foreach($full_sections as $section_id=>$section_name){//全店
-   			$this_value = $AmountSectionModel->markIndex($section_id, $year, $month);
-   		 	$prev_value = $AmountSectionModel->markIndex($section_id, $year -1, $month);
+   			$this_value = $this->AmountSectionModel->markIndex($section_id, $this->year, $this->month);
+   		 	$prev_value = $this->AmountSectionModel->markIndex($section_id, $this->year -1, $this->month);
    		 	$prev_all_month_total = $prev_all_month_total + $prev_value['month_total'];
    		 	$this_all_total = $this_all_total + $this_value['month_total'];
-   		 	for($i=1; $i <= $day; $i++){
+   		 	for($i=1; $i <= $this->day; $i++){
    				foreach($prev_value['days'] as $days){
    					if($days['day'] == $i){
    						$prev_all_total = $prev_all_total + $days['sales_total'];
@@ -585,10 +571,10 @@ class SalesCsvComponent extends Object {
    			'',
    			$this_all_total
    		);
-   		$days_total_comp = $TotalComponent->fprate2($this_existing_total, $prev_days_total);//既存店同日対比
-   		$existing_total_comp = $TotalComponent->fprate2($this_existing_total, $prev_existing_total);//既存店同月対比
-   		$all_total_comp = $TotalComponent->fprate2($this_all_total, $prev_all_total);//全店同日対比
-   		$all_month_total_comp = $TotalComponent->fprate2($this_all_total, $prev_all_month_total);//全店同月対比
+   		$days_total_comp = $this->TotalComponent->fprate2($this_existing_total, $prev_days_total);//既存店同日対比
+   		$existing_total_comp = $this->TotalComponent->fprate2($this_existing_total, $prev_existing_total);//既存店同月対比
+   		$all_total_comp = $this->TotalComponent->fprate2($this_all_total, $prev_all_total);//全店同日対比
+   		$all_month_total_comp = $this->TotalComponent->fprate2($this_all_total, $prev_all_month_total);//全店同月対比
    		$summary3 = array(
    			'既存店同日対比',
    			'',
@@ -606,411 +592,6 @@ class SalesCsvComponent extends Object {
    		
 		return array('summary1'=>$summary1,'summary2'=>$summary2,'summary3'=>$summary3);
 	}
-	
-	
-	//部門別売上集計してCSV出力
-	//とりあえず直営店だけ
-	// dairyReport に譲った
-	function storeSales(){
-		App::import('Model', 'AmountSection');
-    	$AmountSectionModel = new AmountSection();
-		App::import('Model', 'Section');
-    	$SectionModel = new Section();
-    	App::import('Component', 'DateCal');
-   		$DateCalComponent = new DateCalComponent();
-   		App::import('Component', 'Total');
-   		$TotalComponent = new TotalComponent();
-   		
-   		$year = date('Y');
-   		$month = date('m');
-   		$day = date('d');
-   		//////////////////////////////////////////////テストデータ
-    	$year = '2010';
-   		$month = '12';
-   		$day = '31';
-   		
-   		//////////////////////////////////////////////
-   		
-    	$days = $DateCalComponent->last_day($year, $month);
-    	$d = 1;
-    	//はじめ//////////////////////////////////////売上金額
-    	$rankings = array();
-    	$out = '直営店売上集計,'.$year.'年'.$month.'月'.$day.'日'."\r\n";
-    	$out .= '部門,';
-    	while($days >= $d){
-    		$out .= $d.'日,';
-    		$d++;
-    	}
-		$out .= '店別合計'."\r\n";
-		$sections = $SectionModel->amountSectionList(); //集計対象の部門一覧を返す
-		$total = array();
-		$all_total = 0;
-		$prev_ranking = array();
-		$prevComparison = array();
-		$today_total = 0;
-		$prev_today = 0;
-		$prev_year = $year -1;
-		$sectionMark = array();
-		foreach($sections as $section_id=>$section_name){
-			$section_total = 0;
-			$section_mark_total = 0;
-			$i = array();
-			$amounts = $AmountSectionModel->markIndex($section_id, $year, $month);
-			$prev_amounts = $AmountSectionModel->markIndex($section_id, $prev_year, $month); //昨年同月
-			$prevComparison[$section_id]['this_total'] = $amounts['month_total'];
-			$prevComparison[$section_id]['last_year_total'] = $prev_amounts['month_total'];
-			$prevComparison[$section_id]['comparison_avg'] = $TotalComponent->fprate2($amounts['month_total'], $prev_amounts['month_total']);
-			$prev_ranking[$section_id] = $prevComparison[$section_id]['comparison_avg'];
-			foreach($prev_amounts['days'] as $prev_days){
-				if($prev_days['day'] == $day){
-					$prev_today = $prev_today + $prev_days['sales_total'];
-					break;
-				} 
-			}
-			foreach($amounts['days'] as $days){
-				if($days['day'] == $day){
-					$today_total = $today_total + $days['sales_total'];
-				}
-				@$total[$days['day']] = $total[$days['day']] + $days['sales_total'];
-				$i[] = $days['sales_total'];
-				$section_total = $section_total + $days['sales_total'];
-				$all_total = $all_total + $days['sales_total'];
-				$section_mark_total = $section_mark_total + $days['mark'];
-			}
-			$sectionMark[$section_id]['name'] = $section_name;
-			$sectionMark[$section_id]['mark_total'] = $section_mark_total;
-			$out .= $section_name.',';
-			$out .= implode(',', $i);
-			$out .= ','.$section_total."\r\n";
-			//$out .= ','.$amounts['month_total']."\r\n";
-			$rankings[$section_id] = $section_total;
-		}
-		
-		
-		$out .= '日計,';
-		$out .= implode(',', $total);
-		$out .= ','.$all_total."\r\n";
-		$out .= "\r\n";
-		//////////////////////////////////////////月売上金額ランキング
-		$out .= '売上順位,';
-		$out .= "\r\n";
-		arsort($rankings);
-		$out .= '部門,';
-		foreach($rankings as $section_id=>$ranking){
-			$out .= $sections[$section_id].',';
-		}
-		$out .= "\r\n";
-		$out .= '金額,';
-		foreach($rankings as $section_id=>$ranking){
-			$out .= $ranking.',';
-		}
-		$out .= "\r\n";
-		$out .= '順位,';
-		$rank = 1;
-		foreach($rankings as $section_id=>$ranking){
-			$out .= $rank.',';
-			$rank++;
-		}
-		/////////////////////////////////////////月昨対＆達成率ランキング
-		$out .= "\r\n";
-		$out .= '昨対順位,';
-		$out .= "\r\n";
-		$out .= '部門,';
-		$all_prev_comparison = 0;
-		arsort($prev_ranking);
-		foreach($prev_ranking as $section_id=>$comparison_avg){
-			$out .= $sections[$section_id].',';
-		}
-		$out .= "\r\n";
-		$out .= '昨月実績,';
-		foreach($prev_ranking as $section_id=>$comparison_avg){
-			$out .= $prevComparison[$section_id]['last_year_total'].',';
-		}
-		$out .= "\r\n";
-		$out .= '今月実績,';
-		foreach($prev_ranking as $section_id=>$comparison_avg){
-			$out .= $prevComparison[$section_id]['this_total'].',';
-		}
-		$out .= "\r\n";
-		$out .= '昨対%,';
-		foreach($prev_ranking as $section_id=>$comparison_avg){
-			$out .= $comparison_avg.',';
-		}
-		$out .= "\r\n";
-		$out .= '順位,';
-		$rank = 1;
-		foreach($prev_ranking as $section_id=>$comparison_avg){
-			$out .= $rank.',';
-			$rank++;
-		}
-		$out .= "\r\n";
-		//////////////////////////////////////////今月の目標合計と達成率ランキング
-		$mark_list = array();
-		foreach($sectionMark as $id_mark => $mark_value){
-			$sectionMark[$id_mark]['mark_rate'] = $TotalComponent->fprate2($mark_value['mark_total'], $rankings[$id_mark]);
-			$mark_list[$id_mark] = $sectionMark[$id_mark]['mark_rate'];
-		}
-		arsort($mark_list);
-		$out .= '目標順位,';
-		$out .= "\r\n";
-		$out .= '部門,';
-		foreach($mark_list as $section_id=>$value){
-			$out .= $sectionMark[$section_id]['name'].',';
-		}
-		$out .= "\r\n";
-		$out .= '目標金額,';
-		foreach($mark_list as $section_id=>$value){
-			$out .= $sectionMark[$section_id]['mark_total'].',';
-		}
-		$out .= "\r\n";
-		$out .= '実績金額,';
-		foreach($mark_list as $section_id=>$value){
-			$out .= $prevComparison[$section_id]['this_total'].',';
-		}
-		$out .= "\r\n";
-		$out .= '達成%,';
-		foreach($mark_list as $section_id=>$value){
-			$out .= $value.',';
-		}
-		$out .= "\r\n";
-		$out .= '順位,';
-		$rank = 1;
-		foreach($mark_list as $section_id=>$value){
-			$out .= $rank.',';
-			$rank++;
-		}
-		
-		$out .= "\r\n";
-		$out .= "\r\n";
-		//////////////////////////////////////////今期実績
-		$out .= '今期実績,';
-		$thisTerm = $DateCalComponent->this_term($year, $month);
-   		foreach($thisTerm as $term_year => $values){
-   			foreach($values as $value){
-   				$out .= $value.'月,';
-   				$value_month[$value] = 0; // notice が出るので追加したけど、意味無いかも
-   			}
-   		}
-   		$out .= '合計';
-   		$out .= "\r\n";
-   		$all_total = 0;
-   		$value_month = array(); //今期の月合計を出す
-   		$value_mark = array(); //今期の月目標をいろいろ入れる配列
-   		$mark_list = array(); //今期の月目標の達成率をソートする配列
-   		$total_list = array(); //今期の売上ソート用
-   		foreach($sections as $section_id=>$section_name){
-   			$out .= $section_name.',';
-   			$section_total = 0; //部門別、今期の売上合計
-   			$mark_total = 0; //部門別、今期の月目標合計
-			foreach($thisTerm as $term_year => $values){
-				foreach($values as $term_month){
-					$this_term_amount = $AmountSectionModel->markIndex($section_id, $term_year, $term_month);
-					$out .= $this_term_amount['month_total'].',';
-					$section_total = $section_total + $this_term_amount['month_total'];
-					@$value_month[$term_month] = $value_month[$term_month] + $this_term_amount['month_total'];
-					$mark_total = $mark_total + $this_term_amount['month_mark'];
-				}
-			}
-			$value_mark[$section_id]['mark_total'] = $mark_total;
-			$value_mark[$section_id]['mark_month_rate'] = $TotalComponent->fprate2($section_total, $mark_total);
-			$mark_list[$section_id] = $value_mark[$section_id]['mark_month_rate'];
-			$total_list[$section_id] = $section_total;
-			$all_total = $all_total + $section_total;
-			$out .= $section_total.',';
-			$out .= "\r\n";
-   		}
-   		$out .= '合計,';
-		$out .= implode(',', $value_month);
-		$out .= ','.$all_total;
-		$out .= "\r\n";
-		$out .= "\r\n";
-		
-		//////////////////////////////////////////月売上金額ランキング
-		$out .= '今期売順,';
-		$out .= "\r\n";
-		$out .= '部門,';
-		arsort($total_list);
-		foreach($total_list as $section_id=>$term_month){
-			$out .= $sections[$section_id].',';
-		}
-		$out .= "\r\n";
-		$out .= '売上金額,';
-		foreach($total_list as $section_id=>$term_month){
-			$out .= $term_month.',';
-		}
-		$out .= "\r\n";
-		$out .= '順位,';
-		$rank = 1;
-		foreach($total_list as $section_id=>$term_month){
-			$out .= $rank.',';
-			$rank++;
-		}
-		$out .= "\r\n";
-		
-		////////////////////////////////////////今期達成率ランキング
-		$out .= '今期達成,';
-		$out .= "\r\n";
-		$out .= '部門,';
-		arsort($mark_list);
-		foreach($mark_list as $section_id=>$term_mark){
-			$out .= $sections[$section_id].',';
-		}
-		$out .= "\r\n";
-		$out .= '目標金額,';
-		foreach($mark_list as $section_id=>$term_mark){
-			$out .= $value_mark[$section_id]['mark_total'].',';
-		}
-		
-		$out .= "\r\n";
-		$out .= '売上金額,';
-		foreach($mark_list as $section_id=>$term_mark){
-			$out .= $total_list[$section_id].',';
-		}
-		
-		$out .= "\r\n";
-		$out .= '達成%,';
-		foreach($mark_list as $section_id=>$term_mark){
-			$out .= $term_mark.',';
-		}
-		$out .= "\r\n";
-		$out .= '順位,';
-		$rank = 1;
-		foreach($mark_list as $section_id=>$term_mark){
-			$out .= $rank.',';
-			$rank++;
-		}
-		$out .= "\r\n";
-		$out .= "\r\n";
-		
-		//////////////////////////////////////////今日のまとめ
-		$out .= $prev_year.'年'.$month.'月'.$day.'日の売上合計,'.$prev_today."\r\n";
-		$out .= $year.'年'.$month.'月'.$day.'日の売上合計,'.$today_total."\r\n";
-		$today_sakutai = $TotalComponent->fprate2($today_total, $prev_today);
-		$out .= $prev_year.'年'.$month.'月'.$day.'日時点での昨対,'.$today_sakutai."\r\n";
-		
-		/*
-		$out .= "\r\n";
-		$out .= "\r\n";
-		////////////////////////////////////////客数
-		$rankings = array();
-		$out .= '直営店客数集計,'.$year.'年'.$month.'月,'."\r\n";
-    	$out .= '部門,';
-    	$days = $DateCalComponent->last_day($year, $month);
-    	$d = 1;
-    	while($days >= $d){
-    		$out .= $d.'日,';
-    		$d++;
-    	}
-		$out .= '店別合計'."\r\n";
-		$sections = $SectionModel->amountSectionList();
-		$total = array();
-		$all_total = 0;
-		foreach($sections as $section_id=>$section_name){
-			$section_total = 0;
-			$i = array();
-			$amounts = $AmountSectionModel->markIndex($section_id, $year, $month);
-			foreach($amounts['days'] as $day){
-				@$total[$day['day']] = $total[$day['day']] + $day['guest_qty'];
-				$i[] = $day['guest_qty'];
-				$section_total = $section_total + $day['guest_qty'];
-				$all_total = $all_total + $day['guest_qty'];
-			}
-			$out .= $section_name.',';
-			$out .= implode(',', $i);
-			$out .= ','.$section_total."\r\n";
-			$rankings[$section_id] = $section_total;
-		}
-		
-		$out .= '日計,';
-		$out .= implode(',', $total);
-		$out .= ','.$all_total."\r\n";
-		$out .= "\r\n";
-		$out .= '客数ランキング,';
-		$out .= "\r\n";
-		$out .= '部門,';
-		arsort($rankings);
-		foreach($rankings as $section_id=>$ranking){
-			$out .= $sections[$section_id].',';
-		}
-		$out .= "\r\n";
-		$out .= '客数,';
-		foreach($rankings as $section_id=>$ranking){
-			$out .= $ranking.',';
-		}
-		$out .= "\r\n";
-		$out .= '順位,';
-		$rank = 1;
-		foreach($rankings as $section_id=>$ranking){
-			$out .= $rank.',';
-			$rank++;
-		}
-		
-		$out .= "\r\n";
-		$out .= "\r\n";
-		////////////////////////////////////////ブランド集計
-		App::import('Model', 'AmountBrand');
-    	$AmountBrandModel = new AmountBrand();
-    	App::import('Model', 'Brand');
-    	$BrandModel = new Brand();
-    	$brands = $BrandModel->find('list');
-		
-		$out .= 'ブランド別売上,'.$year.'年'.$month.'月,'."\r\n";
-    	$out .= 'ブランド,';
-    	$days = $DateCalComponent->last_day($year, $month);
-    	$d = 1;
-    	while($days >= $d){
-    		$out .= $d.'日,';
-    		$d++;
-    	}
-		$out .= '合計'."\r\n";
-		
-		$total = array();
-		$all_total = 0;
-		$amounts = $AmountBrandModel->markIndex($brands, $year, $month);
-		foreach($brands as $brand_id=>$brand_name){
-			$brand_total = 0;
-			$out .= $brand_name.',';
-			foreach($amounts as $day=>$amount){
-				$out .= $amount[$brand_id]['sales'].',';
-				$brand_total = $brand_total + $amount[$brand_id]['sales'];
-			}
-			$out .= $brand_total."\r\n";
-		}
-		
-		
-		$out .= "\r\n";
-		$out .= "\r\n";
-		////////////////////////////////////////店舗別 在庫
-		$out .= '部門別集計,'.$year.'年'.$month.'月'.$day.'日,'."\r\n";
-		$out .= "\r\n";
-		$stock_qty = 0;
-		$stock_price = 0;
-    	$sections = $SectionModel->amountSectionList2();
-    	foreach($sections as $section_id=>$section_name){
-    		$out .= $section_name."\r\n";
-    		$out_val = $AmountSectionModel->dayAmount($section_id);
-    		$out .= $out_val['value'];
-    		$stock_qty = $stock_qty + $out_val['out']['stock_qty'];
-			$stock_price = $stock_price + $out_val['out']['stock_price'];
-    		$out .= "\r\n";
-    	}
-		$out .= "\r\n";
-		$out .= '全社合計'."\r\n";
-		$out .= '在庫数,'.$stock_qty."\r\n";
-		$out .= '在庫上代,'.$stock_price."\r\n";
-		*/
-		
-		
-		////////////////////////////////////////出力部
-		$file_name = 'store_sales'.date('Ymd-His').'.csv';
-		$path = WWW_ROOT.'/files/store_sales/';
-		$output_csv = mb_convert_encoding($out, 'SJIS', 'UTF-8');
-		file_put_contents($path.$file_name, $output_csv);
-		
-		
-	}//集計終わり
-	
-	
 	
 	
 	function inSales($file_name){
@@ -1065,8 +646,6 @@ class SalesCsvComponent extends Object {
     	$AmountSalesCodeModel = new AmountSalesCode();
     	App::import('Model', 'AmountSalesStateCode');
     	$AmountSalesStateCodeModel = new AmountSalesStateCode();
-    	App::import('Model', 'AmountSection');
-    	$AmountSectionModel = new AmountSection();
     	App::import('Model', 'AmountStone');
     	$AmountStoneModel = new AmountStone();
     	App::import('Model', 'AmountUser');
@@ -1261,7 +840,7 @@ class SalesCsvComponent extends Object {
 					$AmountProcessModel->csv($sale, $sale_dateil, $total_moth);
 					$AmountSalesCodeModel->csv($sale, $sale_dateil, $total_moth);
 					$AmountSalesStateCodeModel->csv($sale, $sale_dateil, $total_moth);
-					$AmountSectionModel->csv($sale, $sale_dateil, $total_moth);
+					$this->AmountSectionModel->csv($sale, $sale_dateil, $total_moth);
 					$AmountStoneModel->csv($sale, $sale_dateil, $total_moth);
 					$AmountUserModel->csv($sale, $sale_dateil, $total_moth);
 				}else{
@@ -1279,8 +858,6 @@ class SalesCsvComponent extends Object {
 	//日付から年次、月次、週次、日次の範囲日付を返す
 	function amountSpan($date, $key){
 		$return = array();
-		App::import('Component', 'DateCal');
-   		$DateCalComponent = new DateCalComponent();
 		$date = str_replace('-', '', $date);
 		$yyyy = substr($date, 0, 4);
 		$mm = substr($date, 4, 2);
@@ -1289,12 +866,12 @@ class SalesCsvComponent extends Object {
 			$start_day = $date;
 			$end_day = $date;
 		}elseif($key == 3){//週次
-			$this_week = $DateCalComponent->this_week($yyyy, $mm, $dd);
+			$this_week = $this->DateCalComponent->this_week($yyyy, $mm, $dd);
 			$start_day = $this_week['start_day'];
 			$end_day = $this_week['end_day'];
 		}elseif($key == 2){//月次
 			$month = (int)$mm;
-			$last_day = $DateCalComponent->last_day($yyyy, $month);
+			$last_day = $this->DateCalComponent->last_day($yyyy, $month);
 			$start_day = $yyyy.$mm.'01';
 			$end_day = $yyyy.$mm.$last_day;
 		}elseif($key == 1){//年次
@@ -1309,23 +886,21 @@ class SalesCsvComponent extends Object {
 	//日付から前年、前月、前週、前日の範囲日付を返す
 	function amountPrevSpan($date, $key){
 		$return = array();
-		App::import('Component', 'DateCal');
-   		$DateCalComponent = new DateCalComponent();
 		$date = str_replace('-', '', $date);
 		$yyyy = substr($date, 0, 4);
 		$mm = substr($date, 4, 2);
 		$dd = substr($date, 6, 2);
 		if($key == 4){//前日
-			$start_day = $DateCalComponent->controll_day($date, 1);
-			$end_day = $DateCalComponent->controll_day($date, 1);
+			$start_day = $this->DateCalComponent->controll_day($date, 1);
+			$end_day = $this->DateCalComponent->controll_day($date, 1);
 		}elseif($key == 3){//前週
-			$this_week = $DateCalComponent->this_week($yyyy, $mm, $dd);
-			$start_day = $DateCalComponent->controll_day($this_week['start_day'], 7);
-			$end_day = $DateCalComponent->controll_day($this_week['end_day'], 7);
+			$this_week = $this->DateCalComponent->this_week($yyyy, $mm, $dd);
+			$start_day = $this->DateCalComponent->controll_day($this_week['start_day'], 7);
+			$end_day = $this->DateCalComponent->controll_day($this_week['end_day'], 7);
 		}elseif($key == 2){//前月
 			$month = (int)$mm;
-			$prev_month = $DateCalComponent->prev_month($yyyy, $month);
-			$last_day = $DateCalComponent->last_day($prev_month['year'], $prev_month['month']);
+			$prev_month = $this->DateCalComponent->prev_month($yyyy, $month);
+			$last_day = $this->DateCalComponent->last_day($prev_month['year'], $prev_month['month']);
 			$start_day = $prev_month['year'].$prev_month['month'].'01';
 			$end_day = $prev_month['year'].$prev_month['month'].$last_day;
 		}elseif($key == 1){//前年
@@ -1341,8 +916,6 @@ class SalesCsvComponent extends Object {
 	//日付から前年、前年同月、前年同週、前年同日の範囲日付を返す
 	function amountPrevYear($date, $key){
 		$return = array();
-		App::import('Component', 'DateCal');
-   		$DateCalComponent = new DateCalComponent();
 		$date = str_replace('-', '', $date);
 		$yyyy = substr($date, 0, 4);
 		$mm = substr($date, 4, 2);
@@ -1352,12 +925,12 @@ class SalesCsvComponent extends Object {
 			$start_day = $prev_year.$mm.$dd;
 			$end_day = $prev_year.$mm.$dd;
 		}elseif($key == 3){//前年同週
-			$this_week = $DateCalComponent->this_week($prev_year, $mm, $dd);
+			$this_week = $this->DateCalComponent->this_week($prev_year, $mm, $dd);
 			$start_day = $this_week['start_day'];
 			$end_day = $this_week['end_day'];
 		}elseif($key == 2){//前年同月
 			$month = (int)$mm;
-			$last_day = $DateCalComponent->last_day($prev_year, $month);
+			$last_day = $this->DateCalComponent->last_day($prev_year, $month);
 			$start_day = $prev_year.$month.'01';
 			$end_day = $prev_year.$month.$last_day;
 		}elseif($key == 1){//前年
@@ -1582,10 +1155,6 @@ class SalesCsvComponent extends Object {
 		//$file_name = $file_name.'.CSV';
 		App::import('Component', 'Selector');
    		$SelectorComponent = new SelectorComponent();
-   		App::import('Model', 'Section');
-    	$SectionModel = new Section();
-    	App::import('Model', 'AmountSection');
-    	$AmountSectionModel = new AmountSection();
 		
 		$tenpo_path = WWW_ROOT.'files'.DS.'default'.DS;
 		$tenpo_name = 'tenpo.csv';
@@ -1628,20 +1197,20 @@ class SalesCsvComponent extends Object {
 				'conditions'=>array('Section.kyuuyo_bugyo5'=>$hon_id),
 				'recursive'=>-1
 			);
-			$section = $SectionModel->find('first' ,$params);
+			$section = $this->SectionModel->find('first' ,$params);
 			if($section){
 				$saveData['section_id'] = $section['Section']['id'];
 			}else{
 				$new_sec = array();
-				$SectionModel->create();
+				$this->SectionModel->create();
 				foreach($tenpos as $tenpo){
 					if($tenpo[0] == $hon_id){
 						$new_sec['Section']['id'] = '';
 						$new_sec['Section']['name'] = $tenpo[1];
 						$new_sec['Section']['kyuuyo_bugyo5'] = $hon_id;
 						$new_sec['Section']['sales_code'] = 4;
-						$SectionModel->save($new_sec);
-						$saveData['section_id'] = $SectionModel->getInsertID();
+						$this->SectionModel->save($new_sec);
+						$saveData['section_id'] = $this->SectionModel->getInsertID();
 					}
 				}
 			}
@@ -1658,15 +1227,15 @@ class SalesCsvComponent extends Object {
 				),
 				'recursive'=>-1
 			);
-			$amount = $AmountSectionModel->find('first' ,$params);
+			$amount = $this->AmountSectionModel->find('first' ,$params);
 			if($amount){
 				$saveData['id'] = $amount['AmountSection']['id'];
 				$saveData['addsub'] = $saveData['addsub'] + $amount['AmountSection']['addsub'];
 				$saveData['mark'] = $saveData['mark'] + $amount['AmountSection']['mark'];
 			}
-			$AmountSectionModel->create();
+			$this->AmountSectionModel->create();
 			$sData['AmountSection'] = $saveData;
-			$AmountSectionModel->save($sData);
+			$this->AmountSectionModel->save($sData);
 		}
 		fclose($sj_opne);
 		return unlink($path.$file_name);
