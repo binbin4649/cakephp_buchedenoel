@@ -50,8 +50,8 @@ class SalesCsvComponent extends Object {
 		$sections_counter = $tenpo_count['kizon_count']; //対象の部門数
 		///////////////////////////////////////////////集計の部
 		//キャッシュは開発のために設置してある
-		//$cache_time = '3600';
-		$cache_time = '+1 year';
+		$cache_time = '3600';
+		//$cache_time = '+1 year';
 		Cache::set(array('duration' => $cache_time));
    		$outReport = Cache::read('sales_csv_test');
    		if(empty($outReport)){
