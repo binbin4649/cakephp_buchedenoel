@@ -14,11 +14,14 @@ class CleaningComponent extends Object {
 		$section_name = str_replace('Kapio', 'kp', $section_name);
 		$section_name = str_replace('Ｋａｐｉｏ', 'kp', $section_name);
 		$section_name = str_replace('Kahuna', 'kh', $section_name);
-		$section_name = str_replace('MACAU', 'MC', $section_name);
-		$section_name = str_replace('KOREA', 'KR', $section_name);
-		$section_name = str_replace('KOREA', 'KR', $section_name);
+		//$section_name = str_replace('MACAU', 'MC', $section_name);
+		//$section_name = str_replace('KOREA', 'KR', $section_name);
+		//$section_name = str_replace('KOREA', 'KR', $section_name);
 		$section_name = str_replace('イオンモール', 'イオン', $section_name);
 		$section_name = str_replace('ららぽーと', '', $section_name);
+		$section_name = str_replace('MACAU girl’s talk！ MACAO', 'マカオGT', $section_name);
+		$section_name = str_replace('MACAU THE KISS MACAO', 'マカオKISS', $section_name);
+		$section_name = str_replace('KOREA THE KISS COEX-MALL', '韓国COEX', $section_name);
 		
         return $section_name;
     }
