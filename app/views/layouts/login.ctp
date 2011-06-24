@@ -37,12 +37,17 @@ echo $content_for_layout;
 </p>
 <h2>Start UP Buche de Noel</h2>
 <p>
+<strong>【FireFoxのダウンロード】</strong><br>
 インターネットエクスプローラー(Internet Explorer) Ver.6および7では表示が崩れ、一部機能が働きません。<br>
-当システムは FireFox3 以降を推奨します。<br>
+当システムは FireFox5 以降の環境で開発されています。<br>
 下記からインストーラーをダウンロードできます。<br>
-<a href="http://download.mozilla.org/?product=firefox-3.6.12&os=win&lang=ja" target="_blank">Firefox Setup 3.6.12.exe</a><br>
+<a href="http://download.mozilla.org/?product=firefox-5.0&os=win&lang=ja" target="_blank">Firefox 5 ダウンロード</a><br>
+<br>
+もし上記リンクでダウンロードできなかった場合は、以下のリンクからお願いします。<br>
+<a href="http://mozilla.jp/firefox/download/" target="_blank">mozilla.jp/firefox/download/</a><br><br>
 </p>
 <p>
+<strong>【印刷ソフトのダウンロード】</strong><br>
 印刷ソフトとして、当システムは PXDoc を使用します。<br>
 下記からダウンロード、インストールして下さい。<br>
 <a href="http://www.pxdoc.com/download-11821.php" target="_blank">PXDoc本体ダウンロード 1.18.21</a><br>
