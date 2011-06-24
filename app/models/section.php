@@ -155,6 +155,7 @@ class Section extends AppModel {
 	function amountSectionList5(){
 		App::import('Component', 'Cleaning');
    		$CleaningComponent = new CleaningComponent();
+   		$sections = array();
    		$params = array(
 			'conditions'=>array(
 				'AND'=>array('Section.sales_code'=>1, 'Section.start_date >'=>NEW_SHOP_FLAG)
@@ -163,6 +164,17 @@ class Section extends AppModel {
 			'order'=>array('Section.start_date ASC')
 		);
    		$sections = $this->find('list', $params);
+   		//催事を無理やり追加
+   		$params = array(
+			'conditions'=>array(
+				'AND'=>array('Section.id'=>420)
+				),
+			'recursive'=>-1,
+		);
+   		$saiji = $this->find('list', $params);
+   		foreach($saiji as $key=>$value){
+   			$sections[$key] = $value;
+   		}
 		foreach($sections as $id=>$name){
 			$name = $CleaningComponent->sectionName($name);
 			$sections[$id] = mb_substr($name, 0, 20);
@@ -211,7 +223,7 @@ class Section extends AppModel {
 	}
 	
 	
-	//既存店のみのlistを返す
+	//既存店のみのlistを返す 20110620これは何で作ったんだｗ  amountSectionList()に統合する
 	function amountSectionList3(){
 		App::import('Component', 'Cleaning');
    		$CleaningComponent = new CleaningComponent();

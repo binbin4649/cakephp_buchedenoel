@@ -23,7 +23,7 @@ class SalesCsvComponent extends Object {
 	function dairyReport(){
 		//////////////////////////////////////////////テストデータ
    		/*
-   		
+   		催事を無理やり新店に含める → めた。さてどうかね。
    		*/
    		//////////////////////////////////////////////
    		$prev_date = $this->DateCalComponent->prev_month($this->year, $this->month);
@@ -39,7 +39,7 @@ class SalesCsvComponent extends Object {
 		$tenpo_count = array('kizon_count'=>$kizon_count, 'new_count'=>$new_count, 'oversea_count'=>$oversea_count);
 		$goukei = array('小計');
 		$sections_title = Set::merge($sections,$goukei,$new_sections,$goukei,$oversea_sections,$goukei);
-		//$sections_merge = Set::merge($sections,$new_sections,$oversea_sections);
+		//$sections_merge = Set::merge($sections,$new_sections,$oversea_sections);//これは予期せぬ動きになったのでforeachで回した
 		$sections_merge = $sections;
 		foreach($new_sections as $key=>$value){
 			$sections_merge[$key] = $value;
@@ -48,11 +48,27 @@ class SalesCsvComponent extends Object {
 			$sections_merge[$key] = $value;
 		}
 		$sections_counter = $tenpo_count['kizon_count']; //対象の部門数
+		
+		///////////////////////////////////////////////店舗に連番を振る
+		$kizon_renban = array();
+		for($i=1; $i<=$kizon_count; $i++){
+			$kizon_renban[] = $i;
+		}
+		$new_renban = array();
+		for($i=1; $i<=$new_count; $i++){
+			$new_renban[] = $i;
+		}
+		$oversea_renban = array();
+		for($i=1; $i<=$oversea_count; $i++){
+			$oversea_renban[] = $i;
+		}
+		$section_renban = array();
+		$section_renban = Set::merge($kizon_renban,'',$new_renban,'',$oversea_renban,'');
 		///////////////////////////////////////////////集計の部
 		//キャッシュは開発のために設置してある
 		//$cache_time = '3600';
 		//$cache_time = '+1 year';
-		$cache_time = '54000';
+		$cache_time = '54000'; //15時間
 		Cache::set(array('duration' => $cache_time));
    		$outReport = Cache::read('sales_csv_test');
    		if(empty($outReport)){
@@ -67,10 +83,10 @@ class SalesCsvComponent extends Object {
    			Cache::set(array('duration' => $cache_time));
    			Cache::write('summary_test', $summar);
    		}
-		
 		/////////////////////////////////////////////出力用配列作成の部
 		$line = array(); //配列一つに対して、出力1行
 		$line[] = $this->year.'年'.$this->month.'月'.$this->day.'日集計 販売実績';
+		$line[] = ','.implode(',',$section_renban).',';
 		$line[] = ','.implode(',',$sections_title).',合計';
 		for($i=1; $i<=31; $i++){
 			$youbi = $this->DateCalComponent->this_youbi($this->year, $this->month, $i);
@@ -136,6 +152,7 @@ class SalesCsvComponent extends Object {
 		$section_comp_profit = array(); //昨年差益 今期-前期 (6-4)
 		$section_comp_exp = array(); //昨対見込 (6-5)
  		$section_exp_avg = array(); //平均見込 (6-7)
+		$thisdays_mark = array();
 		
 		//全店合計
 		$days_total = 0; //当月合計
@@ -157,59 +174,126 @@ class SalesCsvComponent extends Object {
 		$stackAmount = array('days_total'=>$days_total, 'prev_month_total'=>$prev_month_total, 'month_mark_total'=>$month_mark_total,
 			'prev_total'=>$prev_total, 'term_all_total'=>$term_all_total, 'section_mark_term_total'=>$section_mark_term_total,
 			'all_mark_exp'=>$all_mark_exp, 'all_comp_exp'=>$all_comp_exp, 'sections_shoukei'=>0, 'sections_sakunen'=>0,
-			'mokuhyo_shoukei'=>0, 'tukibetu_shoukei'=>0, 
+			'mokuhyo_shoukei'=>0, 'tukibetu_shoukei'=>0,
 		);
 		$stackSection = array('section_total'=>$section_total, 'prev_section_month'=>$prev_section_month, 'section_month_cont'=>$section_month_cont,
 			'section_month_mark'=>$section_month_mark, 'section_mark_cont'=>$section_mark_cont,
 			'prev_sction_total'=>$prev_sction_total, 'prev_section_comp'=>$prev_section_comp, 'term_section_total'=>$term_section_total,
 			'section_mark_term'=>$section_mark_term, 'section_mark_rate'=>$section_mark_rate, 'section_mark_exp'=>$section_mark_exp,
 			'section_comp_profit'=>$section_comp_profit, 'section_comp_exp'=>$section_comp_exp, 'section_exp_avg'=>$section_exp_avg,
+			'thisdays_mark'=>$thisdays_mark, 
 		);
+		//20110616
+		//昨対の合計について、ここで計算しているようだが、表には出ていない？
+		//たしか途中までやったような気がするので確認する。できたらついでに、昨対だけキャッシュするとか、なんとか考えよう。
+		$thisdays_mark_sub = 0; //目標日計 3点合計
+		$section_mark_exp_sub = 0;//目標見込 3点合計
+		$section_comp_profit_sub = 0;//昨対差益 3点合計
+		$section_comp_exp_sub = 0;//昨対見込 3点合計
+		$prev_sction_total_sub = 0;//昨年実績 3点合計
+		$section_exp_avg_sub = 0;//平均見込 3点合計
 		$passd_term_arr = $this->DateCalComponent->this_passd_term_arr($this->month);
-		
-		foreach($sections as $section_id=>$section_name){
+		foreach($sections as $section_id=>$section_name){//既存
 			$outAmount = $this->outAmount($outReport, $section_id, $stackAmount, $stackSection);
 			$stackAmount = $outAmount['stackAmount'];
 			$stackSection = $outAmount['stackSection'];
+			$thisdays_mark_sub = $thisdays_mark_sub + $stackSection['thisdays_mark'][$section_id];
+			$section_mark_exp_sub = $section_mark_exp_sub + $stackSection['section_mark_exp'][$section_id];
+			$section_comp_profit_sub = $section_comp_profit_sub + $stackSection['section_comp_profit'][$section_id];
+			$section_comp_exp_sub = $section_comp_exp_sub + $stackSection['section_comp_exp'][$section_id];
+			$prev_sction_total_sub = $prev_sction_total_sub + $stackSection['prev_sction_total'][$section_id];
+			$section_exp_avg_sub = $section_exp_avg_sub + $stackSection['section_exp_avg'][$section_id];
 		}
+		$stackSection['thisdays_mark']['kizon_shoukei'] = $thisdays_mark_sub;
+		$stackSection['section_mark_rate']['kizon_shoukei'] = $this->TotalComponent->fprate2($stackAmount['sections_shoukei'], $thisdays_mark_sub);
+		$stackSection['section_mark_exp']['kizon_shoukei'] = $section_mark_exp_sub;
+		$stackSection['prev_section_comp']['kizon_shoukei'] = $this->TotalComponent->fprate2($stackAmount['sections_shoukei'], $prev_sction_total_sub);
+		$stackSection['section_comp_profit']['kizon_shoukei'] = $section_comp_profit_sub;
+		$stackSection['section_comp_exp']['kizon_shoukei'] = $section_comp_exp_sub;
+		$stackSection['prev_sction_total']['kizon_shoukei'] = $prev_sction_total_sub;
 		$stackSection['section_total']['kizon_shoukei'] = $stackAmount['sections_shoukei'];
 		$stackSection['prev_section_month']['kizon_shoukei'] = $stackAmount['sections_sakunen'];
 		$stackSection['section_month_cont']['kizon_shoukei'] = $this->TotalComponent->fprate2($stackAmount['sections_shoukei'], $stackAmount['sections_sakunen']);
 		$stackSection['section_month_mark']['kizon_shoukei'] = $stackAmount['mokuhyo_shoukei'];
 		$stackSection['section_mark_cont']['kizon_shoukei'] = $this->TotalComponent->fprate2($stackAmount['sections_shoukei'], $stackAmount['mokuhyo_shoukei']);
 		$stackSection['term_section_total']['kizon_shoukei'] = $stackAmount['tukibetu_shoukei'];
+		$stackSection['section_exp_avg']['kizon_shoukei'] = $section_exp_avg_sub;
+		$thisdays_mark_sub = 0; //目標日計 3点合計
+		$section_mark_exp_sub = 0;//目標見込 3点合計
+		$section_comp_profit_sub = 0;//昨対差益 3点合計
+		$section_comp_exp_sub = 0;//昨対見込 3点合計
+		$prev_sction_total_sub = 0;//昨年実績 3点合計
+		$section_exp_avg_sub = 0;//平均見込 3点合計
 		$stackAmount['mokuhyo_shoukei'] = 0;
 		$stackAmount['sections_shoukei'] = 0;
 		$stackAmount['sections_sakunen'] = 0;
 		$stackAmount['tukibetu_shoukei'] = 0;
-		
-		foreach($new_sections as $section_id=>$section_name){
+		foreach($new_sections as $section_id=>$section_name){//新店
 			$outAmount = $this->outAmount($outReport, $section_id, $stackAmount, $stackSection);
 			$stackAmount = $outAmount['stackAmount'];
 			$stackSection = $outAmount['stackSection'];
+			$thisdays_mark_sub = $thisdays_mark_sub + $stackSection['thisdays_mark'][$section_id];
+			$section_mark_exp_sub = $section_mark_exp_sub + $stackSection['section_mark_exp'][$section_id];
+			$section_comp_profit_sub = $section_comp_profit_sub + $stackSection['section_comp_profit'][$section_id];
+			$section_comp_exp_sub = $section_comp_exp_sub + $stackSection['section_comp_exp'][$section_id];
+			$prev_sction_total_sub = $prev_sction_total_sub + $stackSection['prev_sction_total'][$section_id];
+			$section_exp_avg_sub = $section_exp_avg_sub + $stackSection['section_exp_avg'][$section_id];
 		}
+		$stackSection['thisdays_mark']['new_shoukei'] = $thisdays_mark_sub;
+		$stackSection['section_mark_rate']['new_shoukei'] = $this->TotalComponent->fprate2($stackAmount['sections_shoukei'], $thisdays_mark_sub);
+		$stackSection['section_mark_exp']['new_shoukei'] = $section_mark_exp_sub;
+		$stackSection['prev_section_comp']['new_shoukei'] = $this->TotalComponent->fprate2($stackAmount['sections_shoukei'], $prev_sction_total_sub);
+		$stackSection['section_comp_profit']['new_shoukei'] = $section_comp_profit_sub;
+		$stackSection['section_comp_exp']['new_shoukei'] = $section_comp_exp_sub;
+		$stackSection['prev_sction_total']['new_shoukei'] = $prev_sction_total_sub;
 		$stackSection['section_total']['new_shoukei'] = $stackAmount['sections_shoukei'];
 		$stackSection['prev_section_month']['new_shoukei'] = $stackAmount['sections_sakunen'];
 		$stackSection['section_month_cont']['new_shoukei'] = $this->TotalComponent->fprate2($stackAmount['sections_shoukei'], $stackAmount['sections_sakunen']);
 		$stackSection['section_month_mark']['new_shoukei'] = $stackAmount['mokuhyo_shoukei'];
 		$stackSection['section_mark_cont']['new_shoukei'] = $this->TotalComponent->fprate2($stackAmount['sections_shoukei'], $stackAmount['mokuhyo_shoukei']);
 		$stackSection['term_section_total']['new_shoukei'] = $stackAmount['tukibetu_shoukei'];
+		$stackSection['section_exp_avg']['new_shoukei'] = $section_exp_avg_sub;
+		$thisdays_mark_sub = 0; //目標日計 3点合計
+		$section_mark_exp_sub = 0;//目標見込 3点合計
+		$section_comp_profit_sub = 0;//昨対差益 3点合計
+		$section_comp_exp_sub = 0;//昨対見込 3点合計
+		$prev_sction_total_sub = 0;//昨年実績 3点合計
+		$section_exp_avg_sub = 0;//平均見込 3点合計
 		$stackAmount['mokuhyo_shoukei'] = 0;
 		$stackAmount['sections_shoukei'] = 0;
 		$stackAmount['sections_sakunen'] = 0;
 		$stackAmount['tukibetu_shoukei'] = 0;
-		
-		foreach($oversea_sections as $section_id=>$section_name){
+		foreach($oversea_sections as $section_id=>$section_name){//海外
 			$outAmount = $this->outAmount($outReport, $section_id, $stackAmount, $stackSection);
 			$stackAmount = $outAmount['stackAmount'];
 			$stackSection = $outAmount['stackSection'];
+			$thisdays_mark_sub = $thisdays_mark_sub + $stackSection['thisdays_mark'][$section_id];
+			$section_mark_exp_sub = $section_mark_exp_sub + $stackSection['section_mark_exp'][$section_id];
+			$section_comp_profit_sub = $section_comp_profit_sub + $stackSection['section_comp_profit'][$section_id];
+			$section_comp_exp_sub = $section_comp_exp_sub + $stackSection['section_comp_exp'][$section_id];
+			$prev_sction_total_sub = $prev_sction_total_sub + $stackSection['prev_sction_total'][$section_id];
+			$section_exp_avg_sub = $section_exp_avg_sub + $stackSection['section_exp_avg'][$section_id];
 		}
+		$stackSection['thisdays_mark']['oversea_shoukei'] = $thisdays_mark_sub;
+		$stackSection['section_mark_rate']['oversea_shoukei'] = $this->TotalComponent->fprate2($stackAmount['sections_shoukei'], $thisdays_mark_sub);
+		$stackSection['section_mark_exp']['oversea_shoukei'] = $section_mark_exp_sub;
+		$stackSection['prev_section_comp']['oversea_shoukei'] = $this->TotalComponent->fprate2($stackAmount['sections_shoukei'], $prev_sction_total_sub);
+		$stackSection['section_comp_profit']['oversea_shoukei'] = $section_comp_profit_sub;
+		$stackSection['section_comp_exp']['oversea_shoukei'] = $section_comp_exp_sub;
+		$stackSection['prev_sction_total']['oversea_shoukei'] = $prev_sction_total_sub;
 		$stackSection['section_total']['oversea_shoukei'] = $stackAmount['sections_shoukei'];
 		$stackSection['prev_section_month']['oversea_shoukei'] = $stackAmount['sections_sakunen'];
 		$stackSection['section_month_cont']['oversea_shoukei'] = $this->TotalComponent->fprate2($stackAmount['sections_shoukei'], $stackAmount['sections_sakunen']);
 		$stackSection['section_month_mark']['oversea_shoukei'] = $stackAmount['mokuhyo_shoukei'];
 		$stackSection['section_mark_cont']['oversea_shoukei'] = $this->TotalComponent->fprate2($stackAmount['sections_shoukei'], $stackAmount['mokuhyo_shoukei']);
 		$stackSection['term_section_total']['oversea_shoukei'] = $stackAmount['tukibetu_shoukei'];
+		$stackSection['section_exp_avg']['oversea_shoukei'] = $section_exp_avg_sub;
+		$thisdays_mark_sub = 0; //目標日計 3点合計
+		$section_mark_exp_sub = 0;//目標見込 3点合計
+		$section_comp_profit_sub = 0;//昨対差益 3点合計
+		$section_comp_exp_sub = 0;//昨対見込 3点合計
+		$prev_sction_total_sub = 0;//昨年実績 3点合計
+		$section_exp_avg_sub = 0;//平均見込 3点合計
 		$stackAmount['mokuhyo_shoukei'] = 0;
 		$stackAmount['sections_shoukei'] = 0;
 		$stackAmount['sections_sakunen'] = 0;
@@ -291,8 +375,6 @@ class SalesCsvComponent extends Object {
 		}
 		$term_section_avg['oversea_avg'] = floor($avg_total / $tenpo_count['oversea_count']);
 		
-		
-		
 		$term_total_avg = floor(($term_all_total / $sections_counter) / $passd_month);
 		$line[] = '合計,'.implode(',', $section_total).','.$days_total;
 		$days_section_ranking = $this->TotalComponent->not_chang_rank($section_total, $tenpo_count);
@@ -322,22 +404,23 @@ class SalesCsvComponent extends Object {
 		$section_avg_ranking = $this->TotalComponent->not_chang_rank($term_section_avg);
 		$line[] = '順位,'.implode(',', $section_avg_ranking);
 		$line[] = ',';
-		
-		$section_mark_rate2 = $this->TotalComponent->kizonCount2($section_mark_rate, $sections, $new_sections, $oversea_sections);
-		$section_mark_exp2 = $this->TotalComponent->kizonCount2($section_mark_exp, $sections, $new_sections, $oversea_sections);
-		$prev_section_comp2 = $this->TotalComponent->kizonCount2($prev_section_comp, $sections, $new_sections, $oversea_sections);
-		$section_comp_profit2 = $this->TotalComponent->kizonCount2($section_comp_profit, $sections, $new_sections, $oversea_sections);
-		$section_comp_exp2 = $this->TotalComponent->kizonCount2($section_comp_exp, $sections, $new_sections, $oversea_sections);
-		$prev_sction_total2 = $this->TotalComponent->kizonCount2($prev_sction_total, $sections, $new_sections, $oversea_sections);
-		$section_exp_avg2 = $this->TotalComponent->kizonCount2($section_exp_avg, $sections, $new_sections, $oversea_sections);
-		$line[] = '目標%,'.implode(',', $section_mark_rate2).','.$section_mark_total_rate;
-		$line[] = '目標見込,'.implode(',', $section_mark_exp2).','.$all_mark_exp;
-		$line[] = '昨対%,'.implode(',', $prev_section_comp2).','.$prev_section_comp_avg;
-		$line[] = '昨対差益,'.implode(',', $section_comp_profit2).','.$all_comp_profit;
-		$line[] = '昨対見込,'.implode(',', $section_comp_exp2).','.$all_comp_exp;
-		$line[] = '昨年実績,'.implode(',', $prev_sction_total2).','.$prev_total;
+		//$thisdays_mark2 = $this->TotalComponent->kizonCount2($thisdays_mark, $sections, $new_sections, $oversea_sections);
+		//$section_mark_rate2 = $this->TotalComponent->kizonCount2($section_mark_rate, $sections, $new_sections, $oversea_sections);
+		//$section_mark_exp2 = $this->TotalComponent->kizonCount2($section_mark_exp, $sections, $new_sections, $oversea_sections);
+		//$prev_section_comp2 = $this->TotalComponent->kizonCount2($prev_section_comp, $sections, $new_sections, $oversea_sections);
+		//$section_comp_profit2 = $this->TotalComponent->kizonCount2($section_comp_profit, $sections, $new_sections, $oversea_sections);
+		//$section_comp_exp2 = $this->TotalComponent->kizonCount2($section_comp_exp, $sections, $new_sections, $oversea_sections);
+		//$prev_sction_total2 = $this->TotalComponent->kizonCount2($prev_sction_total, $sections, $new_sections, $oversea_sections);
+		//$section_exp_avg2 = $this->TotalComponent->kizonCount2($section_exp_avg, $sections, $new_sections, $oversea_sections);
+		$line[] = '目標日計,'.implode(',', $thisdays_mark).',';
+		$line[] = '目標%,'.implode(',', $section_mark_rate).','.$section_mark_total_rate;
+		$line[] = '目標見込,'.implode(',', $section_mark_exp).','.$all_mark_exp;
+		$line[] = '昨対%,'.implode(',', $prev_section_comp).','.$prev_section_comp_avg;
+		$line[] = '昨対差益,'.implode(',', $section_comp_profit).','.$all_comp_profit;
+		$line[] = '昨対見込,'.implode(',', $section_comp_exp).','.$all_comp_exp;
+		$line[] = '昨年実績,'.implode(',', $prev_sction_total).','.$prev_total;
 		$all_exp_avg = floor(($all_mark_exp + $all_comp_exp) / 2);
-		$line[] = '平均見込,'.implode(',', $section_exp_avg2).','.$all_exp_avg;
+		$line[] = '平均見込,'.implode(',', $section_exp_avg).','.$all_exp_avg;
 		$line[] = ',';
 		$line[] = ',';
 		
@@ -397,6 +480,7 @@ class SalesCsvComponent extends Object {
 		$stackSection['section_mark_term'][$section_id] = $sectionPrev['mark_section_sub'];//部門別 今期 目標合計
 		$stackAmount['section_mark_term_total'] = $stackAmount['section_mark_term_total'] + $sectionPrev['mark_section_sub'];//部門別 今期 目標 総合計
 		$this_section_mark_rate = $this->TotalComponent->fprate2($this_month_total, $sectionPrev['thisdays_mark_total']);//
+		$stackSection['thisdays_mark'][$section_id] = $sectionPrev['thisdays_mark_total'];
 		$stackSection['section_mark_rate'][$section_id] = $this_section_mark_rate;
 		$this_section_mark_exp = floor($this_month_mark * ($this_section_mark_rate / 100));
 		$stackSection['section_mark_exp'][$section_id] = $this_section_mark_exp;//部門別目標見込
@@ -417,17 +501,17 @@ class SalesCsvComponent extends Object {
 		$out['stackAmount'] = array('days_total'=>$days_total, 'prev_month_total'=>$prev_month_total, 'month_mark_total'=>$month_mark_total,
 			'prev_total'=>$prev_total, 'term_all_total'=>$term_all_total, 'section_mark_term_total'=>$section_mark_term_total,
 			'all_mark_exp'=>$all_mark_exp, 'all_comp_exp'=>$all_comp_exp, 'sections_shoukei'=>$sections_shoukei, 'sections_sakunen'=>$sections_sakunen,
-			'mokuhyo_shoukei'=>$mokuhyo_shoukei, 'tukibetu_shoukei'=>$tukibetu_shoukei, 
+			'mokuhyo_shoukei'=>$mokuhyo_shoukei, 'tukibetu_shoukei'=>$tukibetu_shoukei,
 		);
 		$out['stackSection'] = array('section_total'=>$section_total, 'prev_section_month'=>$prev_section_month, 'section_month_cont'=>$section_month_cont,
 			'section_month_mark'=>$section_month_mark, 'section_mark_cont'=>$section_mark_cont,'this_term'=>$this_term,
 			'prev_sction_total'=>$prev_sction_total, 'prev_section_comp'=>$prev_section_comp, 'term_section_total'=>$term_section_total,
 			'section_mark_term'=>$section_mark_term, 'section_mark_rate'=>$section_mark_rate, 'section_mark_exp'=>$section_mark_exp,
 			'section_comp_profit'=>$section_comp_profit, 'section_comp_exp'=>$section_comp_exp, 'section_exp_avg'=>$section_exp_avg,
+			'thisdays_mark'=>$thisdays_mark,
 		);
 		return $out;
 	}
-	
 	
 	// 部門別 昨年"同日" 実績
 	function sectionPrevDays($section_id, $outReport){
@@ -521,7 +605,8 @@ class SalesCsvComponent extends Object {
 		$this_all_total = 0; //全店同日今期実績
 		$prev_all_month_total = 0;//全店同月前期実績
    		$full_sections = $this->SectionModel->amountSectionList4();// 全店。営業開始日と終了日だけでsectionsを出力。つまりこの二つのうち何れかが入っている部門は、集計対象となる。 全店合計を出す時用。
-   		$exis_sections = $this->SectionModel->amountSectionList3(); //既存店一覧を返す
+   		// 3 から変えたら集計が変になった。しかしキャッシュのせいかもしれないので、再集計してみる。
+   		$exis_sections = $this->SectionModel->amountSectionList(); //既存店一覧を返す
    		foreach($exis_sections as $section_id=>$section_name){//既存店
    		 	$this_value = $this->AmountSectionModel->markIndex($section_id, $this->year, $this->month);
    		 	$prev_value = $this->AmountSectionModel->markIndex($section_id, $this->year -1, $this->month);
