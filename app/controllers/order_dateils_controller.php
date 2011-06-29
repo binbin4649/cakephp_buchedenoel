@@ -8,10 +8,6 @@ class OrderDateilsController extends AppController {
 
 	function index() {
 		$modelName = 'OrderDateil';
-		
-		//pr($this->data[$modelName]['updating']);
-		
-		
 		if(!empty($this->data[$modelName]['new_shipping_date'])){
 			$this->data[$modelName]['new_shipping_date'] = mb_convert_kana($this->data[$modelName]['new_shipping_date'], 'a', 'UTF-8');
 			//$this->data[$modelName]['new_shipping_date'] = ereg_replace("[^0-9]", "", $this->data[$modelName]['new_shipping_date']);//半角数字以外を削除;
@@ -23,7 +19,6 @@ class OrderDateilsController extends AppController {
 			}
 		}
 		if(!empty($this->data[$modelName]['new_shipping_date'])){
-			//pr($this->data[$modelName]['update']);
 			foreach($this->data[$modelName]['updating'] as $upid=>$check){
 				$save_data = array();
 				if($check == '1'){

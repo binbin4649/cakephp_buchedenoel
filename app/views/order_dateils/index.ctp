@@ -1,3 +1,4 @@
+<?php echo $javascript->link("jquery",false); ?>
 <div class="orderDateils index">
 <?php
 if(!empty($csv)){
@@ -203,7 +204,11 @@ echo $form->checkbox($modelName.'.csv');
 	<th>入荷</th>
 	<th>出荷</th>
 	<th>数</th>
-	<th><?php if($addForm->opneUser(open_users(), $opneuser, 'access_authority')) //echo $form->checkbox('OrderDateil.allchecker', array('checked'=>$checkk)); ?></th>
+	<th>
+	<?php if($addForm->opneUser(open_users(), $opneuser, 'access_authority')): ?>
+	<input type="checkbox" id="checkbox_all" onclick="j$('input[type=checkbox][class=something]').attr('checked', j$('#checkbox_all').attr('checked'));" />
+	<?php endif; ?>
+	</th>
 </tr>
 <?php
 	$qty_total = 0;
@@ -252,7 +257,7 @@ echo $form->checkbox($modelName.'.csv');
 		<td>
 			<?php 
 				if($addForm->opneUser(open_users(), $opneuser, 'access_authority')){
-					echo $form->checkbox('OrderDateil.updating.'.$orderDateil['OrderDateil']['id'], array());
+					echo $form->checkbox('OrderDateil.updating.'.$orderDateil['OrderDateil']['id'], array('class'=>'something'));
 					//echo $form->checkbox('OrderDateil.update.'.$orderDateil['OrderDateil']['id'], array('checked'=>$checkk)); 
 				}
 			?>

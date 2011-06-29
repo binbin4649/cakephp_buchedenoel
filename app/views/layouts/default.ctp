@@ -9,7 +9,10 @@ echo $html->css('css');
 echo $html->css("cake.ajax");
 echo $scripts_for_layout;
 ?>
-
+<script type="text/javascript">
+    jQuery.noConflict();
+    var j$ = jQuery;
+</script> 
 <style type="text/css">
 p#compressor {margin-top:0.2em;}
 #index-main #promo li {list-style-type:disc; font-size:100%; margin-top:.2em; margin-left:1em;}
