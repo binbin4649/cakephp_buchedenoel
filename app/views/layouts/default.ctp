@@ -7,6 +7,7 @@ echo $html->charset("UTF-8");
 echo $html->meta('icon');
 echo $html->css('css');
 echo $html->css("cake.ajax");
+echo $html->css("redmond/jquery-ui-1.8.14.custom");
 echo $scripts_for_layout;
 ?>
 <script type="text/javascript">

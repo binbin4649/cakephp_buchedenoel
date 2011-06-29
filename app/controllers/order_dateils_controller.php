@@ -8,16 +8,7 @@ class OrderDateilsController extends AppController {
 
 	function index() {
 		$modelName = 'OrderDateil';
-		if(!empty($this->data[$modelName]['new_shipping_date'])){
-			$this->data[$modelName]['new_shipping_date'] = mb_convert_kana($this->data[$modelName]['new_shipping_date'], 'a', 'UTF-8');
-			//$this->data[$modelName]['new_shipping_date'] = ereg_replace("[^0-9]", "", $this->data[$modelName]['new_shipping_date']);//半角数字以外を削除;
-			if(ereg("[0-9]{8}", $this->data[$modelName]['new_shipping_date'])){
-				
-			}else{
-				$this->data[$modelName]['new_shipping_date'] = null;
-				$this->Session->setFlash(__('出荷日は、半角数字8文字で入力して下さい。', true));
-			}
-		}
+		//出荷日一括更新
 		if(!empty($this->data[$modelName]['new_shipping_date'])){
 			foreach($this->data[$modelName]['updating'] as $upid=>$check){
 				$save_data = array();
@@ -32,6 +23,7 @@ class OrderDateilsController extends AppController {
 			$this->data[$modelName]['new_shipping_date'] = null;
 		}
 		//入荷日一括更新
+		/*
 		if(!empty($this->data[$modelName]['new_stock_date'])){
 			$this->data[$modelName]['new_stock_date'] = mb_convert_kana($this->data[$modelName]['new_stock_date'], 'a', 'UTF-8');
 			//$this->data[$modelName]['new_stock_date'] = ereg_replace("[^0-9]", "", $this->data[$modelName]['new_stock_date']);//半角数字以外を削除;
@@ -42,6 +34,7 @@ class OrderDateilsController extends AppController {
 				$this->Session->setFlash(__('入荷日は、半角数字8文字で入力して下さい。', true));
 			}
 		}
+		*/
 		if(!empty($this->data[$modelName]['new_stock_date'])){
 			foreach($this->data[$modelName]['updating'] as $upid=>$check){
 				$save_data = array();
@@ -75,37 +68,29 @@ class OrderDateilsController extends AppController {
 			if(!empty($this->data[$modelName]['item_name'])){
 				$conditions['AND'][] = array('Item.name LIKE'=>'%'.$this->data[$modelName]['item_name'].'%');
 			}
-			if(!empty($this->data[$modelName]['start_created']['year']) and !empty($this->data[$modelName]['start_created']['month']) and !empty($this->data[$modelName]['start_created']['day'])){
-				$start_created = $this->data[$modelName]['start_created']['year'].'-'.$this->data[$modelName]['start_created']['month'].'-'.$this->data[$modelName]['start_created']['day'].' 00:00:00';
-				$conditions['AND'][] = array('OrderDateil.created >='=>$start_created);
+			if(!empty($this->data[$modelName]['start_created'])){
+				$conditions['AND'][] = array('OrderDateil.created >='=>$this->data[$modelName]['start_created'].' 00:00:00');
 			}
-			if(!empty($this->data[$modelName]['end_created']['year']) and !empty($this->data[$modelName]['end_created']['month']) and !empty($this->data[$modelName]['end_created']['day'])){
-				$end_created = $this->data[$modelName]['end_created']['year'].'-'.$this->data[$modelName]['end_created']['month'].'-'.$this->data[$modelName]['end_created']['day'].' 23:59:59';
-				$conditions['AND'][] = array('OrderDateil.created <='=>$end_created);
+			if(!empty($this->data[$modelName]['end_created'])){
+				$conditions['AND'][] = array('OrderDateil.created <='=>$this->data[$modelName]['end_created'].' 23:59:59');
 			}
-			if(!empty($this->data[$modelName]['start_arrival']['year']) and !empty($this->data[$modelName]['start_arrival']['month']) and !empty($this->data[$modelName]['start_arrival']['day'])){
-				$start_arrival = $this->data[$modelName]['start_arrival']['year'].'-'.$this->data[$modelName]['start_arrival']['month'].'-'.$this->data[$modelName]['start_arrival']['day'].' 00:00:00';
-				$conditions['AND'][] = array('OrderDateil.specified_date >='=>$start_arrival);
+			if(!empty($this->data[$modelName]['start_arrival'])){
+				$conditions['AND'][] = array('OrderDateil.specified_date >='=>$this->data[$modelName]['start_arrival'].' 00:00:00');
 			}
-			if(!empty($this->data[$modelName]['end_arrival']['year']) and !empty($this->data[$modelName]['end_arrival']['month']) and !empty($this->data[$modelName]['end_arrival']['day'])){
-				$end_arrival = $this->data[$modelName]['end_arrival']['year'].'-'.$this->data[$modelName]['end_arrival']['month'].'-'.$this->data[$modelName]['end_arrival']['day'].' 23:59:59';
-				$conditions['AND'][] = array('OrderDateil.specified_date <='=>$end_arrival);
+			if(!empty($this->data[$modelName]['end_arrival'])){
+				$conditions['AND'][] = array('OrderDateil.specified_date <='=>$this->data[$modelName]['end_arrival'].' 23:59:59');
 			}
-			if(!empty($this->data[$modelName]['start_stock']['year']) and !empty($this->data[$modelName]['start_stock']['month']) and !empty($this->data[$modelName]['start_stock']['day'])){
-				$start_stock = $this->data[$modelName]['start_stock']['year'].'-'.$this->data[$modelName]['start_stock']['month'].'-'.$this->data[$modelName]['start_stock']['day'].' 00:00:00';
-				$conditions['AND'][] = array('OrderDateil.stock_date >='=>$start_stock);
+			if(!empty($this->data[$modelName]['start_stock'])){
+				$conditions['AND'][] = array('OrderDateil.stock_date >='=>$this->data[$modelName]['start_stock'].' 00:00:00');
 			}
-			if(!empty($this->data[$modelName]['end_stock']['year']) and !empty($this->data[$modelName]['end_stock']['month']) and !empty($this->data[$modelName]['end_stock']['day'])){
-				$end_stock = $this->data[$modelName]['end_stock']['year'].'-'.$this->data[$modelName]['end_stock']['month'].'-'.$this->data[$modelName]['end_stock']['day'].' 23:59:59';
-				$conditions['AND'][] = array('OrderDateil.stock_date <='=>$end_stock);
+			if(!empty($this->data[$modelName]['end_stock'])){
+				$conditions['AND'][] = array('OrderDateil.stock_date <='=>$this->data[$modelName]['end_stock'].' 23:59:59');
 			}
-			if(!empty($this->data[$modelName]['start_shipping']['year']) and !empty($this->data[$modelName]['start_shipping']['month']) and !empty($this->data[$modelName]['start_shipping']['day'])){
-				$start_shipping = $this->data[$modelName]['start_shipping']['year'].'-'.$this->data[$modelName]['start_shipping']['month'].'-'.$this->data[$modelName]['start_shipping']['day'].' 00:00:00';
-				$conditions['AND'][] = array('OrderDateil.shipping_date >='=>$start_shipping);
+			if(!empty($this->data[$modelName]['start_shipping'])){
+				$conditions['AND'][] = array('OrderDateil.shipping_date >='=>$this->data[$modelName]['start_shipping'].' 00:00:00');
 			}
-			if(!empty($this->data[$modelName]['end_shipping']['year']) and !empty($this->data[$modelName]['end_shipping']['month']) and !empty($this->data[$modelName]['end_shipping']['day'])){
-				$end_shipping = $this->data[$modelName]['end_shipping']['year'].'-'.$this->data[$modelName]['end_shipping']['month'].'-'.$this->data[$modelName]['end_shipping']['day'].' 23:59:59';
-				$conditions['AND'][] = array('OrderDateil.shipping_date <='=>$end_shipping);
+			if(!empty($this->data[$modelName]['end_shipping'])){
+				$conditions['AND'][] = array('OrderDateil.shipping_date <='=>$this->data[$modelName]['end_shipping'].' 23:59:59');
 			}
 			if(empty($this->data[$modelName]['null_shipping'])) $this->data[$modelName]['null_shipping'] = 0;
 			if($this->data[$modelName]['null_shipping'] == 1){

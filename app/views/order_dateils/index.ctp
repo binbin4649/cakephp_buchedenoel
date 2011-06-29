@@ -1,4 +1,13 @@
-<?php echo $javascript->link("jquery",false); ?>
+<script type="text/javascript" charset="utf-8">
+j$(function(j$){
+	j$(".datepicker").datepicker({dateFormat:'yy-mm-dd'});
+});
+</script>
+<?php 
+	echo $javascript->link("jquery-1.5.1.min",false);
+	echo $javascript->link("jquery-ui-1.8.14.custom.min",false);
+	echo $javascript->link("ui/i18n/ui.datepicker-ja.js",false);
+?>
 <div class="orderDateils index">
 <?php
 if(!empty($csv)){
@@ -15,7 +24,8 @@ echo '売上id';
 echo $form->text($modelName.'.order_id', array(
 	'type'=>'text',
 	'size'=>2,
-	'div'=>false
+	'div'=>false,
+	'class'=>'datepicker'
 ));
 echo '　';
 echo '取置id';
@@ -77,67 +87,55 @@ echo '　';
 echo 'SAMPLEのみ';
 echo $form->checkbox($modelName.'.sample_only');
 echo '<br/><br/>';
-echo '入力';
-echo $form->input($modelName.'.start_created', array(
-	'type'=>'date',
-	'dateFormat'=>'YMD',
+echo '入力　';
+echo $form->text($modelName.'.start_created', array(
+	'type'=>'text',
+	'size'=>8,
+	'div'=>false,
 	'label'=>false,
-	'minYear'=>MINYEAR,
-	'maxYear' => MAXYEAR,
-	'empty'=>'select',
-	'div'=>false
+	'class'=>'datepicker'
 ));
-echo '～';
-echo $form->input($modelName.'.end_created', array(
-	'type'=>'date',
-	'dateFormat'=>'YMD',
+echo '　～　';
+echo $form->text($modelName.'.end_created', array(
+	'type'=>'text',
+	'size'=>8,
+	'div'=>false,
 	'label'=>false,
-	'minYear'=>MINYEAR,
-	'maxYear' => MAXYEAR,
-	'empty'=>'select',
-	'div'=>false
+	'class'=>'datepicker'
 ));
 echo '<br/><br/>';
-echo '納期';
-echo $form->input($modelName.'.start_arrival', array(
-	'type'=>'date',
-	'dateFormat'=>'YMD',
+echo '納期　';
+echo $form->text($modelName.'.start_arrival', array(
+	'type'=>'text',
+	'size'=>8,
+	'div'=>false,
 	'label'=>false,
-	'minYear'=>MINYEAR,
-	'maxYear' => MAXYEAR,
-	'empty'=>'select',
-	'div'=>false
+	'class'=>'datepicker'
 ));
-echo '～';
-echo $form->input($modelName.'.end_arrival', array(
-	'type'=>'date',
-	'dateFormat'=>'YMD',
+echo '　～　';
+echo $form->text($modelName.'.end_arrival', array(
+	'type'=>'text',
+	'size'=>8,
+	'div'=>false,
 	'label'=>false,
-	'minYear'=>MINYEAR,
-	'maxYear' => MAXYEAR,
-	'empty'=>'select',
-	'div'=>false
+	'class'=>'datepicker'
 ));
 echo '<br/><br/>';
-echo '入荷';
-echo $form->input($modelName.'.start_stock', array(
-	'type'=>'date',
-	'dateFormat'=>'YMD',
+echo '入荷　';
+echo $form->text($modelName.'.start_stock', array(
+	'type'=>'text',
+	'size'=>8,
+	'div'=>false,
 	'label'=>false,
-	'minYear'=>MINYEAR,
-	'maxYear' => MAXYEAR,
-	'empty'=>'select',
-	'div'=>false
+	'class'=>'datepicker'
 ));
-echo '～';
-echo $form->input($modelName.'.end_stock', array(
-	'type'=>'date',
-	'dateFormat'=>'YMD',
+echo '　～　';
+echo $form->text($modelName.'.end_stock', array(
+	'type'=>'text',
+	'size'=>8,
+	'div'=>false,
 	'label'=>false,
-	'minYear'=>MINYEAR,
-	'maxYear' => MAXYEAR,
-	'empty'=>'select',
-	'div'=>false
+	'class'=>'datepicker'
 ));
 
 if($addForm->opneUser(open_users(), $opneuser, 'access_authority')){
@@ -146,41 +144,39 @@ if($addForm->opneUser(open_users(), $opneuser, 'access_authority')){
 	echo $form->text($modelName.'.new_stock_date', array(
 	'type'=>'text',
 	'size'=>8,
-	'div'=>false
+	'div'=>false,
+	'class'=>'datepicker'
 	));
 }
 echo '　';
 echo '入荷未定';
 echo $form->checkbox($modelName.'.null_stock');
-
 echo '<br/><br/>';
-echo '出荷';
-echo $form->input($modelName.'.start_shipping', array(
-	'type'=>'date',
-	'dateFormat'=>'YMD',
+echo '出荷　';
+echo $form->text($modelName.'.start_shipping', array(
+	'type'=>'text',
+	'size'=>8,
+	'div'=>false,
 	'label'=>false,
-	'minYear'=>MINYEAR,
-	'maxYear' => MAXYEAR,
-	'empty'=>'select',
-	'div'=>false
+	'class'=>'datepicker'
 ));
-echo '～';
-echo $form->input($modelName.'.end_shipping', array(
-	'type'=>'date',
-	'dateFormat'=>'YMD',
+echo '　～　';
+echo $form->text($modelName.'.end_shipping', array(
+	'type'=>'text',
+	'size'=>8,
+	'div'=>false,
 	'label'=>false,
-	'minYear'=>MINYEAR,
-	'maxYear' => MAXYEAR,
-	'empty'=>'select',
-	'div'=>false
+	'class'=>'datepicker'
 ));
+
 if($addForm->opneUser(open_users(), $opneuser, 'access_authority')){
 	echo '　';
 	echo '出荷一括更新';
 	echo $form->text($modelName.'.new_shipping_date', array(
 	'type'=>'text',
 	'size'=>8,
-	'div'=>false
+	'div'=>false,
+	'class'=>'datepicker'
 	));
 }
 echo '　';
