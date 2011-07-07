@@ -3,7 +3,7 @@ class ItemsController extends AppController {
 
 	var $name = 'Items';
 	var $helpers = array('AddForm',"Javascript","Ajax");
-	var $uses = array('Item', 'User', 'ItemImage', 'TagsItem', 'Subitem', 'Stock', 'Itembase');
+	var $uses = array('Item', 'User', 'ItemImage', 'TagsItem', 'Subitem', 'Stock', 'Itembase', 'Depot');
 	var $components = array('ImageSelect', 'StratCsv', 'DateilSeach', 'Cleaning', 'OutputCsv');
 
 	function index() {
@@ -443,7 +443,28 @@ class ItemsController extends AppController {
 
 
 	function csv_add(){//初期の商品マスター移行スクリプト
-		if (!empty($this->data)) {
+		
+		//ここにdepot_idの口を作って、在庫登録する倉庫を指定できるようにする。
+		$this->data['Item']['depot'] = mb_convert_kana($this->data['Item']['depot'], 'a', 'UTF-8');
+		$this->data['Item']['depot'] = ereg_replace("[^0-9]", "", $this->data['Item']['depot']);//半角数字以外を削除
+		
+		if(empty($this->data['Item']['depot'])){
+			$depot_id = 910;
+		}else{
+			//depot_id の存在確認
+			$depot_id = $this->data['Item']['depot'];
+		}
+		$this->data['Item']['depot'] = null;
+		$params = array(
+			'conditions'=>array('Depot.id'=>$depot_id),
+			'recursive'=>-1,
+		);
+		$results = $this->Depot->find('first', $params);
+		if(!$results){
+			$this->data['Item']['upload_file']['tmp_name'] = null;
+			$this->Session->setFlash('倉庫番号が違います');
+		}
+		if (!empty($this->data['Item']['upload_file']['tmp_name'])){
 			$this->Item->create();
 			$file_name = date('Ymd-His').'item.csv';
 			rename($this->data['Item']['upload_file']['tmp_name'], WWW_ROOT.'/files/temp/'.$file_name);
@@ -454,7 +475,7 @@ class ItemsController extends AppController {
 			fclose($sj_rename_opne);
 			$sj_opne = fopen(WWW_ROOT.'/files/temp/en'.$file_name, 'r');
 			
-			if($this->StratCsv->loadSyohinIchiranCsv($sj_opne)){
+			if($this->StratCsv->loadSyohinIchiranCsv($sj_opne, $depot_id)){
 				$this->Session->setFlash(__('たぶん登録がおわりました。確認してみてください。', true));
 			}else{
 				$this->Session->setFlash('ファイルを間違えています。');

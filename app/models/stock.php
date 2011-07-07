@@ -218,6 +218,16 @@ class Stock extends AppModel {
 	
 	//在庫を増やす
 	function Plus($subitem_id, $depot, $quantity, $user_id, $status){
+		//20110706 それぞれ値が無かったらfalseを返すように変更
+		//直したら、入庫されないとか出庫されない問題の解決の糸口が見えるかもしれない。
+		if(empty($subitem_id)) return false;
+		if(empty($depot)) return false;
+		if(empty($quantity)) return false;
+		if(empty($user_id)) return false;
+		if(empty($status)) return false;
+		
+		//DBとも付き合わせれば完璧だが、どうするかな、
+		
 		App::import('Model', 'Subitem');
 		$SubitemModel = new Subitem();
 		$params = array(
@@ -260,6 +270,13 @@ class Stock extends AppModel {
 
 	//在庫を減らす
 	function Mimus($subitem_id, $depot, $quantity, $user_id, $status){
+		//plusと同じ理由で設置
+		if(empty($subitem_id)) return false;
+		if(empty($depot)) return false;
+		if(empty($quantity)) return false;
+		if(empty($user_id)) return false;
+		if(empty($status)) return false;
+		
 		App::import('Model', 'StockLog');
     	$StockLogModel = new StockLog();
     	$params = array(

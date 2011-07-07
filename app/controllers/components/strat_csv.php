@@ -2,7 +2,7 @@
 class StratCsvComponent extends Object {
 
 	// SyohinIchiran.csv の内容、読み込み関数
-	function loadSyohinIchiranCsv($stream){
+	function loadSyohinIchiranCsv($stream, $depot_id){
 		$csv_header = fgetcsv($stream);
 		$starter = true;
 		if(trim($csv_header[0]) != '商品CD') $starter = false;
@@ -114,8 +114,9 @@ class StratCsvComponent extends Object {
 					));
 					$this->Subitem->save($save_subitem);
 					$subitem_id = $this->Subitem->getInsertID();
+					//新しいsubitemが登録される ＝ 単品管理は強制的に在庫増
 					if($find_item['Item']['stock_code'] == '3'){
-						$this->Stock->Plus($subitem_id, 910, 1, 1135, 1);
+						$this->Stock->Plus($subitem_id, $depot_id, 1, 1135, 1);
 					}
 					$this->Subitem->id = null;
 				}
@@ -227,7 +228,7 @@ class StratCsvComponent extends Object {
 				$subitem_id = $this->Subitem->getInsertID();
 				//単品管理を無理やり在庫増
 				if($stock_code == '3'){
-					$this->Stock->Plus($subitem_id, 910, 1, 1135, 1);
+					$this->Stock->Plus($subitem_id, $depot_id, 1, 1135, 1);
 				}
 				$this->Subitem->id = null;
 			}
@@ -1417,7 +1418,7 @@ function sj2bsnItemCsv($path, $file_name){
 				$SubitemModel->save($save_subitem);
 				$subitem_id = $SubitemModel->getInsertID();
 				if($find_item['Item']['stock_code'] == '3'){
-					$StockModel->Plus($subitem_id, 910, 1, 1135, 1);
+					$StockModel->Plus($subitem_id, $depot_id, 1, 1135, 1);
 				}
 				$SubitemModel->id = null;
 			}
@@ -1456,7 +1457,7 @@ function sj2bsnItemCsv($path, $file_name){
 			$SubitemModel->save($save_subitem);
 			$subitem_id = $SubitemModel->getInsertID();
 			if($stock_code == '3'){
-				$StockModel->Plus($subitem_id, 910, 1, 1135, 1);
+				$StockModel->Plus($subitem_id, $depot_id, 1, 1135, 1);
 			}
 			$SubitemModel->id = null;
 		}
