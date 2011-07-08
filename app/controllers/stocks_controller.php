@@ -238,50 +238,81 @@ class StocksController extends AppController {
 
 	//在庫移動プログラム　旧　→　新
 	function csv_add(){
-		if (!empty($this->data)) {
-			$is_depot = false;
-			$depot_old_no = mb_convert_kana($this->data['Stock']['depot'], 'a', 'UTF-8');
-			$depot_old_no = ereg_replace("[^0-9]", "", $depot_old_no);//半角数字以外を削除
-			$params = array(
-				'conditions'=>array('Depot.old_system_no'=>$depot_old_no),
-				'recursive'=>0
-			);
-			$is_depot = $this->Depot->find('first' ,$params);
-			if($is_depot){
-				$this->Stock->create();
-				$file_name = date('Ymd-His').'stock.csv';
-				rename($this->data['Stock']['upload_file']['tmp_name'], WWW_ROOT.'/files/temp/'.$file_name);
-				$sj_file_stream = file_get_contents(WWW_ROOT.'/files/temp/'.$file_name);
-				$sj_file_stream = mb_convert_encoding($sj_file_stream, 'UTF-8', 'ASCII,JIS,EUC-JP,SJIS');
-				$sj_rename_opne = fopen(WWW_ROOT.'/files/temp/en'.$file_name, 'w');
-				$result = fwrite($sj_rename_opne, $sj_file_stream);
-				fclose($sj_rename_opne);
-				$sj_opne = fopen(WWW_ROOT.'/files/temp/en'.$file_name, 'r');
-				$csv_header = fgetcsv($sj_opne);
-				while($sj_row = fgetcsv($sj_opne)){
-					$params = array(
-						'conditions'=>array('Subitem.jan'=>$sj_row[8]),
-						'recursive'=>0
-					);
-					$subitem = $this->Subitem->find('first' ,$params);
-					if(!$subitem){//なかった場合
-						$params = array(
-							'conditions'=>array('Item.name'=>$sj_row[0]),
-							'recursive'=>0
-						);
-						$item = $this->Item->find('first' ,$params);
-						if(!$item){//なかった場合
-							$item = $this->Item->NewItem($sj_row[0], $sj_row[7], $sj_row[5]);
-						}
-						$subitem = $this->Subitem->NewSubitem($item['Item']['id'], $sj_row[3], $sj_row[8], $sj_row[0]);
-					}
-					$qty = floor($sj_row[10]);
-					$this->Stock->Plus($subitem['Subitem']['id'], $is_depot['Depot']['id'], $qty, 1135, 2);
-				}
-			}else{//倉庫が無かったら
-				$this->Session->setFlash('半角数字倉庫がありません。販売管理システムの倉庫番号を半角数字で入力してください');
+		set_time_limit(30000);
+		$login_user = $this->Auth->user();
+		//20110707仕入原価の差替えを追加
+		if (!empty($this->data['Stock']['upload_file']['tmp_name'])) {
+			//ファイル変換読み込み部
+			$file_name = date('Ymd-His').'stock.csv';
+			rename($this->data['Stock']['upload_file']['tmp_name'], WWW_ROOT.'/files/temp/'.$file_name);
+			$sj_file_stream = file_get_contents(WWW_ROOT.'/files/temp/'.$file_name);
+			$sj_file_stream = mb_convert_encoding($sj_file_stream, 'UTF-8', 'ASCII,JIS,EUC-JP,SJIS');
+			$sj_rename_opne = fopen(WWW_ROOT.'/files/temp/en'.$file_name, 'w');
+			$result = fwrite($sj_rename_opne, $sj_file_stream);
+			fclose($sj_rename_opne);
+			$sj_opne = fopen(WWW_ROOT.'/files/temp/en'.$file_name, 'r');
+			//ファイル確認処理
+			$csv_header = fgetcsv($sj_opne);
+			$starter = true;
+			if(trim($csv_header[0]) != '型番コード') $starter = false;
+			if(trim($csv_header[1]) != '型番名') $starter = false;
+			if(trim($csv_header[2]) != 'サイズコード') $starter = false;
+			if(trim($csv_header[3]) != 'サイズ名') $starter = false;
+			if(trim($csv_header[4]) != 'ブランドコード') $starter = false;
+			if(trim($csv_header[5]) != 'ブランド名') $starter = false;
+			if(trim($csv_header[6]) != '小分類コード') $starter = false;
+			if(trim($csv_header[7]) != '小分類名') $starter = false;
+			if(trim($csv_header[8]) != '商品コード') $starter = false;
+			if(trim($csv_header[9]) != '商品名') $starter = false;
+			if(trim($csv_header[10]) != '在庫数') $starter = false;
+			if(trim($csv_header[11]) != '在庫金額') $starter = false;
+			if($starter == false){//ファイル違うよと
+				$this->data['Stock'] = null;
+				$this->Session->setFlash('ファイルが違うようです。');
 				$this->redirect(array('action'=>'csv_add'));
 			}
+			if($this->data['Stock']['process_type'] == 'genka'){//原価差替
+				// 原価差替え処理を追加
+				//subitem のcost(総平均原価)を差替える。理由1、メインは単品管理になりそうだから。理由2、型番別在庫.CSVがそもそもJANコード単位なので
+				//コスト差し替え処理、ついでに$subitem を返す。その中身はSubitemが無ければ登録しitemが無ければ登録する処理。
+				while($sj_row = fgetcsv($sj_opne)){
+					$subitem = $this->Subitem->costReplace($sj_row);
+				}
+				$this->Session->setFlash('原価差替えが終了しました。個々の小品番詳細画面を開いて確認してみて下さい。');
+				$this->data['Stock'] = null;
+			}elseif(!empty($this->data['Stock']['process_type'])){//在庫加算、在庫差替
+				$is_depot = false;
+				$depot_old_no = mb_convert_kana($this->data['Stock']['depot'], 'a', 'UTF-8');
+				$depot_old_no = ereg_replace("[^0-9]", "", $depot_old_no);//半角数字以外を削除
+				$params = array(
+					'conditions'=>array('Depot.old_system_no'=>$depot_old_no),
+					'recursive'=>0
+				);
+				$is_depot = $this->Depot->find('first' ,$params);
+				if($is_depot){
+					$this->Stock->create();
+					while($sj_row = fgetcsv($sj_opne)){
+						$subitem = $this->Subitem->costReplace($sj_row);//これ追加スッキリしたがな　あとテスト
+						$qty = floor($sj_row[10]);
+						if($this->data['Stock']['process_type'] == 'kasan'){//在庫加算
+							$this->Stock->Plus($subitem['Subitem']['id'], $is_depot['Depot']['id'], $qty, $login_user['User']['id'], 2);
+							$this->Session->setFlash('指定倉庫への在庫加算が終了しました。在庫一覧から確認してみて下さい。');
+							$this->data['Stock'] = null;
+						}elseif($this->data['Stock']['process_type'] == 'zaiko'){//在庫差替
+							//在庫差替え処理を追加
+							$conditions = array('Stock.subitem_id'=>$subitem['Subitem']['id'], 'Stock.depot_id'=>$is_depot['Depot']['id']);
+							$this->Stock->deleteAll($conditions, false, false);
+							$this->Stock->Plus($subitem['Subitem']['id'], $is_depot['Depot']['id'], $qty, $login_user['User']['id'], 2);
+							$this->Session->setFlash('在庫の差替えが完了しました。在庫一覧などから確認してみて下さい。');
+							$this->data['Stock'] = null;
+						}
+					}
+				}else{//倉庫が無かったら
+					$this->Session->setFlash('倉庫がありません。販売管理システムの倉庫番号を半角数字で入力してください');
+					$this->redirect(array('action'=>'csv_add'));
+				}
+			}
+			
 		}
 	}
 
