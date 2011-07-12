@@ -53,3 +53,6 @@ foreach ($depots as $depot):
  | 	<?php echo $paginator->numbers();?>
 	<?php echo $paginator->next(__('next', true).' >>', array(), null, array('class'=>'disabled'));?>
 </div>
+<ul>
+<li>検索は、「倉庫名」での部分一致検索になります。部門を検索する時にも便利です。</li>
+</ul>

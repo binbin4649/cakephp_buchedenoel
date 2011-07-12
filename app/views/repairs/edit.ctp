@@ -1,3 +1,13 @@
+<script type="text/javascript" charset="utf-8">
+j$(function(j$){
+	j$(".datepicker").datepicker({dateFormat:'yy-mm-dd'});
+});
+</script>
+<?php 
+	echo $javascript->link("jquery-1.5.1.min",false);
+	echo $javascript->link("jquery-ui-1.8.14.custom.min",false);
+	echo $javascript->link("ui/i18n/ui.datepicker-ja.js",false);
+?>
 <div class="repairs form">
 <p><?php echo $html->link(__('Return Item View', true), array('action'=>'view/'.$this->data['Repair']['id']));?></p>
 <?php echo $form->create('Repair');?>
@@ -44,30 +54,34 @@
 			'label'=>__('Estimate Status', true),
 			'empty'=>__('(Please Select)', true)
 		));
+		
+		
 		echo $form->input('Repair.reception_date', array(
-			'type'=>'date',
-			'dateFormat'=>'YMD',
+			'type'=>'text',
+			'size'=>8,
 			'label'=>__('Reception Date', true),
-			'minYear'=> MINYEAR,
-			'maxYear' => MAXYEAR,
-			'empty'=>'select'
+			'class'=>'datepicker'
 		));
 		echo $form->input('Repair.store_arrival_date', array(
-			'type'=>'date',
-			'dateFormat'=>'YMD',
+			'type'=>'text',
+			'size'=>8,
 			'label'=>__('Store Arrival Date', true),
-			'minYear'=> MINYEAR,
-			'maxYear' => MAXYEAR,
-			'empty'=>'select'
+			'class'=>'datepicker'
 		));
 		echo $form->input('factory_delivery_date', array(
-			'type'=>'date',
-			'dateFormat'=>'YMD',
+			'type'=>'text',
+			'size'=>8,
 			'label'=>__('Factory Delivery Date', true),
-			'minYear'=> MINYEAR,
-			'maxYear' => MAXYEAR,
-			'empty'=>'select'
+			'class'=>'datepicker'
 		));
+		echo $form->input('shipping_date', array(
+			'type'=>'text',
+			'size'=>8,
+			'label'=>__('Shipping Date', true),
+			'class'=>'datepicker'
+		));
+		
+		/*
 		echo $form->input('shipping_date', array(
 			'type'=>'date',
 			'dateFormat'=>'YMD',
@@ -76,6 +90,8 @@
 			'maxYear' => MAXYEAR,
 			'empty'=>'select'
 		));
+		*/
+		
 		echo $form->input('Repair.control_number');
 		echo $form->input('Repair.customer_name');
 		echo $form->input('Repair.customer_tel');

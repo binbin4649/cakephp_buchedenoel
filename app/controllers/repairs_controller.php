@@ -139,6 +139,10 @@ class RepairsController extends AppController {
 			$this->redirect(array('action'=>'index'));
 		}
 		if (!empty($this->data)) {
+			if(empty($this->data['Repair']['reception_date'])) $this->data['Repair']['reception_date'] = array('year'=>'','month'=>'','day'=>'');
+			if(empty($this->data['Repair']['store_arrival_date'])) $this->data['Repair']['store_arrival_date'] = array('year'=>'','month'=>'','day'=>'');
+			if(empty($this->data['Repair']['factory_delivery_date'])) $this->data['Repair']['factory_delivery_date'] = array('year'=>'','month'=>'','day'=>'');
+			if(empty($this->data['Repair']['shipping_date'])) $this->data['Repair']['shipping_date'] = array('year'=>'','month'=>'','day'=>'');
 			if ($this->Repair->save($this->data)) {
 				$this->Session->setFlash(__('The Repair has been saved', true));
 				$this->redirect(array('action'=>'view/'.$this->data['Repair']['id']));
