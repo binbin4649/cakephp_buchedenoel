@@ -1,7 +1,10 @@
 <script type="text/javascript" charset="utf-8">
-j$(function(j$){
-	j$(".datepicker").datepicker({dateFormat:'yy-mm-dd'});
-});
+//datepicker  ワンライナー
+j$(function(j$){j$(".datepicker").datepicker({dateFormat:'yy-mm-dd'});});
+//ラインハイライト 3ライナー
+j$(function(){var overcells = j$("table td"),hoverClass = "hover",current_r;
+overcells.hover(function(){var $this = j$(this);(current_r = $this.parent().children("table td")).addClass(hoverClass);},
+function(){ current_r.removeClass(hoverClass);});});
 </script>
 <?php 
 	echo $javascript->link("jquery-1.5.1.min",false);

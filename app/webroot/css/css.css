@@ -453,3 +453,7 @@ div.form .tagtag input{float: left;}
 	margin: 8px 0px;
 	font-weight: bold;
 }
+
+/*  */
+table td.hover {background:#B6CDE1;}
+table td.hover:hover {background:#B6CDE1;}

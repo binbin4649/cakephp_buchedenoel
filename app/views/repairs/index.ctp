@@ -1,3 +1,14 @@
+<script type="text/javascript" charset="utf-8">
+//ラインハイライト 3ライナー
+j$(function(){var overcells = j$("table td"),hoverClass = "hover",current_r;
+overcells.hover(function(){var $this = j$(this);(current_r = $this.parent().children("table td")).addClass(hoverClass);},
+function(){ current_r.removeClass(hoverClass);});});
+</script>
+<?php 
+	echo $javascript->link("jquery-1.5.1.min",false);
+	echo $javascript->link("jquery-ui-1.8.14.custom.min",false);
+	echo $javascript->link("ui/i18n/ui.datepicker-ja.js",false);
+?>
 <div class="repairs index">
 <div class="actions">
 	<ul>
