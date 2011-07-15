@@ -1,3 +1,4 @@
+<p><a href="javascript:history.back();">戻る</a></p>
 <?php
 if(!empty($print)){
 	echo '<br>今出力したピックリスト：<a href="'.$print['url'].'" target="_blank">'.$print['file'].'</a>';

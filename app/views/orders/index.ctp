@@ -163,11 +163,17 @@ foreach ($orders as $order):
 <h4>ピッキングリスト</h4>
 <ul>
 	<li><?php echo $html->link(__('Pick List Old', true), array('controller'=>'orders', 'action'=>'picklist')); ?></li>
+</ul>
+<ul>
 	<li><?php echo $addForm->switchAnchor('orders/picklist/retail', array(), 'Reservation is in a state and outputs a list of picking for the custom order. Are you all right?', 'CustomOrder PickList OutPut', null); ?></li>
 	<li><?php echo $addForm->switchAnchor('orders/picklist/ws', array(), 'Reservation is in a state and outputs a list of picking for the order. Are you all right?', 'Order PickList OutPut', null); ?></li>
 </ul>
 <hr>
 <ul>
 	<li>Idは受注番号、倉庫は倉庫番号、出荷先は出荷先番号での検索になります。</li>
-	<li>本日分出荷リストCSV出力：今日の出荷日が登録されている受注が、ステータスに係らず全て出力される。本日分の出荷を確認するのに使う。</li>
+	<li><b>本日分出荷リストCSV出力</b>：今日の出荷日が登録されている受注が、ステータスに係らず全てCSV出力される。本日分の出荷を確認するのに使う。</li>
+	<li><b>出力済みのピッキングリスト</b>：出力済みのピッキングリストのページに移動します。</li>
+	<li><b>受注（WS）ピッキングリスト出力</b>：卸用受注データの「未完」ステータスを「PL印刷済」に変更しピッキングリストPXDを出力する。</li>
+	<li>卸用受注データ＝出荷先が登録されている受注データ。逆に登録されていないデータが店舗用と判断されます。</li>
+	<li><b>客注（店舗）ピッキングリスト出力</b>：店舗向け用のピッキングリストを出力し、「未完」ステータスを「PL印刷済」に変更します。</li>
 </ul>
