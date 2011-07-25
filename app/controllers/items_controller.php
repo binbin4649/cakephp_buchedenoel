@@ -215,6 +215,7 @@ class ItemsController extends AppController {
 		if(!empty($view_data['Item']['itemproperty']))$view_data['Item']['itemproperty'] = $itemproperty[$view_data['Item']['itemproperty']];
 		if(!empty($view_data['Item']['itemtype']))$view_data['Item']['itemtype'] = $itemtype[$view_data['Item']['itemtype']];
 		//メイン画像を先頭に持ってくる
+		$itemimages = array();
 		if(isset($view_data['ItemImage'])){
 			foreach($view_data['ItemImage'] as $images){
 				if($images['id'] == $view_data['Item']['itemimage_id']){
@@ -225,7 +226,6 @@ class ItemsController extends AppController {
 			}
 		}
 		if(isset($itemimages))$this->set('itemimages', $itemimages);
-
 		//Subitemページネーター
 		$conditions = array();
 		$this->Subitem->recursive = 0;

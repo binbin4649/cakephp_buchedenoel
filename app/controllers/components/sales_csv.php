@@ -139,7 +139,7 @@ class SalesCsvComponent extends Object {
 		//部門別
 		$section_total = array(); //部門番号=>当月合計
 		$prev_section_month = array(); //昨年同月実績
-		$section_month_cont = array(); //昨対%
+		$section_month_cont = array(); //前比%
 		$section_month_mark = array(); //今月目標
 		$section_mark_cont = array(); //達成率
 		$this_term = array(); //今期実績
@@ -150,7 +150,7 @@ class SalesCsvComponent extends Object {
 		$prev_sction_total = array(); // 昨年同日実績合計 (6-6)
 		$prev_section_comp = array(); // 昨年対比 (6-3)
 		$section_comp_profit = array(); //昨年差益 今期-前期 (6-4)
-		$section_comp_exp = array(); //昨対見込 (6-5)
+		$section_comp_exp = array(); //前比見込 (6-5)
  		$section_exp_avg = array(); //平均見込 (6-7)
 		$thisdays_mark = array();
 		
@@ -160,7 +160,7 @@ class SalesCsvComponent extends Object {
 		$month_mark_total = 0; //目標金額合計
 		$all_mark_exp = 0; //目標見込の合計
 		$all_mark_exp_avg = 0; //目標見込の平均
-		$prev_total = 0; //昨年実績 同日昨対 合計
+		$prev_total = 0; //昨年実績 同日前比 合計
 		
 		//総合計
 		$term_all_total = 0; //今期 合計
@@ -168,7 +168,7 @@ class SalesCsvComponent extends Object {
 		$section_mark_total_rate = 0; //今期の目標 達成率
 		//$all_comp_profit = 0; //総昨年差益 今期-前期
 		$all_comp_profit = 0; //昨年差益 今期-前期
-		$all_comp_exp = 0; //昨対見込
+		$all_comp_exp = 0; //前比見込
 		
 		//集計系と部門積上げ系 下の配列は後から上に移植する
 		$stackAmount = array('days_total'=>$days_total, 'prev_month_total'=>$prev_month_total, 'month_mark_total'=>$month_mark_total,
@@ -184,12 +184,12 @@ class SalesCsvComponent extends Object {
 			'thisdays_mark'=>$thisdays_mark, 
 		);
 		//20110616
-		//昨対の合計について、ここで計算しているようだが、表には出ていない？
-		//たしか途中までやったような気がするので確認する。できたらついでに、昨対だけキャッシュするとか、なんとか考えよう。
+		//前比の合計について、ここで計算しているようだが、表には出ていない？
+		//たしか途中までやったような気がするので確認する。できたらついでに、前比だけキャッシュするとか、なんとか考えよう。
 		$thisdays_mark_sub = 0; //目標日計 3点合計
 		$section_mark_exp_sub = 0;//目標見込 3点合計
-		$section_comp_profit_sub = 0;//昨対差益 3点合計
-		$section_comp_exp_sub = 0;//昨対見込 3点合計
+		$section_comp_profit_sub = 0;//前比差益 3点合計
+		$section_comp_exp_sub = 0;//前比見込 3点合計
 		$prev_sction_total_sub = 0;//昨年実績 3点合計
 		$section_exp_avg_sub = 0;//平均見込 3点合計
 		$passd_term_arr = $this->DateCalComponent->this_passd_term_arr($this->month);
@@ -220,8 +220,8 @@ class SalesCsvComponent extends Object {
 		$stackSection['section_exp_avg']['kizon_shoukei'] = $section_exp_avg_sub;
 		$thisdays_mark_sub = 0; //目標日計 3点合計
 		$section_mark_exp_sub = 0;//目標見込 3点合計
-		$section_comp_profit_sub = 0;//昨対差益 3点合計
-		$section_comp_exp_sub = 0;//昨対見込 3点合計
+		$section_comp_profit_sub = 0;//前比差益 3点合計
+		$section_comp_exp_sub = 0;//前比見込 3点合計
 		$prev_sction_total_sub = 0;//昨年実績 3点合計
 		$section_exp_avg_sub = 0;//平均見込 3点合計
 		$stackAmount['mokuhyo_shoukei'] = 0;
@@ -255,8 +255,8 @@ class SalesCsvComponent extends Object {
 		$stackSection['section_exp_avg']['new_shoukei'] = $section_exp_avg_sub;
 		$thisdays_mark_sub = 0; //目標日計 3点合計
 		$section_mark_exp_sub = 0;//目標見込 3点合計
-		$section_comp_profit_sub = 0;//昨対差益 3点合計
-		$section_comp_exp_sub = 0;//昨対見込 3点合計
+		$section_comp_profit_sub = 0;//前比差益 3点合計
+		$section_comp_exp_sub = 0;//前比見込 3点合計
 		$prev_sction_total_sub = 0;//昨年実績 3点合計
 		$section_exp_avg_sub = 0;//平均見込 3点合計
 		$stackAmount['mokuhyo_shoukei'] = 0;
@@ -290,8 +290,8 @@ class SalesCsvComponent extends Object {
 		$stackSection['section_exp_avg']['oversea_shoukei'] = $section_exp_avg_sub;
 		$thisdays_mark_sub = 0; //目標日計 3点合計
 		$section_mark_exp_sub = 0;//目標見込 3点合計
-		$section_comp_profit_sub = 0;//昨対差益 3点合計
-		$section_comp_exp_sub = 0;//昨対見込 3点合計
+		$section_comp_profit_sub = 0;//前比差益 3点合計
+		$section_comp_exp_sub = 0;//前比見込 3点合計
 		$prev_sction_total_sub = 0;//昨年実績 3点合計
 		$section_exp_avg_sub = 0;//平均見込 3点合計
 		$stackAmount['mokuhyo_shoukei'] = 0;
@@ -384,7 +384,7 @@ class SalesCsvComponent extends Object {
 		$line[] = '昨年実績,'.implode(',', $prev_section_month).','.$prev_month_total;
 		$line[] = '今年実績,'.implode(',', $section_total).','.$days_total;
 		$section_cont_avg = $this->TotalComponent->fprate2($days_total, $prev_month_total);
-		$line[] = '昨対%,'.implode(',', $section_month_cont).','.$section_cont_avg;
+		$line[] = '前比%,'.implode(',', $section_month_cont).','.$section_cont_avg;
 		$section_cont_ranking = $this->TotalComponent->not_chang_rank($section_month_cont, $tenpo_count);
 		$line[] = '順位,'.implode(',', $section_cont_ranking);
 		$line[] = ',';
@@ -415,9 +415,9 @@ class SalesCsvComponent extends Object {
 		$line[] = '目標日計,'.implode(',', $thisdays_mark).',';
 		$line[] = '目標%,'.implode(',', $section_mark_rate).','.$section_mark_total_rate;
 		$line[] = '目標見込,'.implode(',', $section_mark_exp).','.$all_mark_exp;
-		$line[] = '昨対%,'.implode(',', $prev_section_comp).','.$prev_section_comp_avg;
-		$line[] = '昨対差益,'.implode(',', $section_comp_profit).','.$all_comp_profit;
-		$line[] = '昨対見込,'.implode(',', $section_comp_exp).','.$all_comp_exp;
+		$line[] = '前比%,'.implode(',', $prev_section_comp).','.$prev_section_comp_avg;
+		$line[] = '前比差益,'.implode(',', $section_comp_profit).','.$all_comp_profit;
+		$line[] = '前比見込,'.implode(',', $section_comp_exp).','.$all_comp_exp;
 		$line[] = '昨年実績,'.implode(',', $prev_sction_total).','.$prev_total;
 		$all_exp_avg = floor(($all_mark_exp + $all_comp_exp) / 2);
 		$line[] = '平均見込,'.implode(',', $section_exp_avg).','.$all_exp_avg;
@@ -462,7 +462,7 @@ class SalesCsvComponent extends Object {
 		$stackSection['prev_section_month'][$section_id] = $prev_term_month_total;//部門別 昨年 同月 合計
 		$stackAmount['prev_month_total'] = $stackAmount['prev_month_total'] + $prev_term_month_total;//昨年 合計
 		$stackAmount['sections_sakunen'] = $stackAmount['sections_sakunen'] + $prev_term_month_total;
-		$stackSection['section_month_cont'][$section_id] = $this->TotalComponent->fprate2($this_month_total, $prev_term_month_total);//部門別 昨対％
+		$stackSection['section_month_cont'][$section_id] = $this->TotalComponent->fprate2($this_month_total, $prev_term_month_total);//部門別 前比％
 		if(empty($outReport[$section_id]['this_month']['month_mark'])) $outReport[$section_id]['this_month']['month_mark'] = 0;
 		$this_month_mark = $outReport[$section_id]['this_month']['month_mark'];//当月目標
 		$stackSection['section_month_mark'][$section_id] = $this_month_mark;//部門別 当月目標
@@ -489,7 +489,7 @@ class SalesCsvComponent extends Object {
 		$stackSection['prev_section_comp'][$section_id] = str_replace('%', '', $stackSection['prev_section_comp'][$section_id]);
 		$this_section_comp_exp = floor($prev_term_month_total * ($stackSection['prev_section_comp'][$section_id] / 100));
 		
-		$stackSection['section_comp_exp'][$section_id] = $this_section_comp_exp;//部門別昨対見込
+		$stackSection['section_comp_exp'][$section_id] = $this_section_comp_exp;//部門別前比見込
 		
 		$stackAmount['all_comp_exp'] = $stackAmount['all_comp_exp'] + $this_section_comp_exp;
 		$stackSection['section_exp_avg'][$section_id] = floor(($this_section_mark_exp + $this_section_comp_exp) / 2);
