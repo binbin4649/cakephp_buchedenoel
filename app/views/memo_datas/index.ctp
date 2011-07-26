@@ -22,7 +22,7 @@ foreach ($this->viewVars[$category] as $memoData):
 			<?php echo $memoData['MemoData']['id']; ?>
 		</td>
 		<td>
-			<?php echo $html->link(mb_substr($memoData['MemoData']['name'], 0, 30), array('action'=>'view', $memoData['MemoData']['id'])); ?>
+			<?php echo $html->link(mb_substr($memoData['MemoData']['name'], 0, 20), array('action'=>'view', $memoData['MemoData']['id'])); ?>
 		</td>
 		<td>
 			<?php echo $html->link($memoCategories[$memoData['MemoData']['memo_category_id']], array('action'=>'category_index', $memoData['MemoData']['memo_category_id'])); ?>
@@ -31,10 +31,11 @@ foreach ($this->viewVars[$category] as $memoData):
 			<?php echo $memoData['MemoData']['top_flag']; ?>
 		</td>
 		<td>
+			<?php echo $memoData['MemoData']['created_user_section']; ?>:
 			<?php echo $memoData['MemoData']['created_user']; ?>
 		</td>
 		<td>
-			<?php echo $memoData['MemoData']['updated']; ?>
+			<?php echo mb_substr($memoData['MemoData']['updated'], 5, 11); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
