@@ -42,7 +42,7 @@ class CleaningComponent extends Object {
 		$section_name = str_replace('天神インキューブ', '天神インキュ', $section_name);
 		$section_name = str_replace('梅田コムサストア', '梅田コムサ', $section_name);
 		$section_name = str_replace('横浜赤レンガ倉庫', '横浜赤レンガ', $section_name);
-		
+		$section_name = str_replace('越谷レイクタウンアウトレット店', '越谷アウトレット', $section_name);
         return $section_name;
     }
 

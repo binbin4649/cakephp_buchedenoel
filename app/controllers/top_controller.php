@@ -19,11 +19,11 @@ class TopController extends AppController {
 		foreach($memo_datas as $memo_data){
 			$params = array(
 				'conditions'=>array('User.id'=>$memo_data['MemoData']['created_user']),
-				'recursive'=>0,
-    			'fields'=>array('User.name')
+				'recursive'=>0
 			);
 			$created_name = $this->User->find('first', $params);
 			$memo_data['MemoData']['created_user'] = $created_name['User']['name'];
+			$memo_data['MemoData']['created_user_section'] = $this->Section->cleaningName($created_name['User']['section_id']);
 			$memo_datas_ext[] = $memo_data;
 		}
 		$this->set('memoDatas', $memo_datas_ext);
@@ -61,11 +61,11 @@ class TopController extends AppController {
 		foreach($memo_datas as $memo_data){
 			$params = array(
 				'conditions'=>array('User.id'=>$memo_data['MemoData']['created_user']),
-				'recursive'=>0,
-    			'fields'=>array('User.name')
+				'recursive'=>0
 			);
 			$created_name = $this->User->find('first', $params);
 			$memo_data['MemoData']['created_user'] = $created_name['User']['name'];
+			$memo_data['MemoData']['created_user_section'] = $this->Section->cleaningName($created_name['User']['section_id']);
 			$memo_datas_ext[] = $memo_data;
 		}
 		$this->set('onlyDatas', $memo_datas_ext);
