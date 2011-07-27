@@ -26,7 +26,7 @@ msgid "Normal"
 msgstr "通常"
 
 msgid "Top Expression"
-msgstr "表示"
+msgstr "トップ表示"
 
 msgid "Hokkaido"
 msgstr "北海道"
