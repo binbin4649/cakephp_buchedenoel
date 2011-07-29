@@ -161,11 +161,12 @@ class PricetagDetailsController extends AppController {
 	}
 
 	function getData(){
+		$this->data['OrderDateil']['AutoItemName'] = strtolower($_GET["q"]);
 		$this->layout = 'ajax';
 		$params = array(
-			'conditions'=>array('Item.name LIKE'=>'%'.$this->data['PricetagDetail']['AutoItemName'].'%'),
+			'conditions'=>array('Item.name LIKE'=>$this->data['PricetagDetail']['AutoItemName'].'%'),
 			'recursive'=>0,
-			'limit'=>20,
+			'limit'=>30,
 			'order'=>array('Item.name'=>'asc'),
 			'fields'=>array('Item.name')
 		);

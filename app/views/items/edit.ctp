@@ -1,6 +1,11 @@
+<script type="text/javascript">
+$(function() {
+  $('#getData').autocomplete('/buchedenoel/order_dateils/getData');
+});
+</script>
 <?php
-	echo $javascript->link("prototype",false);
-	echo $javascript->link("scriptaculous",false);
+echo $javascript->link("jquery",false);
+echo $javascript->link("jquery.autocomplete",false);
 ?>
 <div class="items form">
 <p><?php echo $html->link(__('Return Item View', true), array('action'=>'view/'.$this->data['Item']['id']));?></p>
@@ -19,7 +24,7 @@
 		));
 		echo '<div class="separater"><p>Auto Complete</p>';
 		echo '<label>Pair Item</label>';
-		echo $ajax->autocomplete('AutoItemName',"getData",array('value'=>$pairItem['Item']['name']));
+		echo $form->input('Item.AutoItemName', array('type'=>'text','div'=>false,'label'=>false,'size'=>30,'id'=>'getData'));
 		if(!empty($this->validationErrors['Item']['pair_id'])) echo $this->validationErrors['Item']['pair_id'];
 		echo '</div>';
 		echo $form->input('Item.price', array(

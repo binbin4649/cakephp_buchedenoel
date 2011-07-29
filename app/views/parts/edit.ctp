@@ -1,6 +1,12 @@
+<script type="text/javascript">
+$(function() {
+  $('#getData').autocomplete('/buchedenoel/order_dateils/getData');
+});
+</script>
+
 <?php
-	echo $javascript->link("prototype",false);
-	echo $javascript->link("scriptaculous",false);
+echo $javascript->link("jquery",false);
+echo $javascript->link("jquery.autocomplete",false);
 ?>
 <div class="parts form">
 <?php echo $form->create('Part');?>
@@ -13,7 +19,7 @@
  	<label><?php __('Item Name');?></label>
 	<?php
 		echo $form->input('id');
-		echo $ajax->autocomplete('AutoItemName',"getData",array('value'=>$item['Item']['name']));
+		echo $form->input('Part.AutoItemName', array('type'=>'text','div'=>false,'label'=>false,'size'=>30,'id'=>'getData','value'=>$item['Item']['name']));
 		echo $form->input('Part.quantity', array(
 			'label'=>__('Quantity', true),
 			'size'=>4

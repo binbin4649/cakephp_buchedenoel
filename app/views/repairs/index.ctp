@@ -1,7 +1,7 @@
 <script type="text/javascript" charset="utf-8">
 //ラインハイライト 3ライナー
-j$(function(){var overcells = j$("table td"),hoverClass = "hover",current_r;
-overcells.hover(function(){var $this = j$(this);(current_r = $this.parent().children("table td")).addClass(hoverClass);},
+$(function(){var overcells = $("table td"),hoverClass = "hover",current_r;
+overcells.hover(function(){var $this = $(this);(current_r = $this.parent().children("table td")).addClass(hoverClass);},
 function(){ current_r.removeClass(hoverClass);});});
 </script>
 <?php 

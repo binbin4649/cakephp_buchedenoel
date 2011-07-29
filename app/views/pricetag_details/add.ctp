@@ -1,6 +1,11 @@
+<script type="text/javascript">
+$(function() {
+  $('#getData').autocomplete('/buchedenoel/order_dateils/getData');
+});
+</script>
 <?php
-	echo $javascript->link("prototype",false);
-	echo $javascript->link("scriptaculous",false);
+echo $javascript->link("jquery",false);
+echo $javascript->link("jquery.autocomplete",false);
 ?>
 <h2><?php __('Add PricetagDetail');?></h2>
 <?php
@@ -16,7 +21,7 @@
  	<?php
  	echo $form->create('PricetagDetail');
  	echo '品番：';
-	echo $ajax->autocomplete('AutoItemName',"getData",array());
+	echo $form->input('PricetagDetail.AutoItemName', array('type'=>'text','div'=>false,'label'=>false,'size'=>30,'id'=>'getData'));
 	echo $form->hidden('step', array('value'=>'1'));
 	echo '<input type="submit" value="Enter" />　';
 	echo $html->link(__('Reset', true), array('action'=>'add'));

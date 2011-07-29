@@ -238,6 +238,7 @@ class OrderingsDetailsController extends AppController {
 	}//add終わり
 
 	function getData(){
+		$this->data['OrderingsDetail']['AutoItemName'] = strtolower($_GET["q"]);
 		$this->layout = 'ajax';
 		$params = array(
 			'conditions'=>array('Item.name LIKE'=>'%'.$this->data['OrderingsDetail']['AutoItemName'].'%'),

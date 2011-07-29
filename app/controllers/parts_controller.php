@@ -74,13 +74,14 @@ class PartsController extends AppController {
 	}
 
 	function getData(){
+		$this->data['Part']['AutoItemName'] = strtolower($_GET["q"]);
 		$this->layout = 'ajax';
 		//入力データは、$this->dataで参照できる。
 		//$this->set("typed",$this->data['Part']['AutoItemName']);
 		$params = array(
-			'conditions'=>array('Item.name LIKE'=>'%'.$this->data['Part']['AutoItemName'].'%'),
+			'conditions'=>array('Item.name LIKE'=>$this->data['Part']['AutoItemName'].'%'),
 			'recursive'=>0,
-			'limit'=>20,
+			'limit'=>30,
 			'order'=>array('Item.name'=>'asc'),
 			'fields'=>array('Item.name')
 		);

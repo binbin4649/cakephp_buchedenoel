@@ -1,6 +1,12 @@
+<script type="text/javascript">
+$(function() {
+  $('#getData').autocomplete('/buchedenoel/order_dateils/getData');
+});
+</script>
 <?php
-	echo $javascript->link("prototype",false);
-	echo $javascript->link("scriptaculous",false);
+	echo $javascript->link("jquery",false);
+	echo $javascript->link("jquery.autocomplete",false);
+	
 	/*
 	if(empty($span_no)) $span_no = '';
 	if(empty($discount)) $discount = '';
@@ -149,9 +155,9 @@
 	
 	echo '</td></tr></table>';
  	echo '品番：';
-	echo $ajax->autocomplete('AutoItemName',"getData",array());
+	echo $form->input('OrderDateil.AutoItemName', array('type'=>'text','div'=>false,'label'=>false,'size'=>30,'id'=>'getData'));
 	echo $form->hidden('step', array('value'=>'1'));
-	echo '<input type="submit" value="Enter" />　';
+	echo '　<input type="submit" value="Enter" />　';
 	echo $html->link(__('Reset', true), array('action'=>'add/reset'));
 	if(!empty($subitems)){
 		echo $form->create('OrderDateil', array('action'=>'add'));

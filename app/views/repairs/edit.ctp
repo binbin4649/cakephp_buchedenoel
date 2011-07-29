@@ -1,6 +1,6 @@
 <script type="text/javascript" charset="utf-8">
-j$(function(j$){
-	j$(".datepicker").datepicker({dateFormat:'yy-mm-dd'});
+$(function($){
+	$(".datepicker").datepicker({dateFormat:'yy-mm-dd'});
 });
 </script>
 <?php 

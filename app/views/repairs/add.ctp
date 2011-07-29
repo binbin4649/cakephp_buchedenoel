@@ -1,6 +1,11 @@
+<script type="text/javascript">
+$(function() {
+  $('#getData').autocomplete('/buchedenoel/order_dateils/getData');
+});
+</script>
 <?php
-	echo $javascript->link("prototype",false);
-	echo $javascript->link("scriptaculous",false);
+echo $javascript->link("jquery",false);
+echo $javascript->link("jquery.autocomplete",false);
 ?>
 <div class="repairs form">
 <?php echo $form->create('Repair');?>
@@ -9,7 +14,7 @@
 	<?php
 		echo '<div class="separater"><p>Auto Complete</p>';
 		echo '<label>品番</label>';
-		echo $ajax->autocomplete('AutoItemName',"getData",array());
+		echo $form->input('Repair.AutoItemName', array('type'=>'text','div'=>false,'label'=>false,'size'=>30,'id'=>'getData'));
 		echo '</div>';
 		echo $form->input('Repair.size',array(
 			'size'=>4

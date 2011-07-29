@@ -1,9 +1,9 @@
 <script type="text/javascript" charset="utf-8">
 //datepicker  ワンライナー
-j$(function(j$){j$(".datepicker").datepicker({dateFormat:'yy-mm-dd'});});
+$(function($){$(".datepicker").datepicker({dateFormat:'yy-mm-dd'});});
 //ラインハイライト 3ライナー
-j$(function(){var overcells = j$("table td"),hoverClass = "hover",current_r;
-overcells.hover(function(){var $this = j$(this);(current_r = $this.parent().children("table td")).addClass(hoverClass);},
+$(function(){var overcells = $("table td"),hoverClass = "hover",current_r;
+overcells.hover(function(){var $this = $(this);(current_r = $this.parent().children("table td")).addClass(hoverClass);},
 function(){ current_r.removeClass(hoverClass);});});
 </script>
 <?php 
@@ -205,7 +205,7 @@ echo $form->checkbox($modelName.'.csv');
 	<th>数</th>
 	<th>
 	<?php if($addForm->opneUser(open_users(), $opneuser, 'access_authority')): ?>
-	<input type="checkbox" id="checkbox_all" onclick="j$('input[type=checkbox][class=something]').attr('checked', j$('#checkbox_all').attr('checked'));" />
+	<input type="checkbox" id="checkbox_all" onclick="$('input[type=checkbox][class=something]').attr('checked', $('#checkbox_all').attr('checked'));" />
 	<?php endif; ?>
 	</th>
 </tr>
