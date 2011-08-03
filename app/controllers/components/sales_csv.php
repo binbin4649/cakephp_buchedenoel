@@ -348,7 +348,11 @@ class SalesCsvComponent extends Object {
 		foreach($sections as $section_id=>$section_name){
 			foreach($term_section_total as $key=>$value){
 				if($section_id == $key){
-					$term_section_avg[$key] = floor($value / $passd_month);
+					if($value <= 0){
+						$term_section_avg[$key] = 0;
+					}else{
+						$term_section_avg[$key] = floor($value / $passd_month);
+					}
 					$avg_total = $avg_total + $term_section_avg[$key];
 				}
 			}
