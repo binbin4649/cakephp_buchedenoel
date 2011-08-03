@@ -43,10 +43,10 @@
 //EOF
 
 //在庫が無くても永久に取り置き出来るモード、TRUEで在庫とか無視、通常はFALSE
-define('EMERGENCY_LANDING', FALSE);
+define('EMERGENCY_LANDING', TRUE);
 
 //AmountでOrderを無視して売上合計を直接入力するモード
-define('AMOUNT_LANDING', FALSE);
+define('AMOUNT_LANDING', TRUE);
 
 define('MAXYEAR', 2011);
 define('MINYEAR', 2009);
