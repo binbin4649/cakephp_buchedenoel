@@ -343,16 +343,16 @@ class SalesCsvComponent extends Object {
 		
 		$term_section_avg = array(); //部門別 月平均額
 		$passd_month = $this->DateCalComponent->this_passd_term($this->month);
-		
+		//Warning: Division by zero に対応する2回目。this_passd_termが怪しいので以下のコードを仕込む。8月限定。
+		if($passd_month == false){
+			$this->log('sales_csv.php : '.$this->month, LOG_ERROR);
+			$passd_month = 5;
+		}
 		$avg_total = 0;
 		foreach($sections as $section_id=>$section_name){
 			foreach($term_section_total as $key=>$value){
 				if($section_id == $key){
-					if($value <= 0){
-						$term_section_avg[$key] = 0;
-					}else{
-						$term_section_avg[$key] = floor($value / $passd_month);
-					}
+					$term_section_avg[$key] = floor($value / $passd_month);
 					$avg_total = $avg_total + $term_section_avg[$key];
 				}
 			}
