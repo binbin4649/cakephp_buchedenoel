@@ -119,6 +119,13 @@ class DestinationsController extends AppController {
 			$this->redirect(array('action'=>'index'));
 		}
 	}
+	
+	//thickbox用
+	function selectid(){
+		$this->layout = 'senddata';
+		$this->index();
+	}
+	
 
 }
 ?>
