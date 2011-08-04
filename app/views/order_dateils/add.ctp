@@ -6,6 +6,7 @@ $(function() {
 <?php
 	echo $javascript->link("jquery",false);
 	echo $javascript->link("jquery.autocomplete",false);
+	echo $javascript->link("thickbox",false);
 	
 	/*
 	if(empty($span_no)) $span_no = '';
@@ -131,7 +132,8 @@ $(function() {
 	));
 	echo $contact4['User']['name'];
  	echo '</td></tr><tr><td>';
-	echo '　<a href="/buchedenoel/destinations" target="_blank">出荷先</a>：';
+ 	echo '　<a href="/buchedenoel/destinations/selectid?keepThis=true&TB_iframe=true&height=400&width=550" title="出荷先選択" class="thickbox">出荷先</a>';
+	//echo '　<a href="/buchedenoel/destinations" target="_blank">出荷先</a>：';
 	echo $form->input("OrderDateil.destination_id", array(
 		'type'=>'text',
 		'div'=>false,

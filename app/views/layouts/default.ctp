@@ -9,6 +9,7 @@ echo $html->css('css');
 echo $html->css("cake.ajax");
 echo $html->css("redmond/jquery-ui-1.8.14.custom");
 echo $html->css("jquery.autocomplete");
+echo $html->css('thickbox');
 echo $scripts_for_layout;
 ?>
 <style type="text/css">
