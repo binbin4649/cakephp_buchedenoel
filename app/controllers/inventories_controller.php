@@ -6,8 +6,17 @@ class InventoriesController extends AppController {
 //	var $uses = array('Inventory');
 
 	function index() {
+		$conditions = array();
+		if (!empty($this->data['Inventory']['section_id']) or !empty($this->data['Inventory']['status'])) {
+			$this->data['Inventory']['section_id'] = mb_convert_kana($this->data['Inventory']['section_id'], 'a', 'UTF-8');
+			$this->data['Inventory']['section_id'] = ereg_replace("[^0-9]", "", $this->data['Inventory']['section_id']);//半角数字以外を削除;
+			$section_id = $this->data['Inventory']['section_id'];
+			$seach_status = $this->data['Inventory']['status'];
+			if(!empty($section_id)) $conditions['AND'][] = array('Inventory.section_id'=>$section_id);
+			if(!empty($seach_status)) $conditions['AND'][] = array('Inventory.status'=>$seach_status);
+		}
 		$this->paginate = array(
-			'conditions'=>array(),
+			'conditions'=>$conditions,
 			'limit'=>50,
 			'order'=>array('Inventory.updated'=>'desc')
 		);

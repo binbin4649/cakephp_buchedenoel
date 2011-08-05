@@ -1,5 +1,21 @@
 <div class="inventories index">
 <h2><?php __('Inventories');?></h2>
+<?php
+echo $form->create('Inventory' ,array('action'=>'index'));
+echo '部門id';
+echo $form->text('Inventory.section_id');
+echo '　';
+echo $form->input('Inventory.status', array(
+	'type'=>'select',
+	'options'=>$status,
+	'label'=>__('Status', true),
+	'empty'=>__('(Please Select)', true),
+	'div'=>false
+));
+echo '　';
+echo $form->submit('Seach', array('div'=>false));
+echo $form->end();
+?>
 <p>
 <?php
 echo $paginator->counter(array(
