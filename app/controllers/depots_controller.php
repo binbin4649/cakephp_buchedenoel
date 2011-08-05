@@ -26,7 +26,11 @@ class DepotsController extends AppController {
 			);
 		}
 		$this->Depot->recursive = 0;
-		$this->set('depots', $this->paginate());
+		$depots = $this->paginate();
+		foreach($depots as $key=>$value){
+			$depots[$key]['Section']['name'] = $this->Section->cleaningName($value['Section']['id']);
+		}
+		$this->set('depots', $depots);
 	}
 
 	function view($id = null) {
@@ -92,6 +96,12 @@ class DepotsController extends AppController {
 			$this->redirect(array('action'=>'index'));
 		}
 	}
+	
+	function selectid(){
+		$this->layout = 'senddata';
+		$this->index();
+	}
+
 
 }
 ?>

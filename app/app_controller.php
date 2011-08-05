@@ -37,7 +37,7 @@ class AppController extends Controller {
     //var $components = array('Session', 'Auth', 'NoHash', 'DebugKit.Toolbar');
     var $components = array('Session', 'Auth', 'NoHash');
     var $uses = array('User', 'Section', 'AmountItem', 'AmountSection', 'AmountUser');
-    var $helpers = array('Html', 'Form', 'AddForm');
+    var $helpers = array('Html', 'Form', 'AddForm', 'Javascript', 'Ajax');
 
     function beforeFilter(){
 

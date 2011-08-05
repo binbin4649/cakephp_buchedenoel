@@ -38,7 +38,7 @@ foreach ($destinations as $destination):
 		<td>
 			<?php //echo $html->link($destination['Destination']['name'], array('action'=>'view', $destination['Destination']['id'])); ?>
 			<?php 
-				echo $html->link($destination['Destination']['name'],'/order_dateils/add/destination/'.$destination['Destination']['id'], array('class'=>'senddata', 'value'=>$destination['Destination']['id']));
+				echo $html->link($destination['Destination']['name'],'', array('class'=>'senddata', 'value'=>$destination['Destination']['id']));
 			?>
 		</td>
 		<td>
@@ -70,5 +70,4 @@ $(function(){
 		window.parent.tb_remove();
 	});
 });
-
 </script>

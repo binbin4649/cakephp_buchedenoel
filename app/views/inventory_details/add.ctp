@@ -1,4 +1,6 @@
 <?php
+	echo $javascript->link("jquery",false);
+	echo $javascript->link("thickbox",false);
 	extract($this->data);
 	$inventory_id =  $Inventory['id'];
 	echo $html->link('棚卸番号:'.$inventory_id.'　へ戻る', array('controller'=>'inventories', 'action'=>'view', $inventory_id));
@@ -19,7 +21,7 @@
 			echo $form->hidden('InventoryDetail.span', array('value'=>$InventoryDetail['span']));
 			echo $form->hidden('InventoryDetail.face', array('value'=>$InventoryDetail['face']));
 		}else{
-			echo '<a href="/buchedenoel/depots" target="_blank">倉庫</a>：';
+			echo '　<a href="/buchedenoel/depots/selectid?keepThis=true&TB_iframe=true&height=400&width=550" title="棚卸倉庫選択" class="thickbox">倉庫</a>';
 			echo $form->input('InventoryDetail.depot', array(
 				'type'=>'text',
 				'div'=>false,

@@ -2,7 +2,6 @@
 class OrderDateilsController extends AppController {
 
 	var $name = 'OrderDateils';
-	var $helpers = array("Javascript","Ajax");
 	var $uses = array('OrderDateil', 'Subitem', 'Depot', 'Item', 'Order', 'Destination', 'Stock', 'Transport');
 	var $components = array('Total', 'Print', 'OutputCsv', 'Selector');
 
