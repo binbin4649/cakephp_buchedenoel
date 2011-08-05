@@ -24,7 +24,7 @@ echo $javascript->link("jquery.autocomplete",false);
 		));
 		echo '<div class="separater"><p>Auto Complete</p>';
 		echo '<label>Pair Item</label>';
-		echo $form->input('Item.AutoItemName', array('type'=>'text','div'=>false,'label'=>false,'size'=>30,'id'=>'getData'));
+		echo $form->input('Item.AutoItemName', array('type'=>'text','div'=>false,'label'=>false,'size'=>30,'id'=>'getData', 'value'=>$pairItem['Item']['name']));
 		if(!empty($this->validationErrors['Item']['pair_id'])) echo $this->validationErrors['Item']['pair_id'];
 		echo '</div>';
 		echo $form->input('Item.price', array(
