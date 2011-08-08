@@ -42,7 +42,11 @@ class InventoryDetailsController extends AppController {
 				);
 				$values = $this->InventoryDetail->find('all' ,$params);
 				$values = $this->InventoryDetail->addStock($values);
-				$output_csv = $this->OutputCsv->InventoryDetail($values);
+				if($this->data[$modelName]['csv_diff'] == 1){
+					$output_csv = $this->OutputCsv->InventoryDetail2($values);
+				}else{
+					$output_csv = $this->OutputCsv->InventoryDetail($values);
+				}
 				$file_name = 'InventoryDetail'.date('Ymd-His').'.csv';
 				$path = WWW_ROOT.'/files/user_csv/'; //どうせ一時ファイルなんだから同じでいいや。ってことはフォルダ名はミスだね。でも面倒だからこのままで。
 				$output_csv = mb_convert_encoding($output_csv, 'SJIS', 'UTF-8');

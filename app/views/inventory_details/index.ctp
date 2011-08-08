@@ -39,6 +39,9 @@ echo '　';
 echo 'CSV';
 echo $form->checkbox($modelName.'.csv');
 echo '　';
+echo '差のみ';
+echo $form->checkbox($modelName.'.csv_diff');
+echo '　';
 echo $form->submit('Seach', array('div'=>false));
 echo $form->end();
 ?>

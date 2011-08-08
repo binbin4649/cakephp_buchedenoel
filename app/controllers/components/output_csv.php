@@ -7,7 +7,7 @@ class OutputCsvComponent extends Object {
 	function InventoryDetail($values){
 		$depot_total = 0;
 		$real_total = 0;
-		$out = '棚卸番号,明細番号,倉庫名,倉庫番号,スパン,フェイス,子品番,JAN,帳簿数,実棚数,入力者,入力日時,更新者,更新日時'."\r\n";
+		$out = '棚卸番号,明細番号,倉庫名,倉庫番号,スパン,フェイス,子品番,JAN,帳簿数,実棚数,差異,入力者,入力日時,更新者,更新日時'."\r\n";
 		foreach($values as $value){
 			extract($value);// InventoryDetail   Depot   Subitem
 			$depot_total = $depot_total + $InventoryDetail['depot_quantity'];
@@ -22,10 +22,44 @@ class OutputCsvComponent extends Object {
 			$out .= $Subitem['jan'].',';
 			$out .= $InventoryDetail['depot_quantity'].',';
 			$out .= $InventoryDetail['qty'].',';
+			$out .= $InventoryDetail['depot_quantity'] - $InventoryDetail['qty'].',';
 			$out .= $InventoryDetail['created_user'].',';
 			$out .= $InventoryDetail['created'].',';
 			$out .= $InventoryDetail['updated_user'].',';
 			$out .= $InventoryDetail['updated']."\r\n";
+		}
+		$out .= "\r\n";
+		$out .= '帳簿数合計:'.$depot_total."\r\n";
+		$out .= '実棚数合計:'.$real_total."\r\n";
+		return $out;
+	}
+	
+	//棚卸明細 一致したのは外すバージョン
+	function InventoryDetail2($values){
+		$depot_total = 0;
+		$real_total = 0;
+		$out = '棚卸番号,明細番号,倉庫名,倉庫番号,スパン,フェイス,子品番,JAN,帳簿数,実棚数,差異,入力者,入力日時,更新者,更新日時'."\r\n";
+		foreach($values as $value){
+			extract($value);// InventoryDetail   Depot   Subitem
+			if($InventoryDetail['depot_quantity'] != $InventoryDetail['qty']){
+				$depot_total = $depot_total + $InventoryDetail['depot_quantity'];
+				$real_total = $real_total + $InventoryDetail['qty'];
+				$out .= $InventoryDetail['inventory_id'].',';
+				$out .= $InventoryDetail['id'].',';
+				$out .= $Depot['name'].',';
+				$out .= $Depot['id'].',';
+				$out .= $InventoryDetail['span'].',';
+				$out .= $InventoryDetail['face'].',';
+				$out .= $Subitem['name'].',';
+				$out .= $Subitem['jan'].',';
+				$out .= $InventoryDetail['depot_quantity'].',';
+				$out .= $InventoryDetail['qty'].',';
+				$out .= $InventoryDetail['depot_quantity'] - $InventoryDetail['qty'].',';
+				$out .= $InventoryDetail['created_user'].',';
+				$out .= $InventoryDetail['created'].',';
+				$out .= $InventoryDetail['updated_user'].',';
+				$out .= $InventoryDetail['updated']."\r\n";
+			}
 		}
 		$out .= "\r\n";
 		$out .= '帳簿数合計:'.$depot_total."\r\n";
