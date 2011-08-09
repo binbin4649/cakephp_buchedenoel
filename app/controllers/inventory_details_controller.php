@@ -113,6 +113,12 @@ class InventoryDetailsController extends AppController {
 				$this->data['InventoryDetail']['face'] = mb_convert_kana($this->data['InventoryDetail']['face'], 'a', 'UTF-8');
 				$this->data['InventoryDetail']['face'] = ereg_replace("[^0-9]", "", $this->data['InventoryDetail']['face']);//半角数字以外を削除
 			}
+			//JANコードをバリデーション
+			if(!empty($this->params['form']['input1'])){
+				$this->params['form']['input1'] = mb_convert_kana($this->params['form']['input1'], 'a', 'UTF-8');
+				$this->params['form']['input1'] = ereg_replace("[^0-9]", "", $this->params['form']['input1']);
+				if(strlen($this->params['form']['input1']) != 13) $this->params['form']['input1'] = null;//13文字以外は却下
+			}
 			//倉庫とjanが入っていたら追加
 			if(!empty($this->data['InventoryDetail']['depot']) AND !empty($this->params['form']['input1'])){
 				$params = array(
@@ -146,13 +152,14 @@ class InventoryDetailsController extends AppController {
 				}
 			}
 		}
-		if(!empty($this->params['data']['InventoryDetail']['Qty'])){
-			$session_reader = $this->Session->read('InventoryDetail');
-			foreach($this->params['data']['InventoryDetail']['Qty'] as $subitem_id=>$quantity){
-				foreach($session_reader as $key=>$value){
-					if($subitem_id == $key AND $quantity != $value['quantity']){
-						$session_reader[$key]['quantity'] = $quantity;
-						
+		$session_reader = $this->Session->read('InventoryDetail');
+		if($session_reader){
+			if(!empty($this->params['data']['InventoryDetail']['Qty'])){
+				foreach($this->params['data']['InventoryDetail']['Qty'] as $subitem_id=>$quantity){
+					foreach($session_reader as $key=>$value){
+						if($subitem_id == $key AND $quantity != $value['quantity']){
+							$session_reader[$key]['quantity'] = $quantity;
+						}
 					}
 				}
 			}
