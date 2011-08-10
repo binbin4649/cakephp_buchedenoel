@@ -2382,7 +2382,7 @@ msgid "Management can not be increased more than one item separately."
 msgstr "単品管理の商品は1以上増やせません。"
 
 msgid "Inventory Detail"
-msgstr "棚卸詳細"
+msgstr "棚卸明細"
 
 msgid "Inventory Input"
 msgstr "棚卸入力"

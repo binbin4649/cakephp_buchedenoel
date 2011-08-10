@@ -81,7 +81,7 @@ class Inventory extends AppModel {
 		return $section;
 	}
 	
-	//指定倉庫の在庫を削除して、新しく入れ直す
+	//指定倉庫の在庫を削除して、新しく入れ直す （チェックが入っていたら入れ替えす）
 	function InventoryFinish($id, $data){
 		App::import('Model', 'Stock');
     	$StockModel = new Stock();
