@@ -43,10 +43,22 @@ echo '差のみ';
 echo $form->checkbox($modelName.'.csv_diff');
 echo '　';
 echo $form->submit('Seach', array('div'=>false));
-echo $form->end();
+
 ?>
 <p>
+<div id='datail'>
+<a href="javascript:;" onmousedown="if(document.getElementById('in_dateil').style.display == 'none'){ document.getElementById('in_dateil').style.display = 'block'; }else{ document.getElementById('in_dateil').style.display = 'none'; }">
+details</a>
+<div id="in_dateil" style="display:none">
+<p>
+検索結果分を全削除
+<?php echo $form->checkbox($modelName.'.all_delete'); ?><br>
+※チェックを入れてSearchを押すと下に「total：○」と表示されている分、全部削除します。確認画面などは出てきません。<br>
+また削除したデータを戻すこともできません。ご注意下さい。
+</p>
+</div></div>
 <?php
+echo $form->end();
 echo $paginator->counter(array(
 'format' => __('Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%', true)
 ));
@@ -128,4 +140,8 @@ $real_total = $real_total + $inventoryDetail['InventoryDetail']['qty'];
 </div>
 <ul>
 <li>倉庫は倉庫番号、作成者はユーザー番号で検索できます。</li>
-<li>CSV出力は、CSVにチェックを入れてSearchボタンを押して下さい。totalに表示されている分のデータが出力されます。</ul>
+<li>CSV出力は、CSVにチェックを入れてSearchボタンを押して下さい。totalに表示されている分のデータが出力されます。</li>
+<li>CSV出力の際に「差のみ」にチェックを入れると、帳簿と実棚に差があるものだけがCSV出力されます。</li>
+<li>まとめて削除したい場合は、detailsをクリックして、チェックを入れてSearchを押して下さい。</li>
+<li>右側のDelを押すと個別に削除できます。</li>
+</ul>

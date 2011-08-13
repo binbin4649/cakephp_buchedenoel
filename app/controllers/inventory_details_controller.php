@@ -33,7 +33,11 @@ class InventoryDetailsController extends AppController {
 				$conditions[] = array('and'=>array($modelName.'.created_user'=>$this->data[$modelName]['created_user']));
 			}
 			$conditions[] = array('and'=>array($modelName.'.inventory_id'=>$inventory_id));
-			
+			if($this->data[$modelName]['all_delete'] == 1){//検索結果、まとめて削除
+				$this->InventoryDetail->deleteAll($conditions, false, false);
+				$this->Session->setFlash('検索結果、全削除を実行しました。');
+				$this->data[$modelName]['all_delete'] = null;
+			}
 			if($this->data[$modelName]['csv'] == 1){
 				$params = array(
 					'conditions'=>$conditions,
