@@ -3,7 +3,6 @@ class InventoriesController extends AppController {
 
 	var $name = 'Inventories';
 	var $helpers = array('Html', 'Form');
-//	var $uses = array('Inventory');
 
 	function index() {
 		$conditions = array();
@@ -24,12 +23,11 @@ class InventoriesController extends AppController {
 		$this->set('status', get_inventory_status());
 	}
 
-	function view($id = null) {
+	function view($id = null, $depot_id = null, $ac = null){
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid Inventory.', true));
 			$this->redirect(array('action'=>'index'));
 		}
-		
 		if(!empty($this->data)){
 			$result = $this->Inventory->InventoryFinish($id, $this->data);
 			//終了処理を隠す
@@ -41,7 +39,6 @@ class InventoriesController extends AppController {
 				$this->Inventory->save($data);
 			}
 		}
-		
 		$params = array(
 			'conditions'=>array('Inventory.id'=>$id),
 			'recursive'=>0,
@@ -51,7 +48,43 @@ class InventoriesController extends AppController {
 		$this->set('inventory', $Inventory);
 		$this->set('depots', $this->Inventory->viewsTotal($id));
 		$this->set('status', get_inventory_status());
+		if($ac == 'full'){//stockとinventDetailを全部ごっそりだして、整形して出力する
+			$output_csv = $this->Inventory->outPutDepot($id, $depot_id);
+			$file_name = 'Full_DepotId_'.$depot_id.'_Date_'.date('Ymd-His').'.csv';
+			$path = WWW_ROOT.'/files/user_csv/';//一時データ保管場所
+			$output_csv = mb_convert_encoding($output_csv, 'SJIS', 'UTF-8');
+			file_put_contents($path.$file_name, $output_csv);
+			$output['url'] = '/buchedenoel/files/user_csv/'.$file_name;
+			$output['name'] = $file_name;
+			$this->set('csv', $output);
+		}
+		if($ac == 'diff'){//stockとinventDetailを全部ごっそりだして、整形して出力する
+			$output_csv = $this->Inventory->outPutDepot2($id, $depot_id);
+			$file_name = 'Diff_DepotId_'.$depot_id.'_Date_'.date('Ymd-His').'.csv';
+			$path = WWW_ROOT.'/files/user_csv/';//一時データ保管場所
+			$output_csv = mb_convert_encoding($output_csv, 'SJIS', 'UTF-8');
+			file_put_contents($path.$file_name, $output_csv);
+			$output['url'] = '/buchedenoel/files/user_csv/'.$file_name;
+			$output['name'] = $file_name;
+			$this->set('csv', $output);
+		}
 	}
+	
+	//倉庫単位に帳簿数と実棚数を合わせて表示する
+	function output_depot($detail_id = null, $depot_id = null){
+		//$this->render('view');
+		if (!$depot_id OR !$detail_id) {
+			$this->Session->setFlash(__('Invalid Inventory.', true));
+			$this->redirect(array('action'=>'index'));
+		}
+		
+		$output_csv = $this->Inventory->outPutDepot($detail_id, $depot_id);
+		
+		
+		//$this->view($detail_id);
+		$this->redirect(array('action'=>'view/'.$detail_id));
+	}
+	
 
 //	viewは消した ←あるじゃん？
 	function add() {

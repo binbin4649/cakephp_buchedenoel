@@ -93,6 +93,19 @@ class InventoryDetail extends AppModel {
 		return $details;
 	}
 	
+	// 棚卸の合計数を返す。
+	function janTotal($jan, $depot_id, $inventory_id){
+		$params = array(
+			'conditions'=>array('InventoryDetail.jan'=>$jan, 'InventoryDetail.depot_id'=>$depot_id, 'InventoryDetail.inventory_id'=>$inventory_id),
+			'recursive'=>-1,
+		);
+		$details = $this->find('all' ,$params);
+		$qty_total = 0;
+		foreach($details as $detail){
+			$qty_total = $qty_total + $detail['InventoryDetail']['qty'];
+		}
+		return $qty_total;
+	}
 	
 
 }
