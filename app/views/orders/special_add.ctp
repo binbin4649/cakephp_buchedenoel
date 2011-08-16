@@ -1,5 +1,13 @@
+<script type="text/javascript" charset="utf-8">
+$(function($){$(".datepicker").datepicker({dateFormat:'yy-mm-dd'});});
+</script>
 <div class="subitems form">
-<?php echo $form->create('OrderDateils', array('controller'=>'order_dateils', 'action'=>'store_add/special'));?>
+<?php
+	echo $javascript->link("jquery-1.5.1.min",false);
+	echo $javascript->link("jquery-ui-1.8.14.custom.min",false);
+	echo $javascript->link("ui/i18n/ui.datepicker-ja.js",false);
+	echo $form->create('OrderDateils', array('controller'=>'order_dateils', 'action'=>'store_add/special'));
+?>
 	<fieldset>
  		<legend><?php __('Special Order');?></legend>
 	<?php
@@ -54,13 +62,12 @@
 			'size'=>5
 		));
 		echo $form->input('OrderDateil.specified_date', array(
-			'type'=>'date',
-			'dateFormat'=>'YMD',
+			'type'=>'text',
+			'size'=>8,
 			'label'=>__('Specified Date', true),
-			'empty'=>'select',
-			'minYear'=>'2009',
-			'maxYear' => MAXYEAR
+			'class'=>'datepicker'
 		));
+		
 		/*
 		echo $form->input('Order.contact1', array(
 			'label'=>__('Contact1', true),
