@@ -350,7 +350,8 @@ class OrderDateilsController extends AppController {
 				$session_write['Subitem']['major_size'] = $value['Subitem']['major_size'];
 				$session_write['Subitem']['minority_size'] = $value['Subitem']['minority_size'];
 				$session_write['Item']['id'] = $value['Item']['id'];
-				$session_write['Subitem']['specified_date'] = array('year'=>'', 'month'=>'', 'day'=>'');
+				//$session_write['Subitem']['specified_date'] = array('year'=>'', 'month'=>'', 'day'=>'');
+				$session_write['Subitem']['specified_date'] = '';
 				$session_write['Subitem']['marking'] = '';
 				$session_write['Subitem']['order_type'] = '6'; // 6 現売
 				$price_element = $this->Total->PriceCalculation($value['Item']['price'], $value['discount'], $value['adjustment']);
@@ -384,11 +385,14 @@ class OrderDateilsController extends AppController {
 				$session_write['Subitem']['major_size'] = $session['Subitem']['major_size'];
 				$session_write['Subitem']['minority_size'] = $session['Subitem']['minority_size'];
 				$session_write['Item']['id'] = $session['Subitem']['item_id'];
+				$session_write['Subitem']['specified_date'] = $session['OrderDateil']['specified_date'];
+				/*
 				$session_write['Subitem']['specified_date'] = array(
 					'year'=>$session['OrderDateil']['specified_date']['year'], 
 					'month'=>$session['OrderDateil']['specified_date']['month'], 
 					'day'=>$session['OrderDateil']['specified_date']['day']
 				);
+				*/
 				$session_write['Subitem']['marking'] = $session['OrderDateil']['marking'];
 				$session_write['Subitem']['order_type'] = $session['Order']['order_type']; // 4 特別注文
 				$price_element = $this->Total->PriceCalculation($Item['Item']['price'], $session['Order']['discount'], $session['Order']['adjustment']);
