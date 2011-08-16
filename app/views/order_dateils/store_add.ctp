@@ -1,11 +1,14 @@
 <script type="text/javascript">
-$(function() {
-  $('#getData').autocomplete('/buchedenoel/order_dateils/getData');
-});
+//オートコンプリート ワンライナー
+$(function() { $('#getData').autocomplete('/buchedenoel/order_dateils/getData');});
+//デートピッカー ワンライナー
+$(function($){$(".datepicker").datepicker({dateFormat:'yy-mm-dd'});});
 </script>
 <?php
 echo $javascript->link("jquery",false);
+echo $javascript->link("jquery-ui-1.8.14.custom.min",false);
 echo $javascript->link("jquery.autocomplete",false);
+echo $javascript->link("ui/i18n/ui.datepicker-ja.js",false);
 	/*
 	if(empty($span_no)) $span_no = '';
 	if(empty($discount)) $discount = '';
@@ -25,20 +28,20 @@ echo $javascript->link("jquery.autocomplete",false);
 <div class="form">
 	<fieldset>
  	<?php
+ 	if(empty($date)) $date = date("Y-m-d");
  	echo $form->create('OrderDateil', array('action'=>'store_add'));
  	echo '<table class="itemVars">';
  	echo '<tr><td>';
 	echo '　売上日：';
 	echo $form->input('OrderDateil.date', array(
-		'type'=>'date',
-		'dateFormat'=>'YMD',
-		'label'=>false,
-		'minYear'=>MINYEAR,
-		'maxYear' => MAXYEAR,
+		'type'=>'text',
+		'size'=>8,
 		'div'=>false,
-		'selected'=>$date
+		'label'=>false,
+		'value'=>$date,
+		'class'=>'datepicker'
 	));
-	if(!empty($date)) echo $date['year'].':'.$date['month'].':'.$date['day'];
+	echo $date;
  	echo '</td><td>';
 	echo __('Partners No.', true);
  	echo $form->input("OrderDateil.partners_no", array(
@@ -164,14 +167,12 @@ echo $javascript->link("jquery.autocomplete",false);
 		echo '<td>'.$item['Item']['name'].' / ￥'.$item['Item']['price'].' / '.$item['Factory']['name'];
 		echo ' / 納期';
 		echo $form->input('OrderDateil.specified_date', array(
-			'type'=>'date',
-			'dateFormat'=>'YMD',
-			'label'=>false,
-			'empty'=>'select',
-			'minYear'=> MINYEAR,
-			'maxYear' => MAXYEAR,
+			'type'=>'text',
+			'size'=>8,
 			'div'=>false,
-			'selected'=>$edit['Subitem']['specified_date']
+			'label'=>false,
+			'class'=>'datepicker',
+			'value'=>$edit['Subitem']['specified_date']
 		));
 		echo ' / 刻印';
 		echo $form->input("OrderDateil.marking", array(
@@ -331,7 +332,7 @@ echo $javascript->link("jquery.autocomplete",false);
 			echo '<tr>';
 			echo '<td>'.$value['Subitem']['name'].'</td>';
 			echo '<td>'.number_format($value['Item']['price']).'</td>';
-			echo '<td>'.$value['Subitem']['specified_date']['year'].'-'.$value['Subitem']['specified_date']['month'].'-'.$value['Subitem']['specified_date']['day'].'</td>';
+			echo '<td>'.$value['Subitem']['specified_date'].'</td>';
 			echo '<td>'.$value['Subitem']['marking'].'</td>';
 			echo '<td>'.$value['Subitem']['quantity'].'</td>';
 			echo '<td>'.$value['Subitem']['depot_id'].'</td>';
