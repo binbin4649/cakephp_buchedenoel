@@ -32,7 +32,7 @@
 		if(!empty($Confirm['order']['order_status'])){
 			echo '<dt>'.__('Order Type').'</dt><dd>'.$orderStatus[$Confirm['order']['order_status']].'　</dd>';
 		}
-		echo '<dt>'.__('Sale Date').'</dt><dd>'.$Confirm['order']['date']['year'].'-'.$Confirm['order']['date']['month'].'-'.$Confirm['order']['date']['day'].'　</dd>';
+		echo '<dt>'.__('Sale Date').'</dt><dd>'.$Confirm['order']['date'].'　</dd>';
 		echo '<dt>'.__('Section').'</dt><dd>'.$Confirm['order']['section_name'].':'.$Confirm['order']['section_id'].'</dd>';
 		echo '<dt>'.__('Destination').'</dt><dd>'.$Confirm['order']['destination_name'].'　</dd>';
 		echo '<dt>'.__('Partners No.').'</dt><dd>'.$Confirm['order']['partners_no'].'　</dd>';
@@ -53,10 +53,17 @@
 		$total_quantity = 0;
 		echo '<table class="itemDetail"><tr><th>子品番</th><th>価格</th><th>納期</th><th>刻印</th><th>数量</th><th>倉庫</th><th>区分</th><th>スパン</th><th>割引</th><th>調整</th><th>備考</th></tr>';
 		foreach($Confirm['details'] as $detail){
+			if($detail['Subitem']['order_type'] == 4 AND !empty($detail['Subitem']['major_size'])){
+				if($detail['Subitem']['major_size'] == 'other'){
+					$detail['Subitem']['name'] = $detail['Subitem']['name'].'('.$detail['Subitem']['minority_size'].')';
+				}else{
+					$detail['Subitem']['name'] = $detail['Subitem']['name'].'('.$detail['Subitem']['major_size'].')';
+				}
+			}
 			echo '<tr>';
 			echo '<td>'.$detail['Subitem']['name'].'</td>';
 			echo '<td>'.number_format($detail['Item']['price']).'</td>';
-			echo '<td>'.$detail['Subitem']['specified_date']['year'].'-'.$detail['Subitem']['specified_date']['month'].'-'.$detail['Subitem']['specified_date']['day'].'</td>';
+			echo '<td>'.$detail['Subitem']['specified_date'].'</td>';
 			echo '<td>'.$detail['Subitem']['marking'].'</td>';
 			echo '<td>'.$detail['Subitem']['quantity'].'</td>';
 			echo '<td>'.$detail['Subitem']['depot_id'].'</td>';

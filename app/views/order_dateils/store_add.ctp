@@ -329,6 +329,15 @@ echo $javascript->link("ui/i18n/ui.datepicker-ja.js",false);
 		$orderType['4'] = '特別';
 		echo '<table class="itemDetail"><tr><th>子品番</th><th>価格</th><th>納期</th><th>刻印</th><th>数量</th><th>倉庫</th><th>区分</th><th>スパン</th><th>割引</th><th>調整</th><th>備考</th><th></th></tr>';
 		foreach($details as $key=>$value){
+			if($value['Subitem']['order_type'] == 4){
+				if(!empty($value['Subitem']['major_size'])){
+					if($value['Subitem']['major_size'] == 'other'){
+						$value['Subitem']['name'] = $value['Subitem']['name'].'('.$value['Subitem']['minority_size'].')';
+					}else{
+						$value['Subitem']['name'] = $value['Subitem']['name'].'('.$value['Subitem']['major_size'].')';
+					}
+				}
+			}
 			echo '<tr>';
 			echo '<td>'.$value['Subitem']['name'].'</td>';
 			echo '<td>'.number_format($value['Item']['price']).'</td>';
@@ -372,5 +381,6 @@ echo $javascript->link("ui/i18n/ui.datepicker-ja.js",false);
 <li>割引：割引率を1～99の整数で入力して下さい。（例）10　と入力すると10％引きの金額が表示されます。（注）端数切捨て</li>
 <li>調整：入力できるのは半角数字と半角ハイフン「-」のみです。減算する場合は先頭にハイフン「-」をつけて下さい。</li>
 <li>(2011.05.09)部門に所属していないと完了で登録される不具合があるらしいです。	</li>
+<li>特別注文を入力した時に、品番の後ろに付いてくるサイズは実際には付きません。</li>
 </ul>
 </p>
