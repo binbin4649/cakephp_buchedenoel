@@ -83,6 +83,9 @@
 		}
 		echo '<tr><td></td><td></td><td></td><td></td><td></td><td></td><td>数量合計</td><td>'.$total_quantity.'</td><td>'.$total_an.'</td><td>'.$total_pairing.'</td><td>'.$total_ordering.'</td><td>'.$total_sell.'</td></tr>';
 		echo '</table>';
+/*
+20110818
+なんか全然関係ないのが出てるから、とりあえず非表示にした。
 
 		//発注明細があれば表示
 		if(!empty($order['OrderingsDetail'])){
@@ -127,6 +130,7 @@
 			}
 			echo '</table>';
 		}
+*/
 	?>
 	</fieldset>
 </div>
