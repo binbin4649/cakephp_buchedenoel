@@ -710,9 +710,7 @@ class OrderDateilsController extends AppController {
 		if(empty($Confirm['order']['contact1']) and empty($Confirm['order']['date'])){
 			$Confirm['order']['contact1'] = $this->Auth->user('id');
 			$Confirm['order']['contact1_name'] = $this->Auth->user('name');
-			$Confirm['order']['date']['year'] = date('Y');
-			$Confirm['order']['date']['month'] = date('m');
-			$Confirm['order']['date']['day'] = date('d');
+			$Confirm['order']['date'] = date('Y-m-d');
 			$this->Session->write('Confirm', $Confirm);
 		}
 		$this->set('Confirm', $Confirm);

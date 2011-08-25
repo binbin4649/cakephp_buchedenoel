@@ -160,7 +160,7 @@ class SalesCsvComponent extends Object {
 		$month_mark_total = 0; //目標金額合計
 		$all_mark_exp = 0; //目標見込の合計
 		$all_mark_exp_avg = 0; //目標見込の平均
-		$prev_total = 0; //昨年実績 同日前比 合計
+		$prev_total = 0; //前年実績 同日前比 合計
 		
 		//総合計
 		$term_all_total = 0; //今期 合計
@@ -190,7 +190,7 @@ class SalesCsvComponent extends Object {
 		$section_mark_exp_sub = 0;//目標見込 3点合計
 		$section_comp_profit_sub = 0;//前比差益 3点合計
 		$section_comp_exp_sub = 0;//前比見込 3点合計
-		$prev_sction_total_sub = 0;//昨年実績 3点合計
+		$prev_sction_total_sub = 0;//前年実績 3点合計
 		$section_exp_avg_sub = 0;//平均見込 3点合計
 		$passd_term_arr = $this->DateCalComponent->this_passd_term_arr($this->month);
 		foreach($sections as $section_id=>$section_name){//既存
@@ -222,7 +222,7 @@ class SalesCsvComponent extends Object {
 		$section_mark_exp_sub = 0;//目標見込 3点合計
 		$section_comp_profit_sub = 0;//前比差益 3点合計
 		$section_comp_exp_sub = 0;//前比見込 3点合計
-		$prev_sction_total_sub = 0;//昨年実績 3点合計
+		$prev_sction_total_sub = 0;//前年実績 3点合計
 		$section_exp_avg_sub = 0;//平均見込 3点合計
 		$stackAmount['mokuhyo_shoukei'] = 0;
 		$stackAmount['sections_shoukei'] = 0;
@@ -257,7 +257,7 @@ class SalesCsvComponent extends Object {
 		$section_mark_exp_sub = 0;//目標見込 3点合計
 		$section_comp_profit_sub = 0;//前比差益 3点合計
 		$section_comp_exp_sub = 0;//前比見込 3点合計
-		$prev_sction_total_sub = 0;//昨年実績 3点合計
+		$prev_sction_total_sub = 0;//前年実績 3点合計
 		$section_exp_avg_sub = 0;//平均見込 3点合計
 		$stackAmount['mokuhyo_shoukei'] = 0;
 		$stackAmount['sections_shoukei'] = 0;
@@ -292,7 +292,7 @@ class SalesCsvComponent extends Object {
 		$section_mark_exp_sub = 0;//目標見込 3点合計
 		$section_comp_profit_sub = 0;//前比差益 3点合計
 		$section_comp_exp_sub = 0;//前比見込 3点合計
-		$prev_sction_total_sub = 0;//昨年実績 3点合計
+		$prev_sction_total_sub = 0;//前年実績 3点合計
 		$section_exp_avg_sub = 0;//平均見込 3点合計
 		$stackAmount['mokuhyo_shoukei'] = 0;
 		$stackAmount['sections_shoukei'] = 0;
@@ -385,10 +385,10 @@ class SalesCsvComponent extends Object {
 		$line[] = '順位,'.implode(',', $days_section_ranking);
 		$line[] = ',';
 		
-		$line[] = '昨年実績,'.implode(',', $prev_section_month).','.$prev_month_total;
+		$line[] = '前年実績,'.implode(',', $prev_section_month).','.$prev_month_total;
 		$line[] = '今年実績,'.implode(',', $section_total).','.$days_total;
 		$section_cont_avg = $this->TotalComponent->fprate2($days_total, $prev_month_total);
-		$line[] = '前比%,'.implode(',', $section_month_cont).','.$section_cont_avg;
+		$line[] = '前年比%,'.implode(',', $section_month_cont).','.$section_cont_avg;
 		$section_cont_ranking = $this->TotalComponent->not_chang_rank($section_month_cont, $tenpo_count);
 		$line[] = '順位,'.implode(',', $section_cont_ranking);
 		$line[] = ',';
@@ -419,10 +419,10 @@ class SalesCsvComponent extends Object {
 		$line[] = '目標日計,'.implode(',', $thisdays_mark).',';
 		$line[] = '目標%,'.implode(',', $section_mark_rate).','.$section_mark_total_rate;
 		$line[] = '目標見込,'.implode(',', $section_mark_exp).','.$all_mark_exp;
-		$line[] = '前比%,'.implode(',', $prev_section_comp).','.$prev_section_comp_avg;
+		$line[] = '前年比%,'.implode(',', $prev_section_comp).','.$prev_section_comp_avg;
 		$line[] = '前比差益,'.implode(',', $section_comp_profit).','.$all_comp_profit;
 		$line[] = '前比見込,'.implode(',', $section_comp_exp).','.$all_comp_exp;
-		$line[] = '昨年実績,'.implode(',', $prev_sction_total).','.$prev_total;
+		$line[] = '前年実績,'.implode(',', $prev_sction_total).','.$prev_total;
 		$all_exp_avg = floor(($all_mark_exp + $all_comp_exp) / 2);
 		$line[] = '平均見込,'.implode(',', $section_exp_avg).','.$all_exp_avg;
 		$line[] = ',';
@@ -529,7 +529,7 @@ class SalesCsvComponent extends Object {
 				$mark_section_sub = $mark_section_sub + $term_days['month_mark'];
 			}
 		}
-		$prev_total_passd = 0; //昨年実績 仮入れ 、これが昨年 [同日] 実績になる
+		$prev_total_passd = 0; //前年実績 仮入れ 、これが昨年 [同日] 実績になる
 		if(!empty($outReport[$section_id]['prev_term'][$this->month]['days'])){
 			for($i=1; $i <= $this->day; $i++){
 				foreach($outReport[$section_id]['prev_term'][$this->month]['days'] as $days ){
@@ -603,7 +603,7 @@ class SalesCsvComponent extends Object {
 	//昨年の売上に含める店舗、つまり既存店のリストを作成
 	function dairySummary1(){
 		$prev_days_total = 0; //既存店同日前期実績、同日までの合計、既存店＝1年以上前から売上がある店舗
-		$prev_existing_total = 0; //既存店同月昨年実績、ひと月合計
+		$prev_existing_total = 0; //既存店同月前年実績、ひと月合計
 		$this_existing_total = 0; //既存店同月今年実績
 		$prev_all_total = 0; //全店同日前期実績 
 		$this_all_total = 0; //全店同日今期実績
@@ -639,16 +639,16 @@ class SalesCsvComponent extends Object {
    		}
    		
    		$summary1 = array(
-   			'既存店同日昨年実績',
+   			'既存店同日前年実績',
    			'',
    			$prev_days_total,
-   			'既存店同月昨年実績',
+   			'既存店同月前年実績',
    			'',
    			$prev_existing_total,
-   			'全店同日昨年実績',
+   			'全店同日前年実績',
    			'',
    			$prev_all_total,
-   			'全店同月昨年実績',
+   			'全店同月前年実績',
    			'',
    			$prev_all_month_total
    		);
@@ -671,16 +671,16 @@ class SalesCsvComponent extends Object {
    		$all_total_comp = $this->TotalComponent->fprate2($this_all_total, $prev_all_total);//全店同日対比
    		$all_month_total_comp = $this->TotalComponent->fprate2($this_all_total, $prev_all_month_total);//全店同月対比
    		$summary3 = array(
-   			'既存店同日前比',
+   			'既存店同日前年比',
    			'',
    			$days_total_comp,
-   			'既存店同月前比',
+   			'既存店同月前年比',
    			'',
    			$existing_total_comp,
-   			'全店同日前比',
+   			'全店同日前年比',
    			'',
    			$all_total_comp,
-   			'全店同月前比',
+   			'全店同月前年比',
    			'',
    			$all_month_total_comp
    		);
