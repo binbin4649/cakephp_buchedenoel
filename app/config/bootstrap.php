@@ -77,6 +77,7 @@ function get_overseashop_list(){
 		'0'=>'406',//KOREA THE KISS COEX-MALL
 		'1'=>'404',//MACAU girl’s talk！ MACAO
 		'2'=>'405',//MACAU THE KISS MACAO
+		'3'=>'422',//真道林
 	);
 }
 
