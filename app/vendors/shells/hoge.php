@@ -261,9 +261,9 @@ class HogeShell extends Shell {
 	
 	// modelテスト用
 	function modelTest(){
-		App::import('Model', 'Inventory');
-    	$InventoryModel = new Inventory();
-    	$result = $InventoryModel->outPutDepot(4, 910);
+		App::import('Model', 'Section');
+    	$SectionModel = new Section();
+    	$result = $SectionModel->amountSectionList5();
     	
     	pr($result);
     	exit;

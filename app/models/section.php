@@ -179,6 +179,13 @@ class Section extends AppModel {
 			$name = $CleaningComponent->sectionName($name);
 			$sections[$id] = mb_substr($name, 0, 20);
 		}
+		//スマートじゃないけど、これで海外新店分を省く
+		$overseashop_list = get_overseashop_list();
+		foreach($overseashop_list as $val){
+			foreach($sections as $key=>$value){
+				if($val == $key) unset($sections[$key]);
+			}
+		}
    		return $sections;
 	}
 	
