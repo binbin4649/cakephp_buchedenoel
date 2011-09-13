@@ -181,7 +181,17 @@ class DateilSeachComponent extends Object {
     		}else{
     			$item['Item']['order_size'] = '';
     		}
-
+			if(!empty($item['Item']['message_stamp'])){
+    			$item['Item']['message_stamp'] = str_replace('&', '＆', $item['Item']['message_stamp']);
+    		}else{
+    			$item['Item']['message_stamp'] = '';
+    		}
+			if(!empty($item['Item']['message_stamp_ja'])){
+    			$item['Item']['message_stamp_ja'] = str_replace('&', '＆', $item['Item']['message_stamp_ja']);
+    		}else{
+    			$item['Item']['message_stamp_ja'] = '';
+    		}
+			
     		$SalesStateCode_text = '';
     		if(!empty($item['Item']['sales_state_code_id'])){
     			/*
