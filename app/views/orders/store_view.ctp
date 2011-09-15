@@ -90,7 +90,9 @@
 		}
 		echo '<tr><td></td><td></td><td></td><td></td><td></td><td></td><td>数量合計</td><td>'.$total_quantity.'</td><td>'.$total_an.'</td><td>'.$total_pairing.'</td><td>'.$total_ordering.'</td><td>'.$total_sell.'</td></tr>';
 		echo '</table>';
-
+/*
+20110829
+なぜか噛み合ってないので、いったん非表示にする。
 		//発注明細があれば表示
 		if(!empty($order['OrderingsDetail'])){
 			echo '<hr>';
@@ -120,6 +122,7 @@
 			}
 			echo '</table>';
 		}
+*/
 	?>
 	</fieldset>
 </div>
