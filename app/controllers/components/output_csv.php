@@ -3,6 +3,73 @@
 class OutputCsvComponent extends Object {
 	var $components = array('Selector');
 	
+	//支払明細
+	function paysView($values){
+		App::import('Model', 'PurchaseDetail');
+    	$PurchaseDetailModel = new PurchaseDetail();
+		$pay_status = get_pay_status();//状態 支払ステータス
+		$pay_way_type = get_pay_way_type();//支払方法
+		if(empty($values['Pay']['pay_status'])){
+			$payStatus = '';
+		}else{
+			$payStatus = $pay_status[$values['Pay']['pay_status']];
+		}
+		if(empty($values['Pay']['pay_way_type'])){
+			$payWayType = '';
+		}else{
+			$payWayType = $pay_way_type[$values['Pay']['pay_way_type']];
+		}
+		$out = '支払ID,工場Id,工場名,締日,支払予定日,支払実行日,状態,客先番号,支払方法,合計金額,税合計,調整金額,備考,入力者,入力日時,更新者,更新日時'."\r\n";
+		$out .= $values['Pay']['id'].',';
+		$out .= $values['Factory']['id'].',';
+		$out .= $values['Factory']['name'].',';
+		$out .= $values['Pay']['total_day'].',';
+		$out .= $values['Pay']['payment_day'].',';
+		$out .= $values['Pay']['date'].',';
+		$out .= $payStatus.',';
+		$out .= $values['Pay']['partner_no'].',';
+		$out .= $payWayType.',';
+		$out .= $values['Pay']['total'].',';
+		$out .= $values['Pay']['tax'].',';
+		$out .= $values['Pay']['adjustment'].',';
+		$out .= $values['Pay']['remark'].',';
+		$out .= $values['Pay']['created_user'].',';
+		$out .= $values['Pay']['created'].',';
+		$out .= $values['Pay']['updated_user'].',';
+		$out .= $values['Pay']['updated']."\r\n";
+		$out .= "\r\n";
+		$out .= '支払明細'."\r\n";
+		$out .= '仕入ID,仕入日,発注ID,親品番,小品番,サイズ,JAN,数量,単価,小計,倉庫ID,倉庫名,入力者,入力日時,更新者,更新日時'."\r\n";
+		foreach($values['Purchase'] as $Purchase){
+			$params = array(
+				'conditions'=>array('PurchaseDetail.purchase_id'=>$Purchase['id']),
+				'recursive'=>0,
+			);
+			$details = $PurchaseDetailModel->find('all', $params);
+			foreach($details as $detail){
+				$size = $this->Selector->sizeSelector($detail['Subitem']['major_size'], $detail['Subitem']['minority_size']);
+				$out .= $detail['Purchase']['id'].',';
+				$out .= $detail['Purchase']['date'].',';
+				$out .= $detail['PurchaseDetail']['order_id'].',';
+				$out .= $detail['Item']['name'].',';
+				$out .= $detail['Subitem']['name'].',';
+				$out .= $detail['Subitem']['jan'].',';
+				$out .= $size.',';
+				$out .= $detail['PurchaseDetail']['quantity'].',';
+				$out .= $detail['PurchaseDetail']['bid'].',';
+				$out .= floor($detail['PurchaseDetail']['bid'] * $detail['PurchaseDetail']['quantity']).',';
+				$out .= $detail['Depot']['id'].',';
+				$out .= $detail['Depot']['name'].',';
+				$out .= $detail['PurchaseDetail']['created_user'].',';
+				$out .= $detail['PurchaseDetail']['created'].',';
+				$out .= $detail['PurchaseDetail']['updated_user'].',';
+				$out .= $detail['PurchaseDetail']['updated']."\r\n";
+				
+			}
+		}
+		return $out;
+	}
+	
 	//棚卸明細
 	function InventoryDetail($values){
 		$depot_total = 0;

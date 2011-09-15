@@ -48,4 +48,3 @@
 	?>
 	</fieldset>
 </div>
-<?php //pr($purchase); ?>

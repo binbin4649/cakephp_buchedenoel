@@ -47,6 +47,36 @@ class Ordering extends AppModel {
 		'adjustment' => array(
 			'alphanumeric'=>array('rule'=>'alphaNumeric')),
 	);
+	
+	//return=>90だったら、在庫を確認して、在庫を減らす処理。出来なかったらエラーを返す。
+	function returnOrdering($details){
+		App::import('Model', 'Stock');
+	    $StockModel = new Stock();
+	    
+	    $stock_return = true; //trueなら、在庫があって次は在庫を減らす処理だってことで
+		foreach($details as $detail){
+			$stock_qty = $StockModel->SubitemDepotTotal($detail['OrderingsDetail']['subitem_id'], $detail['OrderingsDetail']['depot']);
+			$return_qty = ereg_replace("[^0-9]", "", $detail['OrderingsDetail']['ordering_quantity']);
+			if($return_qty > $stock_qty){
+				$stock_return = false;
+				return false;
+			}
+		}
+		if($stock_return == true){
+			foreach($details as $detail){
+				$return_qty = ereg_replace("[^0-9]", "", $detail['OrderingsDetail']['ordering_quantity']);
+				$user_id = $detail['OrderingsDetail']['created_user'];
+				$subitem_id = $detail['OrderingsDetail']['subitem_id'];
+				$depot = $detail['OrderingsDetail']['depot'];
+				if($StockModel->Mimus($subitem_id, $depot, $return_qty, $user_id, 5)){
+					return true;
+				}else{
+					return false;
+				}
+			}
+		}
+	}
+	
 
 }
 ?>

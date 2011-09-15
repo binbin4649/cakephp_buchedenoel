@@ -1,5 +1,13 @@
 <div class="purchases view">
-<?php echo '<p>'.$addForm->switchAnchor('purchases/add/buying/'.$purchase['Purchase']['ordering_id'], array(2,3), null, 'Return', $purchase['Purchase']['purchase_status']).'</p>'; ?>
+<?php 
+echo '<p>';
+if(empty($historyBack)){
+	echo $addForm->switchAnchor('purchases/add/buying/'.$purchase['Purchase']['ordering_id'], array(2,3), null, 'Return', $purchase['Purchase']['purchase_status']);
+}elseif($historyBack == 'direct'){
+	echo $html->link(__('Return', true), array('controller'=>'purchases', 'action'=>'direct'));
+}
+echo '</p>';
+?>
 	<fieldset>
  		<h2><?php __('Add Buying Confirm');?></h2>
 	<?php
@@ -42,4 +50,3 @@
 	?>
 	</fieldset>
 </div>
-<?php //pr($purchase); ?>

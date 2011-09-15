@@ -22,7 +22,9 @@ class PrintComponent extends Object {
     	$i = 0;
     	$all_qty = 0;
     	foreach($details as $detail){
-    		if($detail['OrderingsDetail']['ordering_quantity'] >= 1){
+    		//if($detail['OrderingsDetail']['ordering_quantity'] >= 1){//ここのループに入らないとsub_total配列が作られない。でもちろんマイナスだと入らない。どうする？
+    		if(!empty($detail['OrderingsDetail']['ordering_quantity'])){
+    			//返品伝票って何に使うのか？　返品は締めたら合算するのか？　などなど、聞いてみるか、
     			$judgement = true;
     			if(empty($detail['OrderingsDetail']['major_size']) or $detail['OrderingsDetail']['major_size'] == 'other'){
 					$values[$i]['item_id'] = $detail['OrderingsDetail']['item_id'];
@@ -109,12 +111,23 @@ class PrintComponent extends Object {
 				$xml .= '<tspan x="100" dy="75">TEL : '.$factory['Factory']['tel'].'</tspan>';
 				$xml .= '<tspan x="100" dy="33">FAX : '.$factory['Factory']['fax'].'</tspan>';
 				$xml .= '<tspan x="110" dy="56">いつもお世話になっております。</tspan>';
-				$xml .= '<tspan x="110" dy="37">下記のとおり発注いたしますのでご確認ください。</tspan>';
-				$xml .= '<tspan x="110" dy="37">よろしくお願いいたします。</tspan>';
-				$xml .= '<tspan x="110" dy="37">尚、商品は右記住所まで発送お願いいたします。</tspan>';
+				if($ordering['Ordering']['orderings_type'] == 90){
+					$xml .= '<tspan x="110" dy="37">下記のとおりお送りしますのでご確認ください。</tspan>';
+					$xml .= '<tspan x="110" dy="37">よろしくお願いいたします。</tspan>';
+					$xml .= '<tspan x="110" dy="37"></tspan>';
+				}else{
+					$xml .= '<tspan x="110" dy="37">下記のとおり発注いたしますのでご確認ください。</tspan>';
+					$xml .= '<tspan x="110" dy="37">よろしくお願いいたします。</tspan>';
+					$xml .= '<tspan x="110" dy="37">尚、商品は右記住所まで発送お願いいたします。</tspan>';
+				}
 				$xml .= '</text>';
 				$xml .= '<g stroke="black" stroke-width="3"><polyline points="100,263 700,263"/></g>';
-				$xml .= '<text x="941" y="200" font-size="65" fill="black" font-family="ＭＳ ゴシック" letter-spacing="7">注文書</text>';
+				if($ordering['Ordering']['orderings_type'] == 90){
+					$xml .= '<text x="912" y="200" font-size="65" fill="black" font-family="ＭＳ ゴシック" letter-spacing="7">仕入返品</text>';
+				}else{
+					$xml .= '<text x="941" y="200" font-size="65" fill="black" font-family="ＭＳ ゴシック" letter-spacing="7">注文書</text>';
+				}
+				
 				$xml .= '<g stroke="black" stroke-width="3"><polyline points="915,220 1185,220"/><polyline points="915,228 1185,228"/></g>';
 				$xml .= '<text x="1650" y="160" font-size="26" fill="black" font-family="ＭＳ ゴシック" letter-spacing="-1">発注No.:　'.$ordering['Ordering']['id'].'　'.$orderings_type[$ordering['Ordering']['orderings_type']];
 				$xml .= '<tspan x="1650" dy="30">日　付 :　'.$ordering['Ordering']['date'].'</tspan>';
@@ -405,7 +418,11 @@ class PrintComponent extends Object {
 				$xml .= '</text>';
 				$xml .= '<text x="1450" y="280" font-size="26" fill="black" font-family="ＭＳ ゴシック">工場・仕入先:';
 				$xml .= '<tspan x="1450" dy="40">'.$Purchase['Factory']['name'].'</tspan>';
+				if(empty($Purchase['Factory']['charge_section'])) $Purchase['Factory']['charge_section'] = '';
+				if(empty($Purchase['Factory']['charge_person'])) $Purchase['Factory']['charge_person'] = '';
 				$xml .= '<tspan x="1450" dy="40">'.$Purchase['Factory']['charge_section'].'　'.$Purchase['Factory']['charge_person'].'</tspan>';
+				if(empty($Purchase['Factory']['tel'])) $Purchase['Factory']['tel'] = '';
+				if(empty($Purchase['Factory']['fax'])) $Purchase['Factory']['fax'] = '';
 				$xml .= '<tspan x="1450" dy="40">TEL : '.$Purchase['Factory']['tel'].'　FAX : '.$Purchase['Factory']['fax'].'</tspan>';
 				$xml .= '</text>';
 				$xml .= '<text x="1550" y="545" font-size="35" fill="black" font-family="ＭＳ ゴシック">PAGE　'.$page.' / '.$total_page.'</text>';
