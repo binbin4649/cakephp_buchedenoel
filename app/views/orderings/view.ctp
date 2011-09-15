@@ -84,7 +84,13 @@
 <ul>
 	<li><?php echo $addForm->switchAnchor('orderings/add/alteration/'.$ordering['Ordering']['id'], array(1, 5), 'Returns the status. Are you sure?', 'Ordering Alterration', $ordering['Ordering']['status']); ?></li>
 	<li><?php echo $addForm->switchAnchor('orderings/add/cancell/'.$ordering['Ordering']['id'], array(6), 'To cancel the order. Are you sure?', 'Ordering Cancell', $ordering['Ordering']['status']); ?></li>
-	<li><?php echo $addForm->switchAnchor('purchases/add/buying/'.$ordering['Ordering']['id'], array(1,5,6), null, 'Buying process', $ordering['Ordering']['status']); ?></li>
+	<li>
+	<?php 
+	if($ordering['Ordering']['orderings_type'] != 90){
+		echo $addForm->switchAnchor('purchases/add/buying/'.$ordering['Ordering']['id'], array(1,5,6), null, 'Buying process', $ordering['Ordering']['status']); 
+	}
+	?>
+	</li>
 </ul>
 </div>
 <div id='datail'>
@@ -145,6 +151,7 @@
 	<li>消費税の計算が請求単位の場合は、発注の段階で消費税は計算されません。</li>
 	<li>工場・仕入先マスタで、消費税計算方法・端数処理が設定されていない場合は、伝票単位・切り捨てで計算されます。</li>
 	<li>仕入が行われると発注詳細ではなく仕入詳細にリンクされ、編集は出来なくなります。</li>
+	<li>発注タイプ「返品」で、確定処理を行うと自動的に在庫が減らされます。また在庫が無い場合は確定できません。</li>
 </ul>
 <ul>
 	<li>※注：発注を取消した場合、仕入済み数量や、受注（客注）発注分の数量などは計算されません。または元には戻りません。（例えば、一度仕入れたものが既に売上られていた場合、どこまでデータを戻せばいいのか？判断できないため）</li>

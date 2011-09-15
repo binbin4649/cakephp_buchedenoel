@@ -1683,6 +1683,9 @@ msgstr "移動一覧"
 msgid "Purchase List"
 msgstr "仕入一覧"
 
+msgid "Purchase Direct"
+msgstr "仕入入力"
+
 msgid "Pay List"
 msgstr "支払一覧"
 
@@ -2377,6 +2380,12 @@ msgstr "その他発注"
 
 msgid "The Other Ordering. Are you sure?"
 msgstr "その他の発注します。よろしいですか？"
+
+msgid "Return Ordering"
+msgstr "返品"
+
+msgid "The Return Ordering. Are you sure?"
+msgstr "返品を入力します。よろしいですか？"
 
 msgid "Management can not be increased more than one item separately."
 msgstr "単品管理の商品は1以上増やせません。"

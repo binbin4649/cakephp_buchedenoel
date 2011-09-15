@@ -11,10 +11,17 @@ class PayCloseComponent extends Object {
     	App::import('Model', 'Pay');
     	$PayModel = new Pay();
 		$params = array(
-			'conditions'=>array('Purchase.purchase_status'=>2),
+			//'conditions'=>array('Purchase.purchase_status'=>2),
+			'conditions'=>array('OR'=>array(
+				array('Purchase.purchase_status'=>2),
+				array('Purchase.purchase_status'=>5)
+				)),
 			'recursive'=>0,
 		);
 		$Purchases = $PurchaseModel->find('all' ,$params);
+		
+		//20110902 ORで返品もfindできたが、途中で無効になるのかな？ 最終結果にでてこない。
+		
 		foreach($Purchases as $Purchase){
 			$purchase_year = (integer)substr($Purchase['Purchase']['date'], 0, 4);
 			$purchase_month = (integer)substr($Purchase['Purchase']['date'], 5, 2);
@@ -110,7 +117,8 @@ class PayCloseComponent extends Object {
 			}
 			$total_day = date('Y-m-d', $sime_stamp);
 			if($ac == 'doing' and $Purchase['Purchase']['id'] == $id) $pay_jugement = true;
-			if($Purchase['Purchase']['total'] < 0) $pay_jugement = false;
+			//if($Purchase['Purchase']['total'] < 0) $pay_jugement = false;
+			if(empty($Purchase['Purchase']['total'])) $pay_jugement = false;
 			if($pay_jugement){
 				$params = array(
 					'conditions'=>array('and'=>array(

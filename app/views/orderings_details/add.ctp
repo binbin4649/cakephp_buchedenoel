@@ -119,7 +119,7 @@ echo $javascript->link("jquery.autocomplete",false);
 			//上代:下代
 			//echo '<td>'.number_format($value['Item']['price']).':'.number_format($value['Subitem']['cost']).'</td>';
 			echo '<td>'.$value['order_id'].'</td>';
-			echo '<td>'.$value['Subitem']['quantity'].'</td>';
+			echo '<td>'.$value['Subitem']['quantity'].'('.$value['Subitem']['stock_qty'].')</td>';
 			echo '<td>'.number_format($value['Item']['sub_total_jo']).':'.number_format($value['Item']['sub_total_ge']).'</td>';
 			echo '<td>'.$html->link(__('Del', true), array('action'=>'add/del/'.$value['Subitem']['id'])).'</td>';
 			echo '</tr>';
@@ -135,9 +135,9 @@ echo $javascript->link("jquery.autocomplete",false);
 		}else{
 			echo '<p>'.$html->link(__('Basic Ordering', true), array('action'=>'add/basic/'), null, sprintf(__('The Basic Ordering. Are you sure?', true), $detailTotal['quantity'])).'　/　';
 			echo $html->link(__('Custom Ordering', true), array('action'=>'add/custom/'), null, sprintf(__('The Custom Ordering. Are you sure?', true), $detailTotal['quantity'])).'　/　';
-			
 			echo $html->link(__('Repair Ordering', true), array('action'=>'add/repair/'), null, sprintf(__('The Repair Ordering. Are you sure?', true), $detailTotal['quantity'])).'　/　';
-			echo $html->link(__('Other Ordering', true), array('action'=>'add/other/'), null, sprintf(__('The Other Ordering. Are you sure?', true), $detailTotal['quantity'])).'</p>';
+			echo $html->link(__('Other Ordering', true), array('action'=>'add/other/'), null, sprintf(__('The Other Ordering. Are you sure?', true), $detailTotal['quantity'])).'　/　';
+			echo $html->link(__('Return Ordering', true), array('action'=>'add/return/'), null, sprintf(__('The Return Ordering. Are you sure?', true), $detailTotal['quantity'])).'</p>';
 			
 		}
 //pr($details);
@@ -146,3 +146,6 @@ echo $javascript->link("jquery.autocomplete",false);
 	?>
 	</fieldset>
 </div>
+<ul style="margin-top:40px;">
+<li>数量の脇にある（）内の数字は、その倉庫の現在の在庫数です。返品入力する際の参考にして下さい。</li>
+</ul>

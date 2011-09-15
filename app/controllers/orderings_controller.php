@@ -3,7 +3,7 @@ class OrderingsController extends AppController {
 
 	var $name = 'Orderings';
 	var $helpers = array('AddForm');
-	var $uses = array('Ordering', 'Item', 'OrderingsDetail', 'Subitem', 'User', 'Depot', 'Factory');
+	var $uses = array('Ordering', 'Item', 'OrderingsDetail', 'Subitem', 'User', 'Depot', 'Factory', 'Purchase', 'PurchaseDetail');
 	var $components = array('Total', 'Print');
 
 	function index() {
@@ -98,27 +98,50 @@ class OrderingsController extends AppController {
 				'recursive'=>0,
 			);
 			$details = $this->OrderingsDetail->find('all' ,$params);
-			$ordering_total = 0;
-			$detail_total = 0;
-			$detail_quantity = 0;
-			$sub_total = array();
-			$i = 0;
-			foreach($details as $dateil){
-				$sub_total[$i]['money'] = $dateil['OrderingsDetail']['bid'];
-				$sub_total[$i]['quantity'] = $dateil['OrderingsDetail']['ordering_quantity'];
-				$i++;
+			$judge90 = true;
+			// return=>90だったら、在庫を確認して、在庫を減らす処理。出来なかったらエラーを返す。
+			if($ordering['Ordering']['orderings_type'] == 90){
+				if($this->Ordering->returnOrdering($details)){
+					
+				}else{
+					$this->Session->setFlash('仕入返品できませんでした。在庫が足りないのかもしれません。');
+					$judge90 = false;
+				}
 			}
-			$slip_total = $this->Total->slipTotal($sub_total, $ordering['Factory']['tax_method'], $ordering['Factory']['tax_fraction']);
-			$Ordering['Ordering']['id'] = $id;
-			$Ordering['Ordering']['ordering_status'] = 2;
-			$Ordering['Ordering']['updated_user'] = $this->Auth->user('id');
-			$Ordering['Ordering']['total'] = $slip_total['total'] + $ordering['Ordering']['adjustment'];
-			$Ordering['Ordering']['total_tax'] = $slip_total['tax'];
-			$Ordering['Ordering']['dateil_total'] = $slip_total['detail_total'];
-			if(empty($ordering['Ordering']['date'])){
-				$Ordering['Ordering']['date'] = date('Y-m-d');
+			if($judge90){
+				$ordering_total = 0;
+				$detail_total = 0;
+				$detail_quantity = 0;
+				$sub_total = array();
+				$i = 0;
+				foreach($details as $dateil){
+					$sub_total[$i]['money'] = $dateil['OrderingsDetail']['bid'];
+					$sub_total[$i]['quantity'] = $dateil['OrderingsDetail']['ordering_quantity'];
+					$i++;
+				}
+				$slip_total = $this->Total->slipTotal($sub_total, $ordering['Factory']['tax_method'], $ordering['Factory']['tax_fraction']);
+				$Ordering['Ordering']['id'] = $id;
+				$Ordering['Ordering']['ordering_status'] = 2;
+				$Ordering['Ordering']['updated_user'] = $this->Auth->user('id');
+				$Ordering['Ordering']['total'] = $slip_total['total'] + $ordering['Ordering']['adjustment'];
+				$Ordering['Ordering']['total_tax'] = $slip_total['tax'];
+				$Ordering['Ordering']['dateil_total'] = $slip_total['detail_total'];
+				if(empty($ordering['Ordering']['date'])){
+					$Ordering['Ordering']['date'] = date('Y-m-d');
+				}
+				//$this->Ordering->save($Ordering);
+				//仕入返品の場合、在庫を減らしたらそのまま仕入情報を作る
+				if($ordering['Ordering']['orderings_type'] == 90){
+					//よくわからんマージ、なんでこんなマージが必要なんでしょう
+					$ordering['Ordering']['updated_user'] = $Ordering['Ordering']['updated_user'];
+					$ordering['Ordering']['total'] = $Ordering['Ordering']['total'];
+					$ordering['Ordering']['total_tax'] = $Ordering['Ordering']['total_tax'];
+					$ordering['Ordering']['dateil_total'] = $Ordering['Ordering']['dateil_total'];
+					$ordering['Ordering']['date'] = $Ordering['Ordering']['date'];
+					$this->Purchase->orderingToPurchase($ordering, $details);
+				}
+				$this->Ordering->save($Ordering);
 			}
-			$this->Ordering->save($Ordering);
 			$this->redirect(array('action'=>'view', $id));
 		}
 		if($ac == 'print'){
@@ -132,7 +155,6 @@ class OrderingsController extends AppController {
 				'recursive'=>0,
 			);
 			$details = $this->OrderingsDetail->find('all' ,$params);
-
 			$file_name = 'ordering'.$id.'-'.date('Ymd-His');
 			$path = WWW_ROOT.'/files/ordering/';
 			$print_xml = $this->Print->ordering($ordering, $details, $file_name);
@@ -158,7 +180,7 @@ class OrderingsController extends AppController {
 			$this->Ordering->save($Ordering);
 			$this->redirect(array('action'=>'view', $id));
 		}
-	if($ac == 'cancell'){
+		if($ac == 'cancell'){
 			$Ordering['Ordering']['id'] = $id;
 			$Ordering['Ordering']['ordering_status'] = 6;
 			$Ordering['Ordering']['updated_user'] = $this->Auth->user('id');

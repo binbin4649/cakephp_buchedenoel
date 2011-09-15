@@ -83,7 +83,7 @@ class PaysController extends AppController {
 		$this->set('blance_total', $this->Pay->paysBlance());
 	}
 
-	function view($id = null) {
+	function view($id = null, $ac = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid Pay.', true));
 			$this->redirect(array('action'=>'index'));
@@ -96,6 +96,16 @@ class PaysController extends AppController {
 		if(!empty($view_data['Pay']['adjustment'])){
 			$view_total = $view_data['Pay']['total'] + $view_data['Pay']['adjustment'];
 			$this->set('view_total', $view_total);
+		}
+		if($ac == 'csv'){
+			$output_csv = $this->OutputCsv->paysView($view_data);
+			$file_name = 'pays_'.date('Ymd-His').'.csv';
+			$path = WWW_ROOT.'/files/user_csv/';
+			$output_csv = mb_convert_encoding($output_csv, 'SJIS', 'UTF-8');
+			file_put_contents($path.$file_name, $output_csv);
+			$output['url'] = '/buchedenoel/files/user_csv/'.$file_name;
+			$output['name'] = $file_name;
+			$this->set('csv', $output);
 		}
 	}
 

@@ -1,5 +1,12 @@
 <div class="pays view">
 <p><?php echo $html->link(__('Pay List', true), array('action'=>'index')); ?> </p>
+<?php
+if(!empty($csv)){
+	echo '<p>';
+	echo '<a href="'.$csv['url'].'" target="_blank">'.$csv['name'].'</a>';
+	echo '<br>CSVが出力されました。右クリック「リンク先を保存」を選択して保存してください。</p>';
+}
+?>
 <h2><?php  __('Pay View');?></h2>
 	<dl><?php $i = 0; $class = ' class="altrow"';?>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Id'); ?></dt>
@@ -94,11 +101,12 @@
 <div class="actions">
 	<ul>
 		<li><?php echo $html->link(__('Edit Pay', true), array('action'=>'edit', $pay['Pay']['id'])); ?> </li>
+		<li><?php echo $html->link('csv出力', array('action'=>'view/'.$pay['Pay']['id'].'/csv')); ?> </li>
 	</ul>
 </div>
-<h3><?php __('Related Subitems');?></h3>
+<h3><?php __('By Breakdown');?></h3>
 <?php
-		echo '<table class="itemDetail"><tr><th>*</th><th>納品書</th><th>仕入日</th><th>合計金額</th></tr>';
+		echo '<table class="itemDetail"><tr><th>仕入ID</th><th>納品書</th><th>仕入日</th><th>合計金額</th></tr>';
 		foreach($pay['Purchase'] as $Purchase){
 			echo '<tr>';
 			echo '<td>'.$html->link($Purchase['id'], array('controller'=>'purchases', 'action'=>'view', $Purchase['id'])).'</td>';

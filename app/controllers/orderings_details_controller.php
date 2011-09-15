@@ -3,7 +3,7 @@ class OrderingsDetailsController extends AppController {
 
 	var $name = 'OrderingsDetails';
 	var $helpers = array("Javascript", "Ajax");
-	var $uses = array('OrderingsDetail', 'Subitem', 'User', 'Depot', 'Ordering', 'Item', 'Order', 'Factory');
+	var $uses = array('OrderingsDetail', 'Subitem', 'User', 'Depot', 'Ordering', 'Item', 'Order', 'Factory', 'Stock');
 	//var $components = array('Selector');
 
 	function add($ac = null, $id = null) {
@@ -76,8 +76,6 @@ class OrderingsDetailsController extends AppController {
 				}
 			}
 			
-			
-			//pr($this->data['subitem']);
 			$subitems = array_keys($this->data['subitem']);
 			foreach($subitems as $subitem_id){
 				if($this->data['subitem'][$subitem_id] > 0){
@@ -104,6 +102,8 @@ class OrderingsDetailsController extends AppController {
 							$this->data['Factory']['id'] = $this->data['OrderingsDetail']['factory_id'];
 						}
 					}
+					//返品入力する時に、現在の在庫を確認できるようにする
+					$session_write['Subitem']['stock_qty'] = $this->Stock->SubitemDepotTotal($subitem['Subitem']['id'], $depot['Depot']['id']);
 					//強制半角＆コードを短く
 					$qty = mb_convert_kana($this->data['subitem'][$subitem['Subitem']['id']], 'a', 'UTF-8');
 					$session_write['Subitem']['id'] =  $subitem['Subitem']['id'];
@@ -155,13 +155,14 @@ class OrderingsDetailsController extends AppController {
 				$this->Session->delete("OrderingsDetail");
 				$session_read = array();
 			}
-			if($ac == 'spesial' or $ac == 'basic' or $ac == 'custom' or $ac == 'repair' or $ac == 'other'){
+			if($ac == 'spesial' or $ac == 'basic' or $ac == 'custom' or $ac == 'repair' or $ac == 'other' or $ac == 'return'){
 				$Ordering = array();
 				$OrderingsDetail = array();
 				foreach($session_read as $key=>$value){
 					$Ordering = array();
 					$OrderingsDetail = array();
 					if($ac == 'other') $orderings_type = 99;
+					if($ac == 'return') $orderings_type = 90;//
 					if($ac == 'repair') $orderings_type = 4;
 					if($ac == 'spesial') $orderings_type = 3;
 					if($ac == 'basic') $orderings_type = 2;
@@ -183,6 +184,9 @@ class OrderingsDetailsController extends AppController {
 						$this->Ordering->save($Ordering);
 						$Ordering['Ordering']['id'] = $this->Ordering->getInsertID();
 						$this->Ordering->id = null;
+					}
+					if($orderings_type == 90){//返品の場合はとりあえず数量をマイナスに、遷移先のviewで確定されたら在庫チェック後在庫を減らす
+						$value['Subitem']['quantity'] = '-'.$value['Subitem']['quantity'];
 					}
 					$OrderingsDetail['OrderingsDetail']['ordering_id'] = $Ordering['Ordering']['id'];
 					$OrderingsDetail['OrderingsDetail']['subitem_id'] = $value['Subitem']['id'];

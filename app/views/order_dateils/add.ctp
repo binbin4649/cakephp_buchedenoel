@@ -255,7 +255,6 @@ $(function() {
 		$tanpin_judge = true;
 		if($item['Item']['stock_code'] == '3'){
 			//echo '単品管理の商品は、商品詳細から入力して下さい。';
-			
 			if(empty($edit['Subitem']['id'])){
 				$tanpin_judge = false;
 				echo '単品管理の商品は、品番「SAMPLE」を入力して、備考に品番、サイズ等を入力して下さい。';

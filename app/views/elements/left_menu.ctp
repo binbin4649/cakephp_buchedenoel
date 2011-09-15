@@ -43,6 +43,7 @@ if($addForm->opneUser(open_users(), $opneuser, 'access_authority')){
 		__('Ordering',true)=>array('sect', '0'),
 		__('Ordering Input',true)=>array('item', 'orderings_details/add'),
 		__('Ordering List',true)=>array('item', 'orderings/index'),
+		__('Purchase Direct',true)=>array('item', 'purchases/direct'),
 		__('Purchase List',true)=>array('item', 'purchases/index'),
 		__('Pay List',true)=>array('item', 'pays/index'),
 		//従業員
