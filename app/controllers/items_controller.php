@@ -444,7 +444,6 @@ class ItemsController extends AppController {
 
 
 	function csv_add(){//初期の商品マスター移行スクリプト
-		
 		//ここにdepot_idの口を作って、在庫登録する倉庫を指定できるようにする。
 		$this->data['Item']['depot'] = mb_convert_kana($this->data['Item']['depot'], 'a', 'UTF-8');
 		$this->data['Item']['depot'] = ereg_replace("[^0-9]", "", $this->data['Item']['depot']);//半角数字以外を削除
@@ -476,7 +475,7 @@ class ItemsController extends AppController {
 			fclose($sj_rename_opne);
 			$sj_opne = fopen(WWW_ROOT.'/files/temp/en'.$file_name, 'r');
 			
-			if($this->StratCsv->loadSyohinIchiranCsv($sj_opne, $depot_id)){
+			if($this->StratCsv->loadSyohinIchiranCsv($sj_opne, $depot_id, $this->data['Item']['stock1'])){
 				$this->Session->setFlash(__('たぶん登録がおわりました。確認してみてください。', true));
 			}else{
 				$this->Session->setFlash('ファイルを間違えています。');

@@ -8,6 +8,10 @@
 			'label'=>__('Depot', true),
 			'size'=>2
 		));
+		echo $form->input('Item.stock1',array(
+			'type'=>'checkbox',
+			'label'=>'在庫登録しない',
+		));
 		echo $form->input('Item.upload_file',array('label'=>'Upload CSV ','type'=>'file'));
 		echo $form->end('submit');
 		?>
@@ -20,6 +24,7 @@
 <li>単品管理のJANコードだった場合、在庫を1にして登録します。単品管理以外は在庫登録されません。</li>
 <li>単品管理で在庫を1にする倉庫を指定できます。指定がない場合は倉庫番号（910）になります。</li>
 <li>アニバ、ファサード、カフナ、LUV、sweetsは自動的に単品管理で登録されます。</li>
+<li>在庫登録しないにチェックを入れると、単品管理の自動在庫登録が機能しなくなります。つまり在庫は増えません。</li>
 </ul>
 </p>
 <p style="margin:50px;">
