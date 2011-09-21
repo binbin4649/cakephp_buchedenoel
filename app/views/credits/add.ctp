@@ -25,7 +25,6 @@ if(!empty($add_confirm)){
 }
 ?>
 </div>
-
 <div class="credits form">
 <?php echo $form->create('Credit');?>
 	<fieldset>
@@ -86,3 +85,8 @@ if(!empty($add_confirm)){
 	<?php echo $form->end('Submit');?>
 	</fieldset>
 </div>
+<ul>
+<li>必須：消込金額<br>
+		※消込金額以外の金額データは他のデータに影響を与えません。消込金額は前回入金額として計算されます。
+</li>
+</ul>

@@ -284,6 +284,7 @@ class Stock extends AppModel {
 			'recursive'=>0,
 		);
 		$stock_check = $this->find('first' ,$params);
+		
 		if($stock_check){
 			if($stock_check['Stock']['quantity'] >= $quantity){
 				$this->create();
@@ -291,7 +292,6 @@ class Stock extends AppModel {
 				$stock['quantity'] = $stock_check['Stock']['quantity'] - $quantity;
 				$stock['updated_user'] = $user_id;
 				$this->save($stock);
-
 				$stocklog['StockLog']['subitem_id'] = $subitem_id;
 				$stocklog['StockLog']['depot_id'] = $depot;
 				$stocklog['StockLog']['quantity'] = $quantity;
@@ -303,6 +303,7 @@ class Stock extends AppModel {
 				return false;
 			}
 		}else{
+			if(EMERGENCY_LANDING) return true;
 			App::import('Model', 'Subitem');
 			$SubitemModel = new Subitem();
 			$params = array(
