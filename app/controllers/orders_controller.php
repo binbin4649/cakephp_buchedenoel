@@ -49,6 +49,7 @@ class OrdersController extends AppController {
 			if(!empty($this->data[$modelName]['id'])){
 				$conditions[] = array('and'=>array('Order.id'=>$this->data[$modelName]['id']));
 			}
+			/*
 			if(!empty($this->data[$modelName]['start_date']['year']) and !empty($this->data[$modelName]['start_date']['month']) and !empty($this->data[$modelName]['start_date']['day'])){
 				$start_date = $this->data[$modelName]['start_date']['year'].'-'.$this->data[$modelName]['start_date']['month'].'-'.$this->data[$modelName]['start_date']['day'];
 				$conditions[] = array('and'=>array('Order.date >='=>$start_date));
@@ -57,6 +58,16 @@ class OrdersController extends AppController {
 				$end_date = $this->data[$modelName]['end_date']['year'].'-'.$this->data[$modelName]['end_date']['month'].'-'.$this->data[$modelName]['end_date']['day'];
 				$conditions[] = array('and'=>array('Order.date <='=>$end_date));
 			}
+			*/
+			
+			if(!empty($this->data[$modelName]['start_date'])){
+				$conditions[] = array('and'=>array('Order.date >='=>$this->data[$modelName]['start_date']));
+			}
+			if(!empty($this->data[$modelName]['end_date'])){
+				$conditions[] = array('and'=>array('Order.date <='=>$this->data[$modelName]['end_date']));
+			}
+			
+			
 			if(!empty($this->data[$modelName]['id'])){
 				$conditions[] = array('and'=>array('Order.id'=>$this->data[$modelName]['id']));
 			}
@@ -99,11 +110,8 @@ class OrdersController extends AppController {
 				$this->data[$modelName]['csv'] = null;
 			}
 		}else{
-			$this->data[$modelName]['start_date']['year'] = date('Y');
-			$this->data[$modelName]['start_date']['month'] = date('m');
-			$this->data[$modelName]['start_date']['day'] = date('d');
-			$start_date = $this->data[$modelName]['start_date']['year'].'-'.$this->data[$modelName]['start_date']['month'].'-'.$this->data[$modelName]['start_date']['day'];
-			$conditions[] = array('and'=>array('Order.date >='=>$start_date));
+			$this->data[$modelName]['start_date'] = date('Y-m-d');
+			$conditions[] = array('and'=>array('Order.date >='=>$this->data[$modelName]['start_date']));
 			$conditions[] = array('and'=>array('Order.order_status <>'=>5));
 			if($ac == 'index'){
 				$conditions[] = array('and'=>array('Order.destination_id <>'=>null));

@@ -1,6 +1,13 @@
+<script type="text/javascript" charset="utf-8">
+$(function($){$(".datepicker").datepicker({dateFormat:'yy-mm-dd'});});
+</script>
 <div class="sales index">
 <h2><?php __('Sales');?></h2>
 <?php
+echo $javascript->link("jquery-1.5.1.min",false);
+echo $javascript->link("jquery-ui-1.8.14.custom.min",false);
+echo $javascript->link("ui/i18n/ui.datepicker-ja.js",false);
+
 $modelName = 'Sale';
 echo $form->create($modelName ,array('action'=>'index'));
 echo __('Id');
@@ -41,23 +48,19 @@ echo $form->input($modelName.'.sale_status', array(
 ));
 echo '<br><br>売上日';
 echo $form->input('Sale.start_date', array(
-	'type'=>'date',
-	'dateFormat'=>'YMD',
+	'type'=>'text',
+	'size'=>8,
+	'div'=>false,
 	'label'=>false,
-	'minYear'=>'2009',
-	'maxYear' => MAXYEAR,
-	'empty'=>'select',
-	'div'=>false
+	'class'=>'datepicker'
 ));
 echo '～';
 echo $form->input('Sale.end_date', array(
-	'type'=>'date',
-	'dateFormat'=>'YMD',
+	'type'=>'text',
+	'size'=>8,
+	'div'=>false,
 	'label'=>false,
-	'minYear'=>'2009',
-	'maxYear' => MAXYEAR,
-	'empty'=>'select',
-	'div'=>false
+	'class'=>'datepicker'
 ));
 echo '　';
 echo $form->submit('Seach', array('div'=>false));
@@ -96,10 +99,10 @@ foreach ($sales as $sale):
 			<?php echo $html->link($sale['Sale']['id'], array('action'=>'view', $sale['Sale']['id'])); ?>
 		</td>
 		<td>
-			<?php echo $saleType[$sale['Sale']['sale_type']]; ?>
+			<?php if(!empty($sale['Sale']['sale_type'])) echo $saleType[$sale['Sale']['sale_type']]; ?>
 		</td>
 		<td>
-			<?php echo $saleStatus[$sale['Sale']['sale_status']]; ?>
+			<?php if(!empty($sale['Sale']['sale_status'])) echo $saleStatus[$sale['Sale']['sale_status']]; ?>
 		</td>
 		<td>
 			<?php echo $sale['Sale']['depot_id']; ?>

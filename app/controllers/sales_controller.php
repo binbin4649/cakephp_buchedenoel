@@ -28,13 +28,11 @@ class SalesController extends AppController {
 				$this->data[$modelName]['id'] = ereg_replace("[^0-9]", "", $this->data[$modelName]['id']);//半角数字以外削除
 				$conditions[] = array('and'=>array('Sale.id'=>$this->data[$modelName]['id']));
 			}
-			if(!empty($this->data[$modelName]['start_date']['year']) and !empty($this->data[$modelName]['start_date']['month']) and !empty($this->data[$modelName]['start_date']['day'])){
-				$start_date = $this->data[$modelName]['start_date']['year'].'-'.$this->data[$modelName]['start_date']['month'].'-'.$this->data[$modelName]['start_date']['day'];
-				$conditions[] = array('and'=>array('Sale.date >='=>$start_date));
+			if(!empty($this->data[$modelName]['start_date'])){
+				$conditions[] = array('and'=>array('Sale.date >='=>$this->data[$modelName]['start_date']));
 			}
-			if(!empty($this->data[$modelName]['end_date']['year']) and !empty($this->data[$modelName]['end_date']['month']) and !empty($this->data[$modelName]['end_date']['day'])){
-				$end_date = $this->data[$modelName]['end_date']['year'].'-'.$this->data[$modelName]['end_date']['month'].'-'.$this->data[$modelName]['end_date']['day'];
-				$conditions[] = array('and'=>array('Sale.date <='=>$end_date));
+			if(!empty($this->data[$modelName]['end_date'])){
+				$conditions[] = array('and'=>array('Sale.date <='=>$this->data[$modelName]['end_date']));
 			}
 			$this->paginate = array(
 				'conditions'=>$conditions,

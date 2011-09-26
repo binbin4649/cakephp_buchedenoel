@@ -1,5 +1,11 @@
+<script type="text/javascript" charset="utf-8">
+$(function($){$(".datepicker").datepicker({dateFormat:'yy-mm-dd'});});
+</script>
 <div class="invoices index">
 <?php
+echo $javascript->link("jquery-1.5.1.min",false);
+echo $javascript->link("jquery-ui-1.8.14.custom.min",false);
+echo $javascript->link("ui/i18n/ui.datepicker-ja.js",false);
 if(!empty($csv)){
 	echo '<p>';
 	echo '<a href="'.$csv['url'].'" target="_blank">'.$csv['name'].'</a>';
@@ -39,66 +45,56 @@ detail</a>
 <div id="in_exp" style="display:none">
 <?php
 echo __('Invoice Date', true);
+echo '　　　';
 echo $form->input($modelName.'.start_date', array(
-	'type'=>'date',
-	'dateFormat'=>'YMD',
+	'type'=>'text',
+	'size'=>8,
+	'div'=>false,
 	'label'=>false,
-	'minYear'=>MINYEAR,
-	'maxYear' => MAXYEAR,
-	'empty'=>'select',
-	'div'=>false
+	'class'=>'datepicker'
 ));
 echo '～';
 echo $form->input($modelName.'.end_date', array(
-	'type'=>'date',
-	'dateFormat'=>'YMD',
+	'type'=>'text',
+	'size'=>8,
+	'div'=>false,
 	'label'=>false,
-	'minYear'=>MINYEAR,
-	'maxYear' => MAXYEAR,
-	'empty'=>'select',
-	'div'=>false
+	'class'=>'datepicker'
 ));
 echo '<br><br>';
 echo __('Collect Bill', true);
 echo $form->input($modelName.'.start_payment_day', array(
-	'type'=>'date',
-	'dateFormat'=>'YMD',
+	'type'=>'text',
+	'size'=>8,
+	'div'=>false,
 	'label'=>false,
-	'minYear'=>MINYEAR,
-	'maxYear' => MAXYEAR,
-	'empty'=>'select',
-	'div'=>false
+	'class'=>'datepicker'
 ));
 echo '～';
 echo $form->input($modelName.'.end_payment_day', array(
-	'type'=>'date',
-	'dateFormat'=>'YMD',
+	'type'=>'text',
+	'size'=>8,
+	'div'=>false,
 	'label'=>false,
-	'minYear'=>MINYEAR,
-	'maxYear' => MAXYEAR,
-	'empty'=>'select',
-	'div'=>false
+	'class'=>'datepicker'
 ));
 echo '<br><br>';
 echo __('Close Date', true);
+echo '　　　';
 echo $form->input($modelName.'.start_total_day', array(
-	'type'=>'date',
-	'dateFormat'=>'YMD',
+	'type'=>'text',
+	'size'=>8,
+	'div'=>false,
 	'label'=>false,
-	'minYear'=>MINYEAR,
-	'maxYear' => MAXYEAR,
-	'empty'=>'select',
-	'div'=>false
+	'class'=>'datepicker'
 ));
 echo '～';
 echo $form->input($modelName.'.end_total_day', array(
-	'type'=>'date',
-	'dateFormat'=>'YMD',
+	'type'=>'text',
+	'size'=>8,
+	'div'=>false,
 	'label'=>false,
-	'minYear'=>MINYEAR,
-	'maxYear' => MAXYEAR,
-	'empty'=>'select',
-	'div'=>false
+	'class'=>'datepicker'
 ));
 echo '　　';
 if($addForm->opneUser(open_users(), $opneuser, 'access_authority')){

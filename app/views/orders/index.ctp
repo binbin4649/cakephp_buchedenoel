@@ -1,5 +1,11 @@
+<script type="text/javascript" charset="utf-8">
+$(function($){$(".datepicker").datepicker({dateFormat:'yy-mm-dd'});});
+</script>
 <div class="orders index">
 <?php
+echo $javascript->link("jquery-1.5.1.min",false);
+echo $javascript->link("jquery-ui-1.8.14.custom.min",false);
+echo $javascript->link("ui/i18n/ui.datepicker-ja.js",false);
 if(!empty($csv)){
 	echo '<p>';
 	echo '<a href="'.$csv['url'].'" target="_blank">'.$csv['name'].'</a>';
@@ -48,23 +54,19 @@ echo $form->text($modelName.'.item_word', array(
 echo '　';
 echo __('Sale Date', true);
 echo $form->input('Order.start_date', array(
-	'type'=>'date',
-	'dateFormat'=>'YMD',
+	'type'=>'text',
+	'size'=>8,
+	'div'=>false,
 	'label'=>false,
-	'minYear'=>MINYEAR,
-	'maxYear' => MAXYEAR,
-	'empty'=>'select',
-	'div'=>false
+	'class'=>'datepicker'
 ));
 echo '～';
 echo $form->input('Order.end_date', array(
-	'type'=>'date',
-	'dateFormat'=>'YMD',
+	'type'=>'text',
+	'size'=>8,
+	'div'=>false,
 	'label'=>false,
-	'minYear'=>MINYEAR,
-	'maxYear' => MAXYEAR,
-	'empty'=>'select',
-	'div'=>false
+	'class'=>'datepicker'
 ));
 echo '　';
 echo $form->submit('Seach', array('div'=>false));

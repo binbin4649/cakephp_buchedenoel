@@ -1,19 +1,15 @@
 <script type="text/javascript">
-$(function() {
-  $('#getData').autocomplete('/buchedenoel/order_dateils/getData');
-});
+//オートコンプリート ワンライナー
+$(function() { $('#getData').autocomplete('/buchedenoel/order_dateils/getData');});
+//デートピッカー ワンライナー
+$(function($){$(".datepicker").datepicker({dateFormat:'yy-mm-dd'});});
 </script>
 <?php
 	echo $javascript->link("jquery",false);
-	echo $javascript->link("jquery.autocomplete",false);
 	echo $javascript->link("thickbox",false);
-	
-	/*
-	if(empty($span_no)) $span_no = '';
-	if(empty($discount)) $discount = '';
-	if(empty($adjustment)) $adjustment = '';
-	if(empty($sub_remarks)) $sub_remarks = '';
-	*/
+	echo $javascript->link("jquery-ui-1.8.14.custom.min",false);
+	echo $javascript->link("jquery.autocomplete",false);
+	echo $javascript->link("ui/i18n/ui.datepicker-ja.js",false);
 	if(empty($edit)){
 		$edit = array(
 			'Subitem'=>array('id'=>'','name'=>'','quantity'=>'','major_size'=>'','minority_size'=>'','marking'=>'',
@@ -27,20 +23,20 @@ $(function() {
 <div class="form">
 	<fieldset>
  	<?php
+ 	if(empty($date)) $date = date('Y-m-d');
  	echo $form->create('OrderDateil', array('action'=>'add'));
  	echo '<table class="itemVars">';
  	echo '<tr><td>';
 	echo '　売上日：';
 	echo $form->input('OrderDateil.date', array(
-		'type'=>'date',
-		'dateFormat'=>'YMD',
+		'type'=>'text',
+		'size'=>8,
 		'label'=>false,
-		'minYear'=>MINYEAR,
-		'maxYear' => MAXYEAR,
 		'div'=>false,
-		'selected'=>$date
+		'class'=>'datepicker',
+		'value'=>$date
 	));
-	if(!empty($date)) echo $date['year'].':'.$date['month'].':'.$date['day'];
+	if(!empty($date)) echo $date;
  	echo '</td><td>';
 	echo __('Partners No.', true);
  	echo $form->input("OrderDateil.partners_no", array(
@@ -159,8 +155,10 @@ $(function() {
  	echo '品番：';
 	echo $form->input('OrderDateil.AutoItemName', array('type'=>'text','div'=>false,'label'=>false,'size'=>30,'id'=>'getData'));
 	echo $form->hidden('step', array('value'=>'1'));
-	echo '　<input type="submit" value="Enter" />　';
+	if(empty($subitems)) echo '　<input type="submit" value="Enter" />';
+	echo '　';
 	echo $html->link(__('Reset', true), array('action'=>'add/reset'));
+	
 	if(!empty($subitems)){
 		echo $form->create('OrderDateil', array('action'=>'add'));
 		echo $form->hidden('Item.name', array('value'=>$item['Item']['name']));
@@ -170,6 +168,17 @@ $(function() {
 		echo '<table class="itemVars"><tr>';
 		echo '<td>'.$item['Item']['name'].' / ￥'.$item['Item']['price'].' / '.$item['Factory']['name'];
 		echo ' / 納期';
+		
+		echo $form->input('OrderDateil.specified_date', array(
+			'type'=>'text',
+			'size'=>8,
+			'label'=>false,
+			'empty'=>'select',
+			'div'=>false,
+			'class'=>'datepicker'
+		));
+		
+		/*
 		echo $form->input('OrderDateil.specified_date', array(
 			'type'=>'date',
 			'dateFormat'=>'YMD',
@@ -180,6 +189,7 @@ $(function() {
 			'div'=>false,
 			'selected'=>$edit['Subitem']['specified_date']
 		));
+		*/
 		echo ' / 刻印';
 		echo $form->input("OrderDateil.marking", array(
 		'type'=>'text',
@@ -337,7 +347,8 @@ $(function() {
 			echo '<tr>';
 			echo '<td>'.$value['Subitem']['name'].'</td>';
 			echo '<td>'.number_format($value['Item']['price']).'</td>';
-			echo '<td>'.$value['Subitem']['specified_date']['year'].'-'.$value['Subitem']['specified_date']['month'].'-'.$value['Subitem']['specified_date']['day'].'</td>';
+			//echo '<td>'.$value['Subitem']['specified_date']['year'].'-'.$value['Subitem']['specified_date']['month'].'-'.$value['Subitem']['specified_date']['day'].'</td>';
+			echo '<td>'.$value['Subitem']['specified_date'].'</td>';
 			echo '<td>'.$value['Subitem']['marking'].'</td>';
 			echo '<td>'.$value['Subitem']['quantity'].'</td>';
 			echo '<td>'.$value['Subitem']['depot_id'].'</td>';
@@ -364,8 +375,6 @@ $(function() {
 		echo '</table>';
 		echo '<p>'.$html->link(__('売上入力', true), array('action'=>'add/ordering/')).'</p>';
 	}
-
-
 	?>
 	</fieldset>
 </div>
@@ -376,6 +385,7 @@ $(function() {
 <li>スパン：入力できるのは半角英数字のみです。日本語、記号などは入力できません。</li>
 <li>割引：割引率を1～99の整数で入力して下さい。（例）10　と入力すると10％引きの金額が表示されます。（注）端数切捨て</li>
 <li>調整：入力できるのは半角数字と半角ハイフン「-」のみです。減算する場合は先頭にハイフン「-」をつけて下さい。</li>
+<li>受注情報はEnterを押すまで反映されません。</li>
 <li>(2011.05.09)部門に所属していないと完了で登録される不具合があるらしいです。	</li>
 </ul>
 </p>

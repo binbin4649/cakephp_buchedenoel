@@ -18,30 +18,25 @@ class InvoicesController extends AppController {
 			if(!empty($this->data[$modelName]['invoice_status'])){
 				$conditions[] = array('and'=>array($modelName.'.invoice_status'=>$this->data[$modelName]['invoice_status']));
 			}
-			if(!empty($this->data[$modelName]['start_date']['year']) and !empty($this->data[$modelName]['start_date']['month']) and !empty($this->data[$modelName]['start_date']['day'])){
-				$start_date = $this->data[$modelName]['start_date']['year'].'-'.$this->data[$modelName]['start_date']['month'].'-'.$this->data[$modelName]['start_date']['day'];
-				$conditions[] = array('and'=>array($modelName.'.date >='=>$start_date));
+			if(!empty($this->data[$modelName]['start_date'])){
+				$conditions[] = array('and'=>array($modelName.'.date >='=>$this->data[$modelName]['start_date']));
 			}
-			if(!empty($this->data[$modelName]['end_date']['year']) and !empty($this->data[$modelName]['end_date']['month']) and !empty($this->data[$modelName]['end_date']['day'])){
-				$end_date = $this->data[$modelName]['end_date']['year'].'-'.$this->data[$modelName]['end_date']['month'].'-'.$this->data[$modelName]['end_date']['day'];
-				$conditions[] = array('and'=>array($modelName.'.date <='=>$end_date));
+			if(!empty($this->data[$modelName]['end_date'])){
+				$conditions[] = array('and'=>array($modelName.'.date <='=>$this->data[$modelName]['end_date']));
 			}
-			if(!empty($this->data[$modelName]['start_payment_day']['year']) and !empty($this->data[$modelName]['start_payment_day']['month']) and !empty($this->data[$modelName]['start_payment_day']['day'])){
-				$start_date = $this->data[$modelName]['start_payment_day']['year'].'-'.$this->data[$modelName]['start_payment_day']['month'].'-'.$this->data[$modelName]['start_payment_day']['day'];
-				$conditions[] = array('and'=>array($modelName.'.payment_day >='=>$start_date));
+			if(!empty($this->data[$modelName]['start_payment_day'])){
+				$conditions[] = array('and'=>array($modelName.'.payment_day >='=>$this->data[$modelName]['start_payment_day']));
 			}
-			if(!empty($this->data[$modelName]['end_payment_day']['year']) and !empty($this->data[$modelName]['end_payment_day']['month']) and !empty($this->data[$modelName]['end_payment_day']['day'])){
-				$end_date = $this->data[$modelName]['end_payment_day']['year'].'-'.$this->data[$modelName]['end_payment_day']['month'].'-'.$this->data[$modelName]['end_payment_day']['day'];
-				$conditions[] = array('and'=>array($modelName.'.payment_day <='=>$end_date));
+			if(!empty($this->data[$modelName]['end_payment_day'])){
+				$conditions[] = array('and'=>array($modelName.'.payment_day <='=>$this->data[$modelName]['end_payment_day']));
 			}
-			if(!empty($this->data[$modelName]['start_total_day']['year']) and !empty($this->data[$modelName]['start_total_day']['month']) and !empty($this->data[$modelName]['start_total_day']['day'])){
-				$start_date = $this->data[$modelName]['start_total_day']['year'].'-'.$this->data[$modelName]['start_total_day']['month'].'-'.$this->data[$modelName]['start_total_day']['day'];
-				$conditions[] = array('and'=>array($modelName.'.total_day >='=>$start_date));
+			if(!empty($this->data[$modelName]['start_total_day'])){
+				$conditions[] = array('and'=>array($modelName.'.total_day >='=>$this->data[$modelName]['start_total_day']));
 			}
-			if(!empty($this->data[$modelName]['end_total_day']['year']) and !empty($this->data[$modelName]['end_total_day']['month']) and !empty($this->data[$modelName]['end_total_day']['day'])){
-				$end_date = $this->data[$modelName]['end_total_day']['year'].'-'.$this->data[$modelName]['end_total_day']['month'].'-'.$this->data[$modelName]['end_total_day']['day'];
-				$conditions[] = array('and'=>array($modelName.'.total_day <='=>$end_date));
+			if(!empty($this->data[$modelName]['end_total_day'])){
+				$conditions[] = array('and'=>array($modelName.'.total_day <='=>$this->data[$modelName]['end_total_day']));
 			}
+			
 			if($this->data[$modelName]['csv'] == 1){
 				$params = array(
 					'conditions'=>$conditions,

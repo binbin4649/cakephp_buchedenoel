@@ -18,21 +18,17 @@ class CreditsController extends AppController {
 			if(!empty($this->data[$modelName]['invoice_id'])){
 				$conditions[] = array('and'=>array($modelName.'.invoice_id'=>$this->data[$modelName]['invoice_id']));
 			}
-			if(!empty($this->data[$modelName]['start_date']['year']) and !empty($this->data[$modelName]['start_date']['month']) and !empty($this->data[$modelName]['start_date']['day'])){
-				$start_date = $this->data[$modelName]['start_date']['year'].'-'.$this->data[$modelName]['start_date']['month'].'-'.$this->data[$modelName]['start_date']['day'];
-				$conditions[] = array('and'=>array($modelName.'.date >='=>$start_date));
+			if(!empty($this->data[$modelName]['start_date'])){
+				$conditions[] = array('and'=>array($modelName.'.date >='=>$this->data[$modelName]['start_date']));
 			}
-			if(!empty($this->data[$modelName]['end_date']['year']) and !empty($this->data[$modelName]['end_date']['month']) and !empty($this->data[$modelName]['end_date']['day'])){
-				$end_date = $this->data[$modelName]['end_date']['year'].'-'.$this->data[$modelName]['end_date']['month'].'-'.$this->data[$modelName]['end_date']['day'];
-				$conditions[] = array('and'=>array($modelName.'.date <='=>$end_date));
+			if(!empty($this->data[$modelName]['end_date'])){
+				$conditions[] = array('and'=>array($modelName.'.date <='=>$this->data[$modelName]['end_date']));
 			}
-			if(!empty($this->data[$modelName]['start_created']['year']) and !empty($this->data[$modelName]['start_created']['month']) and !empty($this->data[$modelName]['start_created']['day'])){
-				$start_date = $this->data[$modelName]['start_created']['year'].'-'.$this->data[$modelName]['start_created']['month'].'-'.$this->data[$modelName]['start_created']['day'];
-				$conditions[] = array('and'=>array($modelName.'.created >='=>$start_date.' 00:00:00'));
+			if(!empty($this->data[$modelName]['start_created'])){
+				$conditions[] = array('and'=>array($modelName.'.created >='=>$this->data[$modelName]['start_created'].' 00:00:00'));
 			}
-			if(!empty($this->data[$modelName]['end_created']['year']) and !empty($this->data[$modelName]['end_created']['month']) and !empty($this->data[$modelName]['end_created']['day'])){
-				$end_date = $this->data[$modelName]['end_created']['year'].'-'.$this->data[$modelName]['end_created']['month'].'-'.$this->data[$modelName]['end_created']['day'];
-				$conditions[] = array('and'=>array($modelName.'.created <='=>$end_date.' 23:59:59'));
+			if(!empty($this->data[$modelName]['end_created'])){
+				$conditions[] = array('and'=>array($modelName.'.created <='=>$this->data[$modelName]['end_created'].' 23:59:59'));
 			}
 			if($this->data[$modelName]['csv'] == 1){
 				$params = array(

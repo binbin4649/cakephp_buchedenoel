@@ -1,5 +1,9 @@
 <div class="view">
-<p><?php echo $html->link(__('List Credits', true), array('action'=>'index'));?></p>
+<p><?php
+	echo $javascript->link("jquery",false);
+	echo $javascript->link("thickbox",false);
+	echo $html->link(__('List Credits', true), array('action'=>'index'));
+?></p>
 <?php
 if(!empty($add_confirm)){
 	$date = $add_confirm['Credit']['date']['year'].'-'.$add_confirm['Credit']['date']['month'].'-'.$add_confirm['Credit']['date']['day'];
@@ -53,7 +57,8 @@ if(!empty($add_confirm)){
 		echo $form->input('Credit.billing_id', array(
 			'label'=>__('Billing', true),
 			'size'=>10,
-			'after'=>'<a href="/buchedenoel/billings" target="_blank">請求先検索</a>'
+			'id'=>'billingId',
+			'after'=>'<a href="/buchedenoel/billings/selectid?keepThis=true&TB_iframe=true&height=400&width=550" title="請求先選択" class="thickbox">請求先</a>'
 		));
 		echo $form->input('Credit.deposit_amount', array(
 			'label'=>__('Deposit Amount', true),

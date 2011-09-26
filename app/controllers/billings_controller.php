@@ -122,6 +122,11 @@ class BillingsController extends AppController {
 			$this->redirect(array('action'=>'index'));
 		}
 	}
+	
+	function selectid(){
+		$this->layout = 'senddata';
+		$this->index();
+	}
 
 }
 ?>
