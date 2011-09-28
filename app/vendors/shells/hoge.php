@@ -259,6 +259,51 @@ class HogeShell extends Shell {
 		}
 	}
 	
+	//（とりあえず）レート変更に伴う、海外店の売上歴史書き換えプログラム
+	// ./cake hoge amountSectionsEdit -app /var/www/html/buchedenoel/app
+	function amountSectionsEdit(){
+		$range_en = '2011-09-31';//どこまでの期間の分を書き換えるか、ケツを設定する。ちなみにケツも含まれる。
+		$range = strtotime($range_en);
+		$sections = array('404', '405', '406', '422');
+		App::import('Model', 'AmountSection');
+    	$AmountSectionModel = new AmountSection();
+    	
+    	foreach($sections as $section){
+    		$params = array(
+				'conditions'=>array(
+					'AmountSection.section_id'=>$section, 
+					'AmountSection.start_day <='=>date('Y-m-d'),
+					'AmountSection.end_day <='=>date('Y-m-d'),
+				),
+				'recursive'=>-1,
+			);
+			$amount_sections = $AmountSectionModel->find('all', $params);
+			foreach($amount_sections as $val){
+				$start = strtotime($val['AmountSection']['start_day']);
+				$end = strtotime($val['AmountSection']['end_day']);
+				if($start <= $range & $end <= $range){
+					$AmountSectionModel->create();
+					if($section == 406 OR $section == 422) $value_rate = '0.741'; //KOREA
+					if($section == 404 OR $section == 405) $value_rate = '0.714'; //MACAU
+					if($val['AmountSection']['full_amount'] > 1) $val['AmountSection']['full_amount'] = floor($val['AmountSection']['full_amount'] * $value_rate);
+					if($val['AmountSection']['item_amount'] > 1) $val['AmountSection']['item_amount'] = floor($val['AmountSection']['item_amount'] * $value_rate);
+					if($val['AmountSection']['tax_amount'] > 1) $val['AmountSection']['tax_amount'] = floor($val['AmountSection']['tax_amount'] * $value_rate);
+					if($val['AmountSection']['cost_amount'] > 1) $val['AmountSection']['item_amount'] = floor($val['AmountSection']['cost_amount'] * $value_rate);
+					if($val['AmountSection']['expense_amount'] > 1) $val['AmountSection']['expense_amount'] = floor($val['AmountSection']['expense_amount'] * $value_rate);
+					if($val['AmountSection']['purchase_amount'] > 1) $val['AmountSection']['purchase_amount'] = floor($val['AmountSection']['purchase_amount'] * $value_rate);
+					if($val['AmountSection']['stock_price_amount'] > 1) $val['AmountSection']['stock_price_amount'] = floor($val['AmountSection']['stock_price_amount'] * $value_rate);
+					if($val['AmountSection']['stock_cost_amount'] > 1) $val['AmountSection']['stock_cost_amount'] = floor($val['AmountSection']['stock_cost_amount'] * $value_rate);
+					if($val['AmountSection']['mark'] > 1) $val['AmountSection']['mark'] = floor($val['AmountSection']['mark'] * $value_rate);
+					if($val['AmountSection']['plan'] > 1) $val['AmountSection']['plan'] = floor($val['AmountSection']['plan'] * $value_rate);
+					if($val['AmountSection']['addsub'] > 1) $val['AmountSection']['addsub'] = floor($val['AmountSection']['addsub'] * $value_rate);
+					$AmountSectionModel->save($val);
+				}
+			}
+    	}
+    	
+    	exit("HAPPY END");
+	}
+	
 	// modelテスト用
 	function modelTest(){
 		App::import('Model', 'Section');
@@ -268,10 +313,6 @@ class HogeShell extends Shell {
     	pr($result);
     	exit;
 	}
-	
-	
-	
-	
 	
 }
 
