@@ -49,7 +49,7 @@ class OrdersController extends AppController {
 			if(!empty($this->data[$modelName]['id'])){
 				$conditions[] = array('and'=>array('Order.id'=>$this->data[$modelName]['id']));
 			}
-			/*
+			
 			if(!empty($this->data[$modelName]['start_date']['year']) and !empty($this->data[$modelName]['start_date']['month']) and !empty($this->data[$modelName]['start_date']['day'])){
 				$start_date = $this->data[$modelName]['start_date']['year'].'-'.$this->data[$modelName]['start_date']['month'].'-'.$this->data[$modelName]['start_date']['day'];
 				$conditions[] = array('and'=>array('Order.date >='=>$start_date));
@@ -58,15 +58,16 @@ class OrdersController extends AppController {
 				$end_date = $this->data[$modelName]['end_date']['year'].'-'.$this->data[$modelName]['end_date']['month'].'-'.$this->data[$modelName]['end_date']['day'];
 				$conditions[] = array('and'=>array('Order.date <='=>$end_date));
 			}
-			*/
 			
+			
+			/* datepicerを導入したらコメント外す
 			if(!empty($this->data[$modelName]['start_date'])){
 				$conditions[] = array('and'=>array('Order.date >='=>$this->data[$modelName]['start_date']));
 			}
 			if(!empty($this->data[$modelName]['end_date'])){
 				$conditions[] = array('and'=>array('Order.date <='=>$this->data[$modelName]['end_date']));
 			}
-			
+			*/
 			
 			if(!empty($this->data[$modelName]['id'])){
 				$conditions[] = array('and'=>array('Order.id'=>$this->data[$modelName]['id']));
