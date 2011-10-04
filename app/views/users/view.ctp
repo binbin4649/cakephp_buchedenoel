@@ -98,7 +98,10 @@
 			&nbsp;
 		</dd>
 
-		<?php if($addForm->opneUser(open_users(), $opneuser, 'access_authority')):?>
+		<?php 
+			//if($addForm->opneUser(open_users(), $opneuser, 'access_authority'))://本社スタッフ全員
+			if($addForm->opneUser(array('3'), $opneuser, 'access_authority'))://user権限のみ
+		?>
 		</dl><div class="viewline">Only Head Office Staff</div><dl>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Access Authority'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
@@ -146,7 +149,10 @@
 			&nbsp;
 		</dd>
 		<?php endif; ?>
-		<?php if($addForm->opneUser(array($user['User']['id']), $opneuser, 'id') or $addForm->opneUser(array('3'), $opneuser, 'access_authority')):?>
+		<?php 
+			if($addForm->opneUser(array($user['User']['id']), $opneuser, 'id') or $addForm->opneUser(array('3'), $opneuser, 'access_authority')):
+			//if($addForm->opneUser(array('3'), $opneuser, 'access_authority'))://user権限のみ
+		?>
 		</dl><div class="viewline">Only User</div><dl>
 			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Login ID'); ?></dt>
 			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
@@ -162,7 +168,9 @@
 
 	</dl>
 </div>
-<?php if($addForm->opneUser(array('3'), $opneuser, 'access_authority') or $addForm->opneUser(array($user['User']['id']), $opneuser, 'id')):?>
+<?php 
+	if($addForm->opneUser(array('3'), $opneuser, 'access_authority') or $addForm->opneUser(array($user['User']['id']), $opneuser, 'id'))://user権限と本人
+?>
 <div class="actions">
 	<ul>
 		<!-- <li><?php //echo $form->button(__('Edit User', true), array('onclick'=>"location.href='/buchedenoel/users/edit/".$user['User']['id']."'")); ?> </li> -->
