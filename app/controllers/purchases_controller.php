@@ -438,6 +438,7 @@ class PurchasesController extends AppController {
 				$this->Purchase->save($Purchase);
 				$this->Session->delete("Purchase");
 				$this->Session->delete("PurchaseDetail");
+				$this->Session->setFlash('仕入（または返品）が完了しました。');
 			}
 			$this->set(compact('Purchase', 'PurchaseDetail', 'purchase_status'));
 			
