@@ -363,11 +363,15 @@ class PurchasesController extends AppController {
 					$this->PurchaseDetail->save($detail['PurchaseDetail']);
 					$this->PurchaseDetail->id = null;
 					if($detail['PurchaseDetail']['quantity'] >= 1){
-						$this->Stock->Plus($detail['PurchaseDetail']['subitem_id'], $detail['PurchaseDetail']['depot'], $detail['PurchaseDetail']['quantity'], $this->Auth->user('id'), 1);
+						if(EMERGENCY_LANDING == false){
+							$this->Stock->Plus($detail['PurchaseDetail']['subitem_id'], $detail['PurchaseDetail']['depot'], $detail['PurchaseDetail']['quantity'], $this->Auth->user('id'), 1);
+						}
 					}elseif($detail['PurchaseDetail']['quantity'] < 0){
 						$return_juge = true;
 						$qty = str_replace('-', '', $detail['PurchaseDetail']['quantity']);
-						$mimus_result = $this->Stock->Mimus($detail['PurchaseDetail']['subitem_id'], $detail['PurchaseDetail']['depot'], $qty, $this->Auth->user('id'), 5);
+						if(EMERGENCY_LANDING == false){
+							$mimus_result = $this->Stock->Mimus($detail['PurchaseDetail']['subitem_id'], $detail['PurchaseDetail']['depot'], $qty, $this->Auth->user('id'), 5);
+						}
 					}
 					//コストに変更がある場合は、コストを計算する
 					//単品管理の商品は省く
