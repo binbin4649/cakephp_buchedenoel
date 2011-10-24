@@ -16,7 +16,7 @@ class PrepareShell extends Shell {
 		//$AmountSectionModel->dayAmount('305');
 		
 		
-		
+		/*
 		//タグ発行csvのファイルを削除
 		$old_file = array();
 		$path = WWW_ROOT.DS.'files'.DS.'pricetagcsv'.DS;
@@ -31,6 +31,7 @@ class PrepareShell extends Shell {
 				$this->out("unlink:".$file_name);
 			}
 		}
+		*/
 		//カタログ印刷ファイルを削除
 		$old_file = array();
 		$path = WWW_ROOT.DS.'files'.DS.'print'.DS;

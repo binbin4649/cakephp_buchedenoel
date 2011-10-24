@@ -363,13 +363,15 @@ class PurchasesController extends AppController {
 					$this->PurchaseDetail->save($detail['PurchaseDetail']);
 					$this->PurchaseDetail->id = null;
 					if($detail['PurchaseDetail']['quantity'] >= 1){
-						if(EMERGENCY_LANDING == false){
+						if(EMERGENCY_LANDING == TRUE AND $detail['Item']['stock_code'] == 3){
+						}else{
 							$this->Stock->Plus($detail['PurchaseDetail']['subitem_id'], $detail['PurchaseDetail']['depot'], $detail['PurchaseDetail']['quantity'], $this->Auth->user('id'), 1);
 						}
 					}elseif($detail['PurchaseDetail']['quantity'] < 0){
 						$return_juge = true;
 						$qty = str_replace('-', '', $detail['PurchaseDetail']['quantity']);
-						if(EMERGENCY_LANDING == false){
+						if(EMERGENCY_LANDING == TRUE AND $detail['Item']['stock_code'] == 3){
+						}else{
 							$mimus_result = $this->Stock->Mimus($detail['PurchaseDetail']['subitem_id'], $detail['PurchaseDetail']['depot'], $qty, $this->Auth->user('id'), 5);
 						}
 					}
