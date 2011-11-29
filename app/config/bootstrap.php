@@ -49,7 +49,7 @@ define('EMERGENCY_LANDING', TRUE);
 //AmountでOrderを無視して売上合計を直接入力するモード
 define('AMOUNT_LANDING', TRUE);
 
-define('MAXYEAR', 2011);
+define('MAXYEAR', 2012);
 define('MINYEAR', 2009);
 define('TAX_RATE', 5);//5=5%
 define('INC_NAME_JA', '株式会社ザ･キッス');
@@ -91,6 +91,7 @@ function get_year_list(){
 		'2009'=>'2009',
 		'2010'=>'2010',
 		'2011'=>'2011',
+		'2012'=>'2012',
 	);
 }
 
