@@ -74,3 +74,4 @@ echo $javascript->link("jquery.autocomplete",false);
 	</ul>
 </div>
 <p>品番は、半角英数で入力して下さい。</p>
+<p>品番が無い場合は、SAMPLE 品番で入力して、備考欄に詳細（仮の品番とか）を入力して下さい。</p>
