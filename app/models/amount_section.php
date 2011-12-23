@@ -600,7 +600,48 @@ class AmountSection extends AppModel {
 		return $return;
 	}
 
+	
+	function today_index(){
+		App::import('Model', 'Section');
+    	$SectionModel = new Section();
+    	//$section_list = $SectionModel->amountSectionList2();
+    	$sections = $SectionModel->amountSectionList(); //集計対象の部門一覧を返す
+		$new_sections = $SectionModel->amountSectionList5(); //新店だけのリスト
+   		$oversea_sections = $SectionModel->amountSectionList6();  //海外店だけのリスト
+    	$sections_merge = $sections;
+		foreach($new_sections as $key=>$value){
+			$sections_merge[$key] = $value;
+		}
+		foreach($oversea_sections as $key=>$value){
+			$sections_merge[$key] = $value;
+		}
+    	$section_list = $sections_merge;
+    	
+    	$out = array();
+    	$date = date("Y-m-d",mktime());
+    	$total = 0;
+    	foreach($section_list as $key=>$value){
+    		$out[$key]['name'] = $value;
+    		$params = array(
+				'conditions'=>array(
+					'AmountSection.section_id'=>$key,
+					'AmountSection.start_day'=>$date,
+					'AmountSection.end_day'=>$date,
+				),
+				'recursive'=>-1
+			);
+			$nowAmount = $this->find('first' ,$params);
+	    	if(empty($nowAmount['AmountSection']['full_amount'])){
+	    		$nowAmount['AmountSection']['full_amount'] = $nowAmount['AmountSection']['addsub'];
+	    	}
+	    	$out[$key]['today'] = $nowAmount['AmountSection']['full_amount'];
+	    	$total = $total + $out[$key]['today'];
+    	}
+    	$out['total'] = $total;
+    	return $out;
+	}
 
+	
 	function ranking_today($sales_code, $key){
 		$return = array();
 		$ModelName = 'AmountSection';//変更箇所

@@ -1,3 +1,7 @@
+<h2>本日の売上速報</h2>
+<div><?php echo $html->link('本日の売上速報', array('controller'=>'amount_sections', 'action'=>'todayindex')); ?></div>
+
+
 <h2>商品　今週のTOP10</h2>
 <div><ul class="yuirssreader">
 <?php

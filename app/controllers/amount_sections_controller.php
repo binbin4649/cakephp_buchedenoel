@@ -187,8 +187,8 @@ class AmountSectionsController extends AppController {
 	}
 	
 	//今日の速報
-	function today_index(){
-		$this->set('ranking_store', $this->AmountSection->ranking_today($id, $key));
+	function todayindex(){
+		$this->set('today', $this->AmountSection->today_index());
 	}
 
 	function delete($id = null) {
