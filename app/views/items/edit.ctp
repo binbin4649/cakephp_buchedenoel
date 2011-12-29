@@ -100,16 +100,16 @@ echo $javascript->link("jquery.autocomplete",false);
 			'type'=>'date',
 			'dateFormat'=>'YMD',
 			'label'=>__('Release', true),
-			'minYear'=>'2000',
-			'maxYear' => date('Y'),
+			'minYear'=>MINYEAR,
+			'maxYear' => MAXYEAR,
 			'empty'=>__('(Select)', true)
 		));
 		echo $form->input('Item.order_end_day', array(
 			'type'=>'date',
 			'dateFormat'=>'YMD',
 			'label'=>__('Order End', true),
-			'minYear'=>'2000',
-			'maxYear' => date('Y'),
+			'minYear'=>MINYEAR,
+			'maxYear' => MAXYEAR,
 			'empty'=>__('(Select)', true)
 		));
 		echo $form->input('Item.demension', array(
