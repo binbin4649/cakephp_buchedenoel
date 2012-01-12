@@ -253,8 +253,9 @@ class UsersController extends AppController {
 					if($user_duty_code == '30'){//退職者はIDを消す
 						//$username = $save_user['User']['username'];
 						$randam = mt_rand();
-						//$save_user['User']['username'] = $username.$randam;
+						//$save_user['User']['username'] = $username.$randam ユーザーネームとランダム数字を合体しているだけ
 						$save_user['User']['username'] = $randam;
+						$save_user['User']['section_id'] = '';
 					}
 					
 					$result = $this->User->save($save_user);
@@ -290,6 +291,7 @@ class UsersController extends AppController {
 						$username = $save_user['User']['username'];
 						$randam = mt_rand();
 						$save_user['User']['username'] = $username.$randam;
+						$save_user['User']['section_id'] = '';
 					}
 					$result = $this->User->save($save_user);
 					if($result){
