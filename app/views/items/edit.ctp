@@ -233,4 +233,5 @@ echo $javascript->link("jquery.autocomplete",false);
 	<li>Size Basic:10文字以上は印刷時に省かれます。数字は半角で入力して下さい。</li>
 	<li>在庫管理区分：単品管理：アにバーサリーなどで売上ごとにJANコードを生成する場合はこれを選択。</li>
 	<li>重さは、4桁整数で入力してください。例）3.3g　→　0330</li>
+	<li>Item Imageで Defaultを選択すると、一覧やカタログなどに使用される画像になります。</li>
 </ul>

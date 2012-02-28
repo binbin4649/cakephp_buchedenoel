@@ -38,7 +38,8 @@ class AddFormHelper extends AppHelper{
 
 	function mainImageTable($itemimage, $checked){//メイン画像を選択する、ラジオボタン付きのテーブルを出力
 		$out = '<table class="itemimage">';
-		$out .= '<tr><th colspan="2">Item Image</th></tr>';
+		//$out .= '<tr><th colspan="2">Item Image</th></tr>';
+		$out .= '<tr><th>Item Image</th><th>Default</th></tr>';
 		foreach($itemimage as $image){
 			$out .= '<tr><td>';
 			//$out .= $html->image('/img/itemimage/'.$image['id'].'.jpg', array('width'=>75, 'height'=>75));
