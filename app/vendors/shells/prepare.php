@@ -91,6 +91,7 @@ class PrepareShell extends Shell {
 		}
 		*/
 		
+		/* 20120405 cronの動きがおかしいので、一旦コメントアウト
 		//在庫移動プログラム　旧　→　新
 		//ファイル名がそのまま、旧倉庫番号になる
 		$path = WWW_ROOT.DS.'files'.DS.'pre_zaiko'.DS;
@@ -142,6 +143,7 @@ class PrepareShell extends Shell {
 				}
 			}
 		}
+		*/
 		
 		//単品管理が複数あった場合、最新の在庫を残して、残りは在庫減修正する。
 		/*
