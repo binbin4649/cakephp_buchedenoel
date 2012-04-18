@@ -14,6 +14,7 @@ class CleaningComponent extends Object {
 		$section_name = str_replace('Kapio', 'kp', $section_name);
 		$section_name = str_replace('Ｋａｐｉｏ', 'kp', $section_name);
 		$section_name = str_replace('Kahuna', 'kh', $section_name);
+		$section_name = str_replace('THE KISS sweets', 'sweets', $section_name);
 		//$section_name = str_replace('MACAU', 'MC', $section_name);
 		//$section_name = str_replace('KOREA', 'KR', $section_name);
 		//$section_name = str_replace('KOREA', 'KR', $section_name);
@@ -43,6 +44,7 @@ class CleaningComponent extends Object {
 		$section_name = str_replace('梅田コムサストア', '梅田コムサ', $section_name);
 		$section_name = str_replace('横浜赤レンガ倉庫', '横浜赤レンガ', $section_name);
 		$section_name = str_replace('越谷レイクタウンアウトレット店', '越谷アウトレット', $section_name);
+		$section_name = str_replace('ダイバーシティ東京 プラザ店', 'ダイバーシティ', $section_name);
         return $section_name;
     }
 
