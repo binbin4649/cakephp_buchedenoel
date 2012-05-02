@@ -88,9 +88,9 @@ class SalesCsvComponent extends Object {
 		$line[] = $this->year.'年'.$this->month.'月'.$this->day.'日集計 販売実績';
 		$line[] = ','.implode(',',$section_renban).',';
 		$line[] = ','.implode(',',$sections_title).',合計';
-		$this->log([SALES-CSV]debug1);
+		$this->log('[SALES-CSV]debug1');
 		for($i=1; $i<=31; $i++){
-			$this->log([SALES-CSV]debug2);
+			$this->log('[SALES-CSV]debug2');
 			$youbi = $this->DateCalComponent->this_youbi($this->year, $this->month, $i);
 			$value = array(); // 各店の日割り売上
 			$amont = 0; //日割り合計
@@ -137,7 +137,7 @@ class SalesCsvComponent extends Object {
 			$value[] = $oversea_section_amount;
 			$line[] = $i.'('.$youbi.'),'.implode(',',$value).','.$amont;
 		}
-		$this->log([SALES-CSV]debug3);
+		$this->log('[SALES-CSV]debug3');
 		//部門別
 		$section_total = array(); //部門番号=>当月合計
 		$prev_section_month = array(); //昨年同月実績
@@ -185,7 +185,7 @@ class SalesCsvComponent extends Object {
 			'section_comp_profit'=>$section_comp_profit, 'section_comp_exp'=>$section_comp_exp, 'section_exp_avg'=>$section_exp_avg,
 			'thisdays_mark'=>$thisdays_mark, 
 		);
-		$this->log([SALES-CSV]debug4);
+		$this->log('[SALES-CSV]debug4');
 		//20110616
 		//前比の合計について、ここで計算しているようだが、表には出ていない？
 		//たしか途中までやったような気がするので確認する。できたらついでに、前比だけキャッシュするとか、なんとか考えよう。
@@ -207,7 +207,7 @@ class SalesCsvComponent extends Object {
 			$prev_sction_total_sub = $prev_sction_total_sub + $stackSection['prev_sction_total'][$section_id];
 			$section_exp_avg_sub = $section_exp_avg_sub + $stackSection['section_exp_avg'][$section_id];
 		}
-		$this->log([SALES-CSV]debug5);
+		$this->log('[SALES-CSV]debug5');
 		$stackSection['thisdays_mark']['kizon_shoukei'] = $thisdays_mark_sub;
 		$stackSection['section_mark_rate']['kizon_shoukei'] = $this->TotalComponent->fprate2($stackAmount['sections_shoukei'], $thisdays_mark_sub);
 		$stackSection['section_mark_exp']['kizon_shoukei'] = $section_mark_exp_sub;
@@ -243,7 +243,7 @@ class SalesCsvComponent extends Object {
 			$prev_sction_total_sub = $prev_sction_total_sub + $stackSection['prev_sction_total'][$section_id];
 			$section_exp_avg_sub = $section_exp_avg_sub + $stackSection['section_exp_avg'][$section_id];
 		}
-		$this->log([SALES-CSV]debug6);
+		$this->log('[SALES-CSV]debug6');
 		$stackSection['thisdays_mark']['new_shoukei'] = $thisdays_mark_sub;
 		$stackSection['section_mark_rate']['new_shoukei'] = $this->TotalComponent->fprate2($stackAmount['sections_shoukei'], $thisdays_mark_sub);
 		$stackSection['section_mark_exp']['new_shoukei'] = $section_mark_exp_sub;
@@ -279,7 +279,7 @@ class SalesCsvComponent extends Object {
 			$prev_sction_total_sub = $prev_sction_total_sub + $stackSection['prev_sction_total'][$section_id];
 			$section_exp_avg_sub = $section_exp_avg_sub + $stackSection['section_exp_avg'][$section_id];
 		}
-		$this->log([SALES-CSV]debug7);
+		$this->log('[SALES-CSV]debug7');
 		$stackSection['thisdays_mark']['oversea_shoukei'] = $thisdays_mark_sub;
 		$stackSection['section_mark_rate']['oversea_shoukei'] = $this->TotalComponent->fprate2($stackAmount['sections_shoukei'], $thisdays_mark_sub);
 		$stackSection['section_mark_exp']['oversea_shoukei'] = $section_mark_exp_sub;
@@ -346,7 +346,7 @@ class SalesCsvComponent extends Object {
 			$out_this_term[$key]['oversea_shoukei'] = $tuki_shoukei;
 			$out_this_term[$key]['tuki_shoukei'] = $tuki_goukei;
 		}
-		$this->log([SALES-CSV]debug8);
+		$this->log('[SALES-CSV]debug8');
 		$term_section_avg = array(); //部門別 月平均額
 		$passd_month = $this->DateCalComponent->this_passd_term($this->month);
 		//Warning: Division by zero に対応する2回目。this_passd_termが怪しいので以下のコードを仕込む。8月限定。
@@ -383,7 +383,7 @@ class SalesCsvComponent extends Object {
 				}
 			}
 		}
-		$this->log([SALES-CSV]debug9);
+		$this->log('[SALES-CSV]debug9');
 		$term_section_avg['oversea_avg'] = floor($avg_total / $tenpo_count['oversea_count']);
 		
 		$term_total_avg = floor(($term_all_total / $sections_counter) / $passd_month);
@@ -441,7 +441,7 @@ class SalesCsvComponent extends Object {
 		
 		//$line[] = ',';
 		//$line[] = ',';
-		$this->log([SALES-CSV]debug10);
+		$this->log('[SALES-CSV]debug10');
 		//$prev_sction_total2 = $this->TotalComponent->kizonCount2($prev_sction_total, $sections, $new_sections, $oversea_sections);
 		//$line[] = '昨年同日合計,'.implode(',', $prev_sction_total2);
 		/////////////////////////////////////////出力用文字列の部
@@ -449,7 +449,7 @@ class SalesCsvComponent extends Object {
 		foreach($line as $li){
 			$out .= $li."\r\n";
 		}
-		$this->log([SALES-CSV]debug11);
+		$this->log('[SALES-CSV]debug11');
 		////////////////////////////////////////出力部
 		$file_name = 'store_sales'.date('Ymd-His').'.csv';
 		$path = WWW_ROOT.'/files/store_sales/';
