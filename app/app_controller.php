@@ -53,6 +53,9 @@ class AppController extends Controller {
 			$section_name = $this->Section->find('first', $params);
 			$login_user['User']['section_name'] = $section_name['Section']['name'];
 			$this->set(array('loginUser'=>$login_user));
+        }else{
+        	$login_user = false;
+        	$this->set(array('loginUser'=>$login_user));
         }
 
 		//actionがaddおよびeditだった場合に、誰がやったのか？ユーザーIDを自動挿入

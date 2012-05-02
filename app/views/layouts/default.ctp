@@ -27,7 +27,7 @@ p#compressor {margin-top:0.2em;}
 <div id="ygunav"><!--Header Step1 Start-->
 	<p>
 <?php
-//var_dump($loginUser);
+if(empty($loginUser)) $loginUser = false;
 if($loginUser){
 	echo '<em>';
 	if(!empty($loginUser['User']['section_name'])){

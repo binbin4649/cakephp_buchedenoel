@@ -268,6 +268,7 @@ class Section extends AppModel {
 			$name = $CleaningComponent->sectionName($name);
 			$sections[$id] = mb_substr($name, 0, 20);
 		}
+		$this->log('testttt');
 		return $sections;
 	}
 	

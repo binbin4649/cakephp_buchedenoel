@@ -16,13 +16,6 @@
 			<?php echo $section['Section']['name']; ?>
 			&nbsp;
 		</dd>
-		<!--
-		<dt<?php if ($i % 2 == 0) echo $class;?>>本日売上：前受金額</dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo number_format($today_total['sale_total_total']).' ： '.number_format($today_total['prev_money_total']); ?>
-			&nbsp;
-		</dd>
-		-->
 	</dl>
 
 	<div id='datail'>
