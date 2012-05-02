@@ -308,7 +308,7 @@ class HogeShell extends Shell {
 	function modelTest(){
 		App::import('Model', 'Section');
     	$SectionModel = new Section();
-    	$result = $SectionModel->amountSectionList5();
+    	$result = $SectionModel->amountSectionList();
     	
     	pr($result);
     	exit;
