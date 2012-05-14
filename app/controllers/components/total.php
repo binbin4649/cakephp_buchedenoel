@@ -131,6 +131,7 @@ class TotalComponent extends Object {
     	*$subitems、連想配列（キー＝＞（money=>金額、quantity=>数量）
     	*
 		*/
+		if(!is_array($subitems)) $subitems = array();
     	$total = 0;//合計金額
     	$detail_total = 0;//明細合計
     	$tax = 0;//消費税

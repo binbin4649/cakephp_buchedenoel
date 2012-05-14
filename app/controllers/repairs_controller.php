@@ -36,6 +36,7 @@ class RepairsController extends AppController {
 			if(!empty($this->data[$modelName]['item_id'])){
 				$conditions[] = array('and'=>array('Item.id'=>$this->data[$modelName]['item_id']));
 			}
+			if(empty($this->data['Repair']['csv'])) $this->data['Repair']['csv'] = null;
 			if($this->data['Repair']['csv'] == 1){
 				$params = array(
 					'conditions'=>$conditions,

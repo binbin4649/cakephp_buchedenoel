@@ -52,6 +52,7 @@
 		echo '</ul>';
 		$total_quantity = 0;
 		echo '<table class="itemDetail"><tr><th>子品番</th><th>価格</th><th>納期</th><th>刻印</th><th>数量</th><th>倉庫</th><th>区分</th><th>スパン</th><th>割引</th><th>調整</th><th>備考</th></tr>';
+		if(!is_array($Confirm)) $Confirm = array();
 		foreach($Confirm['details'] as $detail){
 			if($detail['Subitem']['order_type'] == 4 AND !empty($detail['Subitem']['major_size'])){
 				if($detail['Subitem']['major_size'] == 'other'){
@@ -75,6 +76,7 @@
 			echo '</tr>';
 			$total_quantity = $total_quantity + $detail['Subitem']['quantity'];
 		}
+		
 		echo '<tr><td>合計</td><td>'.number_format($Confirm['order']['price_total']).'</td><td></td><td></td><td>'.$total_quantity.'</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>';
 		echo '</table>';
 	?>

@@ -309,7 +309,6 @@ class HogeShell extends Shell {
 		App::import('Model', 'Section');
     	$SectionModel = new Section();
     	$result = $SectionModel->amountSectionList();
-    	
     	pr($result);
     	exit;
 	}
