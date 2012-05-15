@@ -42,6 +42,7 @@ class SalesCsvComponent extends Object {
 		$sections_title = Set::merge($sections,$goukei,$new_sections,$goukei,$oversea_sections,$goukei);
 		//$sections_merge = Set::merge($sections,$new_sections,$oversea_sections);//これは予期せぬ動きになったのでforeachで回した
 		$sections_merge = $sections;
+		$this->log('[sales-csv debug2]'.date('Y/m/d h:i:s'));
 		foreach($new_sections as $key=>$value){
 			$sections_merge[$key] = $value;
 		}
@@ -49,7 +50,7 @@ class SalesCsvComponent extends Object {
 			$sections_merge[$key] = $value;
 		}
 		$sections_counter = $tenpo_count['kizon_count']; //対象の部門数
-		
+		$this->log('[sales-csv debug3]'.date('Y/m/d h:i:s'));
 		///////////////////////////////////////////////店舗に連番を振る
 		$kizon_renban = array();
 		for($i=1; $i<=$kizon_count; $i++){
@@ -63,33 +64,44 @@ class SalesCsvComponent extends Object {
 		for($i=1; $i<=$oversea_count; $i++){
 			$oversea_renban[] = $i;
 		}
+		$this->log('[sales-csv debug4]'.date('Y/m/d h:i:s'));
 		$section_renban = array();
 		$section_renban = Set::merge($kizon_renban,'',$new_renban,'',$oversea_renban,'');
 		///////////////////////////////////////////////集計の部
 		//キャッシュは開発のために設置してある
 		//$cache_time = '3600';
 		//$cache_time = '+1 year';
-		$cache_time = '54000'; //15時間
-		Cache::set(array('duration' => $cache_time));
-   		$outReport = Cache::read('sales_csv_test');
-   		if(empty($outReport)){
-   			$outReport = $this->outReportReader($sections_merge);
-   			Cache::set(array('duration' => $cache_time));
-   			Cache::write('sales_csv_test', $outReport);
-   		}
-   		Cache::set(array('duration' => $cache_time));
-   		$summar = Cache::read('summary_test');
-   		if(empty($summar)){
+		$use_cache = false; //キャッシュを使うか？使わないかの判定
+		if($use_cache){
+			$cache_time = '54000'; //15時間
+			Cache::set(array('duration' => $cache_time));
+	   		$outReport = Cache::read('sales_csv_test');
+	   		if(empty($outReport)){
+	   			$outReport = $this->outReportReader($sections_merge);
+	   			Cache::set(array('duration' => $cache_time));
+	   			Cache::write('sales_csv_test', $outReport);
+	   		}
+	   		Cache::set(array('duration' => $cache_time));
+	   		$summar = Cache::read('summary_test');
+	   		if(empty($summar)){
+	   			$summar = $this->dairySummary1();
+	   			Cache::set(array('duration' => $cache_time));
+	   			Cache::write('summary_test', $summar);
+	   		}
+		}else{
+			$this->log('[sales-csv debug5]'.date('Y/m/d h:i:s'));
+			$outReport = $this->outReportReader($sections_merge);
+			$this->log('[sales-csv debug6]'.date('Y/m/d h:i:s'));
    			$summar = $this->dairySummary1();
-   			Cache::set(array('duration' => $cache_time));
-   			Cache::write('summary_test', $summar);
-   		}
+		}
+   		$this->log('[sales-csv debug7]'.date('Y/m/d h:i:s'));
 		/////////////////////////////////////////////出力用配列作成の部
 		$line = array(); //配列一つに対して、出力1行
 		$line[] = $this->year.'年'.$this->month.'月'.$this->day.'日集計 販売実績';
 		$line[] = ','.implode(',',$section_renban).',';
 		$line[] = ','.implode(',',$sections_title).',合計';
 		for($i=1; $i<=31; $i++){
+			$this->log('[sales-csv debug8]'.date('Y/m/d h:i:s'));
 			$youbi = $this->DateCalComponent->this_youbi($this->year, $this->month, $i);
 			$value = array(); // 各店の日割り売上
 			$amont = 0; //日割り合計
@@ -136,6 +148,7 @@ class SalesCsvComponent extends Object {
 			$value[] = $oversea_section_amount;
 			$line[] = $i.'('.$youbi.'),'.implode(',',$value).','.$amont;
 		}
+		$this->log('[sales-csv debug90]'.date('Y/m/d h:i:s'));
 		//部門別
 		$section_total = array(); //部門番号=>当月合計
 		$prev_section_month = array(); //昨年同月実績
@@ -193,7 +206,7 @@ class SalesCsvComponent extends Object {
 		$prev_sction_total_sub = 0;//前年実績 3点合計
 		$section_exp_avg_sub = 0;//平均見込 3点合計
 		$passd_term_arr = $this->DateCalComponent->this_passd_term_arr($this->month);
-		$this->log('[sales-csv debug2]'.date('Y/m/d h:i:s'));
+		$this->log('[sales-csv debug99]'.date('Y/m/d h:i:s'));
 		foreach($sections as $section_id=>$section_name){//既存
 			$outAmount = $this->outAmount($outReport, $section_id, $stackAmount, $stackSection);
 			$stackAmount = $outAmount['stackAmount'];
@@ -205,7 +218,6 @@ class SalesCsvComponent extends Object {
 			$prev_sction_total_sub = $prev_sction_total_sub + $stackSection['prev_sction_total'][$section_id];
 			$section_exp_avg_sub = $section_exp_avg_sub + $stackSection['section_exp_avg'][$section_id];
 		}
-		$this->log('[sales-csv debug3]'.date('Y/m/d h:i:s'));
 		$stackSection['thisdays_mark']['kizon_shoukei'] = $thisdays_mark_sub;
 		$stackSection['section_mark_rate']['kizon_shoukei'] = $this->TotalComponent->fprate2($stackAmount['sections_shoukei'], $thisdays_mark_sub);
 		$stackSection['section_mark_exp']['kizon_shoukei'] = $section_mark_exp_sub;
@@ -230,7 +242,6 @@ class SalesCsvComponent extends Object {
 		$stackAmount['sections_shoukei'] = 0;
 		$stackAmount['sections_sakunen'] = 0;
 		$stackAmount['tukibetu_shoukei'] = 0;
-		$this->log('[sales-csv debug4]'.date('Y/m/d h:i:s'));
 		foreach($new_sections as $section_id=>$section_name){//新店
 			$outAmount = $this->outAmount($outReport, $section_id, $stackAmount, $stackSection);
 			$stackAmount = $outAmount['stackAmount'];
@@ -266,7 +277,6 @@ class SalesCsvComponent extends Object {
 		$stackAmount['sections_shoukei'] = 0;
 		$stackAmount['sections_sakunen'] = 0;
 		$stackAmount['tukibetu_shoukei'] = 0;
-		$this->log('[sales-csv debug5]'.date('Y/m/d h:i:s'));
 		foreach($oversea_sections as $section_id=>$section_name){//海外
 			$outAmount = $this->outAmount($outReport, $section_id, $stackAmount, $stackSection);
 			$stackAmount = $outAmount['stackAmount'];
@@ -315,7 +325,6 @@ class SalesCsvComponent extends Object {
 				$new_this_term[$key][$section_id] = $value[0];
 			}
 		}
-		$this->log('[sales-csv debug6]'.date('Y/m/d h:i:s'));
 		$out_this_term = array();
 		foreach($new_this_term as $key=>$value){
 			$tuki_goukei = 0;
@@ -382,7 +391,6 @@ class SalesCsvComponent extends Object {
 			}
 		}
 		$term_section_avg['oversea_avg'] = floor($avg_total / $tenpo_count['oversea_count']);
-		$this->log('[sales-csv debug7]'.date('Y/m/d h:i:s'));
 		$term_total_avg = floor(($term_all_total / $sections_counter) / $passd_month);
 		$line[] = '合計,'.implode(',', $section_total).','.$days_total;
 		$days_section_ranking = $this->TotalComponent->not_chang_rank($section_total, $tenpo_count);
@@ -431,7 +439,6 @@ class SalesCsvComponent extends Object {
 		$line[] = '平均見込,'.implode(',', $section_exp_avg).','.$all_exp_avg;
 		$line[] = ',';
 		$line[] = ',';
-		$this->log('[sales-csv debug8]'.date('Y/m/d h:i:s'));
 		$line[] = implode(',', $summar['summary1']);
 		$line[] = implode(',', $summar['summary2']);
 		$line[] = implode(',', $summar['summary3']);
@@ -445,7 +452,6 @@ class SalesCsvComponent extends Object {
 		foreach($line as $li){
 			$out .= $li."\r\n";
 		}
-		$this->log('[sales-csv debug9]'.date('Y/m/d h:i:s'));
 		////////////////////////////////////////出力部
 		$file_name = 'store_sales'.date('Ymd-His').'.csv';
 		$path = WWW_ROOT.'/files/store_sales/';
