@@ -21,7 +21,6 @@ class SalesCsvComponent extends Object {
 	//直営店の売上実績 （シギさんデータは、2010年11月に税込みを税抜きに変換した関係で、端数が微妙に合わない。）
 	//./cake prepare importSales -app /var/www/html/buchedenoel/app
 	function dairyReport(){
-		$this->log('[sales-csv debug1]'.date('Y/m/d h:i:s'));
 		//////////////////////////////////////////////テストデータ
    		/*
    		催事を無理やり新店に含める → めた。さてどうかね。
@@ -42,7 +41,6 @@ class SalesCsvComponent extends Object {
 		$sections_title = Set::merge($sections,$goukei,$new_sections,$goukei,$oversea_sections,$goukei);
 		//$sections_merge = Set::merge($sections,$new_sections,$oversea_sections);//これは予期せぬ動きになったのでforeachで回した
 		$sections_merge = $sections;
-		$this->log('[sales-csv debug2]'.date('Y/m/d h:i:s'));
 		foreach($new_sections as $key=>$value){
 			$sections_merge[$key] = $value;
 		}
@@ -50,7 +48,6 @@ class SalesCsvComponent extends Object {
 			$sections_merge[$key] = $value;
 		}
 		$sections_counter = $tenpo_count['kizon_count']; //対象の部門数
-		$this->log('[sales-csv debug3]'.date('Y/m/d h:i:s'));
 		///////////////////////////////////////////////店舗に連番を振る
 		$kizon_renban = array();
 		for($i=1; $i<=$kizon_count; $i++){
@@ -64,7 +61,6 @@ class SalesCsvComponent extends Object {
 		for($i=1; $i<=$oversea_count; $i++){
 			$oversea_renban[] = $i;
 		}
-		$this->log('[sales-csv debug4]'.date('Y/m/d h:i:s'));
 		$section_renban = array();
 		$section_renban = Set::merge($kizon_renban,'',$new_renban,'',$oversea_renban,'');
 		///////////////////////////////////////////////集計の部
@@ -89,19 +85,15 @@ class SalesCsvComponent extends Object {
 	   			Cache::write('summary_test', $summar);
 	   		}
 		}else{
-			$this->log('[sales-csv debug5]'.date('Y/m/d h:i:s'));
 			$outReport = $this->outReportReader($sections_merge);
-			$this->log('[sales-csv debug6]'.date('Y/m/d h:i:s'));
    			$summar = $this->dairySummary1();
 		}
-   		$this->log('[sales-csv debug7]'.date('Y/m/d h:i:s'));
 		/////////////////////////////////////////////出力用配列作成の部
 		$line = array(); //配列一つに対して、出力1行
 		$line[] = $this->year.'年'.$this->month.'月'.$this->day.'日集計 販売実績';
 		$line[] = ','.implode(',',$section_renban).',';
 		$line[] = ','.implode(',',$sections_title).',合計';
 		for($i=1; $i<=31; $i++){
-			$this->log('[sales-csv debug8]'.date('Y/m/d h:i:s'));
 			$youbi = $this->DateCalComponent->this_youbi($this->year, $this->month, $i);
 			$value = array(); // 各店の日割り売上
 			$amont = 0; //日割り合計
@@ -148,7 +140,6 @@ class SalesCsvComponent extends Object {
 			$value[] = $oversea_section_amount;
 			$line[] = $i.'('.$youbi.'),'.implode(',',$value).','.$amont;
 		}
-		$this->log('[sales-csv debug90]'.date('Y/m/d h:i:s'));
 		//部門別
 		$section_total = array(); //部門番号=>当月合計
 		$prev_section_month = array(); //昨年同月実績
@@ -206,7 +197,6 @@ class SalesCsvComponent extends Object {
 		$prev_sction_total_sub = 0;//前年実績 3点合計
 		$section_exp_avg_sub = 0;//平均見込 3点合計
 		$passd_term_arr = $this->DateCalComponent->this_passd_term_arr($this->month);
-		$this->log('[sales-csv debug99]'.date('Y/m/d h:i:s'));
 		foreach($sections as $section_id=>$section_name){//既存
 			$outAmount = $this->outAmount($outReport, $section_id, $stackAmount, $stackSection);
 			$stackAmount = $outAmount['stackAmount'];
@@ -567,6 +557,7 @@ class SalesCsvComponent extends Object {
 	
 	//計算の元データを生成
 	function outReportReader($sections){
+		$this->log('[sales-csv debug1]'.date('Y/m/d h:i:s'));
 		$outReport = array();
     	$prev_date = $this->DateCalComponent->prev_month($this->year, $this->month);
    		$prev_month = $prev_date['month'];
