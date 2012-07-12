@@ -176,6 +176,7 @@ class AmountSection extends AppModel {
 		$out['month_incomplete'] = $month_incomplete;
 		$out['month_plan'] = $month_plan;
 		$out['month_mark'] = $month_mark;
+		$this->log('[sales-csv debug9]'.date('Y/m/d h:i:s'));
 		return $out;
 	}
 	
