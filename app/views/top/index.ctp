@@ -76,8 +76,8 @@ foreach ($onlyDatas as $memoData):
 <?php endforeach; ?>
 </table>
 <ul>
-	<li><a href="http://e5-os214.xbit.jp/office/zaseki.pdf" target="_blank">事務所座席表（内線番号）</a></li>
-	<li><a href="http://e5-os214.xbit.jp/office/tanshuku.pdf" target="_blank">事務所短縮表</a></li>
+	<li><a href="http://e5-os214.xbit.jp/office/zaseki.jpg" target="_blank">事務所座席表（内線番号）</a></li>
+	<li><a href="http://e5-os214.xbit.jp/office/tanshuku.jpg" target="_blank">事務所短縮表</a></li>
 </ul>
 <?php endif; ?>
 <ul>
