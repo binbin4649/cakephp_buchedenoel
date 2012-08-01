@@ -573,6 +573,7 @@ class SalesCsvComponent extends Object {
 				}
 			}
 		}
+		$this->log('[sales-csv debug2]'.date('Y/m/d h:i:s'));
 		return $outReport;
 	}
 	

@@ -141,7 +141,6 @@ class AmountSection extends AppModel {
 	}
 	
 	function markIndex($section_id = null, $year = null, $month = null){
-		$this->log('[sales-csv debug8]'.date('Y/m/d h:i:s'));
 		if ($this->Behaviors->attached('Cache')) {
 			$args = func_get_args();
 			if($this->cacheEnabled()) return $this->cacheMethod(36000, __FUNCTION__, $args);//
@@ -176,7 +175,6 @@ class AmountSection extends AppModel {
 		$out['month_incomplete'] = $month_incomplete;
 		$out['month_plan'] = $month_plan;
 		$out['month_mark'] = $month_mark;
-		$this->log('[sales-csv debug9]'.date('Y/m/d h:i:s'));
 		return $out;
 	}
 	
