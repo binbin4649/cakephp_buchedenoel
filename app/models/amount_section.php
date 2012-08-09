@@ -181,12 +181,11 @@ class AmountSection extends AppModel {
 	// year month day を受け取って、売上金額、未完金額、売上予算、目標、達成率を返す 
 	// amount を計算してsave & return
 	function mark($section_id, $year, $month, $day){
-		/*
 		if ($this->Behaviors->attached('Cache')) {
 			$args = func_get_args();
-			if($this->cacheEnabled()) return $this->cacheMethod(CACHE_TODAY, __FUNCTION__, $args);//
+			if($this->cacheEnabled()) return $this->cacheMethod(36000, __FUNCTION__, $args);//
 		}
-		*/
+		
 		App::import('Component', 'Selector');
    		$SelectorComponent = new SelectorComponent();
 		App::import('Model', 'Order');
