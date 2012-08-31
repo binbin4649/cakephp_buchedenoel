@@ -23,6 +23,11 @@ class CleaningComponent extends Object {
 		//ここから無理やり系
 		$section_name = str_replace('MACAU girl’s talk！ MACAO', 'マカオGT', $section_name);
 		$section_name = str_replace('MACAU  MACAO', 'マカオKISS', $section_name);
+		
+		$section_name = str_replace('MACAU girl’s talk！ Taipa', 'タイパGT', $section_name);
+		$section_name = str_replace('MACAU THE KISS Taipa', 'タイパKISS', $section_name);
+		$section_name = str_replace('MACAU THE KISS / girl’s talk！ Taipa', 'タイパ', $section_name);
+		
 		$section_name = str_replace('KOREA  COEX-MALL', 'COEX', $section_name);
 		$section_name = str_replace('kp　お台場メディアージュ', 'カピオお台場', $section_name);
 		$section_name = str_replace('select エミフルＭＡＳＡＫＩ', 'エミフル', $section_name);
