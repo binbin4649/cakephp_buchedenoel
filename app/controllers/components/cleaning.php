@@ -5,6 +5,9 @@ class CleaningComponent extends Object {
 	//部門名を短縮形に変える
     function sectionName($section_name){
     	$section_name = trim($section_name);
+    	//無理やり系パート2
+		$section_name = str_replace('MACAU THE KISS / girl’s talk！ Taipa', 'タイパ', $section_name);
+		
 		$section_name = str_replace('Anniversary', 'an', $section_name);
 		$section_name = str_replace('by THE KISS OUTLET', 'outlet', $section_name);
 		$section_name = str_replace('by THE KISS SELECTION', 'select', $section_name);
@@ -26,7 +29,6 @@ class CleaningComponent extends Object {
 		
 		$section_name = str_replace('MACAU girl’s talk！ Taipa', 'タイパGT', $section_name);
 		$section_name = str_replace('MACAU THE KISS Taipa', 'タイパKISS', $section_name);
-		$section_name = str_replace('MACAU THE KISS / girl’s talk！ Taipa', 'タイパ', $section_name);
 		
 		$section_name = str_replace('KOREA  COEX-MALL', 'COEX', $section_name);
 		$section_name = str_replace('kp　お台場メディアージュ', 'カピオお台場', $section_name);

@@ -306,9 +306,18 @@ class HogeShell extends Shell {
 	
 	// modelテスト用
 	function modelTest(){
+//		App::import('Component', 'Cleaning');
+//		$CleaningComponent = new CleaningComponent();
+//		$result = $CleaningComponent->
+		
+		
 		App::import('Model', 'Section');
     	$SectionModel = new Section();
     	$result = $SectionModel->amountSectionList();
+    	pr($result);
+    	$result = $SectionModel->amountSectionList5();
+    	pr($result);
+    	$result = $SectionModel->amountSectionList6();
     	pr($result);
     	exit;
 	}
