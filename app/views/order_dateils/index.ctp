@@ -28,7 +28,6 @@ echo $form->text($modelName.'.order_id', array(
 	'type'=>'text',
 	'size'=>2,
 	'div'=>false,
-	'class'=>'datepicker'
 ));
 echo '　';
 echo '取置id';
