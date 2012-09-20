@@ -7,6 +7,7 @@ class CleaningComponent extends Object {
     	$section_name = trim($section_name);
     	//無理やり系パート2
 		$section_name = str_replace('MACAU THE KISS / girl’s talk！ Taipa', 'タイパ', $section_name);
+		$section_name = str_replace('toU by THE KISS　イオンモールナゴヤドーム前SC店', 'ナゴヤドーム', $section_name);
 		
 		$section_name = str_replace('Anniversary', 'an', $section_name);
 		$section_name = str_replace('by THE KISS OUTLET', 'outlet', $section_name);
