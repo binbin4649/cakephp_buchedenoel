@@ -94,6 +94,8 @@ if($addForm->opneUser(open_users(), $opneuser, 'access_authority')){
 		__('Section List',true)=>array('item', 'sections/index/1'),
 		
 		__('Master',true)=>array('sect', '0'),
+		__('Purchase Direct',true)=>array('item', 'purchases/direct'),
+		__('Purchase List',true)=>array('item', 'purchases/index'),
 		__('Inventory',true)=>array('item', 'inventories/index'),
 	);
 }
