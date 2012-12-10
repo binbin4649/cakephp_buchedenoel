@@ -131,11 +131,16 @@ class PurchasesController extends AppController {
 				$sub_total[$i]['money'] = $value['bid'];
 				$sub_total[$i]['quantity'] = $value['quantity'];
 				$i++;
+				
+				/*　20121210これ消した。そもそもこれ、なんなんだ？
 				$params = array(
 					'conditions'=>array('OrderingsDetail.id'=>$key),// $key はsubitem_id じゃなくて OrderingsDetail_id でした!
 					'recursive'=>0,
 				);
 				$detail = $this->OrderingsDetail->find('first' ,$params);
+				*/
+				$detail = null;
+				
 				if($detail){//直接入力は発注が無い　そもそもこれ可笑しくない？ janコードでdetailとって来ているよね？可笑しくね？
 					$PurchaseDetail['PurchaseDetail']['order_id'] = $detail['OrderingsDetail']['order_id'];
 					$PurchaseDetail['PurchaseDetail']['order_dateil_id'] = $detail['OrderingsDetail']['order_dateil_id'];
