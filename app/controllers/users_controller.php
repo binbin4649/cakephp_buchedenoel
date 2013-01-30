@@ -144,35 +144,45 @@ class UsersController extends AppController {
 			$result = fwrite($rename_opne, $file_stream);
 			fclose($rename_opne);
 			$file_open = fopen(WWW_ROOT.DS.'files/temp/en'.$file_name, 'r');
-			$csv_header = fgetcsv($file_open, 0, "\t");
+//			$csv_header = fgetcsv($file_open, 0, "\t");　//20130130修正
+			$csv_header = fgetcsv($file_open);
+
 			$starter = true;
-			if(trim($csv_header[0]) != '所属') $starter = false;
-			if(trim($csv_header[1]) != '氏名') $starter = false;
-			if(trim($csv_header[2]) != '給与体系コード') $starter = false;
-			if(trim($csv_header[3]) != '退職年月日') $starter = false;
-			if(trim($csv_header[4]) != '役職コード') $starter = false;
-			if(trim($csv_header[5]) != '入社年月日') $starter = false;
-			if(trim($csv_header[6]) != '社員番号') $starter = false;
-			if(trim($csv_header[7]) != '氏名(ﾌﾘｶﾞﾅ)') $starter = false;
-			if(trim($csv_header[8]) != '在籍区分') $starter = false;
-			if(trim($csv_header[9]) != '性別') $starter = false;
-			if(trim($csv_header[10]) != '生年月日') $starter = false;
-			if(trim($csv_header[11]) != '旧姓') $starter = false;
-			if(trim($csv_header[12]) != '郵便番号') $starter = false;
-			if(trim($csv_header[13]) != '住所１') $starter = false;
-			if(trim($csv_header[14]) != '住所２') $starter = false;
-			if(trim($csv_header[15]) != '電話番号') $starter = false;
+			if(trim($csv_header[0]) != '所属コード') $starter = false;
+			if(trim($csv_header[1]) != '所属') $starter = false;
+			if(trim($csv_header[2]) != '氏名') $starter = false;
+			if(trim($csv_header[3]) != '雇用区分コード') $starter = false;
+			if(trim($csv_header[4]) != '雇用区分') $starter = false;
+			if(trim($csv_header[5]) != '退職年月日') $starter = false;
+			if(trim($csv_header[6]) != '役職コード') $starter = false;
+			if(trim($csv_header[7]) != '役職') $starter = false;
+			if(trim($csv_header[8]) != '入社年月日') $starter = false;
+			if(trim($csv_header[9]) != '社員番号') $starter = false;
+			if(trim($csv_header[10]) != '氏名(フリガナ)') $starter = false;
+			if(trim($csv_header[11]) != '在籍区分コード') $starter = false;
+			if(trim($csv_header[12]) != '在籍区分') $starter = false;
+			if(trim($csv_header[13]) != '性別コード') $starter = false;
+			if(trim($csv_header[14]) != '性別') $starter = false;
+			if(trim($csv_header[15]) != '生年月日') $starter = false;
+			if(trim($csv_header[16]) != '旧姓') $starter = false;
+			if(trim($csv_header[17]) != '郵便番号') $starter = false;
+			if(trim($csv_header[18]) != '都道府県') $starter = false;
+			if(trim($csv_header[19]) != '市区町村') $starter = false;
+			if(trim($csv_header[20]) != '番地') $starter = false;
+			if(trim($csv_header[21]) != 'マンション／ビル等') $starter = false;
+			if(trim($csv_header[22]) != '電話番号') $starter = false;
 			if($starter == false){
 				$this->Session->setFlash('給与奉行から出力したファイルの、項目が足りないか、または項目を間違えています。');
 				$this->redirect('/users/csv_update/');
 			}
 
-			while($row = fgetcsv($file_open, 0, "\t")){
+//			while($row = fgetcsv($file_open, 0, "\t")){ //20130130修正
+			while($row = fgetcsv($file_open)){
 				$message_counter_save = 0;
 				$message_counter_update = 0;
 				$user_remarks = '';
-				$user_name = trim($row[1]);
-				$bugyo_employment = trim($row[2]);
+				$user_name = trim($row[2]);
+				$bugyo_employment = trim($row[3]);
 				$params = array(
 					'conditions'=>array('Employment.kyuuyo_bugyo_code'=>$bugyo_employment),
 					'recursive'=>-1
@@ -183,8 +193,8 @@ class UsersController extends AppController {
 				}else{
 					$user_employment_id = '';
 				}
-				$user_exit_day = $row[3];
-				$bugyo_post = trim($row[4]);
+				$user_exit_day = $row[5];
+				$bugyo_post = trim($row[6]);
 				$params = array(
 					'conditions'=>array('Post.kyuuyo_bugyo_code'=>$bugyo_post),
 					'recursive'=>0
@@ -195,9 +205,9 @@ class UsersController extends AppController {
 				}else{
 					$user_post_id = '';
 				}
-				$user_join_day = $row[5];
-				$user_name_kana = trim($row[7]);//半角ｶﾅ
-				$switch_zaishoku = trim($row[8]);//在職区分
+				$user_join_day = $row[8];
+				$user_name_kana = trim($row[10]);
+				$switch_zaishoku = trim($row[12]);
 				switch($switch_zaishoku){
 					case '在籍':
 						$user_duty_code = 10;
@@ -212,21 +222,20 @@ class UsersController extends AppController {
 						$user_duty_code = '';
 						break;
 				}
-				if($row[9] == '男性'){
+				if($row[14] == '男性'){
 					$user_sex = 'm';
-				}elseif($row[9] == '女性'){
+				}elseif($row[14] == '女性'){
 					$user_sex = 'f';
 				}else{
 					$user_sex = '';
 				}
-				$user_birth_day = $row[10];
-				$user_remarks .= trim($row[11]);
-				$user_post_code = trim($row[12]);
-				$user_adress_one = trim($row[13]);
-				$user_adress_two = trim($row[14]);
-				$user_tel = trim($row[15]);
-
-				$user_kyuuyo_bugyo_code = trim($row[6]);//社員番号
+				$user_birth_day = $row[15];
+				$user_remarks .= trim($row[16]);
+				$user_post_code = trim($row[17]);
+				$user_adress_one = trim($row[18] . $row[19] . $row[20]);
+				$user_adress_two = trim($row[21]);
+				$user_tel = trim($row[22]);
+				$user_kyuuyo_bugyo_code = trim($row[9]);
 				$params = array(
 					'conditions'=>array('User.kyuuyo_bugyo_code'=>$user_kyuuyo_bugyo_code),
 					'recursive'=>0
@@ -267,6 +276,7 @@ class UsersController extends AppController {
 						exit;
 					}
 				}else{//userが無かったら新規追加
+					$this->log('new users come on!');
 					$save_user = array('User'=>array(
 						'name'=>$user_name,
 						'kyuuyo_bugyo_code'=>$user_kyuuyo_bugyo_code,
@@ -295,25 +305,27 @@ class UsersController extends AppController {
 					}
 					$result = $this->User->save($save_user);
 					if($result){
-						$this->User->id = null;
-						$message_counter_save++;
-						//掲示板に告知
-						$contents = $user_name.'さんを新規登録しました。'."\n";
-						$contents .= "\n".'自店舗、自部門の方は、'.$user_name.'さんへ教えてあげて下さい。'."\n";
-						$contents .= "\n".'マニュアルをよく読んで、早速ログイン＆ユーザー情報を編集しましょう！、と、'.$user_name.'さんへお伝えください。'."\n";
-						$contents .= "\n\n".'Buche de Noel へようこそ！！'."\n";
-						$contents .= 'この投稿はシステムから半自動で登録されています。'."\n";
-						$new_face = array();
-						$new_face = array('MemoData'=>array(
-							'name'=>$user_name.'　さん。新規登録',
-							'memo_category_id'=>22,
-							'top_flag'=>'top',
-							'contents'=>$contents,
-							'created_user'=>'1135',//admin
-						));
-						$this->MemoData->save($new_face);
+						if($user_duty_code != '30'){//新規登録と退職が重なったら告知しない
+							$this->User->id = null;
+							$message_counter_save++;
+							//掲示板に告知
+							$contents = $user_name.'さんを新規登録しました。'."\n";
+							$contents .= "\n".'自店舗、自部門の方は、'.$user_name.'さんへ教えてあげて下さい。'."\n";
+							$contents .= "\n".'マニュアルをよく読んで、早速ログイン＆ユーザー情報を編集しましょう！、と、'.$user_name.'さんへお伝えください。'."\n";
+							$contents .= "\n\n".'Buche de Noel へようこそ！！'."\n";
+							$contents .= 'この投稿はシステムから半自動で登録されています。'."\n";
+							$new_face = array();
+							$new_face = array('MemoData'=>array(
+								'name'=>$user_name.'　さん。新規登録',
+								'memo_category_id'=>22,
+								'top_flag'=>'top',
+								'contents'=>$contents,
+								'created_user'=>'1135',//admin
+							));
+							$this->MemoData->save($new_face);
+						}
 					}else{
-						pr($save_user);
+						$this->log($save_user);
 						exit;
 					}
 				}

@@ -2,7 +2,7 @@
 
 class OutputCsvComponent extends Object {
 	var $components = array('Selector');
-	
+
 	//支払明細
 	function paysView($values){
 		App::import('Model', 'PurchaseDetail');
