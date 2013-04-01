@@ -80,6 +80,7 @@ function get_overseashop_list(){
 		'2'=>'405',//MACAU THE KISS MACAO
 		'3'=>'450',//金浦空港
 		'4'=>'458',//タイパKISS&GT
+		'5'=>'462',//Hong Kong
 	);
 }
 
