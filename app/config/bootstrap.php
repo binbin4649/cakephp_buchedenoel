@@ -75,7 +75,7 @@ define('NEW_SHOP_FLAG', '2011-12-18');
 //海外店を指定する。そのうちＤＢにしたいです
 function get_overseashop_list(){
 	return array(
-		'0'=>'406',//KOREA THE KISS COEX-MALL
+		//'0'=>'406',//KOREA THE KISS COEX-MALL
 		'1'=>'404',//MACAU girl’s talk！ MACAO
 		'2'=>'405',//MACAU THE KISS MACAO
 		'3'=>'450',//金浦空港
