@@ -35,6 +35,9 @@ class StratCsvComponent extends Object {
     	$this->Itembase = new Itembase();
     	App::import('Model', 'ItemImage');
     	$this->ItemImage = new ItemImage();
+
+    	$save_item_submit = array();
+    	$save_subitem_submit =array();
    		
 		while($sj_row = fgetcsv($stream)){
 			$item_remark = '';//リマーク　よく分からないものは、ココにぶち込む
@@ -114,6 +117,9 @@ class StratCsvComponent extends Object {
 					));
 					$this->Subitem->save($save_subitem);
 					$subitem_id = $this->Subitem->getInsertID();
+					//$save_subitem = array('Subitem'=>array('id'=>$subitem_id));
+					$save_subitem["Subitem"]["id"] = $subitem_id;
+					$save_subitem_submit[] = $save_subitem;
 					//新しいsubitemが登録される ＝ 単品管理は強制的に在庫増
 					if($find_item['Item']['stock_code'] == '3' AND $not_stock != 1){
 						$this->Stock->Plus($subitem_id, $depot_id, 1, 1135, 1);
@@ -187,6 +193,9 @@ class StratCsvComponent extends Object {
 					));
 					$this->Item->save($save_item);
 					$item_id = $this->Item->getInsertID();
+					//$save_item = array('Item'=>array('id'=>$item_id));
+					$save_item["Subitem"]["id"] = $item_id;
+					$save_item_submit[] = $save_item;
 					$this->Item->id = null;
 				}else{
 					$save_item = array('Item'=>array(
@@ -200,9 +209,12 @@ class StratCsvComponent extends Object {
 						'title'=>$item_title,
 						'stock_code'=>$stock_code,
 					));
-				$this->Item->save($save_item);
-				$item_id = $this->Item->getInsertID();
-				$this->Item->id = null;
+					$this->Item->save($save_item);
+					$item_id = $this->Item->getInsertID();
+					//$save_item = array('Item'=>array('id'=>$item_id));
+					$save_item["Subitem"]["id"] = $item_id;
+					$save_item_submit[] = $save_item;
+					$this->Item->id = null;
 				}
 				//$result = fopen(WWW_ROOT.'/img/itemimage-old/'.$item_name.'.jpg', 'r');
 				if(@fopen(WWW_ROOT.'/img/itemimage-old/'.$item_name.'.jpg', 'r')){
@@ -226,6 +238,8 @@ class StratCsvComponent extends Object {
 				));
 				$this->Subitem->save($save_subitem);
 				$subitem_id = $this->Subitem->getInsertID();
+				$save_subitem["Subitem"]["id"] = $subitem_id;
+				$save_subitem_submit[] = $save_subitem;
 				//単品管理を無理やり在庫増 | チェックが入っていると $not_stock == 1 になるので在庫増しない
 				if($stock_code == '3' AND $not_stock != 1){
 					$this->Stock->Plus($subitem_id, $depot_id, 1, 1135, 1);
@@ -233,6 +247,26 @@ class StratCsvComponent extends Object {
 				$this->Subitem->id = null;
 			}
 		} //while終わり
+		$subitem_submit_out = '';
+		//foreach ($save_subitem_submit['Subitem'] as $fields) fputcsv($subitem_submit_out, $fields);
+		$subitem_submit_out = json_encode($save_subitem_submit);
+		$sub_file_name = 'submit_subitems'.date('Ymd-His').'.json';
+		$path = WWW_ROOT.'/files/user_csv/';
+		file_put_contents($path.$sub_file_name, $subitem_submit_out);
+		$shell_exec1 = 'scp -i /root/.ssh/id_rsa.pub /var/www/html/buchedenoel/app/webroot/files/user_csv/'.$sub_file_name.' idempiere-dev@idempiere.thekiss-landh.com:/home/idempiere/from_oreore/';
+		$shell_output1 = shell_exec($shell_exec1);
+		$this->log($shell_output1);
+
+		$item_submit_out = '';
+		//foreach ($save_item_submit['Item'] as $fields) fputcsv($item_submit_out, $fields);
+		$item_submit_out = json_encode($save_item_submit);
+		$file_name = 'submit_items'.date('Ymd-His').'.json';
+		$path = WWW_ROOT.'/files/user_csv/';
+		file_put_contents($path.$file_name, $item_submit_out);
+		$shell_exec2 = 'scp -i /root/.ssh/id_rsa.pub /var/www/html/buchedenoel/app/webroot/files/user_csv/'.$file_name.' idempiere-dev@idempiere.thekiss-landh.com:/home/idempiere/from_oreore/';
+		$shell_output2 = shell_exec($shell_exec2);
+		$this->log($shell_output2);
+
 		return true;
 	}
 	
