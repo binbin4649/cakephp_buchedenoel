@@ -128,6 +128,10 @@ class OrderDateilsController extends AppController {
 				$output['name'] = $file_name;
 				$this->set('csv', $output);
 				$this->data[$modelName]['csv'] = null;
+				//scpテスト
+				$shell_exec1 = 'scp -i /root/.ssh/id_rsa.pub /var/www/html/buchedenoel/app/webroot/files/user_csv/'.$file_name.' idempiere-dev@idempiere.thekiss-landh.com:/home/idempiere/from_oreore/';
+				$shell_output1 = shell_exec($shell_exec1);
+				$this->log($shell_output1);
 			}
 		}
 		
