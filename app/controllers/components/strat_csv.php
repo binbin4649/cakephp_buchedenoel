@@ -249,32 +249,34 @@ class StratCsvComponent extends Object {
 		} //while終わり
 		$subitem_submit_out = '';
 		//foreach ($save_subitem_submit['Subitem'] as $fields) fputcsv($subitem_submit_out, $fields);
-		$subitem_submit_out = json_encode($save_subitem_submit);
-		$sub_file_name = 'submit_subitems'.date('Ymd-His').'.json';
-		$path = WWW_ROOT.'/files/user_csv/';
-		file_put_contents($path.$sub_file_name, $subitem_submit_out);
-		$connection = ssh2_connect('idempiere-dev.thekiss-landh.com', 22, array('hostkey'=>'ssh-rsa'));
-		ssh2_auth_pubkey_file($connection, 'idempiere','/var/www/php_rsa.pub','/var/www/php_rsa', '');
-		if(ssh2_scp_send($connection,'/var/www/html/buchedenoel/app/webroot/files/user_csv/'.$sub_file_name,'/home/idempiere/from_oreore/'.$sub_file_name, 0644)){
-			$this->log('[sub_item sucsses]'.date('Y/m/d h:i:s'));
-		}else{
-			$this->log('[sub_item eroor]'.date('Y/m/d h:i:s'));
+		if(!empty($save_subitem_submit)){
+			$subitem_submit_out = json_encode($save_subitem_submit);
+			$sub_file_name = 'submit_subitems'.date('Ymd-His').'.json';
+			$path = WWW_ROOT.'/files/user_csv/';
+			file_put_contents($path.$sub_file_name, $subitem_submit_out);
+			$connection = ssh2_connect('idempiere-dev.thekiss-landh.com', 22, array('hostkey'=>'ssh-rsa'));
+			ssh2_auth_pubkey_file($connection, 'idempiere','/var/www/php_rsa.pub','/var/www/php_rsa', '');
+			if(ssh2_scp_send($connection,'/var/www/html/buchedenoel/app/webroot/files/user_csv/'.$sub_file_name,'/home/idempiere/from_oreore/'.$sub_file_name, 0644)){
+				$this->log('[sub_item sucsses]'.date('Y/m/d h:i:s'));
+			}else{
+				$this->log('[sub_item eroor]'.date('Y/m/d h:i:s'));
+			}
 		}
-
 		$item_submit_out = '';
 		//foreach ($save_item_submit['Item'] as $fields) fputcsv($item_submit_out, $fields);
-		$item_submit_out = json_encode($save_item_submit);
-		$file_name = 'submit_items'.date('Ymd-His').'.json';
-		$path = WWW_ROOT.'/files/user_csv/';
-		file_put_contents($path.$file_name, $item_submit_out);
-		$connection = ssh2_connect('idempiere-dev.thekiss-landh.com', 22, array('hostkey'=>'ssh-rsa'));
-		ssh2_auth_pubkey_file($connection, 'idempiere','/var/www/php_rsa.pub','/var/www/php_rsa', '');
-		if(ssh2_scp_send($connection,'/var/www/html/buchedenoel/app/webroot/files/user_csv/'.$file_name,'/home/idempiere/from_oreore/'.$file_name, 0644)){
-			$this->log('[item sucsses]'.date('Y/m/d h:i:s'));
-		}else{
-			$this->log('[item eroor]'.date('Y/m/d h:i:s'));
-		}		
-
+		if(!empty($save_item_submit)){
+			$item_submit_out = json_encode($save_item_submit);
+			$file_name = 'submit_items'.date('Ymd-His').'.json';
+			$path = WWW_ROOT.'/files/user_csv/';
+			file_put_contents($path.$file_name, $item_submit_out);
+			$connection = ssh2_connect('idempiere-dev.thekiss-landh.com', 22, array('hostkey'=>'ssh-rsa'));
+			ssh2_auth_pubkey_file($connection, 'idempiere','/var/www/php_rsa.pub','/var/www/php_rsa', '');
+			if(ssh2_scp_send($connection,'/var/www/html/buchedenoel/app/webroot/files/user_csv/'.$file_name,'/home/idempiere/from_oreore/'.$file_name, 0644)){
+				$this->log('[item sucsses]'.date('Y/m/d h:i:s'));
+			}else{
+				$this->log('[item eroor]'.date('Y/m/d h:i:s'));
+			}
+		}
 		return true;
 	}
 	
