@@ -70,7 +70,7 @@ define('CACHE_TODAY_RANKING', '3600');//3600 = 1時間
 define('CACHE_WEEK', '43200');//43200 = 12時間 右カラム
 
 //新店と既存店の基準日。基準日より新しければ新店、古ければ既存店。
-define('NEW_SHOP_FLAG', '2011-12-18');
+define('NEW_SHOP_FLAG', '2012-03-25');
 
 //海外店を指定する。そのうちＤＢにしたいです
 function get_overseashop_list(){
