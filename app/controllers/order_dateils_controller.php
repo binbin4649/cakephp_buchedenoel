@@ -129,9 +129,21 @@ class OrderDateilsController extends AppController {
 				$this->set('csv', $output);
 				$this->data[$modelName]['csv'] = null;
 				//scpテスト
-				$shell_exec1 = 'scp -i /var/www/.ssh/id_rsa /var/www/html/buchedenoel/app/webroot/files/user_csv/'.$file_name.' idempiere@idempiere-dev.thekiss-landh.com:/home/idempiere/from_oreore/';
+				/*
+				$shell_exec1 = 'scp -i /var/www/php_rsa /var/www/html/buchedenoel/app/webroot/files/user_csv/'.$file_name.' idempiere@idempiere-dev.thekiss-landh.com:/home/idempiere/from_oreore/';
 				$shell_output1 = shell_exec($shell_exec1);
 				$this->log($shell_output1);
+				*/
+				//
+				/*
+				 $connection = ssh2_connect('idempiere-dev.thekiss-landh.com', 22, array('hostkey'=>'ssh-rsa'));
+				 ssh2_auth_pubkey_file($connection, 'idempiere','/var/www/php_rsa.pub','/var/www/php_rsa', '');
+				 ssh2_scp_send($connection,'/var/www/html/buchedenoel/app/webroot/files/user_csv/'.$file_name,'/home/idempiere/from_oreore/'.$file_name, 0644);
+			    */
+			    /**
+			     * 公開鍵・秘密鍵はApacheのUserディレクティブで読込可能で
+			     * なければならない 
+			     */
 			}
 		}
 		
