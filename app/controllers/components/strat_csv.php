@@ -255,6 +255,10 @@ class StratCsvComponent extends Object {
 		} //while終わり
 		$subitem_submit_out = '';
 		//foreach ($save_subitem_submit['Subitem'] as $fields) fputcsv($subitem_submit_out, $fields);
+		if(JSON_LANDING == FALSE){
+			$save_subitem_submit = '';
+			$save_item_submit = '';
+		}
 		if(!empty($save_subitem_submit)){
 			$subitem_submit_out = json_encode($save_subitem_submit);
 			$sub_file_name = 'submit_subitems'.date('Ymd-His').'.json';

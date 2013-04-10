@@ -49,6 +49,9 @@ define('EMERGENCY_LANDING', TRUE);
 //AmountでOrderを無視して売上合計を直接入力するモード
 define('AMOUNT_LANDING', TRUE);
 
+//JSON送信　TRUE=する　FALSE=しない
+define('JSON_LANDING', FALSE);
+
 define('MAXYEAR', 2013);
 define('MINYEAR', 2009);
 define('TAX_RATE', 5);//5=5%
