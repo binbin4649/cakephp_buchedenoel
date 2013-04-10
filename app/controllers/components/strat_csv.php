@@ -75,7 +75,13 @@ class StratCsvComponent extends Object {
 				}else{
 					$pre_sj36 = '';
 				}
-			$item_factory_id = $this->masterDump('Factory', $pre_sj36);//工場のid
+
+			$item_factory_id = $this->factoryDump($pre_sj36);
+			if($item_factory_id){
+			}else{
+				$item_factory_id = $this->masterDump('Factory', $pre_sj36);//工場のid
+			}
+
 				if($sj_row[73] == 'Mauloa') $sj_row[73] = 'Kapio';//Mauloaを無理やりKapioに変える
 				if($item_title == 'ハワイアン雑貨') $sj_row[73] = 'Kapio';//タイトルが「ハワイアン雑貨」だったら、ブランドを無理やりKapioに変える
 				if($sj_row[36] == 'ﾕﾆｵﾝｸﾗﾌﾄ') $sj_row[73] = 'SELECT';
@@ -275,6 +281,14 @@ class StratCsvComponent extends Object {
 				$this->log('[item sucsses]'.date('Y/m/d h:i:s'));
 			}else{
 				$this->log('[item eroor]'.date('Y/m/d h:i:s'));
+			}
+			//キックファイル送信
+			$connection = ssh2_connect('idempiere-dev.thekiss-landh.com', 22, array('hostkey'=>'ssh-rsa'));
+			ssh2_auth_pubkey_file($connection, 'idempiere','/var/www/php_rsa.pub','/var/www/php_rsa', '');
+			if(ssh2_scp_send($connection,'/var/www/html/buchedenoel/app/webroot/files/execute_bt05','/home/idempiere/from_oreore/execute_bt05', 0644)){
+				$this->log('[execute_bt05 sucsses]'.date('Y/m/d h:i:s'));
+			}else{
+				$this->log('[execute_bt05 eroor]'.date('Y/m/d h:i:s'));
 			}
 		}
 		return true;
@@ -1364,6 +1378,162 @@ function baseMajorSize($id){
     	return $value;
     }
 
+function factoryDump($f_cd){
+	switch($f_cd){
+    		case '000217':
+    			$value = '15';
+    			break;
+    		case '000054':
+    			$value = '112';
+    			break;
+    		case '000035':
+    			$value = '4';
+    			break;
+    		case '099999':
+    			$value = '14';
+    			break;
+    		case '000027':
+    			$value = '10';
+    			break;
+    		case '000036':
+    			$value = '41';
+    			break;
+    		case '000043':
+    			$value = '9';
+    			break;
+    		case '000052':
+    			$value = '8';
+    			break;
+    		case '000070':
+    			$value = '38';
+    			break;
+    		case '000211':
+    			$value = '36';
+    			break;
+    		case '000237':
+    			$value = '17';
+    			break;
+    		case '000007':
+    			$value = '1';
+    			break;
+    		case '000249':
+    			$value = '105';
+    			break;
+    		case '000239':
+    			$value = '33';
+    			break;
+    		case '000277':
+    			$value = '335';
+    			break;
+    		case '000282':
+    			$value = '354';
+    			break;
+    		case '000266':
+    			$value = '29';
+    			break;
+    		case '000028':
+    			$value = '47';
+    			break;
+    		case '000262':
+    			$value = '20';
+    			break;
+    		case '000236':
+    			$value = '331';
+    			break;
+    		case '000268':
+    			$value = '61';
+    			break;
+    		case '000294':
+    			$value = '347';
+    			break;
+    		case '000110':
+    			$value = '355';
+    			break;
+    		case '000256':
+    			$value = '107';
+    			break;
+    		case '000275':
+    			$value = '303';
+    			break;
+    		case '000261':
+    			$value = '22';
+    			break;
+    		case '000269':
+    			$value = '62';
+    			break;
+    		case '000212':
+    			$value = '95';
+    			break;
+    		case '000032':
+    			$value = '43';
+    			break;
+    		case '000021':
+    			$value = '23';
+    			break;
+    		case '000017':
+    			$value = '21';
+    			break;
+    		case '000005':
+    			$value = '60';
+    			break;
+    		case '000111':
+    			$value = '91';
+    			break;
+    		case '000230':
+    			$value = '93';
+    			break;
+    		case '000100':
+    			$value = '92';
+    			break;
+    		case '000103':
+    			$value = '94';
+    			break;
+    		case '000291':
+    			$value = '357';
+    			break;
+    		case '000285':
+    			$value = '353';
+    			break;
+    		case '000224':
+    			$value = '109';
+    			break;
+    		case '000280':
+    			$value = '358';
+    			break;
+    		case '000026':
+    			$value = '5';
+    			break;
+    		case '000293':
+    			$value = '356';
+    			break;
+    		case '000023':
+    			$value = '12';
+    			break;
+    		case '000250':
+    			$value = '70';
+    			break;
+    		case '000226':
+    			$value = '75';
+    			break;
+    		case '000276':
+    			$value = '322';
+    			break;
+    		case '000260':
+    			$value = '26';
+    			break;
+    		case '000071':
+    			$value = '100';
+    			break;
+    		case '000200':
+    			$value = '25';
+    			break;
+    		default:
+    			$value = false;
+    			break;
+    	}
+    	return $value;
+}
+
 // 2011/3/11 新しく作り直したのが上にあるよ
 //旧の商品紹介からだせるCSVを読み込む
 function sj2bsnItemCsv($path, $file_name){
@@ -1419,7 +1589,13 @@ function sj2bsnItemCsv($path, $file_name){
 		}else{
 			$pre_sj36 = '';
 		}
-		$item_factory_id = $this->masterDump('Factory', $pre_sj36);//工場のid
+		//マップを使って、なかったらダンプする
+		$item_factory_id = $this->factoryDump($pre_sj36);
+		if($item_factory_id){
+		}else{
+			$item_factory_id = $this->masterDump('Factory', $pre_sj36);//工場のid
+		}
+
 		if($sj_row[73] == 'Mauloa') $sj_row[73] = 'Kapio';//Mauloaを無理やりKapioに変える
 		if($item_title == 'ハワイアン雑貨') $sj_row[73] = 'Kapio';//タイトルが「ハワイアン雑貨」だったら、ブランドを無理やりKapioに変える
 		if($sj_row[36] == 'ﾕﾆｵﾝｸﾗﾌﾄ') $sj_row[73] = 'SELECT';
