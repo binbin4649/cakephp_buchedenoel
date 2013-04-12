@@ -50,7 +50,7 @@ define('EMERGENCY_LANDING', TRUE);
 define('AMOUNT_LANDING', TRUE);
 
 //JSON送信　TRUE=する　FALSE=しない
-define('JSON_LANDING', FALSE);
+define('JSON_LANDING', TRUE);
 
 define('MAXYEAR', 2013);
 define('MINYEAR', 2009);
