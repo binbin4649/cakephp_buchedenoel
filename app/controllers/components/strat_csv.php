@@ -259,6 +259,7 @@ class StratCsvComponent extends Object {
 			$save_subitem_submit = '';
 			$save_item_submit = '';
 		}
+		$execute_start = false;
 		if(!empty($save_subitem_submit)){
 			$subitem_submit_out = json_encode($save_subitem_submit);
 			$sub_file_name = 'submit_subitems'.date('Ymd-His').'.json';
@@ -271,6 +272,7 @@ class StratCsvComponent extends Object {
 			}else{
 				$this->log('[sub_item eroor]'.date('Y/m/d h:i:s'));
 			}
+			$execute_start = true;
 		}
 		$item_submit_out = '';
 		//foreach ($save_item_submit['Item'] as $fields) fputcsv($item_submit_out, $fields);
@@ -286,6 +288,9 @@ class StratCsvComponent extends Object {
 			}else{
 				$this->log('[item eroor]'.date('Y/m/d h:i:s'));
 			}
+			$execute_start = true;
+		}
+		if($execute_start){
 			//キックファイル送信
 			$connection = ssh2_connect('idempiere.thekiss-landh.com', 22, array('hostkey'=>'ssh-rsa'));
 			ssh2_auth_pubkey_file($connection, 'idempiere','/var/www/php_rsa.pub','/var/www/php_rsa', '');
