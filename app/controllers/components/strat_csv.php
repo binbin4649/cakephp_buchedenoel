@@ -259,40 +259,48 @@ class StratCsvComponent extends Object {
 			$save_subitem_submit = '';
 			$save_item_submit = '';
 		}
+		//　true = ファイルを送る  false = ファイルは送らない
+		$SSH2_LANDING = true;
 		$execute_start = false;
 		if(!empty($save_subitem_submit)){
 			$subitem_submit_out = json_encode($save_subitem_submit);
 			$sub_file_name = 'submit_subitems'.date('Ymd-His').'.json';
-			$path = WWW_ROOT.'/files/user_csv/';
+			$path = WWW_ROOT.'/files/SyohinIchiran/';
 			file_put_contents($path.$sub_file_name, $subitem_submit_out);
-			$connection = ssh2_connect('idempiere.thekiss-landh.com', 22, array('hostkey'=>'ssh-rsa'));
-			ssh2_auth_pubkey_file($connection, 'idempiere','/var/www/php_rsa.pub','/var/www/php_rsa', '');
-			if(ssh2_scp_send($connection,'/var/www/html/buchedenoel/app/webroot/files/user_csv/'.$sub_file_name,'/home/idempiere/from_oreore/'.$sub_file_name, 0644)){
-				$this->log('[sub_item sucsses]'.date('Y/m/d h:i:s'));
-			}else{
-				$this->log('[sub_item eroor]'.date('Y/m/d h:i:s'));
+			if($SSH2_LANDING == true){
+				$connection = ssh2_connect('idempiere-dev.thekiss-landh.com', 22, array('hostkey'=>'ssh-rsa'));
+				ssh2_auth_pubkey_file($connection, 'idempiere','/var/www/php_rsa.pub','/var/www/php_rsa', '');
+				if(ssh2_scp_send($connection,'/var/www/html/buchedenoel/app/webroot/files/SyohinIchiran/'.$sub_file_name,'/home/idempiere/from_oreore/'.$sub_file_name, 0644)){
+					$this->log('[sub_item sucsses]'.date('Y/m/d h:i:s'));
+				}else{
+					$this->log('[sub_item eroor]'.date('Y/m/d h:i:s'));
+				}
+				$execute_start = true;
 			}
-			$execute_start = true;
+			
 		}
 		$item_submit_out = '';
 		//foreach ($save_item_submit['Item'] as $fields) fputcsv($item_submit_out, $fields);
 		if(!empty($save_item_submit)){
 			$item_submit_out = json_encode($save_item_submit);
 			$file_name = 'submit_items'.date('Ymd-His').'.json';
-			$path = WWW_ROOT.'/files/user_csv/';
+			$path = WWW_ROOT.'/files/SyohinIchiran/';
 			file_put_contents($path.$file_name, $item_submit_out);
-			$connection = ssh2_connect('idempiere.thekiss-landh.com', 22, array('hostkey'=>'ssh-rsa'));
-			ssh2_auth_pubkey_file($connection, 'idempiere','/var/www/php_rsa.pub','/var/www/php_rsa', '');
-			if(ssh2_scp_send($connection,'/var/www/html/buchedenoel/app/webroot/files/user_csv/'.$file_name,'/home/idempiere/from_oreore/'.$file_name, 0644)){
-				$this->log('[item sucsses]'.date('Y/m/d h:i:s'));
-			}else{
-				$this->log('[item eroor]'.date('Y/m/d h:i:s'));
+			if($SSH2_LANDING == true){
+				$connection = ssh2_connect('idempiere-dev.thekiss-landh.com', 22, array('hostkey'=>'ssh-rsa'));
+				ssh2_auth_pubkey_file($connection, 'idempiere','/var/www/php_rsa.pub','/var/www/php_rsa', '');
+				if(ssh2_scp_send($connection,'/var/www/html/buchedenoel/app/webroot/files/SyohinIchiran/'.$file_name,'/home/idempiere/from_oreore/'.$file_name, 0644)){
+					$this->log('[item sucsses]'.date('Y/m/d h:i:s'));
+				}else{
+					$this->log('[item eroor]'.date('Y/m/d h:i:s'));
+				}
+				$execute_start = true;
 			}
-			$execute_start = true;
+			
 		}
 		if($execute_start){
 			//キックファイル送信
-			$connection = ssh2_connect('idempiere.thekiss-landh.com', 22, array('hostkey'=>'ssh-rsa'));
+			$connection = ssh2_connect('idempiere-dev.thekiss-landh.com', 22, array('hostkey'=>'ssh-rsa'));
 			ssh2_auth_pubkey_file($connection, 'idempiere','/var/www/php_rsa.pub','/var/www/php_rsa', '');
 			if(ssh2_scp_send($connection,'/var/www/html/buchedenoel/app/webroot/files/execute_bt05','/home/idempiere/from_oreore/execute_bt05', 0644)){
 				$this->log('[execute_bt05 sucsses]'.date('Y/m/d h:i:s'));
