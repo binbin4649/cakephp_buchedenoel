@@ -145,6 +145,7 @@ class Section extends AppModel {
 				'fields'=>'Section.default_depot'
 			);
 			$section = $this->find('first', $params);
+			pr($section);
 			$out[$id]['default_depot'] = $section['Section']['default_depot'];
 			$out[$id]['name'] = $name;
 		}

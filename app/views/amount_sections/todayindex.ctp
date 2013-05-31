@@ -13,14 +13,15 @@ function(){ current_r.removeClass(hoverClass);});});
 <div class="amountSections index">
 <h2>本日の売上速報</h2>
 <p> ( <?php echo $datetime; ?> ) 更新</p>
+<p>本日改め前日の差額速報になりました。まる。</p>
 <table id="order_by_column_table" style="width:500px;">
 	<thead>
 	<tr>
 	<th>部門</th>
 	<th>合計</th>
-	<th></th>
-	<th></th>
-	<th></th>
+	<th>ランド</th>
+	<th>差</th>
+	<th>F倉庫番号</th>
 	<th></th>
 	</tr>
 	</thead>
@@ -31,9 +32,9 @@ foreach($today as $value){
 	echo '<tr id="item-index">';
 	echo '<td>'.$value['name'].'</td>';
 	echo '<td>'.number_format($value['today']).'</td>';
-	echo '<td></td>';
-	echo '<td></td>';
-	echo '<td></td>';
+	echo '<td>'.number_format($value['landh']).'</td>';
+	echo '<td>'.number_format($value['diff']).'</td>';
+	echo '<td>'.$value['old_system_no'].'</td>';
 	echo '<td></td>';
 	echo '</tr>';
 	$area_text .= $value['name'].' | '.number_format($value['today'])."\n";

@@ -602,10 +602,14 @@ class AmountSection extends AppModel {
 	function today_index(){
 		App::import('Model', 'Section');
     	$SectionModel = new Section();
+    	App::import('Model', 'Depot');
+    	$DepotModel = new Depot();
     	//$section_list = $SectionModel->amountSectionList2();
     	$sections = $SectionModel->amountSectionList(); //集計対象の部門一覧を返す
 		$new_sections = $SectionModel->amountSectionList5(); //新店だけのリスト
    		$oversea_sections = $SectionModel->amountSectionList6();  //海外店だけのリスト
+   		$default_depots = $SectionModel->defaultList();
+
     	$sections_merge = $sections;
 		foreach($new_sections as $key=>$value){
 			$sections_merge[$key] = $value;
@@ -616,7 +620,9 @@ class AmountSection extends AppModel {
     	$section_list = $sections_merge;
     	
     	$out = array();
-    	$date = date("Y-m-d",mktime());
+    	//$date = date("Y-m-d",mktime());
+    	//本来は↑　、入金金額の差異を出すために、、
+    	$date = date("Y-m-d", strtotime("-1 day"));
     	$total = 0;
     	foreach($section_list as $key=>$value){
     		$out[$key]['name'] = $value;
@@ -626,17 +632,82 @@ class AmountSection extends AppModel {
 					'AmountSection.start_day'=>$date,
 					'AmountSection.end_day'=>$date,
 				),
-				'recursive'=>-1
+				'fields'=>'AmountSection.full_amount,AmountSection.addsub,Section.default_depot',
+				'recursive'=>1
 			);
 			$nowAmount = $this->find('first' ,$params);
 	    	if(empty($nowAmount['AmountSection']['full_amount'])){
 	    		$nowAmount['AmountSection']['full_amount'] = $nowAmount['AmountSection']['addsub'];
 	    	}
-	    	$out[$key]['today'] = $nowAmount['AmountSection']['full_amount'];
+	    	$params = array(
+				'conditions'=>array('Depot.id'=>$nowAmount['Section']['default_depot']),
+				'fields'=>'Depot.old_system_no',
+				'recursive'=>-1
+			);
+			$old_system_no = $DepotModel->find('list' ,$params);
+			$out[$key]['old_system_no'] = $old_system_no[$nowAmount['Section']['default_depot']];
+	    	$out[$key]['today'] = $nowAmount['AmountSection']['full_amount']; 
 	    	$total = $total + $out[$key]['today'];
     	}
     	$out['total'] = $total;
+    	$shops = $this->landh_nyuukin();
+    	foreach ($out as $section_id => $bdn_value) {
+    		foreach ($shops as $old_system_no => $landh_value) {
+    			if($bdn_value['old_system_no'] == $old_system_no){
+    				$out[$section_id]['landh'] = $landh_value['total'];
+    				$out[$section_id]['diff'] = $bdn_value['today'] - $landh_value['total'];
+    			}
+    		}
+    	}
     	return $out;
+	}
+
+	//ランドの売上と客注のCSVを読み込んで返す
+	function landh_nyuukin(){
+		$uriage = fopen(WWW_ROOT.'/files/user_csv/'.'uriage.csv', 'r');
+		$shops = array();
+		$hedda = fgetcsv($uriage);
+		while($uri_row = fgetcsv($uriage)){
+			$rows = array();
+			foreach($uri_row as $row){
+				$rows[] = mb_convert_encoding($row, "utf-8","shift-jis");
+			}
+			$st = true;
+			if($rows[3] == '2') $st = false;
+			if($rows[5] == '9700') $st = false;
+			if($rows[5] == '9902') $st = false;
+			if($rows[9] >= 1) $st = false;
+			if($st == true){
+				if($shops["$rows[5]"][total] >= 1){
+					$shops["$rows[5]"][total] = $shops["$rows[5]"][total] + $rows[35];
+				}else{
+					$shops["$rows[5]"] = array("name"=>$rows[6], "total"=>$rows[35]);
+				}
+			}
+		}
+
+		$kyakuchu = fopen(WWW_ROOT.'/files/user_csv/'.'kyakuchu.csv', 'r');
+		$hedda = fgetcsv($kyakuchu);
+		while($kyaku_row = fgetcsv($kyakuchu)){
+			$rows = array();
+			foreach($kyaku_row as $row){
+				$rows[] = mb_convert_encoding($row, "utf-8","shift-jis");
+			}
+			
+			$st = false;
+			if($rows[10] == '1') $st = true;
+			if($rows[2] == '2') $st = false;
+
+			if($st == true){
+				if($shops["$rows[4]"][total] >= 1){
+					$shops["$rows[4]"][total] = $shops["$rows[4]"][total] + $rows[6];
+				}else{
+					$shops["$rows[4]"] = array("name"=>$rows[5], "total"=>$rows[6]);
+				}
+			}
+
+		}
+		return $shops;
 	}
 
 	
