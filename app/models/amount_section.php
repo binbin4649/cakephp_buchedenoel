@@ -678,7 +678,7 @@ class AmountSection extends AppModel {
 			if($rows[5] == '9902') $st = false;
 			if($rows[9] >= 1) $st = false;
 			if($st == true){
-				if($shops["$rows[5]"][total] >= 1){
+				if(!empty($shops["$rows[5]"][total])){
 					$shops["$rows[5]"][total] = $shops["$rows[5]"][total] + $rows[35];
 				}else{
 					$shops["$rows[5]"] = array("name"=>$rows[6], "total"=>$rows[35]);
@@ -697,12 +697,12 @@ class AmountSection extends AppModel {
 			$st = false;
 			if($rows[10] == '1') $st = true;
 			if($rows[2] == '2') $st = false;
-
+			$maeuke = $rows[6] / 1.05;
 			if($st == true){
-				if($shops["$rows[4]"][total] >= 1){
-					$shops["$rows[4]"][total] = $shops["$rows[4]"][total] + $rows[6];
+				if(!empty($shops["$rows[4]"][total])){
+					$shops["$rows[4]"][total] = $shops["$rows[4]"][total] + $maeuke;
 				}else{
-					$shops["$rows[4]"] = array("name"=>$rows[5], "total"=>$rows[6]);
+					$shops["$rows[4]"] = array("name"=>$rows[5], "total"=>$maeuke);
 				}
 			}
 
