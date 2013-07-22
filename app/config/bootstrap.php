@@ -83,7 +83,9 @@ function get_overseashop_list(){
 		'2'=>'405',//MACAU THE KISS MACAO
 		'3'=>'450',//金浦空港
 		'4'=>'458',//タイパKISS&GT
-		'5'=>'462',//Hong Kong
+		'5'=>'462',//Hong Kong Langham Place
+		'6'=>'465',//Hong Kong APM Store
+		'7'=>'466',//Hong Kong Vcity Store
 	);
 }
 
