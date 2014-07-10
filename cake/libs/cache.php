@@ -68,7 +68,7 @@ class Cache extends Object {
 	function &getInstance() {
 		static $instance = array();
 		if (!$instance) {
-			$instance[0] =& new Cache();
+			$instance[0] = new Cache();
 		}
 		return $instance[0];
 	}
@@ -148,7 +148,7 @@ class Cache extends Object {
 			if ($_this->__loadEngine($name) === false) {
 				return false;
 			}
-			$_this->_Engine[$name] =& new $cacheClass();
+			$_this->_Engine[$name] = new $cacheClass();
 		}
 
 		if ($_this->_Engine[$name]->init($settings)) {

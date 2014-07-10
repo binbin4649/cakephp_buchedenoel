@@ -100,7 +100,6 @@ class SalesCsvComponent extends Object {
 			$exi_section_amount = 0; //既存店 日割り合計
 			$new_section_amount = 0; // 新店 日割り合計
 			$oversea_section_amount = 0; //海外店 日割り合計
-			$this->log('[sales-csv debug3]'.date('Y/m/d h:i:s'));
 			// sections から新店が以外を抜く
 			foreach($sections as $section_id=>$section_name){
 				if(empty($outReport[$section_id]['this_month']['days'])){
@@ -141,7 +140,6 @@ class SalesCsvComponent extends Object {
 			$value[] = $oversea_section_amount;
 			$line[] = $i.'('.$youbi.'),'.implode(',',$value).','.$amont;
 		}
-		$this->log('[sales-csv debug4]'.date('Y/m/d h:i:s'));
 		//部門別
 		$section_total = array(); //部門番号=>当月合計
 		$prev_section_month = array(); //昨年同月実績
@@ -310,7 +308,6 @@ class SalesCsvComponent extends Object {
 		//$all_mark_exp_avg = floor($all_mark_exp / $sections_counter); //これは目標見込みの平均だった orz
 		$section_mark_total_rate = $this->TotalComponent->fprate2($days_total, $section_mark_term_total); //(6-1)目標%
 		$prev_section_comp_avg = $this->TotalComponent->fprate2($days_total, $prev_total);
-		$this->log('[sales-csv debug5]'.date('Y/m/d h:i:s'));
 		$new_this_term = array();
 		foreach($this_term as $section_id=>$month_arr){
 			foreach($month_arr as $key=>$value){
@@ -444,7 +441,6 @@ class SalesCsvComponent extends Object {
 		foreach($line as $li){
 			$out .= $li."\r\n";
 		}
-		$this->log('[sales-csv debug7]'.date('Y/m/d h:i:s'));
 		////////////////////////////////////////出力部
 		$file_name = 'store_sales'.date('Ymd-His').'.csv';
 		$path = WWW_ROOT.'/files/store_sales/';
@@ -560,10 +556,9 @@ class SalesCsvComponent extends Object {
 	
 	//計算の元データを生成
 	function outReportReader($sections){
-		$this->log('[sales-csv debug1]'.date('Y/m/d h:i:s'));
 		$outReport = array();
     	$prev_date = $this->DateCalComponent->prev_month($this->year, $this->month);
-   		$prev_month = $prev_date['month'];
+		$prev_month = $prev_date['month'];
    		$thisTerm = $this->DateCalComponent->this_term($this->year, $this->month);
 		foreach($sections as $section_id=>$section_name){
 			$outReport[$section_id]['section_name'] = $section_name;
@@ -575,8 +570,7 @@ class SalesCsvComponent extends Object {
 					$outReport[$section_id]['prev_term'][$term_month] = $this->AmountSectionModel->markIndex($section_id, $term_year -1, $term_month); //前期を月毎に
 				}
 			}
-		}
-		$this->log('[sales-csv debug2]'.date('Y/m/d h:i:s'));
+		}		
 		return $outReport;
 	}
 	

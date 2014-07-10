@@ -620,10 +620,11 @@ class AmountSection extends AppModel {
     	$section_list = $sections_merge;
     	
     	$out = array();
-    	//$date = date("Y-m-d",mktime());
+    	$date = date("Y-m-d",mktime());
     	//本来は↑　、入金金額の差異を出すために、、
-    	$date = date("Y-m-d", strtotime("-1 day"));
-    	$total = 0;
+//    	$date = date("Y-m-d", strtotime("-1 day"));
+//    	$date = "2013-07-31";	
+		$total = 0;
     	foreach($section_list as $key=>$value){
     		$out[$key]['name'] = $value;
     		$params = array(

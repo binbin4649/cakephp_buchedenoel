@@ -52,7 +52,7 @@ define('AMOUNT_LANDING', TRUE);
 //JSON送信　TRUE=する　FALSE=しない
 define('JSON_LANDING', TRUE);
 
-define('MAXYEAR', 2013);
+define('MAXYEAR', 2014);
 define('MINYEAR', 2009);
 define('TAX_RATE', 5);//5=5%
 define('INC_NAME_JA', '株式会社ザ･キッス');
@@ -64,7 +64,7 @@ define('INC_FAX', '03-5457-1135');
 define('BANK1', '三菱東京UFJ銀行　恵比寿支店　当座：1343727');
 define('BANK2', 'みずほ銀行　　　 六本木支店　当座：148483');
 define('BANK3', '三井住友銀行　　 渋谷支店　　当座：208352');
-define('REPAIR_PERSON', '商品課　大塚');
+define('REPAIR_PERSON', '商品課　田中');
 
 //モデルキャッシュ関連
 define('CACHE_TODAY', '86400');//1800 = 30分　86400＝24時間
@@ -73,7 +73,7 @@ define('CACHE_TODAY_RANKING', '3600');//3600 = 1時間
 define('CACHE_WEEK', '43200');//43200 = 12時間 右カラム
 
 //新店と既存店の基準日。基準日より新しければ新店、古ければ既存店。
-define('NEW_SHOP_FLAG', '2012-04-19');
+define('NEW_SHOP_FLAG', '2013-04-25');
 
 //海外店を指定する。そのうちＤＢにしたいです
 function get_overseashop_list(){
@@ -81,11 +81,12 @@ function get_overseashop_list(){
 		//'0'=>'406',//KOREA THE KISS COEX-MALL
 		'1'=>'404',//MACAU girl’s talk！ MACAO
 		'2'=>'405',//MACAU THE KISS MACAO
-		'3'=>'450',//金浦空港
+		//'3'=>'450',//金浦空港
 		'4'=>'458',//タイパKISS&GT
 		'5'=>'462',//Hong Kong Langham Place
 		'6'=>'465',//Hong Kong APM Store
 		'7'=>'466',//Hong Kong Vcity Store
+		'8'=>'483',//Venetian GT POP Store
 	);
 }
 
@@ -100,6 +101,7 @@ function get_year_list(){
 		'2011'=>'2011',
 		'2012'=>'2012',
 		'2013'=>'2013',
+		'2014'=>'2014',
 	);
 }
 

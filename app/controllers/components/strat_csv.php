@@ -67,6 +67,7 @@ class StratCsvComponent extends Object {
 			$item_stone_id = $this->masterDump('Stone', $sj12_zen);//ルースのid
 			$item_material_id = $this->masterDump('Material', $sj_row[14]);//マテリアルのid
 			$item_price = floor($sj_row[26]);//上代 切捨て整数化floor
+
 			$subitem_cost = floor($sj_row[29]);//仕入単価
 			$item_cost = floor($sj_row[32]);//在庫原価
 			if($subitem_cost == 0) $subitem_cost = $item_cost;
@@ -134,8 +135,8 @@ class StratCsvComponent extends Object {
 				}
 
 			}else{//itemが無かった時の処理
-				//アニバ、ファサード、カフナ、LUV sweetsは単品管理に変える
-				if($item_brand_id == 10 or $item_brand_id == 11 or $item_brand_id == 12 or $item_brand_id == 3 or $item_brand_id == 4 or $item_brand_id == 13 or $item_brand_id == 183){
+				//アニバ、ファサード、カフナ、LUV sweets、モルガンベロは単品管理に変える
+				if($item_brand_id == 10 or $item_brand_id == 11 or $item_brand_id == 12 or $item_brand_id == 3 or $item_brand_id == 4 or $item_brand_id == 13 or $item_brand_id == 183 or $item_brand_id == 233){
 					$stock_code = 3;
 				}else{
 					$stock_code = 1;
@@ -175,7 +176,7 @@ class StratCsvComponent extends Object {
 						'cost'=>$item_cost,
 						'factory_id'=>$item_factory_id,
 						'brand_id'=>$item_brand_id,
-						'release_day'=>$item_release_day,
+						//'release_day'=>$item_release_day,
 						'process_id'=>$item_process_id,
 						'remark'=>$item_remark,
 						'stone_other'=>$item_stone_other,
@@ -261,7 +262,7 @@ class StratCsvComponent extends Object {
 		}
 		//　true = ファイルを送る  false = ファイルは送らない
 		$SSH2_LANDING = true;
-		$execute_start = false;
+		$execute_start = true;
 		if(!empty($save_subitem_submit)){
 			$subitem_submit_out = json_encode($save_subitem_submit);
 			$sub_file_name = 'submit_subitems'.date('Ymd-His').'.json';
@@ -269,7 +270,8 @@ class StratCsvComponent extends Object {
 			file_put_contents($path.$sub_file_name, $subitem_submit_out);
 			if($SSH2_LANDING == true){
 				$connection = ssh2_connect('idempiere.thekiss-landh.com', 22, array('hostkey'=>'ssh-rsa'));
-				ssh2_auth_pubkey_file($connection, 'idempiere','/var/www/php_rsa.pub','/var/www/php_rsa', '');
+				//ssh2_auth_pubkey_file($connection, 'idempiere','/var/www/php_rsa.pub','/var/www/php_rsa', '');
+				ssh2_auth_pubkey_file($connection,'idempiere','/var/www/.ssh/id_rsa.pub','/var/www/.ssh/id_rsa', '');
 				if(ssh2_scp_send($connection,'/var/www/html/buchedenoel/app/webroot/files/SyohinIchiran/'.$sub_file_name,'/home/idempiere/from_oreore/'.$sub_file_name, 0644)){
 					$this->log('[sub_item sucsses]'.date('Y/m/d h:i:s'));
 				}else{
@@ -282,13 +284,21 @@ class StratCsvComponent extends Object {
 		$item_submit_out = '';
 		//foreach ($save_item_submit['Item'] as $fields) fputcsv($item_submit_out, $fields);
 		if(!empty($save_item_submit)){
+			//ランドに送るブランドと仕入先を強制書換　ブランド書き換え
+			foreach ($save_item_submit as $value) {
+				if($value["Item"]["factory_id"] == "396") $value["Item"]["factory_id"] = "803";
+				//if($value["Item"]["factory_id"] == "381") $value["Item"]["factory_id"] = "765";//コンプレックスビズ
+				if($value["Item"]["brand_id"] == "233") $value["Item"]["brand_id"] = "237";
+				if($value["Item"]["brand_id"] == "232") $value["Item"]["brand_id"] = "235";//THE KISS BLACK 書換
+			}
 			$item_submit_out = json_encode($save_item_submit);
 			$file_name = 'submit_items'.date('Ymd-His').'.json';
 			$path = WWW_ROOT.'/files/SyohinIchiran/';
 			file_put_contents($path.$file_name, $item_submit_out);
 			if($SSH2_LANDING == true){
 				$connection = ssh2_connect('idempiere.thekiss-landh.com', 22, array('hostkey'=>'ssh-rsa'));
-				ssh2_auth_pubkey_file($connection, 'idempiere','/var/www/php_rsa.pub','/var/www/php_rsa', '');
+				//ssh2_auth_pubkey_file($connection, 'idempiere','/var/www/php_rsa.pub','/var/www/php_rsa', '');
+				ssh2_auth_pubkey_file($connection,'idempiere','/var/www/.ssh/id_rsa.pub','/var/www/.ssh/id_rsa', '');
 				if(ssh2_scp_send($connection,'/var/www/html/buchedenoel/app/webroot/files/SyohinIchiran/'.$file_name,'/home/idempiere/from_oreore/'.$file_name, 0644)){
 					$this->log('[item sucsses]'.date('Y/m/d h:i:s'));
 				}else{
@@ -301,7 +311,8 @@ class StratCsvComponent extends Object {
 		if($execute_start){
 			//キックファイル送信
 			$connection = ssh2_connect('idempiere.thekiss-landh.com', 22, array('hostkey'=>'ssh-rsa'));
-			ssh2_auth_pubkey_file($connection, 'idempiere','/var/www/php_rsa.pub','/var/www/php_rsa', '');
+			//ssh2_auth_pubkey_file($connection, 'idempiere','/var/www/php_rsa.pub','/var/www/php_rsa', '');
+			ssh2_auth_pubkey_file($connection,'idempiere','/var/www/.ssh/id_rsa.pub','/var/www/.ssh/id_rsa', '');
 			if(ssh2_scp_send($connection,'/var/www/html/buchedenoel/app/webroot/files/execute_bt05','/home/idempiere/from_oreore/execute_bt05', 0644)){
 				$this->log('[execute_bt05 sucsses]'.date('Y/m/d h:i:s'));
 			}else{
@@ -1440,7 +1451,7 @@ function factoryDump($f_cd){
     			$value = '33';
     			break;
     		case '000277':
-    			$value = '335';
+    			$value = '363';
     			break;
     		case '000282':
     			$value = '354';
@@ -1598,6 +1609,8 @@ function sj2bsnItemCsv($path, $file_name){
 		$item_stone_id = $this->masterDump('Stone', $sj12_zen);//ルースのid
 		$item_material_id = $this->masterDump('Material', $sj_row[14]);//マテリアルのid
 		$item_price = floor($sj_row[26]);//上代 切捨て整数化floor
+		if($item_price == 0) $item_price = floor($sj_row[27]); //参考上代に入っていなかったら
+		if($item_price == null) $item_price = floor($sj_row[27]); //参考上代に入っていなかったら
 		$subitem_cost = floor($sj_row[29]);//仕入単価
 		$item_cost = floor($sj_row[32]);//在庫原価
 		if($subitem_cost == 0) $subitem_cost = $item_cost;

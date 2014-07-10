@@ -84,7 +84,11 @@ foreach ($onlyDatas as $memoData):
 	<li><?php echo $html->link(__('List Board Index', true), array('controller'=>'memo_datas', 'action'=>'index')); ?></li>
 	<li><?php echo $html->link(__('About Resort House', true), array('controller'=>'pages', 'action'=>'resorthouse')); ?></li>
 </ul>
-
 <ul>
+	<li><?php echo $html->link(__('Pentaho', true), array('controller'=>'amount_sections', 'action'=>'pentaho')); ?></li>
 	<li><?php echo $html->link(__('Out Put Data', true), array('controller'=>'amount_sections', 'action'=>'outputdata')); ?></li>
+</ul>
+<ul>
+	<li><a href="https://docs.google.com/forms/d/1GCeNGAw5wyGb-8LDurFSESDU22bPNvZ4KIQ2FxwQqCo/viewform?usp=send_form" target="_blank">金額訂正依頼</a></li>
+	<li><a href="https://docs.google.com/forms/d/1lSPJggySNLKOZF_6pFGjfjW0ZhNsSZxvQHxDSudQyjI/viewform?usp=send_form" target="_blank">売上日変更依頼</a></li>
 </ul>

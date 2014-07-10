@@ -292,7 +292,7 @@ class HtmlHelper extends AppHelper {
 		if ($escapeTitle === true) {
 			$title = h($title);
 		} elseif (is_string($escapeTitle)) {
-			$title = htmlentities($title, ENT_QUOTES, $escapeTitle);
+			$title = htmlspecialchars($title, ENT_QUOTES, $escapeTitle);
 		}
 
 		if (!empty($htmlAttributes['confirm'])) {

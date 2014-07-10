@@ -185,6 +185,20 @@ class AmountSectionsController extends AppController {
 		}
 		$this->set('old_file', $old_file);
 	}
+
+	function pentaho(){
+		$path = WWW_ROOT.'/files/pentaho/';
+		$old_file = array();
+		$handle = opendir($path);
+		while (false !== ($file = readdir($handle))) {
+			if($file != '.' and $file != '..'){
+				$old_file[] = $file;
+			}
+		}
+		closedir($handle);
+		rsort($old_file);
+		$this->set('old_file', $old_file);
+	}
 	
 	//ランキング
 	function ranking($id = 1, $key = 3){
