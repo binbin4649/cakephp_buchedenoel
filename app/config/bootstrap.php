@@ -79,14 +79,15 @@ define('NEW_SHOP_FLAG', '2013-07-28');
 function get_overseashop_list(){
 	return array(
 		//'0'=>'406',//KOREA THE KISS COEX-MALL
-		'1'=>'404',//MACAU girl’s talk！ MACAO
-		'2'=>'405',//MACAU THE KISS MACAO
+		//'1'=>'404',//MACAU girl’s talk！ MACAO
+		//'2'=>'405',//MACAU THE KISS MACAO
 		//'3'=>'450',//金浦空港
 		'4'=>'458',//タイパKISS&GT
 		'5'=>'462',//Hong Kong Langham Place
 		'6'=>'465',//Hong Kong APM Store
 		'7'=>'466',//Hong Kong Vcity Store
 		'8'=>'483',//Venetian GT POP Store
+		'9'=>'485',//Langham Place GT
 	);
 }
 

@@ -20,12 +20,17 @@ echo '</ul>';
 </p>
 
 <p>
+<strong>maeukezan.xls</strong><br>
+今日現在の前受金残。<br>
+未お渡し客注の一覧。ただし、前受金0円の客注は含まれない。
+</p>
+
+<p>
 <strong>zenhi.xls</strong><br>
 前比データ。12シート。<br>
 今日、今月、今週の前年との比較データ。<br>
 既存店だけのデータ、客数、点数の比較データもあり。
 </p>
-
 <p>
 <strong>month.xls</strong><br>
 今月の売上データ。3シート。<br>
@@ -171,4 +176,8 @@ month.xlsの今日のみ集計バージョン。<br>
 	0313,toU by THE KISS　シャミネ鳥取<br>
 	0063,THE KISS　和歌山MIO<br>
 	0803,THE KISS sweets アミュプラザ博多<br>
+</p>
+<p>
+	<strong>zaiko_chosei.xls</strong><br>
+	先月1日から今日までの、在庫調整の履歴。
 </p>
