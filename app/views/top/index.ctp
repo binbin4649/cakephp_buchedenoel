@@ -92,3 +92,6 @@ foreach ($onlyDatas as $memoData):
 	<li><a href="https://docs.google.com/forms/d/1GCeNGAw5wyGb-8LDurFSESDU22bPNvZ4KIQ2FxwQqCo/viewform?usp=send_form" target="_blank">金額訂正依頼</a></li>
 	<li><a href="https://docs.google.com/forms/d/1lSPJggySNLKOZF_6pFGjfjW0ZhNsSZxvQHxDSudQyjI/viewform?usp=send_form" target="_blank">売上日変更依頼</a></li>
 </ul>
+<ul>
+<li><a href="https://idempiere.thekiss-landh.com/webui/" target="_blank">Landh</a></li>
+</ul>
