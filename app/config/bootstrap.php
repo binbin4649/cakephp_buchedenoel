@@ -43,7 +43,7 @@
 //EOF
 
 //設置している DocumentRoot 以下を定義
-define('SITE_DIR', 'buchedenoel-test');
+define('SITE_DIR', 'buchedenoel');
 
 //在庫が無くても永久に取り置き出来るモード、TRUEで在庫とか無視、通常はFALSE
 //20111013追加：直接仕入入力に単品管理を入れた時、W期間中は在庫を操作しない
