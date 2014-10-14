@@ -47,7 +47,7 @@ class RepairsController extends AppController {
 				$path = WWW_ROOT.'/files/user_csv/'; //どうせ一時ファイルなんだから同じでいいや。ってことはフォルダ名はミスだね。でも面倒だからこのままで。
 				$output_csv = mb_convert_encoding($output_csv, 'SJIS', 'UTF-8');
 				file_put_contents($path.$file_name, $output_csv);
-				$output['url'] = '/buchedenoel/files/user_csv/'.$file_name;
+				$output['url'] = '/'.SITE_DIR.'/files/user_csv/'.$file_name;
 				$output['name'] = $file_name;
 				$this->set('csv', $output);
 				$this->data['Repair']['csv'] = null;
@@ -211,7 +211,7 @@ class RepairsController extends AppController {
 				$file_name = 'repair-request-'.date('Ymd-His');
 				$print_xml = $this->Print->RepairRequest($repairs, $file_name);
 				file_put_contents($path.$file_name.'.php', $print_xml);
-				$print_out['url'] = '/buchedenoel/files/repair-request/'.$file_name.'.php';
+				$print_out['url'] = '/'.SITE_DIR.'/files/repair-request/'.$file_name.'.php';
 				$print_out['file'] = $file_name.'.pxd';
 				$this->set('print', $print_out);
 				foreach($repairs as $repair){

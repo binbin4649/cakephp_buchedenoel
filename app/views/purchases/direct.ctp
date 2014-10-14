@@ -7,8 +7,8 @@
 	<fieldset>
  		<legend><?php __('Direct Purchase');?></legend>
 	<?php
-		//echo '<a href="/buchedenoel/depots" target="_blank">仕入倉庫</a>：';
-		echo '　<a href="/buchedenoel/depots/selectid?keepThis=true&TB_iframe=true&height=400&width=550" title="倉庫選択" class="thickbox">仕入倉庫</a>';
+		//echo '<a href="/'.SITE_DIR.'/depots" target="_blank">仕入倉庫</a>：';
+		echo '　<a href="/'.SITE_DIR.'/depots/selectid?keepThis=true&TB_iframe=true&height=400&width=550" title="倉庫選択" class="thickbox">仕入倉庫</a>';
 		echo $form->input('Purchase.depot', array(
 			'type'=>'text',
 			'div'=>false,

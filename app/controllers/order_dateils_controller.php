@@ -124,13 +124,13 @@ class OrderDateilsController extends AppController {
 				$path = WWW_ROOT.'/files/user_csv/'; //どうせ一時ファイルなんだから同じでいいや。ってことはフォルダ名はミスだね。でも面倒だからこのままで。
 				$output_csv = mb_convert_encoding($output_csv, 'SJIS', 'UTF-8');
 				file_put_contents($path.$file_name, $output_csv);
-				$output['url'] = '/buchedenoel/files/user_csv/'.$file_name;
+				$output['url'] = '/'.SITE_DIR.'/files/user_csv/'.$file_name;
 				$output['name'] = $file_name;
 				$this->set('csv', $output);
 				$this->data[$modelName]['csv'] = null;
 				//scpテスト
 				/*
-				$shell_exec1 = 'scp -i /var/www/php_rsa /var/www/html/buchedenoel/app/webroot/files/user_csv/'.$file_name.' idempiere@idempiere-dev.thekiss-landh.com:/home/idempiere/from_oreore/';
+				$shell_exec1 = 'scp -i /var/www/php_rsa /var/www/html/'.SITE_DIR.'/app/webroot/files/user_csv/'.$file_name.' idempiere@idempiere-dev.thekiss-landh.com:/home/idempiere/from_oreore/';
 				$shell_output1 = shell_exec($shell_exec1);
 				$this->log($shell_output1);
 				*/
@@ -138,7 +138,7 @@ class OrderDateilsController extends AppController {
 				/*
 				 $connection = ssh2_connect('idempiere-dev.thekiss-landh.com', 22, array('hostkey'=>'ssh-rsa'));
 				 ssh2_auth_pubkey_file($connection, 'idempiere','/var/www/php_rsa.pub','/var/www/php_rsa', '');
-				 ssh2_scp_send($connection,'/var/www/html/buchedenoel/app/webroot/files/user_csv/'.$file_name,'/home/idempiere/from_oreore/'.$file_name, 0644);
+				 ssh2_scp_send($connection,'/var/www/html/'.SITE_DIR.'/app/webroot/files/user_csv/'.$file_name,'/home/idempiere/from_oreore/'.$file_name, 0644);
 			    */
 			    /**
 			     * 公開鍵・秘密鍵はApacheのUserディレクティブで読込可能で

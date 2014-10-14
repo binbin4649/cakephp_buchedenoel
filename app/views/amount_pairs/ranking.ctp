@@ -3,10 +3,10 @@
 	echo $javascript->link("order_by_column",false);
 ?>
 ペアベスト100　
-<a href="/buchedenoel/amount_pairs/ranking/1">年次</a> |
-<a href="/buchedenoel/amount_pairs/ranking/2">月次</a> |
-<a href="/buchedenoel/amount_pairs/ranking/3">週次</a> |
-<a href="/buchedenoel/amount_pairs/ranking/4">日次</a> |
+<a href="/'.SITE_DIR.'/amount_pairs/ranking/1">年次</a> |
+<a href="/'.SITE_DIR.'/amount_pairs/ranking/2">月次</a> |
+<a href="/'.SITE_DIR.'/amount_pairs/ranking/3">週次</a> |
+<a href="/'.SITE_DIR.'/amount_pairs/ranking/4">日次</a> |
 <div class="amountSections index">
 <h2><?php echo $key_name; ?></h2>
 <table id="order_by_column_table">

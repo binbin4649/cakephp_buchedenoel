@@ -7,10 +7,10 @@
 		}
 	}
 ?>
-<a href="/buchedenoel/amount_users/ranking/2/1">年次</a> |
-<a href="/buchedenoel/amount_users/ranking/2/2">月次</a> |
-<a href="/buchedenoel/amount_users/ranking/2/3">週次</a> |
-<a href="/buchedenoel/amount_users/ranking/2/4">日次</a> |
+<a href="/'.SITE_DIR.'/amount_users/ranking/2/1">年次</a> |
+<a href="/'.SITE_DIR.'/amount_users/ranking/2/2">月次</a> |
+<a href="/'.SITE_DIR.'/amount_users/ranking/2/3">週次</a> |
+<a href="/'.SITE_DIR.'/amount_users/ranking/2/4">日次</a> |
 <div class="amountSections index">
 <h2><?php echo $key_name; ?></h2>
 <table id="order_by_column_table">

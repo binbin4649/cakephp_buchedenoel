@@ -173,7 +173,7 @@
 ?>
 <div class="actions">
 	<ul>
-		<!-- <li><?php //echo $form->button(__('Edit User', true), array('onclick'=>"location.href='/buchedenoel/users/edit/".$user['User']['id']."'")); ?> </li> -->
+		<!-- <li><?php //echo $form->button(__('Edit User', true), array('onclick'=>"location.href='/'.SITE_DIR.'/users/edit/".$user['User']['id']."'")); ?> </li> -->
 		<li><?php echo $html->link(__('Edit User', true), array('action'=>'edit', $user['User']['id'])); ?> </li>
 	</ul>
 </div>

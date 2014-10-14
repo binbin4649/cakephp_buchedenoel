@@ -19,7 +19,7 @@
 		echo '<div class="input"><label>'.__('In Depot', true).'</label>'.$this->data['Transport']['in_depot']['depot_name'].':'.$this->data['Transport']['in_depot']['depot_id'].'　</div>';
 		echo $form->input('Transport.in_depot', array(
 			'type'=>'text',
-			'label'=>'<a href="/buchedenoel/depots" target="_blank">'.__('Depot No.', true).'</a>：',
+			'label'=>'<a href="/'.SITE_DIR.'/depots" target="_blank">'.__('Depot No.', true).'</a>：',
 			'size'=>5,
 			'value'=>$this->data['Transport']['in_depot']['depot_id']
 		));

@@ -1,6 +1,6 @@
 <script type="text/javascript">
 $(function() {
-  $('#getData').autocomplete('/buchedenoel/order_dateils/getData');
+  $('#getData').autocomplete('/'.SITE_DIR.'/order_dateils/getData');
 });
 </script>
 <?php
@@ -30,7 +30,7 @@ echo $javascript->link("jquery.autocomplete",false);
 		echo '<table class="itemVars"><tr>';
 		echo '<td>'.$item['Item']['name'].' / ￥'.$item['Item']['price'].'('.$item['Item']['cost'].') / '.$item['Factory']['name'];
 		if(empty($item['Factory']['name'])){
-			echo '<a href="/buchedenoel/factories" target="_blank">工場</a>';
+			echo '<a href="/'.SITE_DIR.'/factories" target="_blank">工場</a>';
 			echo $form->input('OrderingsDetail.factory_id', array(
 				'type'=>'text',
 				'div'=>false,

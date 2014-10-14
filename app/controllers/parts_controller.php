@@ -53,7 +53,7 @@ class PartsController extends AppController {
 				$root_item = $this->Item->find('first' ,$params);
 				$supply_code = get_supply_code();
 				$this->set(compact('subitem', 'supply_code', 'root_item'));
-				$this->Session->setFlash(__('ERROR:たぶん入力された品番が無いからだと思います。これを<a href="/buchedenoel/parts/add/'.$subitem_id.'">クリック</a>してからやり直してください。', true));
+				$this->Session->setFlash(__('ERROR:たぶん入力された品番が無いからだと思います。これを<a href="/'.SITE_DIR.'/parts/add/'.$subitem_id.'">クリック</a>してからやり直してください。', true));
 			}
 		}
 		$params = array(

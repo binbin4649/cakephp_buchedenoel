@@ -1,6 +1,6 @@
 <script type="text/javascript">
 //オートコンプリート ワンライナー
-$(function() { $('#getData').autocomplete('/buchedenoel/order_dateils/getData');});
+$(function() { $('#getData').autocomplete('/'.SITE_DIR.'/order_dateils/getData');});
 //デートピッカー ワンライナー
 $(function($){$(".datepicker").datepicker({dateFormat:'yy-mm-dd'});});
 </script>
@@ -128,8 +128,8 @@ $(function($){$(".datepicker").datepicker({dateFormat:'yy-mm-dd'});});
 	));
 	echo $contact4['User']['name'];
  	echo '</td></tr><tr><td>';
- 	echo '　<a href="/buchedenoel/destinations/selectid?keepThis=true&TB_iframe=true&height=400&width=550" title="出荷先選択" class="thickbox">出荷先</a>';
-	//echo '　<a href="/buchedenoel/destinations" target="_blank">出荷先</a>：';
+ 	echo '　<a href="/'.SITE_DIR.'/destinations/selectid?keepThis=true&TB_iframe=true&height=400&width=550" title="出荷先選択" class="thickbox">出荷先</a>';
+	//echo '　<a href="/'.SITE_DIR.'/destinations" target="_blank">出荷先</a>：';
 	echo $form->input("OrderDateil.destination_id", array(
 		'type'=>'text',
 		'div'=>false,
@@ -380,7 +380,7 @@ $(function($){$(".datepicker").datepicker({dateFormat:'yy-mm-dd'});});
 </div>
 <p>
 <ul>
-<li>単品管理の商品は、商品検索から検索して、特殊注文をクリックして入力する。<a href="http://e5-os214.xbit.jp/buchedenoel/memo_datas/view/1614">詳しくはこちら</a></li>
+<li>単品管理の商品は、商品検索から検索して、特殊注文をクリックして入力する。<a href="http://e5-os214.xbit.jp/'.SITE_DIR.'/memo_datas/view/1614">詳しくはこちら</a></li>
 <li>どうしても品番が無い場合などは、品番「SAMPLE」で入力して、備考に品番を入力する。</li>
 <li>スパン：入力できるのは半角英数字のみです。日本語、記号などは入力できません。</li>
 <li>割引：割引率を1～99の整数で入力して下さい。（例）10　と入力すると10％引きの金額が表示されます。（注）端数切捨て</li>

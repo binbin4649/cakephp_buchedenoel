@@ -58,7 +58,7 @@ if(!empty($add_confirm)){
 			'label'=>__('Billing', true),
 			'size'=>10,
 			'id'=>'billingId',
-			'after'=>'<a href="/buchedenoel/billings/selectid?keepThis=true&TB_iframe=true&height=400&width=550" title="請求先選択" class="thickbox">請求先</a>'
+			'after'=>'<a href="/'.SITE_DIR.'/billings/selectid?keepThis=true&TB_iframe=true&height=400&width=550" title="請求先選択" class="thickbox">請求先</a>'
 		));
 		echo $form->input('Credit.deposit_amount', array(
 			'label'=>__('Deposit Amount', true),

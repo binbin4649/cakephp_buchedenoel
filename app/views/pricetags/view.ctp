@@ -32,7 +32,7 @@
 			<?php
 			if(!empty($prints)){
 				foreach($prints as $print){
-					echo '<a href="/buchedenoel/files/pricetagcsv/'.$print.'" target="_blank">'.$print.'</a><br>';
+					echo '<a href="/'.SITE_DIR.'/files/pricetagcsv/'.$print.'" target="_blank">'.$print.'</a><br>';
 				}
 				echo '右クリック「リンク先を保存」を選択して保存してください。';
 			}

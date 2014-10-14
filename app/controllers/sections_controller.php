@@ -123,7 +123,7 @@ class SectionsController extends AppController {
 		$path = WWW_ROOT.'/files/eh_store/';
 		$output_csv = mb_convert_encoding($output_csv, 'SJIS', 'UTF-8');
 		file_put_contents($path.$file_name, $output_csv);
-		$output['url'] = '/buchedenoel/files/eh_store/'.$file_name;
+		$output['url'] = '/'.SITE_DIR.'/files/eh_store/'.$file_name;
 		$output['name'] = $file_name;
 		$this->Session->write("Section.ehStore", $output);
 		$this->redirect(array('action'=>'index'));

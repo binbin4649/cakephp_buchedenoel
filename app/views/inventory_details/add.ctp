@@ -21,7 +21,7 @@
 			echo $form->hidden('InventoryDetail.span', array('value'=>$InventoryDetail['span']));
 			echo $form->hidden('InventoryDetail.face', array('value'=>$InventoryDetail['face']));
 		}else{
-			echo '　<a href="/buchedenoel/depots/selectid?keepThis=true&TB_iframe=true&height=400&width=550" title="棚卸倉庫選択" class="thickbox">倉庫</a>';
+			echo '　<a href="/'.SITE_DIR.'/depots/selectid?keepThis=true&TB_iframe=true&height=400&width=550" title="棚卸倉庫選択" class="thickbox">倉庫</a>';
 			echo $form->input('InventoryDetail.depot', array(
 				'type'=>'text',
 				'div'=>false,

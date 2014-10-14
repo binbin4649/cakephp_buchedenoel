@@ -4,7 +4,7 @@
  		<legend><?php __('Add TransportDateil');?></legend>
 	<?php
 		if($addForm->opneUser(open_users(), $opneuser, 'access_authority')){
-			echo '<a href="/buchedenoel/depots" target="_blank">出庫元倉庫</a>：';
+			echo '<a href="/'.SITE_DIR.'/depots" target="_blank">出庫元倉庫</a>：';
 			if(!empty($section['Section']['out_depot'])){
 				echo $sectionDepots[$section['Section']['out_depot']];
 				echo $form->hidden('TransportDateil.depot', array('value'=>$section['Section']['out_depot']));

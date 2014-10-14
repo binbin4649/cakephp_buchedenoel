@@ -3,10 +3,10 @@
 	echo $javascript->link("order_by_column",false);
 ?>
 アイテムベスト100　
-<a href="/buchedenoel/amount_items/ranking/1">年次</a> |
-<a href="/buchedenoel/amount_items/ranking/2">月次</a> |
-<a href="/buchedenoel/amount_items/ranking/3">週次</a> |
-<a href="/buchedenoel/amount_items/ranking/4">日次</a> |
+<a href="/'.SITE_DIR.'/amount_items/ranking/1">年次</a> |
+<a href="/'.SITE_DIR.'/amount_items/ranking/2">月次</a> |
+<a href="/'.SITE_DIR.'/amount_items/ranking/3">週次</a> |
+<a href="/'.SITE_DIR.'/amount_items/ranking/4">日次</a> |
 <div class="amountSections index">
 <h2><?php echo $key_name; ?></h2>
 <table id="order_by_column_table">

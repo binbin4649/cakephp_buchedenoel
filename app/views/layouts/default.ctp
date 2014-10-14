@@ -36,7 +36,7 @@ if($loginUser){
 		echo sprintf(__('　Logon:　%s' ,true) ,'部門に所属されていません。従業員編集から部門番号を登録してください。'.' ： '.$html->link($loginUser['User']['name'], array('controller'=>'users', 'action'=>'view/'.$loginUser['User']['id'])));
 	}
 	echo '　- ';
-	echo '　( <a href="/buchedenoel/users/logout">'.__('Logout' ,true).'</a> )';
+	echo '　( <a href="/'.SITE_DIR.'/users/logout">'.__('Logout' ,true).'</a> )';
 	echo '</em>';
 }
 ?>

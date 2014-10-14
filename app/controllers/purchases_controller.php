@@ -75,7 +75,7 @@ class PurchasesController extends AppController {
 		$this->set(compact('purchase_status'));
 
 		if(!empty($Purchase['Purchase']['print_file'])){
-			$print_out['url'] = '/buchedenoel/files/purchase/'.$Purchase['Purchase']['print_file'].'.php';
+			$print_out['url'] = '/'.SITE_DIR.'/files/purchase/'.$Purchase['Purchase']['print_file'].'.php';
 			$print_out['file'] = $Purchase['Purchase']['print_file'].'.pxd';
 			$this->set('print', $print_out);
 		}
@@ -454,7 +454,7 @@ class PurchasesController extends AppController {
 			$this->set(compact('Purchase', 'PurchaseDetail', 'purchase_status'));
 			
 			if(!empty($Purchase['Purchase']['print_file'])){
-				$print_out['url'] = '/buchedenoel/files/purchase/'.$Purchase['Purchase']['print_file'].'.php';
+				$print_out['url'] = '/'.SITE_DIR.'/files/purchase/'.$Purchase['Purchase']['print_file'].'.php';
 				$print_out['file'] = $Purchase['Purchase']['print_file'].'.pxd';
 				$this->set('print', $print_out);
 			}

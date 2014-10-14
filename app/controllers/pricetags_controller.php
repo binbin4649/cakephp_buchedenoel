@@ -43,7 +43,7 @@ class PricetagsController extends AppController {
 		$this->set('pricetag', $Pricetag);
 		if(!empty($Pricetag['Pricetag']['csv_data'])){
 			$file_names = explode(',', $Pricetag['Pricetag']['csv_data']);
-			//$print_out['url'] = '/buchedenoel/files/pricetag/'.$Pricetag['Pricetag']['csv_data'];
+			//$print_out['url'] = '/'.SITE_DIR.'/files/pricetag/'.$Pricetag['Pricetag']['csv_data'];
 			//$print_out['file'] = $Pricetag['Pricetag']['csv_data'];
 			$this->set('prints', $file_names);
 		}

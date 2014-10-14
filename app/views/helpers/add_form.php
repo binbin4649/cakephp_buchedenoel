@@ -43,7 +43,7 @@ class AddFormHelper extends AppHelper{
 		foreach($itemimage as $image){
 			$out .= '<tr><td>';
 			//$out .= $html->image('/img/itemimage/'.$image['id'].'.jpg', array('width'=>75, 'height'=>75));
-			$out .= '<img src="/buchedenoel/img/itemimage/'.$image['ItemImage']['id'].'.jpg" width="75" height="75">';
+			$out .= '<img src="/'.SITE_DIR.'/img/itemimage/'.$image['ItemImage']['id'].'.jpg" width="75" height="75">';
 			$out .= '</td><td>';
 			if($image['ItemImage']['id'] == $checked){
 				$out .= '<input type="radio" value="'.$image['ItemImage']['id'].'" name="data[Item][itemimage_id]" checked>';
@@ -73,11 +73,11 @@ class AddFormHelper extends AppHelper{
 			}
 		}
 		if(!empty($messe)){
-			$out = '<a href="/buchedenoel/'.$url.'" onclick="return confirm(&#039;';
+			$out = '<a href="/'.SITE_DIR.'/'.$url.'" onclick="return confirm(&#039;';
 			$out .= __($messe, true).'&#039;);">'.__($links, true).'</a>';
 			return $out;
 		}
-		return '<a href="/buchedenoel/'.$url.'">'.__($links, true).'</a>';
+		return '<a href="/'.SITE_DIR.'/'.$url.'">'.__($links, true).'</a>';
 	}
 
 	function opneAnchor($url, $opnes, $messe, $links, $params){
@@ -91,11 +91,11 @@ class AddFormHelper extends AppHelper{
 			foreach($opnes as $opne){
 				if($param == $opne){
 					if(!empty($messe)){
-						$out = '<a href="/buchedenoel/'.$url.'" onclick="return confirm(&#039;';
+						$out = '<a href="/'.SITE_DIR.'/'.$url.'" onclick="return confirm(&#039;';
 						$out .= __($messe, true).'&#039;);">'.__($links, true).'</a>';
 						return $out;
 					}
-					return '<a href="/buchedenoel/'.$url.'">'.__($links, true).'</a>';
+					return '<a href="/'.SITE_DIR.'/'.$url.'">'.__($links, true).'</a>';
 				}
 			}
 		}

@@ -215,7 +215,7 @@ class SalesController extends AppController {
 		$sale_status = get_sale_status();
 		$this->set(compact('sale_type', 'order_type', 'sale_status'));
 		if(!empty($view['Sale']['print_file'])){
-			$print_out['url'] = '/buchedenoel/files/sale-print/'.$view['Sale']['print_file'].'.php';
+			$print_out['url'] = '/'.SITE_DIR.'/files/sale-print/'.$view['Sale']['print_file'].'.php';
 			$print_out['file'] = $view['Sale']['print_file'].'.pxd';
 			$this->set('print', $print_out);
 		}

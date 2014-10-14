@@ -23,7 +23,7 @@ class HogeShell extends Shell {
 	}
 	
 	//決められたセクションにフリーを作る
-	//./cake hoge newFreeUser -app /var/www/html/buchedenoel/app
+	//./cake hoge newFreeUser -app /var/www/html/'.SITE_DIR.'/app
 	function newFreeUser(){
 		$section_id = ''; //部門IDを書き換える
 		if(empty($section_id)){
@@ -60,7 +60,7 @@ class HogeShell extends Shell {
 	//テスト期間に入力されたテストデータを削除する。
 	// created 2011-03-22 00:00:00 > 2011-03-24 18:00:00
 	// order_status = 5
-	//./cake hoge orderTestDelete -app /var/www/html/buchedenoel/app
+	//./cake hoge orderTestDelete -app /var/www/html/'.SITE_DIR.'/app
 	//失敗したかも
 	function orderTestDelete(){
 		App::import('Model', 'Order');
@@ -83,7 +83,7 @@ class HogeShell extends Shell {
 	}
 	
 	//ホンさんシステムから売上吸い上げ
-	//./cake hoge uptakeSales -app /var/www/html/buchedenoel/app
+	//./cake hoge uptakeSales -app /var/www/html/'.SITE_DIR.'/app
 	function uptakeSales(){
 		$path = WWW_ROOT.'files'.DS.'reTryCost'.DS;
 		App::import('Component', 'SalesCsv');
@@ -108,7 +108,7 @@ class HogeShell extends Shell {
 	}
 	
 	// section に start_date を適当（適切？）に入れ込むスクリプト
-	// ./cake hoge sectionInsertStartdate -app /var/www/html/buchedenoel/app
+	// ./cake hoge sectionInsertStartdate -app /var/www/html/'.SITE_DIR.'/app
 	function sectionInsertStartdate(){
 		App::import('Model', 'Section');
     	$SectionModel = new Section();
@@ -260,7 +260,7 @@ class HogeShell extends Shell {
 	}
 	
 	//（とりあえず）レート変更に伴う、海外店の売上歴史書き換えプログラム
-	// ./cake hoge amountSectionsEdit -app /var/www/html/buchedenoel/app
+	// ./cake hoge amountSectionsEdit -app /var/www/html/'.SITE_DIR.'/app
 	function amountSectionsEdit(){
 		$range_en = '2011-09-31';//どこまでの期間の分を書き換えるか、ケツを設定する。ちなみにケツも含まれる。
 		$range = strtotime($range_en);

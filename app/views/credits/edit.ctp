@@ -29,7 +29,7 @@
 		echo $form->input('Credit.billing_id', array(
 			'label'=>__('Billing', true),
 			'size'=>10,
-			'after'=>'<a href="/buchedenoel/billings" target="_blank">請求先検索</a>'
+			'after'=>'<a href="/'.SITE_DIR.'/billings" target="_blank">請求先検索</a>'
 		));
 		echo $form->input('Credit.deposit_amount', array(
 			'label'=>__('Deposit Amount', true),

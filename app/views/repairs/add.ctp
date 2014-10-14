@@ -1,6 +1,6 @@
 <script type="text/javascript">
 $(function() {
-  $('#getData').autocomplete('/buchedenoel/order_dateils/getData');
+  $('#getData').autocomplete('/'.SITE_DIR.'/order_dateils/getData');
 });
 </script>
 <?php

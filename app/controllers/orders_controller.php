@@ -105,7 +105,7 @@ class OrdersController extends AppController {
 				$path = WWW_ROOT.'/files/user_csv/'; //どうせ一時ファイルなんだから同じでいいや。ってことはフォルダ名はミスだね。でも面倒だからこのままで。
 				$output_csv = mb_convert_encoding($output_csv, 'SJIS', 'UTF-8');
 				file_put_contents($path.$file_name, $output_csv);
-				$output['url'] = '/buchedenoel/files/user_csv/'.$file_name;
+				$output['url'] = '/'.SITE_DIR.'/files/user_csv/'.$file_name;
 				$output['name'] = $file_name;
 				$this->set('csv', $output);
 				$this->data[$modelName]['csv'] = null;
@@ -169,7 +169,7 @@ class OrdersController extends AppController {
 			$path = WWW_ROOT.'/files/user_csv/'; //どうせ一時ファイルなんだから同じでいいや。ってことはフォルダ名はミスだね。でも面倒だからこのままで。
 			$output_csv = mb_convert_encoding($output_csv, 'SJIS', 'UTF-8');
 			file_put_contents($path.$file_name, $output_csv);
-			$output['url'] = '/buchedenoel/files/user_csv/'.$file_name;
+			$output['url'] = '/'.SITE_DIR.'/files/user_csv/'.$file_name;
 			$output['name'] = $file_name;
 			$this->set('csv', $output);
 		}
@@ -225,7 +225,7 @@ class OrdersController extends AppController {
 						$this->Order->id = null;
 					}
 				}
-				$print_out['url'] = '/buchedenoel/files/order-picklist/'.$file_name.'.php';
+				$print_out['url'] = '/'.SITE_DIR.'/files/order-picklist/'.$file_name.'.php';
 				$print_out['file'] = $file_name.'.pxd';
 				$this->set('print', $print_out);
 			}
@@ -253,12 +253,12 @@ class OrdersController extends AppController {
 		$order_status = get_order_status();
 		$this->set(compact('order_type', 'order_status'));
 		if(!empty($order['Order']['print_file'])){
-			$print_out['url'] = '/buchedenoel/files/order-print/'.$order['Order']['print_file'].'.php';
+			$print_out['url'] = '/'.SITE_DIR.'/files/order-print/'.$order['Order']['print_file'].'.php';
 			$print_out['file'] = $order['Order']['print_file'].'.pxd';
 			$this->set('print', $print_out);
 		}
 		if(!empty($order['Order']['print_custom'])){
-			$print_custom['url'] = '/buchedenoel/files/customorder-print/'.$order['Order']['print_custom'].'.php';
+			$print_custom['url'] = '/'.SITE_DIR.'/files/customorder-print/'.$order['Order']['print_custom'].'.php';
 			$print_custom['file'] = $order['Order']['print_custom'].'.pxd';
 			$this->set('print_custom', $print_custom);
 		}
@@ -275,12 +275,12 @@ class OrdersController extends AppController {
 		$order_status = get_order_status();
 		$this->set(compact('order_type', 'order_status'));
 		if(!empty($order['Order']['print_file'])){
-			$print_out['url'] = '/buchedenoel/files/customorder-print/'.$order['Order']['print_file'].'.php';
+			$print_out['url'] = '/'.SITE_DIR.'/files/customorder-print/'.$order['Order']['print_file'].'.php';
 			$print_out['file'] = $order['Order']['print_file'].'.pxd';
 			$this->set('print', $print_out);
 		}
 		if(!empty($order['Order']['print_custom'])){
-			$print_custom['url'] = '/buchedenoel/files/customorder-print/'.$order['Order']['print_custom'].'.php';
+			$print_custom['url'] = '/'.SITE_DIR.'/files/customorder-print/'.$order['Order']['print_custom'].'.php';
 			$print_custom['file'] = $order['Order']['print_custom'].'.pxd';
 			$this->set('print_custom', $print_custom);
 		}

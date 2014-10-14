@@ -21,7 +21,7 @@
 			'type'=>'text',
 			'label'=>__('Destination', true),
 			'size'=>5,
-			'after'=>'　<a href="/buchedenoel/destinations" target="_blank">出荷先</a>'
+			'after'=>'　<a href="/'.SITE_DIR.'/destinations" target="_blank">出荷先</a>'
 		));
 		echo $form->input('Order.shipping', array(
 			'label'=>__('Shipping', true),

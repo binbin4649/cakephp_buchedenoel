@@ -1,5 +1,5 @@
 <div class="factories index">
-<p><a href="/buchedenoel/pages/masters">商品マスタ一覧</a></p>
+<p><a href="/'.SITE_DIR.'/pages/masters">商品マスタ一覧</a></p>
 <h2><?php __('Factories');?></h2>
 <?php
 $modelName = 'Factory';

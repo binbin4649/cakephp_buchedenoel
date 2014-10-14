@@ -37,7 +37,7 @@ if(!empty($this->viewVars['memoData']['MemoData']['reply'])){
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('File'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo '<a href="/buchedenoel/files/memo/'.$memoData['MemoData']['file'].'" target="_blank">'.$memoData['MemoData']['file'].'</a>'; ?>
+			<?php echo '<a href="/'.SITE_DIR.'/files/memo/'.$memoData['MemoData']['file'].'" target="_blank">'.$memoData['MemoData']['file'].'</a>'; ?>
 			&nbsp;
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Created User'); ?></dt>

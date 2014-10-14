@@ -19,7 +19,7 @@ class SalesCsvComponent extends Object {
 	}
 	
 	//直営店の売上実績 （シギさんデータは、2010年11月に税込みを税抜きに変換した関係で、端数が微妙に合わない。）
-	//./cake prepare importSales -app /var/www/html/buchedenoel/app
+	//./cake prepare importSales -app /var/www/html/'.SITE_DIR.'/app
 	function dairyReport(){
 		//////////////////////////////////////////////テストデータ
    		/*

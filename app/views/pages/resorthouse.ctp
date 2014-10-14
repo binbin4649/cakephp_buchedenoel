@@ -55,7 +55,7 @@
 　　　※　トイレットペーパーやティッシュペーパー、ゴミ袋、台所用洗剤など、最低限の消耗品は本社から発注します。<BR>
 　　　　　不足に気づいた方は、総務人事課までご報告下さい。（報告がない限り発注しません。）<BR>
 <br>
-<a href="http://e5-os214.xbit.jp/buchedenoel/memo_datas/category_index/17" target="_self">予約状況はこちら</a>
+<a href="http://e5-os214.xbit.jp/'.SITE_DIR.'/memo_datas/category_index/17" target="_self">予約状況はこちら</a>
 
 
 </FONT><BR></TD></TR>

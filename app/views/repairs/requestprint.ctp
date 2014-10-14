@@ -5,7 +5,7 @@ if(!empty($print)){
 echo '<h3>Request List Old</h3>';
 echo '<ul>';
 foreach($old_file as $value){
-	echo '<li><a href="/buchedenoel/files/repair-request/'.$value.'" target="_blank">'.substr($value, 0, 30).'</a></li>';
+	echo '<li><a href="/'.SITE_DIR.'/files/repair-request/'.$value.'" target="_blank">'.substr($value, 0, 30).'</a></li>';
 }
 echo '</ul>'
 ?>

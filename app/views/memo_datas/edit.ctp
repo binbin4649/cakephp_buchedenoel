@@ -38,7 +38,7 @@ echo $sectionName;
 		//echo $form->input('MemoData.reply');
 		if(!empty($this->data['MemoData']['file'])){
 			echo '<div class="input text"><label for="MemoDataName">File</label>';
-			echo '<a href="/buchedenoel/files/memo/'.$this->data['MemoData']['file'].'" target="_blank">'.$this->data['MemoData']['file'].'</a>';
+			echo '<a href="/'.SITE_DIR.'/files/memo/'.$this->data['MemoData']['file'].'" target="_blank">'.$this->data['MemoData']['file'].'</a>';
 			echo '</div>';
 			echo $form->hidden('MemoData.file', array(
 				'value'=>$this->data['MemoData']['file']

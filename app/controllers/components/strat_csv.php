@@ -272,7 +272,7 @@ class StratCsvComponent extends Object {
 				$connection = ssh2_connect('idempiere.thekiss-landh.com', 22, array('hostkey'=>'ssh-rsa'));
 				//ssh2_auth_pubkey_file($connection, 'idempiere','/var/www/php_rsa.pub','/var/www/php_rsa', '');
 				ssh2_auth_pubkey_file($connection,'idempiere','/var/www/.ssh/id_rsa.pub','/var/www/.ssh/id_rsa', '');
-				if(ssh2_scp_send($connection,'/var/www/html/buchedenoel/app/webroot/files/SyohinIchiran/'.$sub_file_name,'/home/idempiere/from_oreore/'.$sub_file_name, 0644)){
+				if(ssh2_scp_send($connection,'/var/www/html/'.SITE_DIR.'/app/webroot/files/SyohinIchiran/'.$sub_file_name,'/home/idempiere/from_oreore/'.$sub_file_name, 0644)){
 					$this->log('[sub_item sucsses]'.date('Y/m/d h:i:s'));
 				}else{
 					$this->log('[sub_item eroor]'.date('Y/m/d h:i:s'));
@@ -299,7 +299,7 @@ class StratCsvComponent extends Object {
 				$connection = ssh2_connect('idempiere.thekiss-landh.com', 22, array('hostkey'=>'ssh-rsa'));
 				//ssh2_auth_pubkey_file($connection, 'idempiere','/var/www/php_rsa.pub','/var/www/php_rsa', '');
 				ssh2_auth_pubkey_file($connection,'idempiere','/var/www/.ssh/id_rsa.pub','/var/www/.ssh/id_rsa', '');
-				if(ssh2_scp_send($connection,'/var/www/html/buchedenoel/app/webroot/files/SyohinIchiran/'.$file_name,'/home/idempiere/from_oreore/'.$file_name, 0644)){
+				if(ssh2_scp_send($connection,'/var/www/html/'.SITE_DIR.'/app/webroot/files/SyohinIchiran/'.$file_name,'/home/idempiere/from_oreore/'.$file_name, 0644)){
 					$this->log('[item sucsses]'.date('Y/m/d h:i:s'));
 				}else{
 					$this->log('[item eroor]'.date('Y/m/d h:i:s'));
@@ -313,7 +313,7 @@ class StratCsvComponent extends Object {
 			$connection = ssh2_connect('idempiere.thekiss-landh.com', 22, array('hostkey'=>'ssh-rsa'));
 			//ssh2_auth_pubkey_file($connection, 'idempiere','/var/www/php_rsa.pub','/var/www/php_rsa', '');
 			ssh2_auth_pubkey_file($connection,'idempiere','/var/www/.ssh/id_rsa.pub','/var/www/.ssh/id_rsa', '');
-			if(ssh2_scp_send($connection,'/var/www/html/buchedenoel/app/webroot/files/execute_bt05','/home/idempiere/from_oreore/execute_bt05', 0644)){
+			if(ssh2_scp_send($connection,'/var/www/html/'.SITE_DIR.'/app/webroot/files/execute_bt05','/home/idempiere/from_oreore/execute_bt05', 0644)){
 				$this->log('[execute_bt05 sucsses]'.date('Y/m/d h:i:s'));
 			}else{
 				$this->log('[execute_bt05 eroor]'.date('Y/m/d h:i:s'));

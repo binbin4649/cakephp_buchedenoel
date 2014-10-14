@@ -9,7 +9,7 @@
 			echo $form->input('StockRevision.depot_id', array(
 				'size'=>3,
 				'div'=>false,
-				'label'=>'<a href="/buchedenoel/depots" target="_blank">倉庫番号</a>',
+				'label'=>'<a href="/'.SITE_DIR.'/depots" target="_blank">倉庫番号</a>',
 			));
 			echo $form->input('StockRevision.stock_change', array(
 				'type'=>'select',

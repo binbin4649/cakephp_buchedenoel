@@ -107,7 +107,7 @@ class PricetagDetailsController extends AppController {
 				}
 				$out = mb_convert_encoding($out, 'SJIS', 'UTF-8');
 				file_put_contents($path.$file_name, $out);
-				$print_out['url'] = '/buchedenoel/files/pricetagcsv/'.$file_name;
+				$print_out['url'] = '/'.SITE_DIR.'/files/pricetagcsv/'.$file_name;
 				$print_out['file'] = $file_name;
 				$this->set('print', $print_out);
 				$this->Session->delete("PricetagDetail");

@@ -54,7 +54,7 @@ class InventoriesController extends AppController {
 			$path = WWW_ROOT.'/files/user_csv/';//一時データ保管場所
 			$output_csv = mb_convert_encoding($output_csv, 'SJIS', 'UTF-8');
 			file_put_contents($path.$file_name, $output_csv);
-			$output['url'] = '/buchedenoel/files/user_csv/'.$file_name;
+			$output['url'] = '/'.SITE_DIR.'/files/user_csv/'.$file_name;
 			$output['name'] = $file_name;
 			$this->set('csv', $output);
 		}
@@ -64,7 +64,7 @@ class InventoriesController extends AppController {
 			$path = WWW_ROOT.'/files/user_csv/';//一時データ保管場所
 			$output_csv = mb_convert_encoding($output_csv, 'SJIS', 'UTF-8');
 			file_put_contents($path.$file_name, $output_csv);
-			$output['url'] = '/buchedenoel/files/user_csv/'.$file_name;
+			$output['url'] = '/'.SITE_DIR.'/files/user_csv/'.$file_name;
 			$output['name'] = $file_name;
 			$this->set('csv', $output);
 		}

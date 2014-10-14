@@ -58,7 +58,7 @@ class TransportsController extends AppController {
 				$path = WWW_ROOT.'/files/user_csv/';
 				$output_csv = mb_convert_encoding($output_csv, 'SJIS', 'UTF-8');
 				file_put_contents($path.$file_name, $output_csv);
-				$output['url'] = '/buchedenoel/files/user_csv/'.$file_name;
+				$output['url'] = '/'.SITE_DIR.'/files/user_csv/'.$file_name;
 				$output['name'] = $file_name;
 				$this->set('csv', $output);
 				$this->data[$modelName]['csv'] = null;
@@ -77,7 +77,7 @@ class TransportsController extends AppController {
 				$output_xml = $this->Print->TransportBatch($transports, $file_name);
 				$path = WWW_ROOT.'/files/user_csv/';
 				file_put_contents($path.$file_name, $output_xml);
-				$output['url'] = '/buchedenoel/files/user_csv/'.$file_name;
+				$output['url'] = '/'.SITE_DIR.'/files/user_csv/'.$file_name;
 				$output['name'] = $file_name;
 				$this->set('batch_print', $output);
 				$this->data[$modelName]['batch_print'] = null;
@@ -139,7 +139,7 @@ class TransportsController extends AppController {
 		$this->set(compact('transport_status', 'layaway_type'));
 
 		if(!empty($views['Transport']['print_file'])){
-			$print_out['url'] = '/buchedenoel/files/transport/'.$views['Transport']['print_file'].'.php';
+			$print_out['url'] = '/'.SITE_DIR.'/files/transport/'.$views['Transport']['print_file'].'.php';
 			$print_out['file'] = $views['Transport']['print_file'].'.pxd';
 			$this->set('print', $print_out);
 		}

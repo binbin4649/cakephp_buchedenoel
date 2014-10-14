@@ -2,14 +2,14 @@
 <p>右クリック、「名前を付けて保存」、でダウンロードしてからエクセルで開いてください。</p>
 <p>
 <?php
- $mod = filemtime("/var/www/html/buchedenoel/app/webroot/files/pentaho/nyukin_date.xls");
+ $mod = filemtime('/var/www/html/'.SITE_DIR.'/app/webroot/files/pentaho/nyukin_date.xls');
  echo "最終更新日：".date("Y/m/d H:i",$mod);
 ?>
 </p>
 <?php
 echo '<ul>';
 foreach($old_file as $value){
-	echo '<li><a href="/buchedenoel/files/pentaho/'.$value.'" target="_blank">'.$value.'</a></li>';
+	echo '<li><a href="/'.SITE_DIR.'/files/pentaho/'.$value.'" target="_blank">'.$value.'</a></li>';
 }
 echo '</ul>';
 ?>

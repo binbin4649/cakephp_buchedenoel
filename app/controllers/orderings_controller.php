@@ -77,7 +77,7 @@ class OrderingsController extends AppController {
 		}
 		$this->set('ordering', $view);
 		if(!empty($view['Ordering']['print_file'])){
-			$print_out['url'] = '/buchedenoel/files/ordering/'.$view['Ordering']['print_file'].'.php';
+			$print_out['url'] = '/'.SITE_DIR.'/files/ordering/'.$view['Ordering']['print_file'].'.php';
 			$print_out['file'] = $view['Ordering']['print_file'].'.pxd';
 			$this->set('print', $print_out);
 		}

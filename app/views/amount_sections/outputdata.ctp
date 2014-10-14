@@ -3,7 +3,7 @@
 <?php
 echo '<ul>';
 foreach($old_file as $value){
-	echo '<li><a href="/buchedenoel/files/store_sales/'.$value.'" target="_blank">'.$value.'</a></li>';
+	echo '<li><a href="/'.SITE_DIR.'/files/store_sales/'.$value.'" target="_blank">'.$value.'</a></li>';
 }
 echo '</ul>';
 ?>

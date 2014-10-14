@@ -2,7 +2,7 @@
 <html>
 <head>
 <title>[Buche de Noel]</title>
-<link href="/buchedenoel/favicon.ico" type="image/x-icon" rel="icon" />
+<link href="/'.SITE_DIR.'/favicon.ico" type="image/x-icon" rel="icon" />
 <?php echo $html->charset(); ?>
 <?php echo $html->css('css'); ?>
 </head>
@@ -28,7 +28,7 @@
 /*
 if($loginUser){
 	echo sprintf(__('Logon:%s' ,true) ,$loginUser['User']['name']);
-	echo '　(<a href="/buchedenoel/users/logout">Logout</a>)';
+	echo '　(<a href="/'.SITE_DIR.'/users/logout">Logout</a>)';
 }
 */
 $session->flash();

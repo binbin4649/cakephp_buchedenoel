@@ -105,7 +105,7 @@ if($addForm->opneUser(open_users(), $opneuser, 'access_authority')){
 $counter = 0;
 foreach($menu_list as $key=>$value){
 	if($value[1] == $selected){
-		echo '<li class="selected"><a href="/buchedenoel/'.$value[1].'/">'.$key.'</a></li>';
+		echo '<li class="selected"><a href="/'.SITE_DIR.'/'.$value[1].'/">'.$key.'</a></li>';
 	}elseif($value[0] == 'sect'){
 		if($counter == 0){
 			echo '<li class="sect first">'.$key.'</li>';
@@ -114,7 +114,7 @@ foreach($menu_list as $key=>$value){
 			echo '<li class="sect">'.$key.'</li>';
 		}
 	}else{
-		echo '<li class="item"><a href="/buchedenoel/'.$value[1].'">'.$key.'</a></li>';
+		echo '<li class="item"><a href="/'.SITE_DIR.'/'.$value[1].'">'.$key.'</a></li>';
 	}
 }
 ?>
