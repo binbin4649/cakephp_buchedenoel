@@ -760,6 +760,9 @@ class OutputCsvComponent extends Object {
 
 	//商品一覧
 	function items($items){
+		App::import('Model', 'Item');
+    	$ItemModel = new Item();
+
 		$stock_code = get_stock_code();
 		$order_approve = get_order_approve();
 		$cutom_order_approve = get_cutom_order_approve();
@@ -773,7 +776,7 @@ class OutputCsvComponent extends Object {
 
 		$out = '"id","品番","ブランド","工場","上代","在庫管理区分","販売状況","加工","素材","石","石（その他）","石（スペック）","メッセージ刻印",';
 		$out .= '"メッセージ刻印（訳）","販売開始時期","販売終了時期","寸法","重さ","寸法基準単位","発注可否","客注可否","客注日数","修理日数","サイズ直し可否","チェーン品番","アトリエサイズ直し可否","工賃",';
-		$out .= '"支給金額合計","原価","掛率区分","売上計上区分","画像ファイル名","ペアid","品名","商品タイプ","基本サイズ","基本サイズ外","商品属性"'."\r\n";
+		$out .= '"支給金額合計","原価","掛率区分","売上計上区分","画像ファイル名","ペア品番","品名","商品タイプ","基本サイズ","基本サイズ外","備考","非公開備考","商品属性"'."\r\n";
 
 		foreach($items as $item){
 			$out .= '"'.$item['Item']['id'].'","';
@@ -844,7 +847,8 @@ class OutputCsvComponent extends Object {
 			}else{
 				$out .= '","';
 			}
-			$out .= $item['Item']['pair_id'].'","';
+			$out .= $ItemModel->itemName($item['Item']['pair_id']).'","';
+
 			$out .= $item['Item']['title'].'","';
 			if(!empty($item['Item']['itemtype'])){
 				$out .= $itemtype[$item['Item']['itemtype']].'","';
@@ -853,6 +857,8 @@ class OutputCsvComponent extends Object {
 			}
 			$out .= $item['Item']['basic_size'].'","';
 			$out .= $item['Item']['order_size'].'","';
+			$out .= $item['Item']['remark'].'","';
+			$out .= $item['Item']['secret_remark'].'","';
 			if(!empty($item['Item']['itemproperty'])){
 				$out .= $itemproperty[$item['Item']['itemproperty']].'"';
 			}else{

@@ -172,7 +172,7 @@ class ItemsController extends AppController {
 		if(!empty($this->data['Item']['csv'])){
 			$params = array(
 				'conditions'=>$conditions,
-				'limit'=>5000,
+				'limit'=>35000,
 				'order'=>array('Item.created'=>'desc')
 			);
 			$item_csv = $this->Item->find('all' ,$params);
@@ -204,6 +204,7 @@ class ItemsController extends AppController {
 		$view_data = $this->Item->read(null, $id);
 		$itemproperty = get_itemproperty();
 		$itemtype = get_itemtype();
+		//var_dump($view_data['Item']['itemproperty']);
 		if(!empty($view_data['Item']['stock_code']))$view_data['Item']['stock_code'] = $stock_code[$view_data['Item']['stock_code']];
 		if(!empty($view_data['Item']['unit']))$view_data['Item']['unit'] = $unit[$view_data['Item']['unit']];
 		if(!empty($view_data['Item']['order_approve']))$view_data['Item']['order_approve'] = $order_approve[$view_data['Item']['order_approve']];

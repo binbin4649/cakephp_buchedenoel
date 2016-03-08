@@ -63,6 +63,13 @@ class PrepareShell extends Shell {
 
 	}
 
+	function importItemCsv(){
+		App::import('Component', 'StratCsv');
+   		$StratCsvComponent = new StratCsvComponent();
+   		$path = $StratCsvComponent->loadMProduct();
+		exit(date('c').' : '.$path);
+	}
+
 	function importSales(){
 		App::import('Component', 'SalesCsv');
    		$SalesCsvComponent = new SalesCsvComponent();

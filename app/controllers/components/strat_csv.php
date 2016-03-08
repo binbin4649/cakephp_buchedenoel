@@ -1,6 +1,200 @@
 <?php
 class StratCsvComponent extends Object {
 
+	//ランドの商品マスタを読み込む
+	function loadMProduct(){
+		App::import('Component', 'DateCal');
+   		$DateCalComponent = new DateCalComponent();
+   		App::import('Model', 'Item');
+    	$this->Item = new Item();
+    	App::import('Model', 'Stock');
+    	$this->Stock = new Stock();
+    	App::import('Model', 'Subitem');
+    	$this->Subitem = new Subitem();
+    	App::import('Model', 'Itembase');
+    	$this->Itembase = new Itembase();
+    	App::import('Model', 'Factory');
+    	$this->Factory = new Factory();
+
+    	//$read_csv_path = WWW_ROOT.'files/mproduct/from_landh.csv';
+		//$stream = fopen($read_csv_path, 'r');
+		$read_csv_path = '';
+		$stream = '';
+		if(!file_exists(WWW_ROOT.'files/mproduct/from_landh.csv')){
+			$dir_path = WWW_ROOT.'files/mproduct/';
+			$handle = opendir($dir_path);
+			while (false !== ($file = readdir($handle))) {
+				if($file != '.' and $file != '..'){
+					$read_csv_path = $dir_path.$file;
+					break;
+				}
+			}
+			if($read_csv_path){
+				$stream = fopen($read_csv_path, 'r');
+			}
+			closedir($handle);	
+		}else{
+			$read_csv_path = WWW_ROOT.'files/mproduct/from_landh.csv';
+			$stream = fopen($read_csv_path, 'r');
+			$csv_header = fgetcsv($stream);	
+		}
+
+		while($row = fgetcsv($stream)){
+			$item_weight = '';
+			$item_demension = '';
+			$subitem_jan = $row[7];//JAN
+			$subitem_name = trim($row[0]);//品名
+			$item_name = trim($row[6]);//品番
+			$subitem_minority_size = '';
+			$subitem_major_size = $this->baseMajorSize(trim($row[14]));
+			if($subitem_major_size == 'other'){
+				$subitem_minority_size = trim($row[14]);
+			}
+			$subitem_name_kana = mb_convert_kana($row[32], 'k', 'UTF-8');//ルース名　半角カナ　subitemに入れる
+			$item_stone_id = $this->masterDump('Stone', $row[32]);//ルース名
+			$item_material_id = $this->masterDump('Material', $row[30]);//マテリアル　素材
+			$item_process_id = $this->masterDump2('Process', $row[28]);//プロセス　加工
+			$subitem_cost = floor($row[23]);//仕入単価、平均原価
+
+			$item_factory_id = ltrim($row[24], "0");//工場のid
+			$params = array('conditions'=>array('Factory.id'=>$item_factory_id), 'recursive'=>-1);
+			$find_factory = $this->Factory->find('first' ,$params);
+			if($find_factory){
+			}else{
+				$item_factory_id = $this->masterDump('Factory', $row[25]);//工場名
+			}
+			$item_brand_id = $this->BrandLandhToBuche($row[9]);//ブランドのid
+			if($item_brand_id){
+			}else{
+				$item_brand_id = $this->masterDump('Brand', $row[10]);//ブランド名
+			}
+			//stock_codeを編集
+			if($row[17] == 3){//在庫管理区分
+				$stock_code = 3;
+			}else{
+				$stock_code = $row[16];//在庫更新区分
+			}
+			/*
+			$itemtype = get_itemtype();
+			$itemtype = $row[3]
+			あとからbootstrapをハードコーディングして対応する
+			*/
+			if(empty($subitem_jan)){//親品番の場合
+				$params = array('conditions'=>array('Item.name'=>$item_name), 'recursive'=>0);
+				$save_item = $this->Item->find('first' ,$params);
+				if($save_item){
+					$item_id = $save_item['Item']['id'];
+				}else{
+					$item_id = '';
+				}
+				$save_item = array('Item'=>array(
+					'id'=>$item_id,
+					'name'=>$item_name,
+					'stone_id'=>$item_stone_id,
+					'material_id'=>$item_material_id,
+					'price'=>floor($row[20]),//上代単価
+					'cost'=>floor($row[21]),//原価
+					'factory_id'=>$item_factory_id,
+					'brand_id'=>$item_brand_id,
+					'process_id'=>$item_process_id,
+					'remark'=>$row[1],//備考
+					'stone_other'=>$row[33],//石特記事項
+					'stone_spec'=>$row[34],//石仕様
+					'message_stamp'=>$row[35],//メッセージ刻印
+					'message_stamp_ja'=>$row[36],//メッセージ刻印和訳
+					'trans_approve'=>$row[45],//サイズ直し可否
+					'in_chain'=>$row[46],//チェーン品番
+					'sales_state_code_id'=>$row[26],//販売状況区分、コードが合っている前提でそのまま同期
+					'atelier_trans_approve'=>$row[47],//アトリエサイズ直し可否
+					'unit'=>$row[44],//寸法単位区分、使ってないのでそのまま同期
+					'weight'=>$row[5],//重さ
+					'demension'=>$row[43],//寸法
+					'title'=>trim($row[0]),//品名
+					'itemtype'=>$row[3],//商品タイプ
+					'itemproperty'=>$row[11],//LandhはDB、Bucheはbootstrap、だけどIDがぴったり一致してる
+					'basic_size'=>$row[13],//サイズ1 親品番のサイズ一覧
+					'stock_code'=>$stock_code,
+				));
+				$this->Item->save($save_item);
+				$this->Item->id = null;
+
+			}else{//子品番の場合
+				if(!empty($row[54])){
+					$oya_hinban = trim($row[54]);
+				}else{
+					$oya_hinban = '';
+				}
+				$params = array('conditions'=>array('Subitem.jan'=>$subitem_jan), 'recursive'=>1);
+				$find_subitem = $this->Subitem->find('first' ,$params);
+				if(is_array($find_subitem['Item'])){
+					$item_id = $find_subitem['Item']['id'];
+				}else{//親品番が無い場合は、親品番も登録する
+					$params = array('conditions'=>array('Item.name'=>$oya_hinban), 'recursive'=>0);
+					$item = $this->Item->find('first' ,$params);
+					if(is_array($item['Item'])){
+						$item_id = $item['Item']['id'];
+					}else{
+						$save_item = array('Item'=>array(
+							'name'=>$oya_hinban,
+							'stone_id'=>$item_stone_id,
+							'material_id'=>$item_material_id,
+							'price'=>floor($row[20]),//上代単価
+							'cost'=>floor($row[21]),//原価
+							'factory_id'=>$item_factory_id,
+							'brand_id'=>$item_brand_id,
+							'process_id'=>$item_process_id,
+							'remark'=>$row[1],//備考
+							'stone_other'=>$row[33],//石特記事項
+							'stone_spec'=>$row[34],//石仕様
+							'message_stamp'=>$row[35],//メッセージ刻印
+							'message_stamp_ja'=>$row[36],//メッセージ刻印和訳
+							'trans_approve'=>$row[45],//サイズ直し可否
+							'in_chain'=>$row[46],//チェーン品番
+							'sales_state_code_id'=>$row[26],//販売状況区分、コードが合っている前提でそのまま同期
+							'atelier_trans_approve'=>$row[47],//アトリエサイズ直し可否
+							'unit'=>$row[44],//寸法単位区分、使ってないのでそのまま同期
+							'weight'=>$row[5],//重さ
+							'demension'=>$row[43],//寸法
+							'title'=>trim($row[0]),//品名
+							'itemtype'=>$row[3],//商品タイプ
+							'itemproperty'=>$row[3],//LandhはDB、Bucheはbootstrap、だけどIDがぴったり一致してる
+							'basic_size'=>$row[13],//サイズ1 親品番のサイズ一覧
+							'stock_code'=>$stock_code,
+						));
+						$this->Item->save($save_item);
+						$item_id = $this->Item->getInsertID();
+						$this->Item->id = null;
+					}
+				}
+
+				if(is_array($find_subitem['Subitem'])){
+					$subitem_id = $find_subitem['Subitem']['id'];
+				}else{
+					$subitem_id = '';
+				}
+				$save_subitem = array('Subitem'=>array(
+					'id'=>$subitem_id,
+					'name'=>$item_name,
+					'item_id'=>$item_id,
+					'major_size'=>$subitem_major_size,
+					'minority_size'=>$subitem_minority_size,
+					'name_kana'=>$subitem_name_kana,
+					'jan'=>$subitem_jan,
+					'cost'=>$subitem_cost,
+				));
+				$this->Subitem->save($save_subitem);
+				$this->Subitem->id = null;
+			}
+		}
+		if($read_csv_path){
+			unlink($read_csv_path);	
+		}
+		return $read_csv_path;
+	}
+
+
+
+
 	// SyohinIchiran.csv の内容、読み込み関数
 	function loadSyohinIchiranCsv($stream, $depot_id, $not_stock){
 		$csv_header = fgetcsv($stream);
@@ -327,7 +521,42 @@ class StratCsvComponent extends Object {
 		return true;
 	}
 	
-	
+	//landhのブランドIDを受け取って、BucheのブランドIDを返す。
+	function BrandLandhToBuche($brand_id){
+		switch($brand_id){
+			case 1 : $return_id = 1; break;
+			case 2 : $return_id = 2; break;
+			case 3 : $return_id = 3; break;
+			case 4 : $return_id = 4; break;
+			case 5 : $return_id = 5; break;
+			case 6 : $return_id = 6; break;
+			case 7 : $return_id = 7; break;
+			case 8 : $return_id = 8; break;
+			case 9 : $return_id = 9; break;
+			case 10 : $return_id = 10; break;
+			case 11 : $return_id = 11; break;
+			case 12 : $return_id = 12; break;
+			case 13 : $return_id = 13; break;
+			case 14 : $return_id = 14; break;
+			case 15 : $return_id = 15; break;
+			case 17 : $return_id = 230; break;
+			case 181 : $return_id = 8; break;
+			case 182 : $return_id = 182; break;
+			case 183 : $return_id = 183; break;
+			case 229 : $return_id = 229; break;
+			case 230 : $return_id = 236; break;
+			case 231 : $return_id = 234; break;
+			case 232 : $return_id = 235; break;
+			case 233 : $return_id = 239; break;
+			case 234 : $return_id = 240; break;
+			case 235 : $return_id = 232; break;
+			case 236 : $return_id = 237; break;
+			case 237 : $return_id = 233; break;
+			case 238 : $return_id = 238; break;
+			default : $return_id = false; break;
+		}
+		return $return_id;
+	}
 	
 	//旧システムＮｏと売上日を受け取り、Ｎｏと期間が一致したらuser_idを返す
 	function oldContact($old_no, $old_date){
@@ -520,6 +749,29 @@ class StratCsvComponent extends Object {
         return $id;
     }
 
+    function masterDump2($modelname, $value){
+    	$id = '';
+    	App::import('Model', $modelname);
+    	$model = new $modelname();
+    	if(!empty($value)){
+    		$params = array(
+				'conditions'=>array($modelname.'.name'=>$value),
+				'recursive'=>0
+			);
+			$result = $model->find('first' ,$params);
+			if($result){
+				$id = $result[$modelname]['id'];
+			}else{
+				$save_data = array($modelname=>array(
+					'name'=>$value,
+				));
+				$model->save($save_data);
+				$model->id = null;
+				$id = $model->getInsertID();
+			}
+    	}
+        return $id;
+    }
 
     function baseRelease($id){
 
