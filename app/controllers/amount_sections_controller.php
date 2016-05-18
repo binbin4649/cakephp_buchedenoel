@@ -178,11 +178,13 @@ class AmountSectionsController extends AppController {
 		}
 		closedir($handle);
 		rsort($old_file);
+		/*
 		$pop_count = 0;//後ろから省く数
 		$pop_count = floor(count($old_file) / 2);//総数の半分を省く
 		for($i = 0; $i < $pop_count; $i++){
 			$stash = array_pop($old_file);
 		}
+		*/
 		$this->set('old_file', $old_file);
 	}
 
